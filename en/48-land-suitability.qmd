@@ -62,3 +62,13 @@ The inputs are public layers: WorldClim temperature and rainfall, OpenLandMap so
 1. Add a second crop with its own thresholds (for example a crop suited to wet conditions) and compare the two maps.
 2. Replace WorldClim rainfall with CHIRPS 2001–2020. Do the classes change?
 3. Add a flooding factor from the HAND model in Chapter [-@sec-flood] and see where it becomes the limiting factor.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. A crop suited to wet conditions, with an S1 rainfall band of perhaps 1,500-3,000 mm and tolerance of acid soils, will produce a very different map in Pangandaran: much of the land rainfall limits for jarak may become S1 or S2 for it. Publish both limiting-factor maps side by side; the point is that suitability is a property of the land and the crop together, never of the land alone.
+
+**2.** Not computed in the chapter. CHIRPS 2001-2020 annual rainfall over Pangandaran is likely to be similar to or somewhat different from WorldClim, but the classes will only change where the total crosses a threshold (1,400 or 1,800 mm). Compare the two rainfall layers first; if both show far more than 1,800 mm, rainfall stays limiting and the jarak classes do not change. The exercise shows that a second, independent source is the check against a wrong variable like BIO18.
+
+**3.** Add a flood factor: HAND below a few metres near rivers as "floods often" (N or S3 for a crop that cannot stand waterlogging). It becomes the limiting factor on the low coastal plain and valley floors, replacing rainfall there, while upland classes are unchanged. The limiting-factor map then tells a farmer on the floodplain that drainage, not rainfall, is the barrier.
+:::

@@ -70,3 +70,13 @@ The Monte Carlo intervals in the emissions chart include only the EF uncertainty
 1. Replace the 30 % tree-cover threshold in the Hansen activity data with 60 %. How much do the reference level and the reduction change?
 2. Build a stratified EF: compute GEDI biomass separately for TMF "undisturbed" and "degraded" forest and apply each to the matching loss.
 3. Draw a stratified random sample of 100 points (loss, stable forest, non-forest) for Tebo and plan how you would label them. How many points per stratum do you need for a ±20 % interval on loss area?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. A 60 % threshold excludes loss in sparser tree cover (old rubber, open smallholdings, degraded forest), so Hansen activity data fall in every year and move towards TMF's lower numbers. The reference level drops, and so do the monitoring-period emissions. The percentage reduction changes less than either, because both periods lose similar kinds of loss. That is the point of the exercise: the definition moves the numbers more than the satellite does.
+
+**2.** Not computed in the chapter. Compute GEDI L4B mean biomass separately inside TMF "undisturbed" and "degraded" forest, then multiply each stratum's loss by its own EF. Degraded forest carries less biomass, so the emissions fall, often substantially where much of the loss is in degraded or secondary forest. This is the main correction to the chapter's biggest assumption: using intact-forest biomass for every hectare cleared.
+
+**3.** Allocate the 100 points across strata, not in proportion to area: for example about 50 in mapped loss, 25 in stable forest and 25 in non-forest, so the small loss stratum has enough points and omission errors in stable forest can still be found. Label each from high-resolution imagery before and after the event, following a written protocol. For a ±20 % interval on loss area the sample usually needs more than 100 points in total; Olofsson's formula (Chapter [-@sec-accuracy]) with the expected user's accuracy of each stratum gives the number, and it typically lands in the low hundreds.
+:::

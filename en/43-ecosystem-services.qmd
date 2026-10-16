@@ -58,3 +58,13 @@ The weak point is always step 2. Many studies use a lookup table of values per c
 1. Replace the 500 m rule with 200 m and 1,000 m. Which service responds most?
 2. Split tree cover into forest on slopes above 30 % and below. Does carbon per hectare differ?
 3. Add a fourth service, flood regulation, using HAND from Chapter [-@sec-flood]: low-lying land near rivers that is still vegetated. Where does it overlap with the other three?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. With 200 m fewer forest pixels are converted, with 1,000 m more, so every service changes in the same direction but by different amounts. Carbon responds most in absolute terms, because forest holds about five times the carbon of cropland (62 against 12 Mg C/ha) and the loss is proportional to converted forest. Habitat responds strongly too where conversion breaks up large blocks. Water yield changes least, a few per cent, and in the opposite direction.
+
+**2.** Not computed in the chapter. Compute the mean GEDI biomass for tree cover above and below 30 % slope. Expect forest on steep slopes to hold similar or higher carbon per hectare where it is less disturbed (harder to reach, often protected), and lower where slopes have thin soils or recent landslides; check the footprint count in each class before trusting the difference.
+
+**3.** Map vegetated pixels with low HAND (for example under 5-10 m) within a distance of rivers. They are mostly on the valley floors and lower slopes, which overlap the three-service hotspots only partly: the hotspots sit on high volcanic slopes, while flood regulation sits in the lowlands near settlements. That is the useful finding: protecting the hotspots does not protect the flood buffer, so a plan needs both.
+:::

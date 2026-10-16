@@ -51,3 +51,13 @@ BPS melaporkan bahwa produksi Karawang turun sekitar 130.000 t pada 2023, penuru
 1. Petakan umur tanaman saat banjir Maret 2023 (hari sejak lembah penggenangan terakhir) dan hitung hanya sawah yang tergenang 20–80 hari setelah tanam. Apakah 2023 sekarang menonjol dibandingkan 2022?
 2. Ulangi perbandingan untuk Indramayu, kabupaten padi terbesar. Apakah penurunan 2023 juga terjadi pada luas panen?
 3. Kalau Anda bisa memperoleh luas panen BPS per kecamatan, bandingkan dengan taksiran radar kecamatan demi kecamatan. Di mana radar melewatkan sawah?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Umur tanaman adalah jumlah hari sejak penggenangan terakhir; sawah berumur 20-80 hari setelah tanam sedang berada pada fase vegetatif atau reproduktif, fase ketika banjir merusak tanaman, bukan sekadar menunda. Menghitung hanya sawah itu memisahkan kerusakan dari waktu tanam. Kalau 2023 menonjol dibanding 2022 dengan ukuran ini, banjir menjelaskan kehilangan produksi; kalau tidak, periksa kalender tanam atau serangan hama.
+
+**2.** Tidak dihitung di bab ini. Jalankan mask sawah dan hitungan musim tanam yang sama untuk Indramayu dan bandingkan luas panen (sawah × jumlah musim) 2022 dan 2023, lalu bandingkan dengan produksi BPS. Kalau produksi turun tetapi luas panen dari radar tidak, penurunannya ada pada hasil per hektare (kekeringan, hama, kerusakan banjir setelah keluar malai); kalau luas panen ikut turun, sawah dibiarkan tidak ditanami atau kehilangan satu musim.
+
+**3.** Plot luas panen BPS terhadap luas panen dari radar per kecamatan dan petakan rasionya. Radar biasanya melewatkan sawah yang penggenangannya tidak terlihat: sawah kecil atau berteras di lereng, sawah di bawah pohon atau di samping desa, dan sawah dengan penggenangan sangat singkat di antara composite 12 harian. Radar bisa menghitung berlebih di tempat tambak atau lahan bera yang tergenang meniru tandanya. Kecamatan yang jauh dari garis 1:1 menunjukkan di mana ambangnya perlu disesuaikan secara lokal.
+:::

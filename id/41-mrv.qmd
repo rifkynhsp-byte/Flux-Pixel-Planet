@@ -70,3 +70,13 @@ Selang Monte Carlo pada grafik emisi hanya memuat ketidakpastian EF: galat baku 
 1. Ganti batas tutupan pohon 30 % pada data aktivitas Hansen menjadi 60 %. Seberapa besar tingkat acuan dan penurunannya berubah?
 2. Susun EF berstrata: hitung biomassa GEDI terpisah untuk hutan TMF "tidak terganggu" dan "terdegradasi", lalu terapkan masing-masing pada kehilangan yang sesuai.
 3. Ambil sampel acak berstrata 100 titik (hilang, hutan stabil, bukan hutan) untuk Tebo dan rencanakan cara melabelinya. Berapa titik per strata yang dibutuhkan untuk selang ±20 % pada luas kehilangan?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Ambang 60 % membuang kehilangan pada tutupan pohon yang lebih jarang (karet tua, kebun rakyat yang terbuka, hutan terdegradasi), sehingga data aktivitas Hansen turun di setiap tahun dan mendekati angka TMF yang lebih rendah. Tingkat referensi turun, begitu juga emisi periode pemantauan. Persentase penurunan berubah lebih sedikit daripada keduanya, karena kedua periode kehilangan jenis kehilangan yang serupa. Itulah inti latihan ini: definisi menggeser angka lebih besar daripada satelitnya.
+
+**2.** Tidak dihitung di bab ini. Hitung rata-rata biomassa GEDI L4B secara terpisah di dalam hutan TMF "tidak terganggu" dan "terdegradasi", lalu kalikan kehilangan di setiap strata dengan EF-nya sendiri. Hutan terdegradasi menyimpan biomassa lebih sedikit, sehingga emisinya turun, sering cukup besar di tempat sebagian besar kehilangan terjadi di hutan terdegradasi atau sekunder. Inilah koreksi utama terhadap asumsi terbesar di bab ini: memakai biomassa hutan utuh untuk setiap hektare yang dibuka.
+
+**3.** Bagi 100 titik antar-strata, bukan sebanding luasnya: misalnya sekitar 50 di kehilangan terpetakan, 25 di hutan stabil dan 25 di bukan hutan, agar strata kehilangan yang kecil memiliki cukup titik dan kesalahan omisi di hutan stabil tetap bisa ditemukan. Labeli setiap titik dari citra resolusi tinggi sebelum dan sesudah kejadian, mengikuti protokol tertulis. Untuk interval ±20 % pada luas kehilangan, sampel biasanya memerlukan lebih dari 100 titik; rumus Olofsson (Bab [-@sec-accuracy]) dengan user's accuracy yang diharapkan di setiap strata memberi jumlahnya, dan biasanya berada di kisaran beberapa ratus.
+:::

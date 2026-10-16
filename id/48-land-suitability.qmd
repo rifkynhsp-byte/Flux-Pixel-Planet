@@ -62,3 +62,13 @@ Masukannya adalah lapisan terbuka: suhu dan curah hujan WorldClim, pH tanah Open
 1. Tambahkan komoditas kedua dengan batas-batasnya sendiri (misalnya tanaman yang cocok untuk kondisi basah) lalu bandingkan kedua petanya.
 2. Ganti curah hujan WorldClim dengan CHIRPS 2001–2020. Apakah kelasnya berubah?
 3. Tambahkan faktor genangan dari model HAND di Bab [-@sec-flood] dan lihat di mana faktor itu menjadi pembatas.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Tanaman yang cocok untuk kondisi basah, dengan pita curah hujan S1 mungkin 1.500-3.000 mm dan toleran terhadap tanah masam, akan menghasilkan peta yang sangat berbeda di Pangandaran: sebagian besar lahan yang dibatasi curah hujan untuk jarak bisa menjadi S1 atau S2 untuknya. Terbitkan kedua peta faktor pembatas berdampingan; intinya, kesesuaian adalah sifat lahan dan tanaman bersama-sama, tidak pernah sifat lahan saja.
+
+**2.** Tidak dihitung di bab ini. Curah hujan tahunan CHIRPS 2001-2020 di Pangandaran kemungkinan mirip atau agak berbeda dari WorldClim, tetapi kelasnya hanya berubah di tempat totalnya melewati ambang (1.400 atau 1.800 mm). Bandingkan kedua layer curah hujan lebih dulu; kalau keduanya menunjukkan jauh di atas 1.800 mm, curah hujan tetap menjadi pembatas dan kelas jarak tidak berubah. Latihan ini menunjukkan bahwa sumber kedua yang independen adalah pemeriksa terhadap variabel yang salah seperti BIO18.
+
+**3.** Tambahkan faktor banjir: HAND di bawah beberapa meter di dekat sungai sebagai "sering tergenang" (N atau S3 untuk tanaman yang tidak tahan tergenang). Faktor ini menjadi pembatas di dataran pantai rendah dan dasar lembah, menggantikan curah hujan di sana, sementara kelas di dataran tinggi tidak berubah. Peta faktor pembatas kemudian memberi tahu petani di dataran banjir bahwa drainase, bukan curah hujan, yang menjadi penghalang.
+:::

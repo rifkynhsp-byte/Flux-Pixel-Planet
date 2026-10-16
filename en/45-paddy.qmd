@@ -51,3 +51,13 @@ BPS reported that Karawang's production fell by about 130,000 t in 2023, the lar
 1. Map crop age at the time of the March 2023 floods (days since the last flooding dip) and count only fields flooded 20–80 days after transplanting. Does 2023 now stand out against 2022?
 2. Repeat the comparison for Indramayu, the largest rice district. Is the 2023 fall also in harvested area?
 3. If you can obtain BPS harvested area by subdistrict, compare it with the radar estimate subdistrict by subdistrict. Where does the radar miss fields?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. Crop age is the number of days since the last flooding dip; fields 20-80 days after transplanting were in vegetative or reproductive growth, the stages where a flood destroys the crop rather than delaying it. Counting only those fields isolates damage from timing. If 2023 stands out against 2022 on this measure, the floods explain the production loss; if not, look at the planting calendar or a pest outbreak instead.
+
+**2.** Not computed in the chapter. Run the same paddy mask and crop count for Indramayu and compare harvested area (paddy fields × crops) for 2022 and 2023, then compare with BPS production. If production fell but radar harvested area did not, the fall was in yield per hectare (drought, pests, flood damage after heading); if harvested area fell too, fields were left unplanted or lost a season.
+
+**3.** Plot BPS harvested area against radar harvested area per subdistrict and map the ratio. Radar typically misses fields where the flooding dip is not seen: small or terraced fields on slopes, fields under trees or next to villages, and fields with very short flooding between 12-day composites. It can overcount where fishponds or flooded fallow mimic the signature. Subdistricts far from the 1:1 line tell you where the threshold needs local adjustment.
+:::

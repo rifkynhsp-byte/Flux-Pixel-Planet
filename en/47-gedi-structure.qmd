@@ -58,3 +58,13 @@ In this landscape, fire found the most open, most degraded land, not the forest 
 1. Split the burned and unburned shots by peat and non-peat (Chapter [-@sec-peat]). Does the difference hold on both?
 2. Map the FHD grid against a protected-area boundary. Is structural complexity higher inside?
 3. Build a fire-risk index from GEDI cover, distance to canals or roads and FIRMS history, and test it on the 2023 fire season.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. Split the April-July 2019 shots by the peat mask (Chapter [-@sec-peat]) as well as by burned or not. On peat expect the same pattern, lower and more open vegetation where fire followed, because drained, degraded peat carries the fern and shrub fuel. On mineral soil the sample is smaller and fires follow land clearing rather than fuel, so the difference may weaken or vanish. Report the shot counts in each of the four groups.
+
+**2.** Not computed in the chapter. Overlay the FHD grid on a WDPA or national protected-area boundary and compare the distribution of FHD inside and outside, using only forested cells so that land use does not drive the result. Expect higher foliage height diversity inside where protection works, and little difference where the protected area is degraded or encroached; a boundary-distance plot (FHD against distance inside or outside the edge) shows whether the edge matters.
+
+**3.** Combine three inputs per grid cell: low GEDI canopy cover (open, fern and shrub fuel), short distance to canals or roads (access and drainage), and FIRMS detections in earlier years. Normalise each to 0-1, weight them, and test the score on 2023 by comparing burned and unburned cells (an area under the curve, or the share of 2023 burned area in the top 20 % of the score). If the score beats each input alone, the combination adds information.
+:::

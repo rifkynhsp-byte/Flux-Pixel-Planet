@@ -68,3 +68,13 @@ Mengalikan dengan 44/12 mengubahnya menjadi CO₂: satu hektare sawit di gambut 
 1. Ganti faktor "lahan terbuka lainnya" (15) dengan faktor akasia (20) atau faktor lahan pertanian (14). Seberapa besar totalnya bergeser, dibandingkan rentang IPCC?
 2. Ulangi analisis untuk kabupaten yang sedikit gambutnya (misalnya Tebo, Bab [-@sec-mrv]). Suku mana yang dominan di sana?
 3. Dengan luas terbakar di gambut dan kedalaman bakaran yang diandaikan 10, 20, dan 30 cm, taksir CO₂ dari kebakaran 2019. Andaian mana yang harus Anda pertahankan dalam laporan?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Pada 145.000 ha, menaikkan faktor dari 15 ke 20 t C/ha/tahun menambah 145.000 × 5 × 44/12 ≈ 2,7 Mt CO₂ per tahun, sehingga totalnya naik dari sekitar 13 ke sekitar 15,7 Mt; memakai 14 mengurangi sekitar 0,5 Mt, menjadi sekitar 12,5 Mt. Keduanya tetap di dalam rentang 7-20 Mt yang sudah dimungkinkan faktor IPCC. Pilihan kelas untuk "lahan terbuka lainnya" penting, tetapi kurang penting dibanding ketidakpastian faktornya sendiri.
+
+**2.** Tidak dihitung di bab ini. Di kabupaten dengan sedikit gambut, seperti Tebo, emisi drainase kecil dan biomassa yang hilang akibat deforestasi mendominasi neraca, dan karena itulah MRV di Bab [-@sec-mrv] hanya menghitung deforestasi di sana. Jalankan tabel yang sama dengan luas gambut Tebo dan bandingkan kedua suku: urutannya terbalik.
+
+**3.** Asumsikan bulk density gambut sekitar 0,1 g/cm³ dan kadar karbon sekitar 50 % (lazim untuk gambut Indonesia), sehingga setiap sentimeter yang terbakar melepaskan sekitar 5 t C/ha. Pada 28.400 ha yang terbakar pada 2019: 10 cm ≈ 1,4 Mt C ≈ 5,2 Mt CO₂; 20 cm ≈ 10,4 Mt CO₂; 30 cm ≈ 15,6 Mt CO₂, yang terakhir lebih besar dari emisi drainase setahun penuh. Asumsi yang harus dipertahankan adalah kedalaman bakar: satelit tidak mengukurnya, nilainya berkisar dari beberapa sentimeter hingga lebih dari setengah meter tergantung muka air, dan pengukuran lapangan atau LiDAR pada bekas kebakaran adalah satu-satunya cara untuk membatasinya.
+:::

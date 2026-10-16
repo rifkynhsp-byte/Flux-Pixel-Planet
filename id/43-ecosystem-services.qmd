@@ -58,3 +58,13 @@ Titik lemahnya selalu di langkah 2. Banyak studi memakai tabel nilai per kelas y
 1. Ganti aturan 500 m dengan 200 m dan 1.000 m. Jasa mana yang paling peka?
 2. Pisahkan tutupan pohon menjadi hutan di lereng di atas 30 % dan di bawahnya. Apakah karbon per hektarenya berbeda?
 3. Tambahkan jasa keempat, pengaturan banjir, dengan HAND dari Bab [-@sec-flood]: lahan rendah di dekat sungai yang masih bervegetasi. Di mana jasa ini bertumpuk dengan tiga jasa lainnya?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Dengan 200 m lebih sedikit piksel hutan yang dikonversi, dengan 1.000 m lebih banyak, sehingga setiap jasa berubah ke arah yang sama tetapi dengan besaran berbeda. Karbon paling responsif secara absolut, karena hutan menyimpan sekitar lima kali karbon lahan pertanian (62 dibanding 12 Mg C/ha) dan kehilangannya sebanding dengan hutan yang dikonversi. Habitat juga merespons kuat di tempat konversi memecah blok-blok besar. Hasil air berubah paling sedikit, beberapa persen, dan ke arah sebaliknya.
+
+**2.** Tidak dihitung di bab ini. Hitung rata-rata biomassa GEDI untuk tutupan pohon di atas dan di bawah kemiringan 30 %. Harapkan hutan di lereng curam menyimpan karbon per hektare yang serupa atau lebih tinggi di tempat ia kurang terganggu (sulit dijangkau, sering dilindungi), dan lebih rendah di lereng bertanah tipis atau bekas longsor; periksa jumlah footprint di setiap kelas sebelum memercayai perbedaannya.
+
+**3.** Petakan piksel bervegetasi dengan HAND rendah (misalnya di bawah 5-10 m) dalam jarak tertentu dari sungai. Sebagian besar berada di dasar lembah dan lereng bawah, yang hanya sebagian tumpang tindih dengan hotspot tiga jasa: hotspot berada di lereng vulkanik yang tinggi, sedangkan pengatur banjir berada di dataran rendah dekat permukiman. Itulah temuan yang berguna: melindungi hotspot tidak melindungi penyangga banjir, sehingga rencana memerlukan keduanya.
+:::
