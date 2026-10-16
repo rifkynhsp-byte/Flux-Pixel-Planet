@@ -1,0 +1,90 @@
+# P8 · LiDAR, serta Penginderaan Pasif dan Aktif {#sec-p8-lidar .unnumbered}
+
+<!-- run-links -->
+::: {.callout-tip .run-links appearance="simple" icon="false"}
+**Jalankan bab ini**
+
+- `ch00j_lidar` &nbsp; [![Buka di Code Editor](https://img.shields.io/badge/Open%20in-Earth%20Engine%20Code%20Editor-1a73e8)](https://code.earthengine.google.com/?scriptPath=users/rifkynauvalhsp/Fullstack-Remote-Sensing:ch00j_lidar) &nbsp; [![Buka di Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rifkynhsp-byte/Flux-Pixel-Planet/blob/main/notebooks/ch00j_lidar.ipynb)
+
+[![Tambahkan semua skrip buku ke Code Editor Anda (sekali saja)](https://img.shields.io/badge/Add%20all%20book%20scripts-to%20your%20Code%20Editor-34a853)](https://code.earthengine.google.com/?accept_repo=users/rifkynauvalhsp/Fullstack-Remote-Sensing) &nbsp; *Baru pertama kali? Lampiran A menjelaskan cara masuk ke Earth Engine dan Colab.*
+:::
+<!-- /run-links -->
+
+
+::: {.chapter-goal}
+#### Dalam bab ini
+Anda akan mempelajari perbedaan sensor pasif dan aktif serta apa yang ditentukannya (siang atau malam, awan, kemampuan mengukur jarak); bagaimana pemindai laser mengubah waktu tempuh cahaya menjadi tinggi; perbedaan pantulan diskret dan gelombang penuh, serta arti RH98; wahana dari drone hingga orbit dan apa yang bisa dan tidak bisa dicakup masing-masing; serta batas-batas LiDAR. Contohnya adalah gelombang yang dibangun dari tajuk hutan, dan tinggi tajuk GEDI yang nyata di sekitar Palangka Raya dan tepi hutan rawa gambut Sebangau.
+:::
+
+## Pasif dan aktif
+
+Setiap sensor di buku ini termasuk salah satu dari dua keluarga.
+
+Sensor **pasif** merekam energi yang tidak dikirimnya sendiri. Sensor optik merekam cahaya matahari yang dipantulkan permukaan (P1, P3, P6); sensor termal dan radiometer gelombang mikro pasif merekam energi yang dipancarkan permukaan itu sendiri. Karena itu penginderaan optik pasif memerlukan siang hari, dan baik optik maupun inframerah termal terhenti oleh awan.
+
+Sensor **aktif** mengirim pulsanya sendiri dan merekam gemanya. **Radar** memakai gelombang mikro (P5), **LiDAR** memakai laser. Karena sensor tahu persis kapan pulsanya berangkat, ia bisa menghitung waktu gema dan mengukur jarak, sesuatu yang tidak bisa dilakukan sensor pasif secara langsung. Ia bekerja di malam hari. Gelombang mikro menembus awan; cahaya laser tidak. Dan mengirim energi memerlukan daya, itulah sebabnya satelit radar membawa panel surya besar dan sebagian besar LiDAR terbang dengan pesawat dan drone.
+
+## Mengukur waktu cahaya
+
+LiDAR menembakkan pulsa laser pendek dan mengukur waktu $t$ sampai gemanya kembali. Jarak ke benda yang memantulkannya adalah
+
+$$
+R = \frac{c\,t}{2}
+$$
+
+dibagi dua karena cahaya menempuh perjalanan pergi dan pulang. Cahaya menempuh 30 cm dalam satu nanodetik, sehingga satu nanodetik waktu sama dengan 15 cm jarak. Dengan mengetahui persis di mana pemindai berada dan ke mana ia mengarah (GNSS dan unit inersia, P7), setiap gema menjadi titik dengan tiga koordinat.
+
+Panjang gelombang dipilih sesuai sasaran. Inframerah dekat 1064 nm, tempat daun memantul kuat, adalah pilihan umum untuk vegetasi dan medan; 1550 nm lebih aman bagi mata dan umum dipakai di drone dan pesawat; cahaya hijau 532 nm menembus air dan dipakai untuk mengukur kedalaman perairan dangkal serta oleh ICESat-2 di atas es.
+
+## Pantulan diskret dan gelombang penuh
+
+Pulsa yang diarahkan ke hutan tidak mengenai satu permukaan saja. Sebagian dipantulkan puncak tajuk, sebagian oleh cabang di bawahnya, dan sebagian lolos lewat celah dan dipantulkan tanah.
+
+Sistem **pantulan diskret**, kebanyakan pemindai pesawat dan drone, merekam beberapa gema per pulsa sebagai titik: pantulan pertama biasanya puncak tajuk, yang terakhir sering kali tanah. Mengklasifikasikan titik tanah lalu menginterpolasinya menghasilkan **model medan digital** (DTM); pantulan pertama menghasilkan **model permukaan digital** (DSM); selisih keduanya adalah **model tinggi tajuk** (CHM). Bab [-@sec-lidar-classification] dan [-@sec-lidar-terrain-cities] mengerjakan persis hal ini.
+
+Sistem **gelombang penuh** merekam seluruh sinyal yang kembali sebagai fungsi waktu. GEDI melakukannya untuk footprint selebar 25 m. Gambar gelombang di bawah dibangun dari tajuk hutan sederhana: energi tiba lebih dulu dari puncak tajuk, lalu dari lapisan yang lebih rendah, dan terakhir sebagai puncak tajam dari tanah. GEDI meringkas setiap gelombang dengan **tinggi relatif**: RH98 adalah tinggi di atas tanah yang di bawahnya terdapat 98 % energi yang kembali, ukuran tinggi tajuk yang lazim; RH50 adalah tinggi yang membagi energi menjadi dua, dan turun ketika hutan dijarangkan atau terdegradasi meskipun beberapa pohon tinggi masih tersisa.
+
+## Dari drone hingga orbit
+
+Tabel perbandingan di bawah menjajarkan sistem-sistem itu. Perbedaannya lebih pada cakupan daripada fisika:
+
+- **LiDAR pesawat dan drone** memetakan area survei secara menyeluruh, dengan puluhan hingga ratusan titik per meter persegi dan akurasi vertikal sekitar 10 sampai 15 cm di permukaan terbuka. Setiap survei adalah satu tempat, satu tanggal, dan berbayar.
+- **LiDAR terestris**, pemindai di atas tripod, melihat plot dari bawah dengan detail milimeter: batang dan cabang satu per satu, rujukan bagi persamaan biomassa (Bab [-@sec-height-scaling]).
+- **GEDI dan ICESat-2** mengambil sampel seluruh kawasan tropis dan sekitarnya, gratis, tetapi sebagai jalur footprint dengan celah di antaranya, tidak pernah sebagai peta lengkap. Untuk memetakan tinggi hutan di mana-mana, sampel itu digabungkan dengan data optik dan radar yang menyeluruh (Bab [-@sec-gedi-structure]).
+
+Peta GEDI di bawah memperlihatkan hal ini dengan jelas: setiap goresan berwarna adalah jalur footprint laser, dan di antara jalur itu tidak ada apa-apa.
+
+## Apa yang terlihat di sekitar Palangka Raya
+
+Kotak ini mencakup Palangka Raya, gambut yang sudah dibuka dan berulang kali terbakar di selatan dan timurnya, serta tepi hutan rawa gambut Sebangau. Dikelompokkan menurut kelas Dynamic World di bawahnya, footprint GEDI berkualitas baik memberi median tinggi tajuk sekitar 16 m di bawah pohon, dibanding 3 sampai 4 m di atas lahan pertanian dan semak. Lahan terbangun dan lahan terbuka menunjukkan 6 sampai 7 m: pohon kota dan bangunan adalah tinggi bagi laser, dan di gambut bekas terbakar pohon mati yang masih berdiri memantulkan energi, sementara footprint 25 m juga bisa melintasi batas kelas yang digambar pada 10 m. Pemisahan itulah gunanya sensor tinggi tajuk; tumpang tindihnya mengingatkan bahwa footprint dan label piksel bukan hal yang sama.
+
+## Batas-batasnya
+
+Cahaya laser tidak menembus awan, sehingga LiDAR antariksa kehilangan banyak tembakan di atas kawasan tropis yang basah dan hanya menyimpan yang bebas awan. Di tajuk yang sangat rapat hanya sedikit foton yang mencapai tanah, puncak tanah melemah dan tinggi menjadi tidak pasti; GEDI menandai footprint menurut sensitivitasnya karena alasan ini. Di lereng curam pantulan tanah melebar dalam waktu dan bercampur dengan tajuk. GEDI sendiri berhenti antara Maret 2023 dan April 2024, ketika dipindahkan di stasiun luar angkasa untuk memberi tempat bagi instrumen lain, sehingga rekamannya memiliki celah. Dan survei pesawat itu mahal: LiDAR menyeluruh ada untuk sebagian negara, sebagian konsesi, dan sebagian kota, bukan untuk sebagian besar kawasan tropis.
+
+{{< include _snippets/ch00j_lidar.qmd >}}
+
+## Istilah kunci
+
+**Penginderaan pasif / aktif**. **LiDAR**, **waktu tempuh**, $R = ct/2$. **Pulsa**, **footprint**. **Pantulan diskret**: pertama, terakhir; **gelombang penuh**. **DTM, DSM, CHM**. **Tinggi relatif** (RH25, RH50, RH98). **ALS, ULS, TLS**. **GEDI, ICESat-2**. **Kerapatan titik**. **Sensitivitas**, **quality flag**.
+
+## Kuis
+
+1. Golongkan sebagai pasif atau aktif: Landsat OLI, Sentinel-1, GEDI, Landsat TIRS, radiometer SMAP. Apa yang dimungkinkan oleh sifat aktif?
+2. Gema LiDAR kembali 6,67 µs setelah pulsa. Berapa jauh permukaannya? Berapa kesalahan jarak yang ditimbulkan kesalahan waktu 2 ns?
+3. Mengapa radar bisa menembus awan tetapi LiDAR tidak?
+4. Dari pantulan diskret, bagaimana Anda membangun DTM, DSM, dan CHM?
+5. Apa itu RH98, dan mengapa RH50 bisa turun di hutan terdegradasi sementara RH98 tetap?
+6. Mengapa GEDI bukan peta tinggi hutan, dan bagaimana peta dibuat darinya?
+7. Di sekitar Palangka Raya, lahan terbangun dan lahan terbuka menunjukkan tinggi GEDI 6 sampai 7 m. Berikan dua alasannya.
+
+::: {.callout-note collapse="true"}
+## Jawaban
+1. Pasif: Landsat OLI (cahaya matahari yang dipantulkan), Landsat TIRS (panas yang dipancarkan), radiometer SMAP (gelombang mikro yang dipancarkan). Aktif: Sentinel-1 (radar), GEDI (LiDAR). Sifat aktif memungkinkan pencitraan di malam hari, dan mengukur jarak dari waktu gema.
+2. $R = c t / 2 = 3\times10^8 \times 6{,}67\times10^{-6} / 2 \approx 1000$ m. Kesalahan 2 ns menjadi $3\times10^8 \times 2\times10^{-9} / 2 = 0{,}3$ m.
+3. Gelombang mikro panjangnya sentimeter, jauh lebih panjang dari butir awan, sehingga lewat dengan sedikit hamburan; cahaya laser sekitar satu mikrometer, sebanding dengan butir awan, sehingga awan menghambur dan menyerapnya.
+4. Klasifikasikan titik tanah lalu interpolasikan menjadi DTM; gridkan pantulan pertama (tertinggi) menjadi DSM; kurangkan, DSM dikurangi DTM, untuk mendapatkan CHM.
+5. RH98 adalah tinggi di atas tanah yang di bawahnya terdapat 98 % energi yang kembali, mendekati puncak tajuk. Menghilangkan pohon dari tajuk bawah dan tengah menggeser energi ke arah tanah, sehingga RH50 turun, sementara beberapa pohon tinggi yang tersisa menjaga RH98 tetap tinggi.
+6. GEDI mengambil sampel footprint 25 m di sepanjang jalur dengan celah lebar di antaranya, dan hanya pada tembakan bebas awan. Peta dibuat dengan memodelkan tinggi footprint dari prediktor menyeluruh seperti optik, radar, dan medan, lalu memprediksinya di mana-mana.
+7. Pohon kota dan bangunan adalah tinggi yang nyata bagi laser; di gambut bekas terbakar, pohon mati yang masih berdiri memantulkan energi; dan footprint 25 m bisa melintasi batas kelas yang diberi label pada 10 m.
+:::

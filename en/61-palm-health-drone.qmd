@@ -78,7 +78,7 @@ A plantation manager rarely asks "how many tonnes will this block give?" alone. 
 
 ## Land cover from the drone: objects, not pixels
 
-Satellite land-cover maps (Chapter [-@sec-supervised], and the IJB walk-through in P6) see a 10 m pixel. A drone sees a single frond. Classifying a 0.3 m image pixel by pixel fails, because one palm crown contains green leaflets, yellow midribs, shadow and soil, and each pixel would get a different class. The answer is to classify **objects**.
+Satellite land-cover maps (Chapter [-@sec-supervised], and the IJB walk-through in P10) see a 10 m pixel. A drone sees a single frond. Classifying a 0.3 m image pixel by pixel fails, because one palm crown contains green leaflets, yellow midribs, shadow and soil, and each pixel would get a different class. The answer is to classify **objects**.
 
 1. **Objects.** SLIC superpixels split the image into about 8,000 compact patches of similar colour, each roughly the size of one palm crown (about 50 m²).
 2. **Features per object.** Mean colour, the excess-green index, brightness, roughness (the local standard deviation of brightness, which separates a crown of fronds from a smooth lawn), and one feature only this plot has: the share of the object near a crown that passed the **planting-grid test** from the health section.

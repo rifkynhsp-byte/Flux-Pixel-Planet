@@ -16,7 +16,7 @@ Untuk selebihnya, ayah saya punya peribahasa Sunda: *cikaracak ninggang batu, la
 
 Saya beruntung bisa mempelajari pekerjaan ini langsung di proyek nyata, bersama orang-orang hebat, dengan persoalan nyata yang harus dipecahkan, dan mendalaminya di UNSW Sydney dengan beasiswa LPDP. Tidak semua orang mendapat kesempatan itu. Saya ingin semua orang di bidang ini bisa merasakannya juga, dan punya rekan sejawat untuk bersama-sama memecahkan persoalan yang sulit. Buku ini membagikannya: pengetahuan praktis yang saya kumpulkan, saya tuliskan, dan saya berikan cuma-cuma, supaya mahasiswa di Kupang, penyuluh kehutanan di Riau, atau insinyur muda di mana pun bisa membangun kemampuan yang sama dan tumbuh darinya.
 
-Buku ini bukan gelar akademik, dan tidak menggantikan program sarjana maupun pendidikan formal apa pun; saya sendiri bahkan belum menyelesaikan program magister saya. Ini adalah pengalaman seorang praktisi yang dibuka untuk umum, supaya siapa pun yang mau menekuninya bisa menjadi spesialis SIG atau penginderaan jauh.
+Buku ini bukan gelar akademik, dan tidak menggantikan program sarjana maupun pendidikan formal apa pun. Ini adalah pengalaman seorang praktisi yang dibuka untuk umum, supaya siapa pun yang mau menekuninya bisa menjadi spesialis SIG atau penginderaan jauh.
 
 Kebutuhannya mendesak. Indonesia adalah negara tropis yang sangat luas, hampir dua juta kilometer persegi daratan dengan jumlah penduduk terbesar keempat di dunia, dan di sinilah perubahan iklim datang lebih awal: hujan yang makin lebat di lereng curam yang padat penduduk, banjir di kota yang sekaligus ambles, kebakaran gambut yang dikeringkan di setiap kemarau panjang, dan naiknya muka laut di pesisir rendah tempat jutaan orang tinggal. Jawabannya bersifat spasial. Kebijakan memerlukan peta untuk menetapkan target dan melaporkan capaiannya; perencana memerlukannya untuk memutuskan di mana boleh dan tidak boleh membangun; penegakan hukum memerlukannya untuk menemukan pembukaan hutan, tambang dan penangkapan ikan ilegal sebelum kerusakan terjadi. Karena itu data menjadi sangat berharga, dan untuk negara seluas ini data tidak bisa hanya berasal dari survei lapangan. Data harus datang dari satelit dan dari platform yang cukup besar untuk mencakup satu kabupaten, atau seluruh negeri, setiap tahun. Datanya sendiri kini sebagian besar gratis. Yang masih kurang adalah orang yang terlatih mengolahnya menjadi keputusan. Karena itulah buku ini gratis dan terbuka: setiap orang yang menguasai pekerjaan ini menjadi pengganda, memetakan satu kabupaten, melatih satu tim, dan membuat keputusan berikutnya lebih berdasar. Buku ini adalah kontribusi saya untuk itu, sekaligus ajakan: pelajari, gunakan, perbaiki, dan pecahkan persoalan berikutnya bersama-sama.
 
@@ -26,7 +26,7 @@ Di UNSW Sydney, tiga orang mendukung proses belajar saya di bidang penginderaan 
 
 Semuanya berawal lebih dulu, di Geofisika Universitas Padjadjaran. **Professor Irwan Ary Dharmawan**, **Professor Eleonora Agustine** dan **Professor Muhammad Aufaristama** membimbing skripsi saya, dan merekalah yang pertama kali mengajari saya memandang Bumi dengan fisika dan memercayai sebuah pengukuran hanya setelah mengujinya. Kepada beliau bertiga, dan kepada seluruh dosen saya di Geofisika Universitas Padjadjaran dan di UNSW yang tidak dapat saya sebutkan satu per satu: terima kasih. Apa yang baik dalam buku ini banyak berutang kepada Bapak dan Ibu; kesalahannya adalah milik saya.
 
-Di bidang kehutanan di Riau, bersama manajer saya **Amit Kumar Haldar**, pengalaman saya banyak tumbuh. Bersama beliau, gagasan kami tidak berhenti di atas kertas: gagasan itu dijalankan dan diuji dalam operasi nyata, tempat sebuah metode terbukti berhasil atau segera terlihat tidak berhasil. Terima kasih.
+Terima kasih kepada **Amit Kumar Haldar**, manajer pertama saya di bidang kehutanan di Riau, yang banyak mengajari saya menerapkan penginderaan jauh dalam praktik, terutama *soft skills*-nya.
 
 Dan untuk keluarga kecil saya. **Kesuma Fitri**, istri saya, yang selalu mendukung saya; anak-anak kami **Ibrahim Bagaskoro** dan **Yahya Kenzi Hendrawan**, yang bersama kami mengarungi ombak. Perjalanan kami masih berlanjut, dari tempat ke tempat, dari kesempatan ke kesempatan, dan semuanya adalah alasan untuk bersyukur atas keagungan ciptaan Allah SWT: betapa presisi dan teraturnya alam, dan betapa rumitnya bumi untuk dimodelkan, sehingga masih tersisa ruang yang luas bagi kita untuk terus berusaha memahaminya, dan bersyukur.
 
@@ -62,7 +62,7 @@ Teks dan pembahasan seluruh buku dalam satu dokumen Word, dengan tautan ke kode 
 
 | Bagian | Bab | Setelah selesai Anda mampu |
 |--------|-----|----------------------------|
-| Prinsip | P1 sampai P6 | Menjelaskan cara sensor optik, termal, dan radar membentuk citra, dan memakai aplikasi IJB tanpa kode |
+| Prinsip | P1 sampai P10 | Menjelaskan cara sensor optik, hiperspektral, termal, radar, dan LiDAR membentuk citra, apa yang ditambahkan satelit geostasioner dan navigasi, dan memakai aplikasi IJB tanpa kode |
 | I. Fondasi, tujuan dan fisika | 4 bab | Menjelaskan apa yang diukur satu piksel dan memilih sensor yang tepat |
 | II. Platform | 3 | Menulis dan men-debug skrip Earth Engine dengan percaya diri |
 | III. Data siap analisis | 4 | Membangun komposit dari data optik, radar dan topografi |
@@ -164,9 +164,9 @@ Skrip dasar di Bagian II berasal dari seri pengajaran EE101 oleh Noel Gorelick, 
 
 ![](images/author.jpg){.author-photo width="170" fig-alt="Rifky Nauval Hendrawan"}
 
-Saya **Rifky Nauval Hendrawan**, spesialis penginderaan jauh dari Indonesia yang kini tinggal di Sydney. Saya memakai satelit, drone, dan data untuk membantu orang memahami dan menjaga hutan, lahan, serta masyarakat yang bergantung padanya.
+Saya **Rifky Nauval Hendrawan**, spesialis penginderaan jauh dari Indonesia. Saya memakai satelit, drone, dan data untuk membantu orang memahami dan menjaga hutan, lahan, serta masyarakat yang bergantung padanya.
 
-Pekerjaan saya membawa saya dari hutan tanaman di Riau ke proyek karbon bersama perusahaan rintisan iklim di Jerman, riset bersama mitra di Singapura, dan tim kehutanan di Brasil. Kini saya bekerja sebagai Senior Remote Sensing Specialist di APRIL, dan sedang menyelesaikan Master of Engineering Science di UNSW Sydney (Desember 2026).
+Pekerjaan saya membawa saya dari hutan tanaman di Riau ke proyek karbon bersama perusahaan rintisan iklim di Jerman, riset bersama mitra di Singapura, dan tim kehutanan di Brasil. Kini saya bekerja sebagai Remote Sensing Specialist di APRIL.
 
 Saya menulis buku ini karena pelajaran paling berguna di bidang ini dipetik dari proyek nyata, sering kali dengan cara yang sulit, dan pelajaran itu layak dibagikan secara gratis, dalam bahasa Indonesia dan Inggris.
 
@@ -174,8 +174,9 @@ Saya menulis buku ini karena pelajaran paling berguna di bidang ini dipetik dari
 
 Buku ini gratis, dan akan tetap gratis. Jika buku ini bermanfaat dan Anda membutuhkan metode yang sama untuk persoalan Anda sendiri, saya terbuka untuk:
 
-- **Konsultasi dan proyek**: analisis satelit dan LiDAR, inventarisasi dan biomassa hutan, MRV karbon, pemetaan tutupan lahan dan perubahannya, serta aplikasi Earth Engine, untuk perusahaan, LSM, dan pemerintah.
+- **Aplikasi otomatis yang dibuat khusus**: di luar buku ini, saya membangun aplikasi dan *pipeline* otomatis untuk data dan pertanyaan Anda sendiri, dari aplikasi dan dasbor Earth Engine hingga rantai pemrosesan yang berjalan terjadwal.
+- **Konsultasi dan proyek**: analisis satelit, drone, dan LiDAR, survei pemetaan, inventarisasi dan biomassa hutan, MRV karbon, serta pemetaan tutupan lahan dan perubahannya, untuk perusahaan, LSM, dan pemerintah.
 - **Pelatihan**: lokakarya dan kursus untuk tim, dalam bahasa Indonesia atau Inggris, berdasarkan bab-bab buku ini.
-- **Kolaborasi riset dan peluang PhD** di bidang penginderaan jauh, LiDAR, GeoAI, dan pemantauan lingkungan.
+- **Riset**: kolaborasi, peluang PhD, dan posisi asisten peneliti di bidang penginderaan jauh, LiDAR, GeoAI, dan pemantauan lingkungan, terutama riset kehutanan.
 
 Hubungi [rifkynauvalhsp@gmail.com](mailto:rifkynauvalhsp@gmail.com), atau terhubung di [LinkedIn](https://www.linkedin.com/in/rifkynauvalhsp). Koreksi, sanggahan, dan pertanyaan tentang buku ini juga sama-sama disambut. Bila Anda menemukan kesalahan, menyampaikannya adalah sebuah kontribusi.

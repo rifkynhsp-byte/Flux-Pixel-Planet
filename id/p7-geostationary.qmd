@@ -1,0 +1,106 @@
+# P7 · Satelit Geostasioner dan Navigasi: Mengamati Cuaca, Mengetahui Posisi {#sec-p7-geostationary .unnumbered}
+
+<!-- run-links -->
+::: {.callout-tip .run-links appearance="simple" icon="false"}
+**Jalankan bab ini**
+
+- `ch00i_geostationary` &nbsp; [![Buka di Code Editor](https://img.shields.io/badge/Open%20in-Earth%20Engine%20Code%20Editor-1a73e8)](https://code.earthengine.google.com/?scriptPath=users/rifkynauvalhsp/Fullstack-Remote-Sensing:ch00i_geostationary) &nbsp; [![Buka di Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rifkynhsp-byte/Flux-Pixel-Planet/blob/main/notebooks/ch00i_geostationary.ipynb)
+
+[![Tambahkan semua skrip buku ke Code Editor Anda (sekali saja)](https://img.shields.io/badge/Add%20all%20book%20scripts-to%20your%20Code%20Editor-34a853)](https://code.earthengine.google.com/?accept_repo=users/rifkynauvalhsp/Fullstack-Remote-Sensing) &nbsp; *Baru pertama kali? Lampiran A menjelaskan cara masuk ke Earth Engine dan Colab.*
+:::
+<!-- /run-links -->
+
+
+::: {.chapter-goal}
+#### Dalam bab ini
+Anda akan mempelajari apa yang diberikan satelit cuaca geostasioner yang tidak pernah bisa diberikan Landsat atau Sentinel (tampilan yang sama setiap sepuluh menit) dan apa harganya (piksel besar dan miring, serta tidak ada tampilan kutub); satelit mana yang mengamati Indonesia; bagaimana hujan diperkirakan dari antariksa dan sejauh mana bisa dipercaya; dan apa yang dilakukan satelit navigasi, GPS dan saudara-saudaranya, untuk penginderaan jauh. Contohnya nyata: Siklon Senyar melintasi Sumatra bagian utara dalam citra GK-2A yang dibaca langsung dari arsip terbuka, dan hujan banjir Tahun Baru 2020 di Jakarta dari GSMaP dibandingkan dengan penakar hujan.
+:::
+
+## Dua orbit, dua tugas
+
+P2 sudah memperkenalkan orbit. Dua di antaranya penting di sini.
+
+Satelit **geostasioner** mengitari Bumi 35 786 km di atas khatulistiwa, sekali setiap hari sideris, searah putaran Bumi. Dilihat dari permukaan, ia diam di langit. Ia selalu melihat cakram yang sama, sedikit kurang dari separuh Bumi, dan bisa memotret cakram itu berulang-ulang: setiap 10 menit untuk pencitra generasi sekarang. Itulah yang menjadikannya satelit cuaca. Landsat atau Sentinel lewat sekali dalam beberapa hari; siklon, badai guntur, atau kepulan asap berubah dalam hitungan menit.
+
+Satelit **navigasi** (GNSS) terbang di orbit Bumi menengah, sekitar 19 000 sampai 23 000 km, di beberapa bidang orbit, sehingga sedikitnya empat di antaranya berada di atas cakrawala di mana pun di Bumi kapan pun. Satelit ini tidak memotret apa-apa. Mereka memancarkan posisi dan waktu yang presisi, dan dari sinyal itu penerima menghitung di mana ia berada.
+
+## Apa yang diberikan pencitra geostasioner
+
+Pencitra geostasioner generasi sekarang sangat mirip antarbadan:
+
+| Satelit | Posisi | Pencitra | Band | Cakram penuh |
+|---|---|---|---|---|
+| Himawari-9 (Jepang, beroperasi sejak Desember 2022) | 140,7° BT | AHI | 16 | setiap 10 menit |
+| GEO-KOMPSAT-2A atau GK-2A (Korea, diluncurkan Desember 2018) | 128,2° BT | AMI | 16 | setiap 10 menit |
+| GOES-East, GOES-19 (AS, beroperasi sejak April 2025) | 75,2° BB | ABI | 16 | setiap 10 menit |
+
+Enam belas band dari cahaya tampak hingga inframerah termal, dengan piksel 0,5 sampai 1 km di cahaya tampak dan 2 km di inframerah tepat di bawah satelit, serta area yang lebih kecil dipotret setiap beberapa menit (setiap 2,5 menit untuk area Jepang pada Himawari dan untuk badai yang dipilih operatornya). Dari band-band itu lahir produk yang dipakai setiap hari:
+
+- **Awan dan badai**: suhu dan tinggi puncak awan, badai guntur yang sedang tumbuh, mata dan pita hujan siklon. Puncak awan paling dingin di band 10,5 µm adalah awan badai paling tinggi dan paling basah.
+- **Hujan**, ketika inframerah digabungkan dengan pengukuran gelombang mikro dari satelit orbit rendah (di bawah).
+- **Kebakaran dan asap**: api yang jauh lebih kecil dari piksel 2 km tetap menaikkan sinyal 3,9 µm piksel itu. Setiap sepuluh menit cukup cepat untuk melihat api mulai menyala, dan mengikuti kabut asap yang ditimbulkannya (Bab [-@sec-haze]).
+- **Abu vulkanik, debu, kabut, suhu permukaan laut, dan aerosol**, masing-masing dari kombinasi band yang dipilih untuknya.
+
+Arsipnya terbuka. NOAA menyalin seluruh data Himawari-9 dan GK-2A ke Amazon Web Services, gratis dan tanpa akun, dan dari sanalah citra Senyar di bawah berasal.
+
+## Harganya: piksel besar dan miring
+
+Dari 35 786 km, satu piksel itu besar: 2 km di inframerah tepat di bawah satelit. Menjauh dari titik itu, piksel membesar karena dua alasan. Permukaan lebih jauh, dan dilihat secara miring, sehingga piksel memanjang ke arah tepi cakram. Indonesia bagian barat berada sekitar 40° sampai 53° dari sudut pandang Himawari-9, sehingga piksel inframerah 2 km-nya sepanjang sekitar 2,7 sampai 3,5 km (tabel di bawah). Di atas sekitar 70° pandangannya terlalu miring untuk dipakai, dan wilayah kutub tidak terlihat oleh satelit geostasioner mana pun; itu tugas satelit orbit polar.
+
+Gambar cakupan memperlihatkan lima satelit, masing-masing sendiri. Dari kelimanya, hanya Himawari-9 dan GK-2A yang melihat Indonesia dengan baik; GOES dan Meteosat di 0° sama sekali tidak melihatnya. Satelit lain yang tidak digambar di sini juga melihat dari samping: satelit FengYun-4 milik Tiongkok, dan Meteosat milik EUMETSAT di atas Samudra Hindia (45,5° BT), yang melihat Sumatra dengan sudut curam.
+
+## Melihat Senyar
+
+Siklon Senyar terbentuk di Selat Malaka pada 25 November 2025, salah satu dari sangat sedikit siklon tropis yang pernah tercatat di sana, mendarat di Sumatra bagian utara sekitar tengah malam 26 November, menyeberang ke Semenanjung Malaysia, dan punah pada 30 November. Hujannya menimbulkan banjir dan longsor mematikan di Aceh, Sumatra Utara, dan Sumatra Barat.
+
+Tiga bingkai GK-2A di bawah berselang 12 jam, dari 144 cakram penuh yang dipotret GK-2A setiap hari. Pada pagi 26 November puncak awan paling dingin, di bawah -70 °C, menutupi Aceh dan selat; dua belas jam kemudian badai sudah di atas daratan dan melemah; pada pagi berikutnya sisa-sisanya sudah menyeberang ke Semenanjung Malaysia dan Laut Cina Selatan. Pencitra orbit polar hanya akan menangkap satu atau dua momen ini, kalau langit mengizinkan.
+
+## Melihat asap di atas Kalimantan
+
+Musim kebakaran memperlihatkan sisi lain dari tampilan sepuluh menit. Pada tengah hari 13 Oktober 2026, salah satu hari dengan kebakaran terbanyak tahun itu di Kalimantan, band biru, hijau, dan merah GK-2A memperlihatkan asap kelabu kecokelatan yang mengalir ke barat laut dari deretan api di pesisir selatan Kalimantan Tengah dan Kalimantan Selatan, dengan deteksi FIRMS hari itu ditandai di atasnya. Asap lebih kelabu dan lebih baur daripada awan, dan bisa diikuti dari sumbernya saat bergerak, setiap sepuluh menit, sepanjang hari. Tampilan yang sama, dengan skala yang sama, adalah bahan Bab [-@sec-haze] untuk membangun satu musim penuh.
+
+## Hujan dari antariksa, dan sejauh mana bisa dipercaya
+
+Tidak ada satelit yang mengukur hujan secara langsung dari orbit geostasioner: citra inframerah memperlihatkan puncak awan yang dingin, bukan hujan di bawahnya. Radiometer gelombang mikro di satelit orbit rendah memang menangkap hujan, karena butir hujan memancarkan dan menghamburkan gelombang mikro, tetapi masing-masing hanya lewat beberapa kali sehari. Produk seperti **GSMaP** milik JAXA menggabungkan keduanya: perkiraan hujan gelombang mikro, diteruskan di antara lintasan dengan gerak awan yang terlihat setiap sepuluh menit dari orbit geostasioner, lalu disesuaikan dengan penakar hujan di tempat yang ada.
+
+Banjir Jakarta 1 Januari 2020 memperlihatkan nilai dan batasnya. Penakar BMKG di Halim Perdanakusuma mencatat 377 mm dalam sehari, tertinggi sejak pencatatan dimulai pada 1866. GSMaP, dirata-ratakan dalam radius 5 km di sekitar penakar yang sama, memberi sekitar 108 mm untuk hari yang sama. GSMaP menempatkan badai di tempat dan waktu yang benar, menguat sepanjang malam dan memuncak sebelum subuh, tetapi pada resolusi sekitar 10 km ia menghaluskan inti ekstrem yang ditangkap satu penakar. Gunakan hujan satelit untuk melihat di mana dan kapan; gunakan penakar, atau kalibrasi dengannya, ketika totalnya penting.
+
+## Satelit navigasi, dan apa gunanya bagi penginderaan jauh
+
+Empat konstelasi global sedang beroperasi: **GPS** milik Amerika (sekitar 20 200 km), **GLONASS** milik Rusia (19 100 km), **Galileo** milik Eropa (23 222 km), dan **BeiDou** milik Tiongkok (21 528 km untuk bagian orbit menengahnya, ditambah satelit di orbit geostasioner dan miring). QZSS milik Jepang dan NavIC milik India menambah cakupan regional. Penerima mengukur jaraknya ke sedikitnya empat satelit dan menyelesaikan empat bilangan yang tidak diketahui: tiga koordinatnya dan kesalahan jamnya sendiri.
+
+Bagi penginderaan jauh, satelit navigasi penting dalam empat hal:
+
+- **Di mana sensornya berada.** Setiap satelit pencitra membawa penerima GNSS, sehingga orbitnya diketahui hingga sentimeter. Setiap survei pesawat dan drone memadukan GNSS dengan unit pengukuran inersia (IMU), sehingga setiap foto atau tembakan laser diketahui posisinya tanpa titik kontrol tanah: **georeferensi langsung**. Dengan koreksi dari stasiun referensi (RTK, atau PPK setelah terbang), posisinya mencapai beberapa sentimeter. Stasiun referensi nasional Indonesia, yang dioperasikan BIG sebagai InaCORS, melayani tepat tujuan ini.
+- **Di mana permukaannya.** Plot lapangan, titik latih, dan sampel akurasi semuanya membawa koordinat GNSS, dan kesalahannya membatasi seberapa kecil objek yang bisa diuji sebuah validasi.
+- **Tundaan atmosfer.** Sinyal GNSS diperlambat oleh uap air; tundaan yang sama mendistorsi interferometri radar, dan stasiun GNSS dipakai untuk mengoreksinya (P5).
+- **GNSS sebagai sensor.** Sinyal yang dibelokkan atmosfer saat satelit terbenam (**okultasi radio**) memberi profil suhu dan kelembapan untuk model cuaca; sinyal yang dipantulkan laut (**reflektometri**, seperti pada CYGNSS milik NASA) mengukur angin di atas laut dan kelembapan tanah.
+
+{{< include _snippets/ch00i_geostationary.qmd >}}
+
+## Istilah kunci
+
+**Orbit geostasioner** (35 786 km, satu hari sideris). **Cakram penuh**, **pindai cepat**. **Titik sub-satelit**. **Sudut pandang (zenit satelit)**. **Suhu kecerahan**, **suhu puncak awan**. **AHI, AMI, ABI**. **Hujan gelombang mikro pasif**, **GSMaP**. **GNSS**: GPS, GLONASS, Galileo, BeiDou, QZSS, NavIC. **Pseudorange**. **IMU**, **georeferensi langsung**, **RTK / PPK**, **CORS**. **Okultasi radio**, **reflektometri GNSS**.
+
+## Kuis
+
+1. Mengapa satelit geostasioner tampak diam, dan mengapa ia harus mengorbit di atas khatulistiwa?
+2. Sebutkan tiga hal yang bisa diperlihatkan citra geostasioner setiap 10 menit tetapi tidak oleh kunjungan ulang Sentinel-2 setiap 5 hari.
+3. Satu piksel inframerah 2 km dipotret dari jarak 37 680 km pada sudut pandang 48,7°. Kira-kira berapa panjangnya ke arah tepi cakram?
+4. Dari lima satelit di gambar cakupan, mana yang melihat Indonesia dengan baik, dan mengapa bukan GOES atau Meteosat di 0°?
+5. Mengapa area paling dingin pada citra 10,5 µm menandai awan badai paling kuat?
+6. GSMaP memberi sekitar 108 mm di Halim pada hari ketika penakar mencatat 377 mm. Berikan dua alasannya, dan katakan untuk apa masing-masing sumber itu baik.
+7. Mengapa penerima GNSS memerlukan sedikitnya empat satelit?
+8. Sebutkan dua cara GNSS dipakai dalam survei drone dan satu cara ia dipakai dalam interferometri radar.
+
+::: {.callout-note collapse="true"}
+## Jawaban
+1. Periode orbitnya sama dengan satu hari sideris dan ia bergerak searah putaran Bumi, sehingga ia mengikuti satu titik di permukaan. Hanya orbit di bidang khatulistiwa yang bisa tetap di atas titik yang sama; orbit yang miring akan bergeser ke utara dan selatan setiap hari.
+2. Misalnya: tumbuhnya badai guntur dalam satu sore; lintasan siklon jam demi jam; api mulai menyala dan asapnya menyebar; kabut menghilang; abu keluar dari gunung api. Semuanya berubah lebih cepat dari beberapa hari.
+3. Melintang: 2 × 37 680 / 35 786 ≈ 2,1 km. Ke arah tepi ia memanjang lagi sebesar 1/cos(48,7°) ≈ 1,52, jadi sekitar 3,2 km.
+4. Himawari-9 (140,7° BT) dan GK-2A (128,2° BT). GOES-East dan GOES-West berada di atas Amerika dan Pasifik timur, dan Meteosat di 0° di atas Afrika: Indonesia berada di luar cakrawalanya. (Satelit yang tidak ada di gambar, seperti Meteosat di 45,5° BT dan FengYun-4 milik Tiongkok, melihat Indonesia bagian barat secara miring.)
+5. Suhu turun seiring ketinggian di troposfer, sehingga puncak awan paling dingin adalah yang paling tinggi, dan awan paling tinggi adalah badai konvektif dalam yang membawa hujan paling banyak.
+6. GSMaP merata-ratakan dalam sekitar 10 km dan menggabungkan lintasan gelombang mikro yang berselang beberapa jam dengan gerak awan inframerah, sehingga ia menghaluskan inti ekstrem dan bisa melewatkan puncak di antara lintasan; penakar mengukur satu titik dengan tepat. Hujan satelit memperlihatkan di mana dan kapan badai jatuh di wilayah luas; penakar memberi total sebenarnya di lokasinya.
+7. Penerima menyelesaikan empat bilangan yang tidak diketahui, tiga koordinat dan kesalahan jamnya, dan memerlukan satu jarak (pseudorange) untuk setiap bilangan itu.
+8. Drone: menentukan posisi setiap foto atau tembakan laser dengan GNSS dan IMU (georeferensi langsung), dan mengukur titik kontrol atau titik uji dengan RTK atau PPK. Interferometri radar: stasiun GNSS memperkirakan tundaan uap air yang kalau tidak dikoreksi akan tampak sebagai deformasi palsu.
+:::

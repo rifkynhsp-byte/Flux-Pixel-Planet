@@ -18,7 +18,7 @@ You will train a land-cover model once, save it as an Earth Engine asset, load i
 
 ## Why save a model
 
-Training takes samples, time and judgement. Once a model works, you want to reuse it: in another district, next year, in an app such as IJB (P6), or hand it to a colleague. Earth Engine lets you store a trained classifier as an asset and call it from any script. The author's IJB app does exactly this with its 10-class model: trained once on embeddings and terrain, applied wherever a user draws an area.
+Training takes samples, time and judgement. Once a model works, you want to reuse it: in another district, next year, in an app such as IJB (P10), or hand it to a colleague. Earth Engine lets you store a trained classifier as an asset and call it from any script. The author's IJB app does exactly this with its 10-class model: trained once on embeddings and terrain, applied wherever a user draws an area.
 
 ## Two ways to save
 

@@ -38,13 +38,17 @@ Its failure mode matters more than its formula. Once leaf area index passes roug
 
 The practical consequence: NDVI distinguishes forest from not forest very well, and distinguishes degraded forest from intact forest hardly at all. If your question is about forest condition rather than forest extent, NDVI alone will not answer it, and no amount of better classification will rescue it.
 
-**EVI** keeps responding where NDVI has saturated. Three additions do the work: a blue term correcting residual atmospheric scattering, a soil adjustment in the denominator reducing background influence, and a gain rescaling the output. The coefficients are the standard MODIS values, empirical rather than derived. Keep them unless you have a specific reason and a citation.
+**EVI** keeps responding longer than NDVI. Three additions do the work: a blue term correcting residual atmospheric scattering, a soil adjustment in the denominator reducing background influence, and a gain rescaling the output. The coefficients are the standard MODIS values, empirical rather than derived. Keep them unless you have a specific reason and a citation. In the first year of MODIS data, NDVI saturated over the Amazon while EVI stayed sensitive to differences between canopies [@huete2002modis]. Longer is not forever, though: in @fig-saturation EVI still changes by about 3 % of its range for each extra unit of leaf area index at LAI 4, against under 1 % for NDVI, and by LAI 6 it too is close to the noise of a good image.
+
+Two newer metrics are worth knowing. **NIRv**, NDVI multiplied by near infrared reflectance, isolates the near infrared reflected by vegetation and tracks photosynthesis closely [@badgley2017nirv]. Because near infrared keeps building with each leaf layer after red is fully absorbed, it holds its sensitivity a little longer than EVI. **kNDVI**, $\tanh(NDVI^2)$, is a kernel generalisation of NDVI that agrees better with leaf area and productivity products [@campsvalls2021kndvi], but it is a function of NDVI alone, so it cannot recover what NDVI has already lost at high leaf area: in the figure it saturates like NDVI.
+
+Which to use follows from the physics. Every optical index sees only the top layers of a canopy, so all of them flatten in the end. For extent and seasonality, NDVI is fine. For condition inside dense forest, use EVI or NIRv and say which. For biomass and degradation under a closed canopy, the answer is not a better ratio but a different measurement: structure, from L-band radar (Chapter [-@sec-sar]) or from LiDAR and GEDI (Chapter [-@sec-p8-lidar]).
 
 **SAVI** adds a soil brightness correction $L$. At $L = 0.5$ it suits intermediate cover; $L = 1$ suits sparse cover, $L = 0.25$ dense. At $L = 0$ it reduces exactly to NDVI, which is a useful check that you understand what the parameter does. It matters on the landward fringe and over young replanted stands, where bright mud between crowns inflates NDVI.
 
-![NDVI plateaus above a leaf area index of about 3 while EVI keeps climbing. Modelled with a simple canopy: red is absorbed quickly, near infrared accumulates through multiple scattering.](images/ndvi-saturation.png){#fig-saturation}
+![A simple canopy model. (a) NDVI, EVI, NIRv and kNDVI against leaf area index. (b) Sensitivity: the change for one more unit of leaf area index, as a percentage of each index's own range, on a log scale.](images/ndvi-saturation.png){#fig-saturation}
 
-@fig-saturation is the argument in one picture. Past LAI 3, adding leaves barely moves NDVI, so intact and degraded tropical forest return nearly the same number.
+@fig-saturation is the argument in one picture. Past LAI 3, adding leaves barely moves NDVI, so intact and degraded tropical forest return nearly the same number; EVI and NIRv buy a few more units of leaf area, then flatten too.
 
 ## The water indices, and why the older one is worse
 

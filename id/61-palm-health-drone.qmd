@@ -78,7 +78,7 @@ Manajer kebun jarang hanya bertanya "berapa ton yang akan dihasilkan blok ini?".
 
 ## Tutupan lahan dari drone: objek, bukan piksel
 
-Peta tutupan lahan dari satelit (Bab [-@sec-supervised], dan langkah demi langkah IJB di P6) melihat piksel 10 m. Drone melihat satu pelepah. Mengklasifikasikan citra 0,3 m piksel demi piksel gagal, karena satu tajuk sawit berisi anak daun hijau, lidi kuning, bayangan, dan tanah, sehingga setiap piksel mendapat kelas berbeda. Jawabannya adalah mengklasifikasikan **objek**.
+Peta tutupan lahan dari satelit (Bab [-@sec-supervised], dan langkah demi langkah IJB di P10) melihat piksel 10 m. Drone melihat satu pelepah. Mengklasifikasikan citra 0,3 m piksel demi piksel gagal, karena satu tajuk sawit berisi anak daun hijau, lidi kuning, bayangan, dan tanah, sehingga setiap piksel mendapat kelas berbeda. Jawabannya adalah mengklasifikasikan **objek**.
 
 1. **Objek.** Superpiksel SLIC membagi citra menjadi sekitar 8.000 petak ringkas dengan warna serupa, masing-masing kira-kira seukuran satu tajuk sawit (sekitar 50 m²).
 2. **Fitur per objek.** Warna rerata, indeks excess green, kecerahan, kekasaran (simpangan baku kecerahan lokal, yang membedakan tajuk berpelepah dari hamparan rumput yang halus), dan satu fitur yang hanya dimiliki plot ini: porsi objek yang dekat dengan tajuk yang lolos **uji grid tanam** dari bagian kesehatan.

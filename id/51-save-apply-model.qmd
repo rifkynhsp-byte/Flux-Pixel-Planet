@@ -18,7 +18,7 @@ Anda akan melatih model tutupan lahan sekali, menyimpannya sebagai aset Earth En
 
 ## Kenapa menyimpan model
 
-Melatih model butuh sampel, waktu, dan pertimbangan. Begitu modelnya berhasil, Anda ingin memakainya lagi: di kabupaten lain, tahun depan, di aplikasi seperti IJB (P6), atau diberikan kepada rekan. Earth Engine memungkinkan classifier yang sudah dilatih disimpan sebagai aset lalu dipanggil dari skrip mana pun. Aplikasi IJB milik penulis melakukan persis hal ini dengan model 10 kelasnya: dilatih sekali di atas embedding dan data medan, lalu diterapkan di mana pun pengguna menggambar wilayah.
+Melatih model butuh sampel, waktu, dan pertimbangan. Begitu modelnya berhasil, Anda ingin memakainya lagi: di kabupaten lain, tahun depan, di aplikasi seperti IJB (P10), atau diberikan kepada rekan. Earth Engine memungkinkan classifier yang sudah dilatih disimpan sebagai aset lalu dipanggil dari skrip mana pun. Aplikasi IJB milik penulis melakukan persis hal ini dengan model 10 kelasnya: dilatih sekali di atas embedding dan data medan, lalu diterapkan di mana pun pengguna menggambar wilayah.
 
 ## Dua cara menyimpan
 

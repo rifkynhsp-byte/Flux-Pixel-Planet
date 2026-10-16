@@ -62,6 +62,9 @@ book:
         - p3-scanning.qmd
         - p4-resolution.qmd
         - p5-radar.qmd
+        - p6-hyperspectral.qmd
+        - p7-geostationary.qmd
+        - p8-lidar.qmd
         - p6-ijb.qmd
     - part: "Part I: Foundations, Purpose and Physics"
       chapters:

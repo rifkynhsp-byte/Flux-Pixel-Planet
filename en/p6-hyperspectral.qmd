@@ -1,0 +1,102 @@
+# P6 · Hyperspectral and Multispectral: How Many Colours Are Enough? {#sec-p6-hyperspectral .unnumbered}
+
+<!-- run-links -->
+::: {.callout-tip .run-links appearance="simple" icon="false"}
+**Run this chapter**
+
+- `ch00h_hyperspectral` &nbsp; [![Open in Code Editor](https://img.shields.io/badge/Open%20in-Earth%20Engine%20Code%20Editor-1a73e8)](https://code.earthengine.google.com/?scriptPath=users/rifkynauvalhsp/Fullstack-Remote-Sensing:ch00h_hyperspectral) &nbsp; [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rifkynhsp-byte/Flux-Pixel-Planet/blob/main/notebooks/ch00h_hyperspectral.ipynb)
+
+[![Add all book scripts to your Code Editor (once)](https://img.shields.io/badge/Add%20all%20book%20scripts-to%20your%20Code%20Editor-34a853)](https://code.earthengine.google.com/?accept_repo=users/rifkynauvalhsp/Fullstack-Remote-Sensing) &nbsp; *First time? Appendix A shows how to sign in to Earth Engine and Colab.*
+:::
+<!-- /run-links -->
+
+
+::: {.chapter-goal}
+#### In this chapter
+You will learn what separates a multispectral sensor from a hyperspectral one, why a multispectral band is an average that hides everything inside it, what hundreds of narrow bands reveal (the exact red edge, mineral and leaf-chemistry features in the shortwave infrared), and what they cost in pixel size, revisit and data volume. The examples are real: one EMIT pass over Saguling and Bandung, averaged by land cover and squeezed into Sentinel-2's bands so you can see exactly what is kept and what is lost.
+:::
+
+## From one band to hundreds
+
+Every optical sensor in this book splits sunlight reflected from the ground into bands, and the number and width of those bands is its spectral resolution (P4).
+
+- **Panchromatic**: one wide band across the visible and often part of the near infrared. It collects a lot of light, so it can afford small pixels. Landsat's 15 m band 8 is one.
+- **Multispectral**: a handful of bands, typically 4 to 15, each tens to a couple of hundred nanometres wide, placed where the atmosphere is clear and where materials differ most. Landsat 8 and 9 have 9 reflective bands; Sentinel-2 has 13.
+- **Hyperspectral**, or imaging spectroscopy: around a hundred or more narrow bands, 5 to 12 nm wide, sitting next to each other with no gaps. Each pixel carries a near-continuous spectrum, close to what a laboratory spectrometer measures.
+
+The line at about a hundred bands is a convention, not physics. What matters is whether the bands are **narrow and contiguous** enough to trace the shape of a spectrum, rather than sample it at a few points.
+
+## A band is an average
+
+A sensor band does not measure reflectance at one wavelength. It measures the average over its width, weighted by its spectral response:
+
+$$
+\rho_{band} = \frac{\int \rho(\lambda)\, S(\lambda)\, d\lambda}{\int S(\lambda)\, d\lambda}
+$$
+
+where $\rho(\lambda)$ is the true reflectance spectrum and $S(\lambda)$ the band's response. Anything that happens inside the band, a shoulder, a dip, a shift of a few nanometres, is folded into one number. Between bands, the sensor knows nothing at all: when a multispectral spectrum is drawn as a line joining its points, the straight segments are a guess.
+
+That is exactly what the code below does with real data. It takes the EMIT spectrum of each land cover and averages it inside each Sentinel-2 band, which is what Sentinel-2 would have reported over the same ground.
+
+## What the narrow bands reveal
+
+**The red edge, precisely.** Between about 680 and 750 nm, vegetation reflectance climbs from the chlorophyll trough to the near infrared plateau. The wavelength of the steepest rise, the **red edge position**, moves with chlorophyll content and canopy condition: stressed or senescing vegetation shifts it towards shorter wavelengths. Sentinel-2 places three narrow bands on the edge (B5, B6, B7), which is good for a multispectral sensor; EMIT samples it every 7.4 nm, about 20 times between 650 and 800 nm.
+
+**Narrow absorption features in the shortwave infrared.** Beyond 2000 nm, clay minerals, carbonates, cellulose and lignin each leave absorption features only tens of nanometres wide. That is why imaging spectrometers are the tool of choice for mineral mapping. EMIT's own first purpose is to map the minerals of dust source regions. Sentinel-2's B12 is 180 nm wide: it reports how bright the region is, never its shape.
+
+**Gases and water.** Narrow bands can also see absorption by gases between the sensor and the ground. EMIT data have been used to find methane plumes from the absorption near 2300 nm, something no multispectral land sensor was designed to do. And the water absorption around 970 and 1200 nm inside leaves tracks canopy water content.
+
+**Where nothing can be measured.** Around 1400 and 1900 nm, water vapour in the atmosphere absorbs almost all of the sunlight. Every hyperspectral spectrum in this chapter has gaps there, and a multispectral sensor simply places no band there (P1).
+
+## What they cost
+
+Splitting the same light into 285 bands instead of 13 means each band receives far less energy. To keep an acceptable signal-to-noise ratio, a hyperspectral sensor collects light from a larger area or for longer, so its pixels are coarser (30 m for EnMAP and PRISMA, 60 m for EMIT) and its swath narrower (30 km for EnMAP).
+
+The data volume grows with the number of bands. A 60 by 60 km scene at 30 m is 2000 by 2000 pixels, four million in all. At 250 bands and 2 bytes per value that is 2 GB, before any uncertainty layers, against about 100 MB for the same scene with 13 bands.
+
+Coverage is sparse. Sentinel-2 images every land surface every five days; the hyperspectral missions are tasked or ride on the space station, so a given place may be seen a few times a year. Over Bandung, the box used here has about 70 EMIT passes since 2023, and only two of them are more than half clear.
+
+Atmospheric correction is harder, because the narrow bands resolve the water-vapour and oxygen features that broad bands blur. And hundreds of bands are highly correlated: neighbouring bands carry nearly the same information, so the analysis usually starts by compressing them (principal components or minimum noise fraction) or by working with a few targeted features such as the red edge position or the depth of an absorption.
+
+## Reading the Bandung spectra
+
+The tables and figures below come from one pass, 26 August 2025, chosen because it is the clearest dry-season view of the box. Only pixels at least 90 m inside each Dynamic World class are used, so a 60 m pixel is not half shore and half water.
+
+Sentinel-2's bands get the **outline** right. Trees and crops are dark in the red and bright in the near infrared; built land is bright everywhere and brightest in the shortwave infrared; water is dark beyond 1000 nm. Every one of those statements survives the averaging into 12 bands, which is why multispectral data carry most land-cover mapping.
+
+What they lose is the **shape**. Inside B12, built land's spectrum is flat and then falls steeply after about 2250 nm, while vegetation peaks near 2200 nm and falls on both sides; Sentinel-2 reports a single brightness for each. On the red edge, the steepest rise for trees sits at about 723 nm and for crops at about 731 nm in this scene: a difference of 8 nm that EMIT resolves and that Sentinel-2's B5 to B7 can only approximate by interpolation.
+
+## Which one to use
+
+Use **multispectral** data (Landsat, Sentinel-2) for anything that needs regular, wall-to-wall coverage: land cover, change, crops through the season, water. Its few bands are placed for exactly these questions, the archive is long, and the revisit is frequent.
+
+Use **hyperspectral** data when the answer lives in the shape of the spectrum: minerals and soils, leaf chemistry and stress before it shows in a broad index, species discrimination, water quality, gas plumes. Expect to plan around sparse acquisitions, and to validate against field spectra.
+
+Most projects end up combining them: hyperspectral samples to learn what separates the classes, multispectral time series to map them everywhere.
+
+{{< include _snippets/ch00h_hyperspectral.qmd >}}
+
+## Key terms
+
+**Panchromatic / multispectral / hyperspectral** (imaging spectroscopy). **Spectral resolution**: number and width of bands. **Spectral response function**. **Contiguous bands**. **Red edge, red edge position**. **Absorption feature**. **Signal-to-noise ratio**. **Water-vapour absorption bands** (about 1400 and 1900 nm). **Dimensionality reduction** (principal components, minimum noise fraction). **EMIT, EnMAP, PRISMA, Hyperion**.
+
+## Quiz
+
+1. What makes a sensor hyperspectral rather than multispectral? Why is "more than 100 bands" only a rule of thumb?
+2. A Sentinel-2 band is 30 nm wide. Write what its reflectance value represents in terms of the true spectrum.
+3. Why does a hyperspectral sensor usually have larger pixels or a narrower swath than a multispectral one on a similar platform?
+4. Estimate the size of a 30 by 30 km scene at 30 m with 230 bands stored as 2-byte integers.
+5. In the Bandung spectra, which statements about trees, crops, built land and water survive averaging into Sentinel-2 bands, and which detail is lost?
+6. Why does every hyperspectral spectrum in this chapter have gaps near 1400 and 1900 nm?
+7. Name two questions for which you would choose hyperspectral data, and one for which you would not.
+
+::: {.callout-note collapse="true"}
+## Answers
+1. Narrow (about 5 to 12 nm), contiguous bands that trace the shape of the spectrum rather than sampling it at a few points. The count is a convention: what matters is width and contiguity, not the number itself.
+2. The average of the true reflectance spectrum over the band, weighted by the band's spectral response: one number for everything between roughly 650 and 680 nm.
+3. Each narrow band receives only a small share of the light, so to keep the signal well above the noise the sensor collects light from a larger area (bigger pixels) or for longer, which limits the swath.
+4. 30 km at 30 m is 1000 by 1000 pixels, one million in all. One million × 230 bands × 2 bytes ≈ 460 MB.
+5. Survive: trees and crops are dark in the red and bright in the near infrared; built land is brightest in the shortwave infrared; water is dark beyond 1000 nm. Lost: the shape inside wide bands (built land flat then falling after about 2250 nm, vegetation peaking near 2200 nm, all inside B12) and the exact red edge position (about 723 nm for trees and 731 nm for crops in this scene).
+6. Water vapour in the atmosphere absorbs almost all sunlight there, so too little light reaches the sensor to measure surface reflectance.
+7. For: mineral and soil mapping; detecting crop stress or leaf chemistry before it shows in NDVI; species discrimination; methane plumes. Against: annual wall-to-wall land-cover change, where Landsat and Sentinel-2's frequent, free coverage is what matters.
+:::

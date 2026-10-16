@@ -1,0 +1,90 @@
+# P8 · LiDAR, and Passive Against Active Sensing {#sec-p8-lidar .unnumbered}
+
+<!-- run-links -->
+::: {.callout-tip .run-links appearance="simple" icon="false"}
+**Run this chapter**
+
+- `ch00j_lidar` &nbsp; [![Open in Code Editor](https://img.shields.io/badge/Open%20in-Earth%20Engine%20Code%20Editor-1a73e8)](https://code.earthengine.google.com/?scriptPath=users/rifkynauvalhsp/Fullstack-Remote-Sensing:ch00j_lidar) &nbsp; [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rifkynhsp-byte/Flux-Pixel-Planet/blob/main/notebooks/ch00j_lidar.ipynb)
+
+[![Add all book scripts to your Code Editor (once)](https://img.shields.io/badge/Add%20all%20book%20scripts-to%20your%20Code%20Editor-34a853)](https://code.earthengine.google.com/?accept_repo=users/rifkynauvalhsp/Fullstack-Remote-Sensing) &nbsp; *First time? Appendix A shows how to sign in to Earth Engine and Colab.*
+:::
+<!-- /run-links -->
+
+
+::: {.chapter-goal}
+#### In this chapter
+You will learn the difference between passive and active sensors and what it decides (day or night, cloud, the ability to measure distance); how a laser scanner turns the timing of light into height; the difference between discrete returns and a full waveform, and what RH98 means; the platforms from drone to orbit and what each can and cannot cover; and the limits of LiDAR. The examples are a waveform built from a forest canopy, and real GEDI canopy heights around Palangka Raya and the edge of the Sebangau peat swamp.
+:::
+
+## Passive and active
+
+Every sensor in this book belongs to one of two families.
+
+A **passive** sensor records energy it did not send. Optical sensors record sunlight reflected by the ground (P1, P3, P6); thermal sensors and passive microwave radiometers record energy the ground emits itself. Passive optical sensing therefore needs daylight, and both optical and thermal infrared stop at cloud.
+
+An **active** sensor sends its own pulse and records the echo. **Radar** uses microwaves (P5), **LiDAR** uses a laser. Because the sensor knows exactly when its pulse left, it can time the echo and measure distance, which no passive sensor can do directly. It works at night. Microwaves pass through cloud; laser light does not. And sending energy costs power, which is why radar satellites carry large solar panels and why most LiDAR flies on aircraft and drones.
+
+## Timing light
+
+A LiDAR fires a short laser pulse and measures the time $t$ until the echo returns. The range to whatever reflected it is
+
+$$
+R = \frac{c\,t}{2}
+$$
+
+halved because the light travels there and back. Light covers 30 cm in a nanosecond, so one nanosecond of timing is 15 cm of range. Knowing exactly where the scanner was and where it pointed (GNSS and an inertial unit, P7), each echo becomes a point with three coordinates.
+
+The wavelength is chosen for the target. Near infrared at 1064 nm, where leaves reflect strongly, is the usual choice for vegetation and terrain; 1550 nm is safer for the eye and common on drones and aircraft; green light at 532 nm penetrates water and is used for shallow-water depth and by ICESat-2 over ice.
+
+## Discrete returns and the full waveform
+
+A pulse aimed at a forest does not hit one surface. Part of it reflects from the top of the canopy, part from branches lower down, and part slips through gaps and reflects from the ground.
+
+**Discrete-return** systems, most airborne and drone scanners, record a few echoes per pulse as points: the first return is usually the canopy top, the last is often the ground. Classifying the ground points and interpolating them gives the **digital terrain model** (DTM); the first returns give the **digital surface model** (DSM); their difference is the **canopy height model** (CHM). Chapters [-@sec-lidar-classification] and [-@sec-lidar-terrain-cities] work through exactly this.
+
+**Full-waveform** systems record the whole returned signal as a function of time. GEDI does this for footprints 25 m wide. The waveform figure below is built from a simple forest canopy: energy arrives first from the top of the canopy, then from the lower layers, and last as a sharp peak from the ground. GEDI summarises each waveform with **relative heights**: RH98 is the height above the ground below which 98 % of the returned energy lies, the usual measure of canopy height; RH50 is the height that splits the energy in half, which drops when a forest is thinned or degraded even if a few tall trees remain.
+
+## From drone to orbit
+
+The comparison table below sets the systems side by side. They differ less in physics than in coverage:
+
+- **Airborne and drone LiDAR** map a survey area wall to wall, with tens to hundreds of points per square metre and vertical accuracy of about 10 to 15 cm on open ground. Each survey is one place, one date, and paid for.
+- **Terrestrial LiDAR**, a scanner on a tripod, sees a plot from below in millimetre detail: individual stems and branches, the reference for biomass equations (Chapter [-@sec-height-scaling]).
+- **GEDI and ICESat-2** sample the whole tropics and beyond, free, but as tracks of footprints with gaps between them, never a complete map. To map forest height everywhere, the samples are combined with wall-to-wall optical and radar data (Chapter [-@sec-gedi-structure]).
+
+The GEDI map below shows this plainly: every coloured streak is a track of laser footprints, and between the tracks there is nothing.
+
+## What it shows around Palangka Raya
+
+The box covers Palangka Raya, the cleared and repeatedly burned peat to its south and east, and the edge of the Sebangau peat swamp forest. Grouped by the Dynamic World class beneath them, good-quality GEDI footprints give a median canopy height of about 16 m under trees, against 3 to 4 m over crops and shrub. Built and bare land show 6 to 7 m: town trees and buildings count as height to a laser, and on burned peat the dead trees still standing return energy, while a 25 m footprint can also straddle a class boundary drawn at 10 m. The separation is what a canopy-height sensor is for; the overlaps are a reminder that a footprint and a pixel label are not the same thing.
+
+## Limits
+
+Laser light does not pass through cloud, so spaceborne LiDAR loses many shots over the wet tropics and keeps only cloud-free ones. In very dense canopy few photons reach the ground, the ground peak weakens and heights become uncertain; GEDI flags footprints by sensitivity for this reason. On steep slopes the ground return spreads out in time and mixes with the canopy. GEDI itself paused between March 2023 and April 2024, when it was moved on the space station to make room for another instrument, so its record has a gap. And airborne surveys are expensive: wall-to-wall LiDAR exists for some countries, some concessions and some cities, not for most of the tropics.
+
+{{< include _snippets/ch00j_lidar.qmd >}}
+
+## Key terms
+
+**Passive / active sensing**. **LiDAR**, **time of flight**, $R = ct/2$. **Pulse**, **footprint**. **Discrete returns**: first, last; **full waveform**. **DTM, DSM, CHM**. **Relative height** (RH25, RH50, RH98). **ALS, ULS, TLS**. **GEDI, ICESat-2**. **Point density**. **Sensitivity**, **quality flag**.
+
+## Quiz
+
+1. Classify as passive or active: Landsat OLI, Sentinel-1, GEDI, Landsat TIRS, SMAP radiometer. What does being active allow?
+2. A LiDAR echo returns 6.67 µs after the pulse. How far away was the surface? How much range error does a 2 ns timing error cause?
+3. Why can radar see through cloud but LiDAR cannot?
+4. From discrete returns, how do you build a DTM, a DSM and a CHM?
+5. What is RH98, and why might RH50 fall in a degraded forest while RH98 stays the same?
+6. Why is GEDI not a map of forest height, and how is one made from it?
+7. Around Palangka Raya, built and bare land show GEDI heights of 6 to 7 m. Give two reasons.
+
+::: {.callout-note collapse="true"}
+## Answers
+1. Passive: Landsat OLI (reflected sunlight), Landsat TIRS (emitted heat), the SMAP radiometer (emitted microwaves). Active: Sentinel-1 (radar), GEDI (LiDAR). Being active allows imaging at night, and timing the echo to measure distance.
+2. $R = c t / 2 = 3\times10^8 \times 6.67\times10^{-6} / 2 \approx 1000$ m. A 2 ns error is $3\times10^8 \times 2\times10^{-9} / 2 = 0.3$ m.
+3. Microwaves are centimetres long, far longer than cloud droplets, so they pass with little scattering; laser light is about a micrometre, comparable to the droplets, so cloud scatters and absorbs it.
+4. Classify ground points and interpolate them into the DTM; grid the first (highest) returns into the DSM; subtract, DSM minus DTM, to get the CHM.
+5. RH98 is the height above ground below which 98 % of the returned energy lies, close to the canopy top. Removing trees from the lower and middle canopy moves energy down towards the ground, so RH50 falls, while a few remaining tall trees keep RH98 high.
+6. GEDI samples 25 m footprints along tracks with wide gaps between them, and only on cloud-free shots. A map is made by modelling the footprint heights from wall-to-wall predictors such as optical, radar and terrain, then predicting everywhere.
+7. Trees in town and buildings are real heights to a laser; on burned peat, dead trees still standing return energy; and a 25 m footprint can straddle the boundary of a class labelled at 10 m.
+:::

@@ -32,7 +32,7 @@ Pilihannya di sini:
 | Curah hujan tahunan (mm) | < 2.000 | 2.000–2.500 | 2.500–3.000 | 3.000–3.500 | > 3.500 | 0,3 |
 | Tutupan lahan | | pohon, terbangun | pertanian | rumput, semak | terbuka | 0,2 |
 
-Kelas dan bobot ini dipilih untuk keperluan belajar. Ini bukan nilai yang sudah diterbitkan; justru karena itulah semuanya harus diuji. Bab [-@sec-obia] dan aplikasi IJB (P6) menunjukkan versi machine learning-nya; bab ini adalah fondasi di bawahnya.
+Kelas dan bobot ini dipilih untuk keperluan belajar. Ini bukan nilai yang sudah diterbitkan; justru karena itulah semuanya harus diuji. Bab [-@sec-obia] dan aplikasi IJB (P10) menunjukkan versi machine learning-nya; bab ini adalah fondasi di bawahnya.
 
 {{< include _snippets/ch50_landslide_simple.qmd >}}
 

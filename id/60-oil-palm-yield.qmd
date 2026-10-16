@@ -56,7 +56,7 @@ Total satu bentang lahan menjawab "berapa banyak?", tetapi pabrik kelapa sawit, 
 
 Peta ini menunjukkan siklus hidup kebun. Blok tergelap adalah sawit di masa prima, sekitar 14 t/ha/th. Blok yang lebih terang adalah sawit muda yang belum berbuah penuh, atau blok tua yang menurun, dan keduanya langsung terlihat. Garis putih tipis adalah jalan kebun dan parit yang dibuang sebelum penilaian.
 
-Dijumlahkan per desa dengan batas resmi BPS (batas yang sama yang dipakai aplikasi IJB, P6), peta menjadi tabel perencanaan:
+Dijumlahkan per desa dengan batas resmi BPS (batas yang sama yang dipakai aplikasi IJB, P10), peta menjadi tabel perencanaan:
 
 {{< include _snippets/ch60_oil_palm_yield__ch60-ffb-desa.qmd >}}
 

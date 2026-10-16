@@ -49,7 +49,7 @@ Untuk apa repot-repot? Karena penginderaan jauh menjawab pertanyaan yang menjadi
 
 ::: {.callout-note}
 ## Cara membaca bagian Prinsip
-P1 sampai P5 adalah fisika dan rekayasa di balik semua bab lain: energi dan atmosfer (P1), wahana dan orbit (P2), cara sensor memindai (P3), empat resolusi dan arti piksel sebagai sinyal (P4), serta radar (P5). P6 kemudian menerapkan semuanya dalam sebuah aplikasi, tanpa kode. Setiap bab ditutup dengan kuis. Gambar-gambarnya dihitung dari fisika, digambar khusus untuk buku ini, atau dibuat dari data satelit asli di tab kode.
+P1 sampai P5 adalah fisika dan rekayasa di balik semua bab lain: energi dan atmosfer (P1), wahana dan orbit (P2), cara sensor memindai (P3), empat resolusi dan arti piksel sebagai sinyal (P4), radar (P5), penginderaan hiperspektral (P6), satelit cuaca geostasioner dan satelit navigasi (P7), serta LiDAR beserta perbedaan penginderaan pasif dan aktif (P8). P9 melihat ke mana bidang ini bergerak, dan P10 menerapkan semuanya dalam sebuah aplikasi, tanpa kode. Setiap bab ditutup dengan kuis. Gambar-gambarnya dihitung dari fisika, digambar khusus untuk buku ini, atau dibuat dari data satelit asli di tab kode.
 :::
 
 ## Penginderaan jauh adalah mengukur energi

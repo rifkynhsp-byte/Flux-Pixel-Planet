@@ -32,7 +32,7 @@ Here the choices are:
 | Annual rainfall (mm) | < 2,000 | 2,000–2,500 | 2,500–3,000 | 3,000–3,500 | > 3,500 | 0.3 |
 | Land cover | | trees, built | cropland | grass, shrub | bare | 0.2 |
 
-These classes and weights were chosen for teaching. They are not published values; that is exactly why they must be tested. Chapter [-@sec-obia] and the IJB app (P6) show machine-learning versions; this chapter is the foundation under them.
+These classes and weights were chosen for teaching. They are not published values; that is exactly why they must be tested. Chapter [-@sec-obia] and the IJB app (P10) show machine-learning versions; this chapter is the foundation under them.
 
 {{< include _snippets/ch50_landslide_simple.qmd >}}
 

@@ -70,11 +70,11 @@ Two habits matter more than any widget. Use `evaluate` with a callback, never `g
 A tool that lets anyone choose the scale, the threshold and the dates will be used with the wrong ones. Good apps:
 
 - **Choose defensible defaults**: the dates, thresholds and datasets you would choose yourself.
-- **Put up guard rails**: refuse areas too large to compute, dates with no images, combinations that make no sense. IJB, the author's app in P6, rejects areas over 25,000 km² for this reason.
+- **Put up guard rails**: refuse areas too large to compute, dates with no images, combinations that make no sense. IJB, the author's app in P10, rejects areas over 25,000 km² for this reason.
 - **Show the uncertainty**: accuracy, kappa, image counts, the date of the newest image. A number without its confidence will be read as certain.
 - **Explain in the user's language**: IJB's labels are in Bahasa Indonesia because its first users are Indonesian officers and students.
 
-P6 shows a complete app of this kind, module by module, with no code at all.
+P10 shows a complete app of this kind, module by module, with no code at all.
 
 ## A working example: where is it liveable?
 

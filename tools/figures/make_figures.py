@@ -170,43 +170,61 @@ def spectral_signatures():
 # 2. NDVI saturation
 # ---------------------------------------------------------------------------
 def ndvi_saturation():
-    """Why NDVI cannot distinguish intact from degraded tropical forest.
+    """Why NDVI cannot distinguish intact from degraded tropical forest,
+    how much longer EVI, NIRv and kNDVI keep responding, and where every
+    optical index flattens.
 
-    Reflectance is modelled with a simple Beer-Lambert style canopy: red is
-    absorbed strongly so it saturates fast, NIR accumulates through multiple
-    scattering. The resulting NDVI curve reproduces the well documented
-    plateau above LAI of roughly 3.
+    Two-stream style toy canopy: red is absorbed quickly (k = 2.0), near
+    infrared accumulates through multiple scattering more slowly (k = 0.45),
+    blue behaves like red. Panel b is the sensitivity: the change in each
+    index for one more unit of LAI, as a percentage of that index's own
+    range, so indices with different scales can be compared fairly.
     """
-    lai = np.linspace(0, 8, 300)
-
-    red = 0.04 + 0.26 * np.exp(-2.2 * lai)      # soil showing through, then absorbed
-    nir = 0.50 - 0.28 * np.exp(-0.75 * lai)     # builds with scattering layers
-    blue = 0.03 + 0.14 * np.exp(-2.4 * lai)
+    lai = np.linspace(0, 8, 801)
+    red = 0.03 + 0.17 * np.exp(-2.0 * lai)
+    nir = 0.48 - 0.23 * np.exp(-0.45 * lai)
+    blue = 0.025 + 0.13 * np.exp(-2.2 * lai)
 
     ndvi = (nir - red) / (nir + red)
     evi = 2.5 * (nir - red) / (nir + 6 * red - 7.5 * blue + 1)
+    nirv = ndvi * nir
+    kndvi = np.tanh(ndvi ** 2)
+    series = [("NDVI", ndvi, BRIGHT), ("EVI", evi, AMBER),
+              ("NIRv", nirv, "#7c3aed"), ("kNDVI", kndvi, MUTED)]
 
-    fig, ax = plt.subplots(figsize=(8, 4.2))
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(10, 4.4))
+    for ax in (a1, a2):
+        ax.axvspan(3, 8, color=RED, alpha=0.06, zorder=0)
+        ax.set_xlim(0, 8)
+        ax.set_xlabel("Leaf area index")
+    for name, v, c in series:
+        a1.plot(lai, v, color=c, lw=2.2, label=name)
+        sens = np.gradient(v, lai) / (v.max() - v.min()) * 100
+        a2.plot(lai, sens, color=c, lw=2.2)
+    a1.set_ylim(0, 1.0)
+    a1.legend(frameon=False, loc="upper left", fontsize=8.5, ncol=2)
+    a1.text(0, 1.04, "Index value", transform=a1.transAxes, fontsize=8.5, color=MUTED)
+    a1.text(5.5, 0.05, "dense tropical forest", ha="center", fontsize=8, color=RED)
+    a1.set_title("a. Values: all four rise, then flatten", fontsize=9.5, loc="left", color=INK, pad=16)
 
-    ax.axvspan(3, 8, color=RED, alpha=0.06, zorder=0)
-    ax.text(5.5, 0.24, "saturated zone\ntropical forest lives here",
-            ha="center", fontsize=8, color=RED)
-
-    ax.plot(lai, ndvi, color=BRIGHT, lw=2.4, label="NDVI")
-    ax.plot(lai, evi, color=AMBER, lw=2.4, label="EVI")
-
-    ax.annotate("NDVI stops responding:\nintact and degraded forest\nreturn nearly the same value",
-                xy=(5.0, ndvi[np.argmin(abs(lai - 5.0))]), xytext=(4.4, 0.55),
-                fontsize=7.5, ha="center", color=INK,
+    a2.set_yscale("log")
+    a2.set_ylim(0.1, 100)
+    a2.text(0, 1.04, "Change per +1 LAI, % of the index's own range (log)",
+            transform=a2.transAxes, fontsize=8.5, color=MUTED)
+    i4 = 400
+    vals = {n: np.gradient(v, lai)[i4] / (v.max() - v.min()) * 100 for n, v, _ in series}
+    a2.annotate("At LAI 4: NIRv %.1f%%, EVI %.1f%%,\nNDVI %.1f%% per extra unit of LAI"
+                % (vals["NIRv"], vals["EVI"], vals["NDVI"]),
+                xy=(4, vals["EVI"]), xytext=(4.3, 30), fontsize=7.5, color=INK,
                 arrowprops=dict(arrowstyle="->", color=MUTED, lw=0.9))
-
-    ax.set_xlabel("Leaf area index")
-    ax.set_ylabel("Index value")
-    ax.set_xlim(0, 8)
-    ax.set_ylim(0, 1.0)
-    ax.legend(frameon=False, loc="lower right", fontsize=9)
-    ax.set_title("NDVI saturation, and why EVI keeps responding",
-                 fontsize=11, color=INK, pad=14, loc="left")
+    a2.axhline(1, color=MUTED, lw=0.8, ls=":")
+    a2.text(0.1, 0.75, "1%: about the noise of a good image", ha="left", fontsize=7, color=MUTED)
+    a2.set_title("b. Sensitivity: EVI and NIRv last longer, none forever",
+                 fontsize=9.5, loc="left", color=INK, pad=16)
+    fig.suptitle("Past LAI 3 NDVI barely moves; EVI and NIRv keep responding, "
+                 "but by LAI 6 even the best moves under 2% per unit",
+                 fontsize=11, color=INK, x=0.01, ha="left")
+    fig.tight_layout(rect=(0, 0, 1, 0.94))
     save(fig, "ndvi-saturation")
 
 

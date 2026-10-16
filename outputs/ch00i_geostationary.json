@@ -1,0 +1,52 @@
+[
+ {
+  "name": "ch00i_geostationary-webmap",
+  "kind": "html",
+  "html": "images/real/ch00i_geostationary-webmap.html",
+  "height": 480,
+  "caption": "Interactive: pan, zoom, switch layers and basemaps, change the overlay opacity."
+ },
+ {
+  "name": "p7-geo-coverage",
+  "kind": "figure",
+  "caption": "Each geostationary satellite sees the same disk, a little less than half the Earth, always from the same place above the equator (red dashed line). Beyond about 70° from vertical the view is too slanted to use, and the poles are seen by none. Of these five, only Himawari-9 and GK-2A look into Indonesia usefully.",
+  "image": "images/real/p7-geo-coverage.png"
+ },
+ {
+  "name": "p7-pixel-stretch",
+  "kind": "table",
+  "caption": "A 2 km infrared pixel under Himawari-9 (140.7° E) grows with distance and with the slant of the view. Western Indonesia is seen at about 40°, so its pixels are around 3 km across and longer towards the edge of the disk.",
+  "markdown": "| Place      |   Zenith angle from Himawari-9 (°) |   Distance (km) |   2 km IR pixel, across (km) |   2 km IR pixel, towards the edge (km) |\n|:-----------|-----------------------------------:|----------------:|-----------------------------:|---------------------------------------:|\n| Jayapura   |                                3   |           35793 |                          2   |                                    2   |\n| Makassar   |                               25.6 |           36322 |                          2   |                                    2.3 |\n| Jakarta    |                               39.9 |           37074 |                          2.1 |                                    2.7 |\n| Medan      |                               48.7 |           37680 |                          2.1 |                                    3.2 |\n| Banda Aceh |                               52.5 |           37980 |                          2.1 |                                    3.5 |\n| Sydney     |                               41   |           37140 |                          2.1 |                                    2.7 |"
+ },
+ {
+  "name": "p7-orbits",
+  "kind": "figure",
+  "caption": "Orbits to scale. Imaging satellites fly a few hundred kilometres up; navigation constellations about 19 000 to 23 000 km; weather satellites that never move across the sky, 35 786 km above the equator.",
+  "image": "images/real/p7-orbits.png"
+ },
+ {
+  "name": "p7-senyar",
+  "kind": "figure",
+  "caption": "GK-2A's 10.5 µm band, three of the 144 full disks it took each day, read straight from the open archive on AWS (noaa-gk2a-pds). The storm's coldest cloud tops, below -70 °C, sit over the Strait of Malacca and Aceh as Senyar makes landfall around midnight on 26 November 2025.",
+  "image": "images/real/p7-senyar.png"
+ },
+ {
+  "name": "p7-smoke",
+  "kind": "figure",
+  "caption": "GK-2A's blue, green and red bands (1 km, the red averaged from 0.5 km) at noon on 13 October 2026, read from the open archive on AWS, with that day's MODIS fire detections from FIRMS. Smoke is the grey-brown haze, thicker than cloud is white; the same view comes every 10 minutes.",
+  "image": "images/real/p7-smoke.png"
+ },
+ {
+  "name": "p7-gsmap-day",
+  "kind": "map",
+  "caption": "One day of rain as GSMaP estimated it, from microwave radiometers on low satellites moved along by cloud motion seen from geostationary orbit, then adjusted with rain gauges.",
+  "image": "images/real/p7-gsmap-day.jpg"
+ },
+ {
+  "name": "p7-gsmap-hourly",
+  "kind": "chart",
+  "caption": "The same storm hour by hour at Halim. Satellite rain is an average over about 10 km, so it smooths the peak a single gauge catches.",
+  "image": "images/real/p7-gsmap-hourly.png",
+  "live": "import io\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nDATA = \"\"\"mm_per_h,utc,local_wib\n0,2019-12-31 00:00,2019-12-31 07:00:00\n0,2019-12-31 01:00,2019-12-31 08:00:00\n0,2019-12-31 02:00,2019-12-31 09:00:00\n0,2019-12-31 03:00,2019-12-31 10:00:00\n0,2019-12-31 04:00,2019-12-31 11:00:00\n0,2019-12-31 05:00,2019-12-31 12:00:00\n0.041039,2019-12-31 06:00,2019-12-31 13:00:00\n0.58387,2019-12-31 07:00,2019-12-31 14:00:00\n2.3931,2019-12-31 08:00,2019-12-31 15:00:00\n5.7522,2019-12-31 09:00,2019-12-31 16:00:00\n7.256,2019-12-31 10:00,2019-12-31 17:00:00\n7.4963,2019-12-31 11:00,2019-12-31 18:00:00\n6.7609,2019-12-31 12:00,2019-12-31 19:00:00\n5.7543,2019-12-31 13:00,2019-12-31 20:00:00\n5.0538,2019-12-31 14:00,2019-12-31 21:00:00\n5.1106,2019-12-31 15:00,2019-12-31 22:00:00\n5.5973,2019-12-31 16:00,2019-12-31 23:00:00\n6.425,2019-12-31 17:00,2020-01-01 00:00:00\n6.9642,2019-12-31 18:00,2020-01-01 01:00:00\n7.168,2019-12-31 19:00,2020-01-01 02:00:00\n7.4062,2019-12-31 20:00,2020-01-01 03:00:00\n8.1437,2019-12-31 21:00,2020-01-01 04:00:00\n9.862,2019-12-31 22:00,2020-01-01 05:00:00\n10.357,2019-12-31 23:00,2020-01-01 06:00:00\n1.457,2020-01-01 00:00,2020-01-01 07:00:00\n1.7953,2020-01-01 01:00,2020-01-01 08:00:00\n1.683,2020-01-01 02:00,2020-01-01 09:00:00\n1.5342,2020-01-01 03:00,2020-01-01 10:00:00\n1.4124,2020-01-01 04:00,2020-01-01 11:00:00\n1.3258,2020-01-01 05:00,2020-01-01 12:00:00\n1.2845,2020-01-01 06:00,2020-01-01 13:00:00\n1.2392,2020-01-01 07:00,2020-01-01 14:00:00\n1.2091,2020-01-01 08:00,2020-01-01 15:00:00\n1.2186,2020-01-01 09:00,2020-01-01 16:00:00\n1.2581,2020-01-01 10:00,2020-01-01 17:00:00\n1.3138,2020-01-01 11:00,2020-01-01 18:00:00\n\"\"\"\ndf = pd.read_csv(io.StringIO(DATA))\n\ndef plot_hourly(df):\n    fig, ax = plt.subplots(figsize=(9, 3.8))\n    t = pd.to_datetime(df.local_wib)\n    ax.bar(t, df.mm_per_h, width=0.035, color=\"#2563eb\")\n    day = df[(t >= \"2019-12-31 07:00\") & (t < \"2020-01-01 07:00\")].mm_per_h.sum()\n    ax.text(0, 1.03, \"Rain rate (mm per hour), mean of a 5 km circle around Halim, East Jakarta\",\n            transform=ax.transAxes, fontsize=8.5, color=\"#475569\")\n    ax.set_title(f\"GSMaP measured {day:.0f} mm at Halim in the BMKG day; the gauge there \"\n                 f\"recorded 377 mm\", loc=\"left\", fontsize=10.5, pad=20)\n    ax.set_xlabel(\"Local time (WIB), 31 December 2019 to 1 January 2020\")\n    for s in (\"top\", \"right\"):\n        ax.spines[s].set_visible(False)\n    fig.autofmt_xdate()\n    return fig\n\nplot_hourly(df)\nplt.show()\n"
+ }
+]

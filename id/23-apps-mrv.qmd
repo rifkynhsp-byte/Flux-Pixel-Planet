@@ -70,11 +70,11 @@ Dua kebiasaan lebih penting daripada widget apa pun. Di dalam aplikasi, pakai `e
 Alat yang membiarkan siapa pun memilih skala, ambang, dan tanggal akan dipakai dengan pilihan yang salah. Aplikasi yang baik:
 
 - **Memilih nilai bawaan yang bisa dipertanggungjawabkan**: tanggal, ambang, dan dataset yang akan Anda pilih sendiri.
-- **Memasang pagar pengaman**: menolak wilayah yang terlalu besar untuk dihitung, tanggal tanpa citra, kombinasi yang tidak masuk akal. IJB, aplikasi penulis di P6, menolak wilayah di atas 25.000 km² karena alasan ini.
+- **Memasang pagar pengaman**: menolak wilayah yang terlalu besar untuk dihitung, tanggal tanpa citra, kombinasi yang tidak masuk akal. IJB, aplikasi penulis di P10, menolak wilayah di atas 25.000 km² karena alasan ini.
 - **Menunjukkan ketidakpastian**: akurasi, kappa, jumlah citra, tanggal citra terbaru. Angka tanpa tingkat keyakinannya akan dibaca seolah pasti.
 - **Berbicara dalam bahasa penggunanya**: label IJB berbahasa Indonesia karena pengguna pertamanya adalah petugas dan mahasiswa Indonesia.
 
-P6 menunjukkan aplikasi lengkap semacam ini, modul demi modul, tanpa kode sama sekali.
+P10 menunjukkan aplikasi lengkap semacam ini, modul demi modul, tanpa kode sama sekali.
 
 ## Contoh nyata: di mana layak huni?
 

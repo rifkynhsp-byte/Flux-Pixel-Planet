@@ -49,7 +49,7 @@ Why go to that trouble? Because remote sensing answers questions that organisati
 
 ::: {.callout-note}
 ## How to read the Principles part
-P1 to P5 are the physics and engineering underneath everything else: energy and the atmosphere (P1), platforms and orbits (P2), how sensors scan (P3), the four resolutions and what a pixel really is as a signal (P4), and radar (P5). P6 then applies all of it in an app, without code. Each chapter ends with a quiz. The figures are computed from the physics, drawn for this book, or made from real satellite data in the code tabs.
+P1 to P5 are the physics and engineering underneath everything else: energy and the atmosphere (P1), platforms and orbits (P2), how sensors scan (P3), the four resolutions and what a pixel really is as a signal (P4), radar (P5), hyperspectral sensing (P6), geostationary weather and navigation satellites (P7), and LiDAR with the difference between passive and active sensing (P8). P9 looks at where the field is going, and P10 applies all of it in an app, without code. Each chapter ends with a quiz. The figures are computed from the physics, drawn for this book, or made from real satellite data in the code tabs.
 :::
 
 ## Remote sensing is measuring energy

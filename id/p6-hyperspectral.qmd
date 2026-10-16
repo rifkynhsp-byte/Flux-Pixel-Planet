@@ -1,0 +1,102 @@
+# P6 · Hiperspektral dan Multispektral: Berapa Banyak Warna yang Cukup? {#sec-p6-hyperspectral .unnumbered}
+
+<!-- run-links -->
+::: {.callout-tip .run-links appearance="simple" icon="false"}
+**Jalankan bab ini**
+
+- `ch00h_hyperspectral` &nbsp; [![Buka di Code Editor](https://img.shields.io/badge/Open%20in-Earth%20Engine%20Code%20Editor-1a73e8)](https://code.earthengine.google.com/?scriptPath=users/rifkynauvalhsp/Fullstack-Remote-Sensing:ch00h_hyperspectral) &nbsp; [![Buka di Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rifkynhsp-byte/Flux-Pixel-Planet/blob/main/notebooks/ch00h_hyperspectral.ipynb)
+
+[![Tambahkan semua skrip buku ke Code Editor Anda (sekali saja)](https://img.shields.io/badge/Add%20all%20book%20scripts-to%20your%20Code%20Editor-34a853)](https://code.earthengine.google.com/?accept_repo=users/rifkynauvalhsp/Fullstack-Remote-Sensing) &nbsp; *Baru pertama kali? Lampiran A menjelaskan cara masuk ke Earth Engine dan Colab.*
+:::
+<!-- /run-links -->
+
+
+::: {.chapter-goal}
+#### Dalam bab ini
+Anda akan mempelajari apa yang membedakan sensor multispektral dari sensor hiperspektral, mengapa satu band multispektral adalah rata-rata yang menyembunyikan semua yang ada di dalamnya, apa yang diungkap oleh ratusan band sempit (posisi red edge yang tepat, ciri mineral dan kimia daun di inframerah gelombang pendek), dan apa harganya dalam ukuran piksel, waktu kunjung ulang, dan volume data. Contohnya nyata: satu lintasan EMIT di atas Saguling dan Bandung, dirata-ratakan per tutupan lahan lalu dipadatkan ke dalam band Sentinel-2, sehingga Anda bisa melihat persis apa yang dipertahankan dan apa yang hilang.
+:::
+
+## Dari satu band ke ratusan
+
+Setiap sensor optik di buku ini membagi cahaya matahari yang dipantulkan permukaan ke dalam band, dan jumlah serta lebar band itulah resolusi spektralnya (P4).
+
+- **Pankromatik**: satu band lebar yang mencakup cahaya tampak dan sering sebagian inframerah dekat. Ia mengumpulkan banyak cahaya, sehingga mampu memakai piksel kecil. Band 8 Landsat yang 15 m adalah contohnya.
+- **Multispektral**: segelintir band, biasanya 4 sampai 15, masing-masing selebar puluhan hingga dua ratusan nanometer, ditempatkan di jendela atmosfer dan di tempat material paling berbeda. Landsat 8 dan 9 memiliki 9 band reflektif; Sentinel-2 memiliki 13.
+- **Hiperspektral**, atau spektroskopi pencitraan: sekitar seratus band sempit atau lebih, selebar 5 sampai 12 nm, berdampingan tanpa celah. Setiap piksel membawa spektrum yang hampir sinambung, mendekati yang diukur spektrometer laboratorium.
+
+Batas sekitar seratus band adalah kesepakatan, bukan fisika. Yang penting adalah apakah band-nya cukup **sempit dan bersambung** untuk menelusuri bentuk spektrum, bukan sekadar mengambil sampelnya di beberapa titik.
+
+## Satu band adalah rata-rata
+
+Sebuah band sensor tidak mengukur reflektans pada satu panjang gelombang. Ia mengukur rata-rata di sepanjang lebarnya, dibobot oleh respons spektralnya:
+
+$$
+\rho_{band} = \frac{\int \rho(\lambda)\, S(\lambda)\, d\lambda}{\int S(\lambda)\, d\lambda}
+$$
+
+dengan $\rho(\lambda)$ spektrum reflektans sebenarnya dan $S(\lambda)$ respons band. Apa pun yang terjadi di dalam band, sebuah bahu, sebuah lekukan, pergeseran beberapa nanometer, dilipat menjadi satu angka. Di antara band, sensor sama sekali tidak tahu apa-apa: ketika spektrum multispektral digambar sebagai garis yang menghubungkan titik-titiknya, segmen lurus itu hanyalah tebakan.
+
+Itulah persis yang dilakukan kode di bawah dengan data nyata. Kode itu mengambil spektrum EMIT tiap tutupan lahan dan merata-ratakannya di dalam setiap band Sentinel-2, yaitu yang akan dilaporkan Sentinel-2 di atas permukaan yang sama.
+
+## Apa yang diungkap band sempit
+
+**Red edge, dengan tepat.** Antara sekitar 680 dan 750 nm, reflektans vegetasi naik dari lembah klorofil ke dataran tinggi inframerah dekat. Panjang gelombang tempat kenaikan paling curam, **posisi red edge**, bergeser mengikuti kandungan klorofil dan kondisi tajuk: vegetasi yang tertekan atau menua menggesernya ke panjang gelombang yang lebih pendek. Sentinel-2 menempatkan tiga band sempit di tepi itu (B5, B6, B7), dan itu sudah baik untuk sensor multispektral; EMIT mengambil sampelnya setiap 7,4 nm, sekitar 20 kali antara 650 dan 800 nm.
+
+**Ciri serapan sempit di inframerah gelombang pendek.** Di atas 2000 nm, mineral lempung, karbonat, selulosa, dan lignin masing-masing meninggalkan ciri serapan yang lebarnya hanya puluhan nanometer. Karena itulah spektrometer pencitraan menjadi alat utama untuk pemetaan mineral. Tujuan utama EMIT sendiri adalah memetakan mineral di wilayah sumber debu. B12 Sentinel-2 selebar 180 nm: ia melaporkan seberapa terang wilayah itu, tidak pernah bentuknya.
+
+**Gas dan air.** Band sempit juga bisa melihat serapan oleh gas di antara sensor dan permukaan. Data EMIT telah dipakai untuk menemukan kepulan metana dari serapan di dekat 2300 nm, sesuatu yang tidak pernah dirancang untuk sensor daratan multispektral. Serapan air di sekitar 970 dan 1200 nm di dalam daun mengikuti kandungan air tajuk.
+
+**Di mana tidak ada yang bisa diukur.** Di sekitar 1400 dan 1900 nm, uap air di atmosfer menyerap hampir semua cahaya matahari. Setiap spektrum hiperspektral di bab ini memiliki celah di sana, dan sensor multispektral memang tidak menempatkan band di sana (P1).
+
+## Harganya
+
+Membagi cahaya yang sama ke 285 band, bukan 13, berarti setiap band menerima energi jauh lebih sedikit. Untuk menjaga rasio sinyal terhadap noise tetap layak, sensor hiperspektral mengumpulkan cahaya dari area yang lebih luas atau lebih lama, sehingga pikselnya lebih kasar (30 m untuk EnMAP dan PRISMA, 60 m untuk EMIT) dan sapuannya lebih sempit (30 km untuk EnMAP).
+
+Volume data bertambah dengan jumlah band. Satu citra 60 kali 60 km pada 30 m berukuran 2000 kali 2000 piksel, empat juta seluruhnya. Dengan 250 band dan 2 byte per nilai, itu 2 GB, belum termasuk lapisan ketidakpastian, dibanding sekitar 100 MB untuk citra yang sama dengan 13 band.
+
+Cakupannya jarang. Sentinel-2 memotret setiap permukaan darat setiap lima hari; misi hiperspektral dijadwalkan khusus atau menumpang di stasiun luar angkasa, sehingga satu tempat mungkin hanya terlihat beberapa kali setahun. Di atas Bandung, kotak yang dipakai di sini memiliki sekitar 70 lintasan EMIT sejak 2023, dan hanya dua di antaranya yang lebih dari separuh cerah.
+
+Koreksi atmosfer lebih sulit, karena band sempit memisahkan ciri uap air dan oksigen yang dikaburkan band lebar. Dan ratusan band sangat berkorelasi: band bertetangga membawa informasi yang hampir sama, sehingga analisis biasanya dimulai dengan memampatkannya (komponen utama atau minimum noise fraction) atau dengan bekerja pada beberapa ciri terarah seperti posisi red edge atau kedalaman sebuah serapan.
+
+## Membaca spektrum Bandung
+
+Tabel dan gambar di bawah berasal dari satu lintasan, 26 Agustus 2025, yang dipilih karena merupakan tampilan musim kemarau paling cerah untuk kotak ini. Hanya piksel yang berada sekurang-kurangnya 90 m di dalam tiap kelas Dynamic World yang dipakai, supaya satu piksel 60 m tidak setengah tepian dan setengah air.
+
+Band Sentinel-2 menangkap **garis besarnya** dengan benar. Pohon dan tanaman pertanian gelap di merah dan terang di inframerah dekat; lahan terbangun terang di semua band dan paling terang di inframerah gelombang pendek; air gelap di atas 1000 nm. Semua pernyataan itu bertahan setelah dirata-ratakan ke 12 band, dan itulah sebabnya data multispektral menanggung sebagian besar pemetaan tutupan lahan.
+
+Yang hilang adalah **bentuknya**. Di dalam B12, spektrum lahan terbangun datar lalu turun tajam setelah sekitar 2250 nm, sedangkan vegetasi memuncak di dekat 2200 nm dan turun di kedua sisi; Sentinel-2 hanya melaporkan satu kecerahan untuk masing-masing. Di red edge, kenaikan paling curam untuk pohon berada di sekitar 723 nm dan untuk tanaman pertanian di sekitar 731 nm pada citra ini: selisih 8 nm yang terpisahkan oleh EMIT dan hanya bisa didekati oleh B5 sampai B7 Sentinel-2 lewat interpolasi.
+
+## Kapan memakai yang mana
+
+Gunakan data **multispektral** (Landsat, Sentinel-2) untuk apa pun yang memerlukan cakupan rutin dan menyeluruh: tutupan lahan, perubahan, tanaman sepanjang musim, air. Band-nya yang sedikit ditempatkan tepat untuk pertanyaan-pertanyaan ini, arsipnya panjang, dan kunjungan ulangnya sering.
+
+Gunakan data **hiperspektral** ketika jawabannya ada pada bentuk spektrum: mineral dan tanah, kimia daun dan cekaman sebelum terlihat di indeks lebar, pembedaan spesies, kualitas air, kepulan gas. Bersiaplah merencanakan di sekitar akuisisi yang jarang, dan memvalidasi dengan spektrum lapangan.
+
+Kebanyakan proyek akhirnya menggabungkan keduanya: sampel hiperspektral untuk mempelajari apa yang memisahkan kelas-kelasnya, deret waktu multispektral untuk memetakannya di mana-mana.
+
+{{< include _snippets/ch00h_hyperspectral.qmd >}}
+
+## Istilah kunci
+
+**Pankromatik / multispektral / hiperspektral** (spektroskopi pencitraan). **Resolusi spektral**: jumlah dan lebar band. **Fungsi respons spektral**. **Band bersambung**. **Red edge, posisi red edge**. **Ciri serapan**. **Rasio sinyal terhadap noise**. **Band serapan uap air** (sekitar 1400 dan 1900 nm). **Reduksi dimensi** (komponen utama, minimum noise fraction). **EMIT, EnMAP, PRISMA, Hyperion**.
+
+## Kuis
+
+1. Apa yang membuat sebuah sensor hiperspektral, bukan multispektral? Mengapa "lebih dari 100 band" hanya patokan kasar?
+2. Satu band Sentinel-2 selebar 30 nm. Tuliskan apa yang diwakili nilai reflektansnya terhadap spektrum sebenarnya.
+3. Mengapa sensor hiperspektral biasanya memiliki piksel lebih besar atau sapuan lebih sempit daripada sensor multispektral di wahana serupa?
+4. Perkirakan ukuran satu citra 30 kali 30 km pada 30 m dengan 230 band yang disimpan sebagai bilangan bulat 2 byte.
+5. Pada spektrum Bandung, pernyataan mana tentang pohon, tanaman pertanian, lahan terbangun, dan air yang bertahan setelah dirata-ratakan ke band Sentinel-2, dan detail mana yang hilang?
+6. Mengapa setiap spektrum hiperspektral di bab ini memiliki celah di dekat 1400 dan 1900 nm?
+7. Sebutkan dua pertanyaan yang membuat Anda memilih data hiperspektral, dan satu yang tidak.
+
+::: {.callout-note collapse="true"}
+## Jawaban
+1. Band yang sempit (sekitar 5 sampai 12 nm) dan bersambung, yang menelusuri bentuk spektrum alih-alih mengambil sampelnya di beberapa titik. Jumlahnya hanyalah kesepakatan: yang penting adalah lebar dan kesinambungannya, bukan angkanya.
+2. Rata-rata spektrum reflektans sebenarnya di sepanjang band, dibobot oleh respons spektral band itu: satu angka untuk segala yang ada di antara sekitar 650 dan 680 nm.
+3. Setiap band sempit hanya menerima sebagian kecil cahaya, sehingga untuk menjaga sinyal jauh di atas noise, sensor mengumpulkan cahaya dari area yang lebih luas (piksel lebih besar) atau lebih lama, dan itu membatasi sapuannya.
+4. 30 km pada 30 m adalah 1000 kali 1000 piksel, satu juta seluruhnya. Satu juta × 230 band × 2 byte ≈ 460 MB.
+5. Bertahan: pohon dan tanaman pertanian gelap di merah dan terang di inframerah dekat; lahan terbangun paling terang di inframerah gelombang pendek; air gelap di atas 1000 nm. Hilang: bentuk di dalam band lebar (lahan terbangun datar lalu turun setelah sekitar 2250 nm, vegetasi memuncak di dekat 2200 nm, semuanya di dalam B12) dan posisi red edge yang tepat (sekitar 723 nm untuk pohon dan 731 nm untuk tanaman pertanian pada citra ini).
+6. Uap air di atmosfer menyerap hampir semua cahaya matahari di sana, sehingga terlalu sedikit cahaya yang sampai ke sensor untuk mengukur reflektans permukaan.
+7. Memilih: pemetaan mineral dan tanah; mendeteksi cekaman tanaman atau kimia daun sebelum terlihat di NDVI; pembedaan spesies; kepulan metana. Tidak memilih: perubahan tutupan lahan tahunan yang menyeluruh, karena di sana cakupan Landsat dan Sentinel-2 yang sering dan gratis lebih penting.
+:::

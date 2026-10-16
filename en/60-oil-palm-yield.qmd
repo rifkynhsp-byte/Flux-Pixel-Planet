@@ -56,7 +56,7 @@ A landscape total answers "how much?", but a mill, a cooperative or a district o
 
 The map shows the life cycle of the plantations. The darkest blocks are palms in their prime years, at about 14 t/ha/yr. Lighter blocks are young palms that do not yet bear fully, or old blocks in decline, and they stand out at a glance. The thin white lines are the estate roads and drains removed before scoring.
 
-Summed per desa with the official BPS boundaries (the same boundaries the IJB app uses, P6), the map becomes a planning table:
+Summed per desa with the official BPS boundaries (the same boundaries the IJB app uses, P10), the map becomes a planning table:
 
 {{< include _snippets/ch60_oil_palm_yield__ch60-ffb-desa.qmd >}}
 

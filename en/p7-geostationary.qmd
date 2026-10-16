@@ -1,0 +1,106 @@
+# P7 · Geostationary and Navigation Satellites: Watching the Weather, Knowing Where {#sec-p7-geostationary .unnumbered}
+
+<!-- run-links -->
+::: {.callout-tip .run-links appearance="simple" icon="false"}
+**Run this chapter**
+
+- `ch00i_geostationary` &nbsp; [![Open in Code Editor](https://img.shields.io/badge/Open%20in-Earth%20Engine%20Code%20Editor-1a73e8)](https://code.earthengine.google.com/?scriptPath=users/rifkynauvalhsp/Fullstack-Remote-Sensing:ch00i_geostationary) &nbsp; [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rifkynhsp-byte/Flux-Pixel-Planet/blob/main/notebooks/ch00i_geostationary.ipynb)
+
+[![Add all book scripts to your Code Editor (once)](https://img.shields.io/badge/Add%20all%20book%20scripts-to%20your%20Code%20Editor-34a853)](https://code.earthengine.google.com/?accept_repo=users/rifkynauvalhsp/Fullstack-Remote-Sensing) &nbsp; *First time? Appendix A shows how to sign in to Earth Engine and Colab.*
+:::
+<!-- /run-links -->
+
+
+::: {.chapter-goal}
+#### In this chapter
+You will learn what a geostationary weather satellite gives you that a Landsat or Sentinel never can (the same view every ten minutes) and what it costs (big, slanted pixels and no view of the poles); which satellites watch Indonesia; how rain is estimated from space and how far to trust it; and what the navigation satellites, GPS and its siblings, do for remote sensing. The examples are real: Cyclone Senyar crossing northern Sumatra in GK-2A images read straight from the open archive, and Jakarta's New Year flood rain of 2020 from GSMaP against the rain gauge.
+:::
+
+## Two orbits, two jobs
+
+P2 introduced the orbits. Two of them matter here.
+
+A **geostationary** satellite circles 35 786 km above the equator, once per sidereal day, in the same direction as the Earth turns. Seen from the ground it hangs still in the sky. It always sees the same disk, a little under half the Earth, and it can image that disk again and again: every 10 minutes for the current imagers. That makes it a weather satellite. A Landsat or Sentinel passes once every few days; a cyclone, a thunderstorm or a smoke plume changes in minutes.
+
+The **navigation** satellites (GNSS) fly in medium Earth orbit, about 19 000 to 23 000 km up, in several orbital planes, so that at least four of them are above the horizon anywhere on Earth at any time. They do not image anything. They broadcast their position and the precise time, and from those signals a receiver works out where it is.
+
+## What a geostationary imager gives you
+
+The current generation of geostationary imagers is remarkably similar across agencies:
+
+| Satellite | Position | Imager | Bands | Full disk |
+|---|---|---|---|---|
+| Himawari-9 (Japan, operational since December 2022) | 140.7° E | AHI | 16 | every 10 min |
+| GEO-KOMPSAT-2A or GK-2A (Korea, launched December 2018) | 128.2° E | AMI | 16 | every 10 min |
+| GOES-East, GOES-19 (USA, operational since April 2025) | 75.2° W | ABI | 16 | every 10 min |
+
+Sixteen bands from the visible to the thermal infrared, with pixels of 0.5 to 1 km in the visible and 2 km in the infrared directly below the satellite, and smaller areas imaged every few minutes (every 2.5 minutes for Himawari's Japan area and for a storm the operators choose). From those bands come products used every day:
+
+- **Clouds and storms**: cloud-top temperature and height, growing thunderstorms, the eye and rain bands of a cyclone. The coldest cloud tops in the 10.5 µm band are the tallest, wettest storm clouds.
+- **Rain**, when the infrared is combined with microwave measurements from low satellites (below).
+- **Fire and smoke**: a fire much smaller than a 2 km pixel still raises the pixel's 3.9 µm signal. Every ten minutes is fast enough to see a fire start, and to follow the haze it makes (Chapter [-@sec-haze]).
+- **Volcanic ash, dust, fog, sea-surface temperature and aerosol**, each from a combination of bands chosen for it.
+
+The archives are open. NOAA mirrors the full Himawari-9 and GK-2A data on Amazon Web Services, free and without an account, which is where the Senyar images below come from.
+
+## The price: big, slanted pixels
+
+From 35 786 km, a pixel is large: 2 km in the infrared directly below the satellite. Away from that point it grows, for two reasons. The ground is farther away, and it is seen at a slant, so a pixel stretches towards the edge of the disk. Western Indonesia lies about 40° to 53° from Himawari-9's point of view, so its 2 km infrared pixels are around 2.7 to 3.5 km long (table below). Beyond about 70° the view is too slanted to use, and the polar regions are seen by no geostationary satellite at all; that is a job for polar-orbiting satellites.
+
+The coverage figure shows five satellites, each on its own. Of these, only Himawari-9 and GK-2A see Indonesia usefully; GOES and Meteosat at 0° do not see it at all. Others not drawn here also look in from the side: China's FengYun-4 satellites, and EUMETSAT's Meteosat over the Indian Ocean (45.5° E), which sees Sumatra at a steep angle.
+
+## Seeing Senyar
+
+Cyclone Senyar formed in the Strait of Malacca on 25 November 2025, among the very few tropical cyclones ever recorded there, made landfall on northern Sumatra around midnight on 26 November, crossed into Peninsular Malaysia and dissipated by 30 November. Its rain caused deadly floods and landslides across Aceh, North Sumatra and West Sumatra.
+
+The three GK-2A frames below are 12 hours apart, out of the 144 full disks GK-2A took each day. On the morning of 26 November the coldest cloud tops, below -70 °C, cover Aceh and the strait; twelve hours later the storm is over land and weakening; by the next morning its remnants have crossed to the Malay Peninsula and the South China Sea. A polar-orbiting imager would have caught one or two of these moments, if the sky allowed.
+
+## Seeing smoke over Kalimantan
+
+The fire season shows the other side of the ten-minute view. At noon on 13 October 2026, one of the heaviest fire days of the year in Kalimantan, GK-2A's blue, green and red bands show grey-brown smoke streaming north-west from lines of fires along the south coast of Central and South Kalimantan, with that day's FIRMS detections marked on top. Smoke is greyer and more diffuse than cloud, and it can be followed from its sources as it moves, every ten minutes, across the day. The same view, at the same scale, is what Chapter [-@sec-haze] builds a whole season from.
+
+## Rain from space, and how far to trust it
+
+No satellite measures rain directly from geostationary orbit: an infrared image shows cold cloud tops, not the rain beneath them. Microwave radiometers on low-orbit satellites do sense rain, because raindrops emit and scatter microwaves, but each one passes only a few times a day. Products such as JAXA's **GSMaP** combine the two: microwave rain estimates, carried forward between passes with the cloud motion seen every ten minutes from geostationary orbit, then adjusted with rain gauges where they exist.
+
+The Jakarta flood of 1 January 2020 shows both the value and the limit. BMKG's gauge at Halim Perdanakusuma recorded 377 mm in one day, the highest since records began in 1866. GSMaP, averaged over 5 km around the same gauge, gives about 108 mm for the same day. It puts the storm in the right place at the right time, building through the evening and peaking before dawn, but at about 10 km resolution it smooths the extreme core that a single gauge catches. Use satellite rain to see where and when; use gauges, or calibrate against them, when the total matters.
+
+## Navigation satellites, and what they do for remote sensing
+
+Four global constellations are operating: the American **GPS** (about 20 200 km), Russia's **GLONASS** (19 100 km), Europe's **Galileo** (23 222 km) and China's **BeiDou** (21 528 km in its medium-orbit part, with more satellites in geostationary and inclined orbits). Japan's QZSS and India's NavIC add regional coverage. A receiver measures its distance to at least four satellites and solves for four unknowns: its three coordinates and the error of its own clock.
+
+For remote sensing they matter in four ways:
+
+- **Where the sensor was.** Every imaging satellite carries a GNSS receiver, so its orbit is known to centimetres. Every aircraft and drone survey pairs GNSS with an inertial measurement unit (IMU), so that each image or laser shot is located without ground control: **direct georeferencing**. With corrections from a base station (RTK, or PPK after the flight), positions reach a few centimetres. Indonesia's national reference stations, operated by BIG as InaCORS, serve exactly this purpose.
+- **Where the ground is.** Field plots, training points and accuracy samples all carry GNSS coordinates, and their error limits how small a feature a validation can test.
+- **The atmosphere's delay.** GNSS signals are slowed by water vapour; the same delay distorts radar interferometry, and GNSS stations are used to correct it (P5).
+- **GNSS as a sensor.** Signals bent by the atmosphere as a satellite sets (**radio occultation**) give temperature and humidity profiles for weather models; signals reflected off the sea (**reflectometry**, as on NASA's CYGNSS) measure ocean winds and soil moisture.
+
+{{< include _snippets/ch00i_geostationary.qmd >}}
+
+## Key terms
+
+**Geostationary orbit** (35 786 km, one sidereal day). **Full disk**, **rapid scan**. **Sub-satellite point**. **Viewing (satellite zenith) angle**. **Brightness temperature**, **cloud-top temperature**. **AHI, AMI, ABI**. **Passive microwave rain**, **GSMaP**. **GNSS**: GPS, GLONASS, Galileo, BeiDou, QZSS, NavIC. **Pseudorange**. **IMU**, **direct georeferencing**, **RTK / PPK**, **CORS**. **Radio occultation**, **GNSS reflectometry**.
+
+## Quiz
+
+1. Why does a geostationary satellite appear to stand still, and why must it orbit above the equator?
+2. Give three things a 10-minute geostationary image can show that a 5-day Sentinel-2 revisit cannot.
+3. A 2 km infrared pixel is imaged from 37 680 km at a viewing angle of 48.7°. Roughly how long is it towards the edge of the disk?
+4. Of the five satellites in the coverage figure, which see Indonesia usefully, and why not GOES or Meteosat at 0°?
+5. Why do the coldest areas of a 10.5 µm image mark the strongest storm clouds?
+6. GSMaP gave about 108 mm at Halim for a day when the gauge recorded 377 mm. Give two reasons, and say what each source is good for.
+7. Why does a GNSS receiver need at least four satellites?
+8. Name two ways GNSS is used in a drone survey and one way it is used in radar interferometry.
+
+::: {.callout-note collapse="true"}
+## Answers
+1. Its orbital period equals one sidereal day and it moves in the direction of the Earth's rotation, so it keeps pace with a point on the ground. Only an orbit in the equatorial plane can stay over the same point; an inclined orbit would drift north and south every day.
+2. For example: the growth of a thunderstorm in an afternoon; a cyclone's track hour by hour; a fire starting and its smoke spreading; fog clearing; ash leaving a volcano. All change faster than a few days.
+3. Across: 2 × 37 680 / 35 786 ≈ 2.1 km. Towards the edge it is stretched further by 1/cos(48.7°) ≈ 1.52, so about 3.2 km.
+4. Himawari-9 (140.7° E) and GK-2A (128.2° E). GOES-East and GOES-West sit over the Americas and the eastern Pacific, and Meteosat at 0° over Africa: Indonesia is beyond their horizon. (Satellites not in the figure, such as Meteosat at 45.5° E and China's FengYun-4, see western Indonesia at a slant.)
+5. Temperature falls with height in the troposphere, so the coldest cloud tops are the highest, and the tallest clouds are the deep convective storms that carry the most rain.
+6. GSMaP averages over about 10 km and combines microwave passes a few hours apart with infrared cloud motion, so it smooths the extreme core and can miss peaks between passes; the gauge measures one point, exactly. Satellite rain shows where and when the storm fell over a wide area; the gauge gives the true total at its location.
+7. The receiver solves for four unknowns, its three coordinates and its clock error, and needs one distance (pseudorange) per unknown.
+8. Drone: locating each photo or laser shot with GNSS and an IMU (direct georeferencing), and measuring ground control or check points with RTK or PPK. Radar interferometry: GNSS stations estimate the water-vapour delay that would otherwise appear as false deformation.
+:::
