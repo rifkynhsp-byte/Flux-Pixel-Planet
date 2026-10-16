@@ -8,15 +8,17 @@ Most of it comes from project work. Some of it comes from the classroom, where I
 
 ## Why this book is free
 
-I had the privilege of learning this work on real projects, next to good people, with real problems to solve. Not everyone gets that chance. This book shares it: the hands-on knowledge I have gathered, written down and given away, so that a student in Kupang, a forestry officer in Riau, a young engineer anywhere, can build the same skills and grow from them.
+I had the privilege of learning this work on real projects, next to good people, with real problems to solve, and of studying it further at UNSW Sydney with an LPDP scholarship. Not everyone gets that chance. I want everyone in this field to be able to experience it too, and to have peers to work through the hard problems with. This book shares it: the hands-on knowledge I have gathered, written down and given away, so that a student in Kupang, a forestry officer in Riau, a young engineer anywhere, can build the same skills and grow from them.
 
 It is not a degree, and it does not replace a Master's programme or formal training. It is one practitioner's experience, made open, so that anyone willing to work through it can become a GIS or remote sensing specialist.
 
-The need is real. Indonesia has more than seventeen thousand islands, and many of its hardest problems are spatial: where forest is being lost, which hillsides will slide in the next rain, which neighbourhoods will flood. The satellite data to answer them is free. What is missing is people trained to turn it into decisions. That is why the book is free and open: every person who learns to do this well becomes a multiplier, mapping a district, training a team, and making the next decision better informed.
+The need is real. Indonesia has more than seventeen thousand islands, and many of its hardest problems are spatial: where forest is being lost, which hillsides will slide in the next rain, which neighbourhoods will flood. The satellite data to answer them is free. What is missing is people trained to turn it into decisions. That is why the book is free and open: every person who learns to do this well becomes a multiplier, mapping a district, training a team, and making the next decision better informed. This book is my contribution to that, and an invitation: learn it, use it, improve it, and solve the next problem together.
 
 ## Thank you
 
-At UNSW Sydney, three people supported my learning in remote sensing and GIS: **Professor Samsung Lim**, my supervisor, **Professor Linlin Ge** and **Professor Shawn Laffan**. They gave me their time, their questions and their patience, and they helped a practitioner learn to think like a researcher. This book is, in part, a thank-you to them. What is good in this book owes them a great deal; the mistakes are mine.
+At UNSW Sydney, three people supported my learning in remote sensing and GIS: **Professor Samsung Lim**, my supervisor, **Professor Linlin Ge** and **Professor Shawn Laffan**. They gave me their time, their questions and their patience, and they helped a practitioner learn to think like a researcher. This book is, in part, a thank-you to them.
+
+It began earlier, in Geophysics at Universitas Padjadjaran, where **Professor Irwan Ary Dharmawan** and **Professor Eleonora Agustine** first taught me to look at the Earth with physics and to trust measurements only after testing them. To them, and to all my lecturers in Geophysics at Universitas Padjadjaran and at UNSW, too many to name one by one: thank you. What is good in this book owes you a great deal; the mistakes are mine.
 
 ::: {.callout-tip}
 ## Reading edition (Word)
