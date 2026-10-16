@@ -28,7 +28,7 @@ window.LMS_CONFIG = {
   // ---- Identity -----------------------------------------------------------
   courseId: 'planetary-scale-cloud-gis',
   instructorName: 'Rifky Nauval Hendrawan',
-  instructorEmail: 'rifky.nhsp@gmail.com',
+  instructorEmail: 'rifkynauvalhsp@gmail.com',
 
   // ---- Account mode. Leave both empty to stay in local mode. --------------
   supabaseUrl: '',

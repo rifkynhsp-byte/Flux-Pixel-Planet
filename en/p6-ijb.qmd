@@ -5,7 +5,7 @@
 **Run this chapter**
 
 - `ch00g_ijb_cases` &nbsp; [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rifkynhsp-byte/Fullstack-Remote-Sensing/blob/main/notebooks/ch00g_ijb_cases.ipynb)
-- [Open the IJB app](https://bit.ly/IJBExplorer)
+- [Open the IJB app](https://rifkynauvalhsp.users.earthengine.app/view/ijbexplorer)
 
 [![Add all book scripts to your Code Editor (once)](https://img.shields.io/badge/Add%20all%20book%20scripts-to%20your%20Code%20Editor-34a853)](https://code.earthengine.google.com/?accept_repo=users/rifkynauvalhsp/Fullstack-Remote-Sensing) &nbsp; *First time? Appendix A shows how to sign in to Earth Engine and Colab.*
 :::
@@ -27,7 +27,7 @@ What you still need is the understanding from P1 to P5. The app will happily pro
 
 IJB is a published Earth Engine App, so it opens in an ordinary web browser.
 
-1. Open <https://bit.ly/IJBExplorer>.
+1. Open <https://rifkynauvalhsp.users.earthengine.app/view/ijbexplorer> (short link: bit.ly/IJBExplorer).
 2. Wait a few seconds while the frame loads: the panel on the left, the map on the right.
 3. Start with Step 1 below.
 

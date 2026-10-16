@@ -5,7 +5,7 @@
 **Jalankan bab ini**
 
 - `ch00g_ijb_cases` &nbsp; [![Buka di Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rifkynhsp-byte/Fullstack-Remote-Sensing/blob/main/notebooks/ch00g_ijb_cases.ipynb)
-- [Buka aplikasi IJB](https://bit.ly/IJBExplorer)
+- [Buka aplikasi IJB](https://rifkynauvalhsp.users.earthengine.app/view/ijbexplorer)
 
 [![Tambahkan semua skrip buku ke Code Editor Anda (sekali saja)](https://img.shields.io/badge/Add%20all%20book%20scripts-to%20your%20Code%20Editor-34a853)](https://code.earthengine.google.com/?accept_repo=users/rifkynauvalhsp/Fullstack-Remote-Sensing) &nbsp; *Baru pertama kali? Lampiran A menjelaskan cara masuk ke Earth Engine dan Colab.*
 :::
@@ -27,7 +27,7 @@ Yang tetap Anda butuhkan adalah pemahaman dari P1 sampai P5. Aplikasi ini akan d
 
 IJB adalah Earth Engine App yang sudah dipublikasikan, jadi bisa dibuka di peramban web biasa.
 
-1. Buka <https://bit.ly/IJBExplorer>.
+1. Buka <https://rifkynauvalhsp.users.earthengine.app/view/ijbexplorer> (tautan pendek: bit.ly/IJBExplorer).
 2. Tunggu beberapa detik sampai kerangkanya termuat: panel di kiri, peta di kanan.
 3. Mulai dari Langkah 1 di bawah.
 
