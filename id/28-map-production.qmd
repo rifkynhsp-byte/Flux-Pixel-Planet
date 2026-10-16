@@ -83,3 +83,15 @@ Pemeriksaan akhir dua menit yang menangkap sebagian besar kesalahan yang disadar
 2. Tambahkan halaman kedua untuk setiap wilayah berisi histogram suhu. Apa yang ditunjukkan histogram yang tidak terlihat di peta?
 3. Hitung rentang warna dari persentil ke-2 dan ke-98 semua wilayah yang digabung, sebelum menggambar halaman mana pun, lalu pakai untuk seluruh laporan. Wilayah mana yang akan jenuh dengan rentang lama 22-42 °C?
 4. Gambar ulang laporan dengan peta warna inferno dan cetak satu halaman dalam abu-abu. Apa yang berubah dari apa yang bisa dilihat pembaca?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Harapkan waktunya bertambah kira-kira sebanding dengan jumlah kabupaten, jadi 27 kabupaten memakan waktu kira-kira sembilan kali run tiga kabupaten. Langkah paling lambat hampir selalu permintaan ke Earth Engine: menghitung dan mengunduh raster suhu serta statistik setiap kabupaten. Menggambar dan menulis halaman PDF di matplotlib hanya beberapa detik per halaman. Simpan cache array yang sudah diunduh agar run ulang hanya menggambar ulang.
+
+**2.** Histogram memperlihatkan sebaran suhu di dalam kabupaten: apakah merata hangat atau memiliki inti panas dan pinggiran sejuk, berapa luas area di atas ambang seperti 40 °C, dan apakah sebarannya bimodal (lahan terbangun dan lahan bervegetasi sebagai dua puncak). Peta menunjukkan di mana; histogram menunjukkan seberapa banyak, yang tidak bisa dibaca mata dari warna.
+
+**3.** Gabungkan sampel suhu permukaan lahan semua kabupaten, ambil persentil ke-2 dan ke-98, dan pakai rentang itu di setiap halaman. Kabupaten yang akan jenuh dengan rentang 22-42 °C adalah yang piksel terpanasnya melebihi 42 °C: di bab ini, Kota Bekasi (sepersepuluh terpanasnya di atas 44 °C) adalah kasus yang jelas, dan kabupaten industri padat lain di bagian timur provinsi kemungkinan juga. Periksa nilai maksimum di tabel ringkasan.
+
+**4.** Inferno adalah peta sekuensial, gelap ke terang, dengan kecerahan monoton, sehingga dalam skala abu-abu ia tetap gradasi berurutan dari sejuk (gelap) ke panas (terang), dan titik panas tetap terlihat. Biru-kuning-merah yang divergen menempatkan warna paling terangnya di tengah rentang, sehingga dalam skala abu-abu area yang sangat sejuk maupun sangat panas tercetak gelap dan tampak sama, dan pembaca tidak bisa lagi membedakan panas dari dingin.
+:::

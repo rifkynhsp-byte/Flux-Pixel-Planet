@@ -113,3 +113,15 @@ Laporkan setiap total karbon bersama selangnya, sebutkan galat mana yang dicakup
 2. Ganti random forest dengan gradient boosting (`ee.Classifier.smileGradientTreeBoost`) pada embedding. Apakah rentang prediksi melebar?
 3. Tambahkan biomassa di bawah permukaan dengan rasio akar-pucuk mangrove dari IPCC 2013 Wetlands Supplement, lalu ulangi tabel karbon. Ketidakpastian mana yang kini dominan?
 4. Hitung selang karbon untuk random forest tumpukan sensor, bukan embedding. Mengapa selang yang lebih lebar untuk model yang lebih buruk adalah hasil yang jujur?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Membuang plot yang tinggi kanopi satelitnya bertentangan dengan biomassa lapangannya akan memperbaiki RMSE leave-one-out setiap model, karena residual terburuk hilang. Itu tidak jujur kecuali aturan pembuangannya ditetapkan sebelumnya atas dasar selain galat model, misalnya "plot yang diukur sebelum peta kanopi 2020 dan tata guna lahannya kemudian berubah, berdasarkan pemeriksaan visual citra". Membuang titik karena model meleset mengubah validasi menjadi seleksi. Laporkan kedua run beserta aturannya.
+
+**2.** Gradient boosting mencocokkan residual pohon-pohon sebelumnya, sehingga prediksinya bisa bergerak lebih jauh dari rata-rata data latih dibanding forest yang di-bagging, dan rentang prediksi leave-one-out biasanya agak melebar. Ia tetap tidak bisa memprediksi di luar rentang data latih, dan dengan prediktor yang lemah (R² sekitar 0,18 di sini) rentang yang lebih lebar bisa berarti galat yang lebih besar, bukan yang lebih baik. Bandingkan rentang dan RMSE bersama-sama.
+
+**3.** IPCC 2013 Wetlands Supplement memberi rasio akar terhadap tajuk mangrove 0,49 untuk iklim tropis basah, sehingga biomassa total ≈ 1,49 × AGB, dan karbon = biomassa × 0,451 (fraksi karbon mangrove dalam suplemen yang sama). Totalnya naik sekitar setengah. Ketidakpastian model pada AGB kini ikut dikalikan, dan rasio itu menambah sebarannya sendiri (rasio dalam suplemen berkisar 0,29 sampai 0,96 antar-zona iklim). Dengan R² sekitar 0,18, galat model pada AGB masih dominan; dengan model AGB yang lebih baik, rasio akar-tajuk akan menjadi ketidakpastian utama.
+
+**4.** Interval bootstrap mencerminkan seberapa besar prediksi berubah ketika plot latihnya berubah. Model yang kurang cakap (RMSE sekitar 50 dibanding 43 Mg/ha) memiliki residual lebih besar, sehingga pengambilan ulang plot menggeser totalnya lebih jauh dan intervalnya melebar. Itu jujur: ia melaporkan bahwa kita kurang mengetahui total karbon dengan model itu. Interval sempit di sekitar model yang lebih buruk justru hasil yang tidak jujur.
+:::

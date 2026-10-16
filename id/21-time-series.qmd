@@ -256,3 +256,15 @@ Dua proses yang sangat berbeda meninggalkan tanda yang sama pada sepasang citra 
 2. Pasang model regional pada 2019-2021, bukan 2019-2020. Apakah luas perubahan 2023 mengecil, dan mengapa bisa begitu?
 3. Ulangi perubahan radar dengan orbit naik dan turun digabung. Apakah kesepakatan dengan peta optis membaik?
 4. Haluskan deret terbangun Dynamic World selama tiga tahun sebelum mengurangkan. Apakah penurunan 2020 menghilang?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Dengan dua dari tiga pengamatan di bawah −3 SD, alert bisa menyala pada pengamatan rendah kedua, bukan ketiga, sehingga paling cepat satu revisit lebih awal, beberapa hari pada jarak pengamatan piksel ini (alert di bab ini menyala dua hari setelah pengamatan rendah pertama, 6 ke 8 Maret 2023). Harganya adalah lebih banyak alert palsu: dua nilai rendah dari tiga lebih mudah ditimbulkan oleh kabut atau bayangan awan yang lolos. Periksa periode fitting: kalau ada alert di 2019-2020, aturan yang lebih longgar itu terlalu permisif untuk deret ini.
+
+**2.** Biasanya ya. Menambahkan 2021 memperpanjang periode latih, sehingga fitting harmonik lebih stabil dan simpangan baku residualnya lebih besar dan lebih realistis; pengamatan 2023 harus jatuh lebih jauh dari pola musim untuk dihitung, dan luas perubahan menyusut. Luasnya juga bisa menyusut karena sebagian pembukaan dimulai pada 2021, sehingga gangguan itu menjadi bagian dari "normal" yang dipelajari model: harga dari fitting yang lebih panjang adalah baseline yang mungkin sudah mengandung perubahan.
+
+**3.** Biasanya tidak. Mencampur lintasan ascending dan descending menambahkan perbedaan geometri pandang ke log ratio: lereng yang menghadap satu lintasan tampak lebih terang, yang lain lebih gelap, dan campuran lintasannya berbeda antar-tahun. Itu menghasilkan perubahan di tempat yang sebenarnya tidak berubah, terutama di medan berbukit di sekitar ibu kota, sehingga kesesuaian dengan peta optik cenderung turun. Pertahankan satu arah orbit.
+
+**4.** Menghaluskan dengan rata-rata (atau median) bergerak tiga tahun sebelum mengurangkan meredam anomali satu tahun, sehingga penurunan 2020 jauh mengecil atau hilang: kemungkinan besar itu artefak klasifikasi tahun tersebut, bukan hilangnya bangunan yang nyata. Harganya, perubahan yang nyata tersebar ke tiga tahun dan waktunya menjadi kabur. Median lebih baik daripada rata-rata untuk menghapus satu tahun yang buruk.
+:::

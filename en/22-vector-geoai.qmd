@@ -160,3 +160,17 @@ Use it to reduce a thousand candidate locations to ten. Then send someone to sta
 3. Add one feature of your own and use SHAP to decide whether it earned its place.
 4. Take the ten highest scoring cells and inspect each on street level imagery. Count how many are plausible. That count is your real accuracy.
 5. Map this chapter's workflow onto Chapter [-@sec-supervised] line by line. Write down which step in each corresponds to which step in the other.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** At H3 resolution 8 each hexagon is about 0.74 km² instead of about 0.1 km² at resolution 9, so each cell holds several minimarkets and their neighbourhoods. The agglomeration effect (stores cluster near other stores) weakens as a predictor, because the count of nearby stores and the label now describe the same cell: most cells near a store also contain one, and the contrast between occupied and empty cells is averaged away. Coarser cells mix the drivers you are trying to separate.
+
+**2.** For: cells far from any store are more likely to be genuinely unattractive (or at least tried and avoided), so the 0 label is cleaner. Against: it makes the problem artificially easy, because distance to the nearest store then almost defines the label, the same leakage as the perfect model, and it removes exactly the near-but-empty cells where the decision is hardest. Random pseudo-absences are the safer default; the 1 km rule is defensible only if distance features are dropped.
+
+**3.** Add, for example, the number of schools within 500 m or the length of main road in the cell. Compute SHAP values on the test set: keep the feature if it ranks above the median feature by mean |SHAP| and its effect has a plausible direction (more footfall, higher score). If it ranks low, or its effect is erratic in sign, it has not earned its place. Also check that it is not a disguised copy of the label.
+
+**4.** Open each of the ten cells in Street View or a recent high-resolution image. Plausible means a road-front location with housing or footfall where a minimarket could open, not a river, a cemetery, a toll road or a military area. Typical results: six to eight of ten plausible. That count, with its reasons, says more about real performance than the 0.78 out-of-bag score.
+
+**5.** Unit: pixel ↔ hexagon. Features: spectral bands, indices, terrain ↔ distances, counts, population. Labels: field-validated classes ↔ existing minimarkets (presence) and random cells (pseudo-absence). Split: hold-out polygons ↔ hold-out hexagons. Model: Random Forest in both. Diagnostics: feature importance ↔ SHAP, plus the leakage check. Output: a class map ↔ a suitability score map. Validation: independent field points ↔ street-level inspection.
+:::

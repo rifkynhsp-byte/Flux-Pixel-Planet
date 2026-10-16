@@ -76,3 +76,17 @@ The chapters of this part follow the path a result takes from analysis to its au
 3. In the interactive heatmap, find the driest row for Kupang. Look up what happened that year.
 4. Recompute the risk chart with "below the 20th percentile of the city's own Jul-Oct rainfall" instead of "below half of normal". Does Kupang still look safe?
 5. Add ERA5-Land precipitation as a third product for Ambon. Does it agree with CHIRPS and IMERG on the rise after 2008?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** With a free y-axis each city fills its own panel, so wet Padang and dry Kupang look equally large, and the reader compares shapes as if they were amounts. The comparison that becomes misleading is the one between cities: how much wetter one is than another, and how large a dry-season dip is in millimetres. Free axes are right only when the question is about each city's seasonal shape, not about levels.
+
+**2.** Choose a city whose regime differs, for example a monsoonal city in Nusa Tenggara or a double-peaked equatorial one. Place it next to the city with the most similar regime (by the timing of its peak and its dry season), not alphabetically: panel order should group similar seasonal cycles so that the eye compares like with like, and the odd one out stands out by position.
+
+**3.** Find the row with the lowest annual total for Kupang in the heatmap, then check that year against the El Niño and Indian Ocean Dipole record. Strong El Niño years such as 1997 and 2015 brought severe drought to Nusa Tenggara; if the driest row is one of those, the explanation is the ENSO phase; if not, look for the IOD or a delayed monsoon onset that year.
+
+**4.** Not computed in the chapter. Defining dry as below each city's own 20th percentile of July-October rainfall makes the threshold relative: by construction about 20 % of years fall below it in every city. Kupang, whose July-October is always very dry in absolute terms, then shows its El Niño years clearly among those 20 %, so it no longer looks "safe". The relative definition answers "is this year unusually dry for here"; half of normal answers "is it dry enough to hurt crops". Say which question you are asking.
+
+**5.** Not computed in the chapter. Add `ECMWF/ERA5_LAND/MONTHLY_AGGR` total precipitation for the Ambon pixel and compute annual totals for 1991-2007 and 2008-2024. If ERA5-Land and IMERG both show the step after 2008, the rise is more likely real; if only CHIRPS shows it, suspect a change in the gauges CHIRPS blends in eastern Indonesia. Note that ERA5-Land is a reanalysis and tends to underestimate convective rainfall amounts, so compare the change, not the level.
+:::

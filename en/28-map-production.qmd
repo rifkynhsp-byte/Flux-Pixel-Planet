@@ -83,3 +83,15 @@ A final check that takes two minutes and catches most of the errors clients noti
 2. Add a second page per district with the temperature histogram. What does it show that the map does not?
 3. Compute the colour range from the 2nd and 98th percentiles of all districts pooled, before drawing any page, and use it for the whole report. Which districts would have saturated with the old 22-42 °C range?
 4. Redraw the report with the inferno colour map and print one page in grey. What changes in what a reader can see?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Expect the time to scale roughly with the number of districts, so 27 districts take roughly nine times the three-district run. The slowest step is almost always the Earth Engine requests: computing and downloading each district's temperature raster and statistics. Rendering and writing PDF pages in matplotlib is seconds per page. Cache the downloaded arrays so a rerun only redraws.
+
+**2.** The histogram shows the distribution of temperatures inside the district: whether it is uniformly warm or has a hot core and cool periphery, how much of the area is above a threshold such as 40 °C, and whether the distribution is bimodal (built-up and vegetated land as two peaks). The map shows where; the histogram shows how much, which the eye cannot read from colours.
+
+**3.** Pool the land surface temperature samples of all districts, take the 2nd and 98th percentiles and use that range on every page. Districts would have saturated with 22-42 °C wherever their hottest pixels exceed 42 °C: in this chapter, Kota Bekasi (hottest tenth above 44 °C) is the clear case, and other dense industrial districts in the east of the province are likely candidates. Check the summary table's maxima.
+
+**4.** Inferno is a sequential map, dark to light, with monotonic lightness, so in grey it remains an ordered ramp from cool (dark) to hot (light), and hot spots stay visible. The diverging blue-yellow-red puts its lightest colour at the middle of the range, so in grey both very cool and very hot areas print dark and look alike, and the reader can no longer tell hot from cold.
+:::

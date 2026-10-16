@@ -75,3 +75,13 @@ Put together: a lot of tree cover was cleared in this landscape after 2020 (abou
 1. Set the tolerance from 0.5 ha to 0. How many plots change status? Is the extra loss real, or pixels on the plot edge?
 2. List the 71 plots that fail on Hansen only. Look at three of them in the Sentinel-2 archive. What does Hansen see that TMF does not?
 3. Pick three failed plots and look at them in the Sentinel-2 archive for 2019 and 2024. Which ones are forest conversion and which are replanting?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. With zero tolerance any loss pixel inside a plot fails it, so more plots fail. Inspect the newly failing ones: if the loss is one or two 30 m pixels on the plot boundary, it is usually edge effects (misregistration between the 1 km grid, Hansen and JRC, or a neighbour's clearing) rather than deforestation of the plot. That is why a small tolerance exists; state it in the method.
+
+**2.** Typical findings: Hansen records loss of tree cover of any kind, so it flags short-rotation clearing of rubber or tree crops, selective logging and canopy damage that TMF classes as degradation or does not mark at all; and small clearings near Hansen's detection limit that TMF misses. Sometimes the disagreement is timing: Hansen dates loss in one year, TMF in the next. Each case is a reason to look at imagery before judging a supplier.
+
+**3.** In Sentinel-2 imagery: forest conversion shows closed, irregular forest canopy in 2019 replaced by bare ground and then a new crop pattern, regular rows of young palms or rubber, or open farmland, in 2024. Replanting shows a regular plantation grid in 2019 (row lines visible, uniform crowns), a clear-felled block, then young trees in the same grid. Only the first is deforestation under the regulation; the second is land that was not forest at the cut-off.
+:::

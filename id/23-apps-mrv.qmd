@@ -149,3 +149,23 @@ Alasan untuk berpindah adalah modelnya atau integrasinya, bukan kata "machine le
 2. Tambahkan indikator kedelapan: jarak ke sekolah atau klinik terdekat dari OpenStreetMap, diunggah sebagai aset. Di bagian kode mana indikator itu ditaruh, dan batas apa yang akan Anda pilih?
 3. Tambahkan pagar pengaman: jika pengguna mengatur semua bobot menjadi nol, tampilkan pesan alih-alih peta kosong.
 4. Terbitkan aplikasinya dan berikan kepada seseorang yang tidak memakai GIS. Minta mereka mencari tempat tinggal. Catat hal pertama yang mereka salah pahami.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Dengan hanya panas yang diberi bobot, peta mengikuti suhu permukaan lahan: inti kota yang padat dan kawasan industri mendapat skor terendah, dan perbukitan bervegetasi di sekitar cekungan tertinggi. Menambahkan banjir (HAND, ketinggian di atas drainase terdekat) terutama mengubah bagian selatan cekungan yang rendah di sepanjang Citarum: tempat seperti Dayeuhkolot yang sudah panas turun lagi karena berada nyaris di atas sungai, sementara perbukitan tidak berubah. Dua indikator yang berkorelasi secara spasial (lahan terbangun yang rendah dan datar itu panas dan rawan banjir) saling memperkuat.
+
+**2.** Muat asset-nya, hitung jarak dengan `fastDistanceTransform` (dalam meter, pada skala 30 m), lalu tambahkan di samping indikator lain pada daftar tempat setiap indikator dirumuskan ulang di antara batas terburuk dan terbaik, dan beri slider bobot. Batas yang masuk akal: terburuk 3 km (satu jam berjalan kaki, atau perjalanan panjang di jalan yang buruk) dan terbaik 300 m atau kurang. Periksa terhadap persentil ke-5 sampai ke-95 di wilayah itu, seperti yang dilakukan aplikasi untuk indikator lain, dan tulis batasnya di kode.
+
+**3.** ```javascript
+var total = weights.reduce(function (a, b) { return a + b; }, 0);
+if (total === 0) {
+  message.setValue('Atur setidaknya satu bobot di atas nol untuk melihat skor.');
+  Map.layers().reset();
+  return;
+}
+```
+Pemeriksaan ini berjalan di sisi klien sebelum ada permintaan ke Earth Engine, sehingga seketika. Letakkan di awal fungsi yang menghitung ulang skor.
+
+**4.** Kesalahpahaman pertama yang umum: membaca skor sebagai vonis mutlak ("0,3 berarti buruk"), bukan peringkat di bawah bobot yang dipilih; tidak menyadari bahwa bobot mengubah peta; mengartikan cahaya malam sebagai "layanan" secara harfiah; atau tidak tahu apa yang harus dilakukan setelah mengklik. Tulis kesalahpahaman pertama itu kata demi kata dan perbaiki di antarmuka (satu kalimat di panel, label yang lebih jelas), bukan di buku panduan.
+:::

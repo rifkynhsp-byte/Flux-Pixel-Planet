@@ -254,3 +254,15 @@ Two very different processes leave the same signature in a before-and-after pair
 2. Fit the regional model on 2019-2021 instead of 2019-2020. Does the 2023 change area shrink, and why might it?
 3. Repeat the radar change with ascending and descending orbits combined. Does the agreement with the optical map improve?
 4. Smooth the Dynamic World built-up series over three years before differencing. Does the 2020 dip disappear?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** With two of three observations below −3 SD, the alert can fire on the second low observation instead of the third, so it comes one revisit earlier at most, a few days at this pixel's observation spacing (the chapter's alert came two days after the first low observation, 6 to 8 March 2023). The cost is more false alerts: two low values in three is easier for haze or a missed cloud shadow to produce. Check the fit period: if any alert appears in 2019-2020, the looser rule is too permissive for this series.
+
+**2.** Usually yes. Adding 2021 lengthens the training period, so the harmonic fit is more stable and the residual standard deviation larger and more realistic; a 2023 observation must then fall further from the season to count, and the change area shrinks. It can also shrink because some clearing began in 2021, so that disturbance becomes part of the "normal" the model learns: the price of a longer fit is a baseline that may already contain change.
+
+**3.** Usually not. Mixing ascending and descending passes adds a viewing-geometry difference to the log ratio: slopes facing one pass look brighter, the other darker, and the mix of passes differs between years. That produces change where nothing changed, especially on the hilly terrain around the capital, so agreement with the optical map tends to fall. Keep one orbit direction.
+
+**4.** Smoothing with a three-year moving mean (or median) before differencing damps a one-year anomaly, so the 2020 dip shrinks a lot or disappears: it was most likely a classification artefact of that year rather than real loss of buildings. The cost is that genuine change is spread over three years and its timing blurs. A median is better than a mean at removing a single bad year.
+:::

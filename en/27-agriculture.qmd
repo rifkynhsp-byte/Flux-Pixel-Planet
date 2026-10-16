@@ -91,3 +91,17 @@ The general lesson: before you tune a threshold, check that the variable can sep
 3. Run the method on the town scene "kebun_sawit_SPP" from the same survey. What does it count that is not a palm?
 4. Repeat the cross-check with the 2020 satellite map (`p2020` is already in the cell table). Which cells changed, and does the drone show young palms there?
 5. Digitise every palm by hand in one 1 ha square of the planted block (about 140 points). Rerun the sensitivity sweep and compute true precision and recall for each setting. Is 5.5 m and 0.30 still the best?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** At 4 m two maxima can be accepted inside one large crown, so the spacing histogram grows a spike at 4-6 m, well below the 8-9 m planting distance: that spike is double counting, and the count rises. At 7 m neighbouring palms on a tight 8-9 m grid, or crowns that overlap in a mature block, start to be merged and the count falls, with the histogram truncated below 7 m. 5.5 m keeps the histogram centred near the planting distance with few spacings below 6 m.
+
+**2.** Draw the polygon in the Code Editor (or in Python with a shapely polygon), count detections inside and divide by its area in hectares. A standard 9 m triangular planting holds about 143 palms per hectare. A count close to 140 means a fully stocked block; a count well above suggests false detections of bushes; well below suggests gaps (dead or missing palms) or merged crowns. Inspect the image where density deviates.
+
+**3.** In a town or village scene the detector also counts other round, bright crowns of about the right size: fruit trees (mango, rambutan), coconut palms, ornamental trees, shrubs, and sometimes roof corners or bright objects. Nothing in a crown-maximum rule knows that a crown is an oil palm; the planting-grid test of Chapter [-@sec-palm-health] removes most of these because they are not on a regular 9 m grid.
+
+**4.** Compare `p2020` with the 2024 probability per cell. Cells that rose from below to above 0.5 are candidates for new or young planting; in the drone image, look for small crowns on a regular grid, below the size of mature palms. Cells that fell may be replanting (clearing of old palms) or disturbance. If the drone shows young palms where the probability rose, the two sources agree on recent planting.
+
+**5.** Not computed in the chapter. With about 140 hand-digitised palms as reference, match each detection to the nearest reference within about 3 m. Precision = matched / detections; recall = matched / references. Run the sweep of spacing and threshold and pick the setting that maximises F1 (or the balance you need). 5.5 m and 0.30 may or may not stay best; one hectare is a small sample, so repeat in a second square before changing the default.
+:::

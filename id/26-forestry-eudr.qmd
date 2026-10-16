@@ -75,3 +75,13 @@ Bila digabungkan: banyak tutupan pohon dibuka di bentang ini setelah 2020 (sekit
 1. Ubah toleransi dari 0,5 ha menjadi 0. Berapa plot yang berubah status? Apakah tambahan kehilangan itu nyata, atau hanya piksel di tepi plot?
 2. Buat daftar 71 plot yang gagal hanya menurut Hansen. Lihat tiga di antaranya di arsip Sentinel-2. Apa yang dilihat Hansen tetapi tidak dilihat TMF?
 3. Pilih tiga plot yang gagal dan periksa di arsip Sentinel-2 tahun 2019 dan 2024. Mana yang konversi hutan dan mana yang peremajaan kebun?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Dengan toleransi nol, satu piksel kehilangan pun di dalam plot membuatnya gagal, sehingga lebih banyak plot yang gagal. Periksa plot yang baru gagal: kalau kehilangannya hanya satu atau dua piksel 30 m di batas plot, biasanya itu efek tepi (pergeseran registrasi antara grid 1 km, Hansen dan JRC, atau pembukaan lahan tetangga), bukan deforestasi di plot itu. Karena itulah toleransi kecil diberikan; nyatakan dalam metode.
+
+**2.** Temuan yang umum: Hansen mencatat hilangnya tutupan pohon jenis apa pun, sehingga ia menandai pembukaan rotasi pendek karet atau tanaman pohon, tebang pilih dan kerusakan kanopi yang oleh TMF diklasifikasikan sebagai degradasi atau tidak ditandai sama sekali; serta pembukaan kecil di dekat batas deteksi Hansen yang terlewat oleh TMF. Kadang perbedaannya soal waktu: Hansen menanggali kehilangan pada satu tahun, TMF pada tahun berikutnya. Setiap kasus adalah alasan untuk melihat citra sebelum menilai seorang pemasok.
+
+**3.** Pada citra Sentinel-2: konversi hutan memperlihatkan kanopi hutan yang rapat dan tidak teratur pada 2019 yang digantikan tanah terbuka lalu pola tanaman baru, barisan sawit atau karet muda yang teratur, atau lahan pertanian terbuka, pada 2024. Peremajaan memperlihatkan grid perkebunan yang teratur pada 2019 (barisan terlihat, tajuk seragam), blok yang ditebang habis, lalu pohon muda pada grid yang sama. Hanya yang pertama termasuk deforestasi menurut regulasi; yang kedua adalah lahan yang bukan hutan pada tanggal batas.
+:::

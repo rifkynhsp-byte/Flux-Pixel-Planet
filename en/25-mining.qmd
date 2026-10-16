@@ -82,3 +82,17 @@ Bare ground is hotter than forest in the dry season whether or not anything is b
 3. Split the footprint chart into new bare ground and bare ground that has regrown. Which matters more to a regulator?
 4. Replace the footprint rule with "bare or built probability above 0.5, in at least two of three consecutive years". Does the yearly series become plausible?
 5. Find a night-time Landsat scene over the rectangle and repeat the persistence test. Which hot patches survive the night?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Lowering the cut-off admits elevation changes between 15 and 30 m, so the cut volume grows, often substantially. Much of that growth is cleared forest rather than excavation: both DEMs are surface models, so removing a 15-30 m canopy reads as a 15-30 m "cut". Check by masking pixels that were forest in the earlier year (Hansen tree cover 2000 > 50 % or Dynamic World trees): the share of the extra volume that sits on former forest is the share that is probably canopy, not rock.
+
+**2.** Usually on active pit floors and benches, on fresh dumps of dark overburden, and above all on coal stockpile yards and any area where coal is exposed or self-heating. Overlay the top 1 % on the Sentinel-2 true-colour image and the footprint: dark, flat yards next to haul roads or a port are stockpiles. Hot pixels that persist across many scenes deserve attention for spontaneous combustion; one-off hot pixels are usually bare dark ground on a clear day.
+
+**3.** New bare ground is newly opened land: expansion of the pit, dump or yard, which is what permits and environmental approvals limit. Regrown bare ground is rehabilitation. A regulator usually needs both, but they answer different questions: new clearing checks compliance with the permitted footprint; regrowth checks reclamation obligations and bond release. For enforcement, new bare ground matters more.
+
+**4.** Requiring two of three consecutive years removes single-year spikes and dips caused by haze, few clear scenes or a threshold crossed by chance, so the series becomes smooth and nearly monotonic, which is plausible for a working mine. Including built-up keeps sealed yards and infrastructure in the footprint. The cost: the rule lags real change by a year, and it cannot report the first year of a new opening until the next confirms it.
+
+**5.** Night-time Landsat thermal scenes exist but are rare and must be searched for by acquisition time (around 22:00-23:00 local time over Indonesia, on descending-path night acquisitions where available). At night, sun-heated bare ground cools and drops out; what remains hot is heat with an internal source: smouldering coal in stockpiles or seams, and sometimes process plants. Patches that survive the night are the strongest evidence of spontaneous combustion.
+:::

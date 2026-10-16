@@ -113,3 +113,15 @@ Report every carbon total with its interval, say which errors the interval inclu
 2. Replace the random forest with gradient boosting (`ee.Classifier.smileGradientTreeBoost`) on the embeddings. Does the predicted range widen?
 3. Add below ground biomass with the mangrove root-to-shoot ratio of the IPCC 2013 Wetlands Supplement, and redo the carbon table. Which uncertainty now dominates?
 4. Compute the carbon interval for the sensor-stack forest instead of the embedding forest. Why is a wider interval for a worse model the honest outcome?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. Removing plots whose satellite canopy height contradicts their field biomass will improve every model's leave-one-out RMSE, because the worst residuals are gone. It is not honest unless the removal rule is stated in advance on grounds other than the model's error, for example "plots measured before the 2020 canopy map whose land use has since changed, by visual check of imagery". Removing points because the model misses them turns validation into selection. Report both runs and the rule.
+
+**2.** Gradient boosting fits the residuals of earlier trees, so its predictions can move further from the training mean than a bagged forest's, and the range of leave-one-out predictions usually widens somewhat. It still cannot predict beyond the training range, and with weak predictors (R² about 0.18 here) a wider range can mean larger errors rather than better ones. Compare the range and the RMSE together.
+
+**3.** The IPCC 2013 Wetlands Supplement gives a mangrove root-to-shoot ratio of 0.49 for tropical wet climates, so total biomass ≈ 1.49 × AGB, and carbon = biomass × 0.451 (the mangrove carbon fraction in the same supplement). The total rises by about half. The model uncertainty on AGB is now multiplied too, and the ratio adds its own spread (the supplement's ratios range from 0.29 to 0.96 across climate zones). With R² near 0.18 the model error on AGB still dominates; with a better AGB model the root-to-shoot ratio would become the main uncertainty.
+
+**4.** The bootstrap interval reflects how much the prediction changes when the training plots change. A model with less skill (RMSE about 50 against 43 Mg/ha) has larger residuals, so resampling the plots shifts its total more and the interval widens. That is honest: it reports that we know the carbon total less well with that model. A narrow interval around a worse model would be the dishonest outcome.
+:::

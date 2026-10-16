@@ -159,3 +159,17 @@ Pakai skor ini untuk menyaring seribu kandidat lokasi menjadi sepuluh. Lalu kiri
 3. Tambahkan satu fitur buatan Anda sendiri dan pakai SHAP untuk memutuskan apakah fitur itu layak dipertahankan.
 4. Ambil sepuluh sel dengan skor tertinggi dan periksa masing-masing di citra tingkat jalan. Hitung berapa yang masuk akal. Hitungan itulah akurasi Anda yang sebenarnya.
 5. Petakan alur kerja bab ini ke Bab [-@sec-supervised] baris demi baris. Tuliskan langkah mana di satu bab yang sesuai dengan langkah mana di bab lainnya.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Pada resolusi H3 8 setiap heksagon sekitar 0,74 km², dibanding sekitar 0,1 km² pada resolusi 9, sehingga setiap sel memuat beberapa minimarket beserta lingkungannya. Efek aglomerasi (toko mengelompok di dekat toko lain) melemah sebagai prediktor, karena jumlah toko di sekitar dan labelnya kini menggambarkan sel yang sama: kebanyakan sel di dekat toko juga berisi toko, dan kontras antara sel berisi dan sel kosong terhapus oleh perata-rataan. Sel yang lebih kasar mencampur faktor-faktor yang ingin Anda pisahkan.
+
+**2.** Mendukung: sel yang jauh dari toko mana pun lebih mungkin memang tidak menarik (atau setidaknya pernah dicoba lalu dihindari), sehingga label 0 lebih bersih. Menolak: masalahnya menjadi mudah secara artifisial, karena jarak ke toko terdekat hampir menentukan labelnya, kebocoran yang sama dengan model sempurna tadi, dan definisi itu membuang tepat sel-sel yang dekat tetapi kosong, tempat keputusan paling sulit. Pseudo-absence acak adalah default yang lebih aman; aturan 1 km hanya dapat dibenarkan bila fitur jarak dibuang.
+
+**3.** Tambahkan, misalnya, jumlah sekolah dalam radius 500 m atau panjang jalan utama di dalam sel. Hitung nilai SHAP pada data uji: pertahankan fitur itu bila peringkat rata-rata |SHAP|-nya di atas median fitur lain dan arah pengaruhnya masuk akal (lebih banyak pengunjung, skor lebih tinggi). Kalau peringkatnya rendah, atau tanda pengaruhnya tidak konsisten, fitur itu belum layak dipertahankan. Periksa juga bahwa fitur itu bukan salinan label yang terselubung.
+
+**4.** Buka setiap sel dari sepuluh sel itu di Street View atau citra resolusi tinggi terbaru. Masuk akal berarti lokasi di pinggir jalan dengan permukiman atau lalu lalang orang tempat minimarket bisa dibuka, bukan sungai, makam, jalan tol atau kawasan militer. Hasil yang umum: enam sampai delapan dari sepuluh masuk akal. Jumlah itu, beserta alasannya, lebih banyak bercerita tentang kinerja sebenarnya daripada skor out-of-bag 0,78.
+
+**5.** Unit: piksel ↔ heksagon. Fitur: band spektral, indeks, topografi ↔ jarak, jumlah, populasi. Label: kelas tervalidasi lapangan ↔ minimarket yang ada (presence) dan sel acak (pseudo-absence). Pembagian data: poligon yang ditahan ↔ heksagon yang ditahan. Model: Random Forest pada keduanya. Diagnostik: feature importance ↔ SHAP, ditambah pemeriksaan kebocoran. Keluaran: peta kelas ↔ peta skor kesesuaian. Validasi: titik lapangan independen ↔ inspeksi di tingkat jalan.
+:::

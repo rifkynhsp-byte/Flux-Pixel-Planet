@@ -82,3 +82,17 @@ Di musim kemarau lahan terbuka memang lebih panas daripada hutan, terbakar atau 
 3. Pisahkan grafik luas menjadi lahan terbuka baru dan lahan terbuka yang sudah tumbuh kembali. Mana yang lebih penting bagi regulator?
 4. Ganti aturan jejak dengan "peluang bare atau built di atas 0,5, pada minimal dua dari tiga tahun berturut-turut". Apakah deret tahunannya menjadi masuk akal?
 5. Cari citra Landsat malam hari di atas kotak ini dan ulangi uji persistensi. Petak panas mana yang bertahan di malam hari?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Menurunkan ambang memasukkan perubahan elevasi antara 15 dan 30 m, sehingga volume galian bertambah, sering kali cukup besar. Sebagian besar tambahan itu adalah hutan yang dibuka, bukan galian: kedua DEM adalah model permukaan, sehingga hilangnya kanopi setinggi 15-30 m terbaca sebagai "galian" 15-30 m. Periksa dengan me-mask piksel yang dulunya hutan (tutupan pohon Hansen 2000 > 50 % atau kelas pohon Dynamic World): bagian volume tambahan yang berada di bekas hutan adalah bagian yang kemungkinan kanopi, bukan batuan.
+
+**2.** Biasanya di lantai dan jenjang pit yang aktif, di timbunan overburden gelap yang baru, dan terutama di stockpile batu bara serta area tempat batu bara terbuka atau memanas sendiri. Tumpangkan 1 % teratas pada citra Sentinel-2 warna asli dan footprint: halaman yang gelap dan datar di dekat jalan angkut atau pelabuhan adalah stockpile. Piksel panas yang bertahan di banyak citra perlu diperhatikan karena kemungkinan pembakaran spontan; piksel panas yang hanya sekali biasanya tanah gelap terbuka pada hari cerah.
+
+**3.** Lahan terbuka baru adalah lahan yang baru dibuka: perluasan pit, timbunan atau stockpile, yang dibatasi oleh izin dan persetujuan lingkungan. Lahan terbuka yang tumbuh kembali adalah rehabilitasi. Regulator biasanya memerlukan keduanya, tetapi keduanya menjawab pertanyaan berbeda: pembukaan baru memeriksa kepatuhan terhadap footprint yang diizinkan; pertumbuhan kembali memeriksa kewajiban reklamasi dan pencairan jaminan. Untuk penegakan hukum, lahan terbuka baru lebih penting.
+
+**4.** Mensyaratkan dua dari tiga tahun berturut-turut menghapus lonjakan dan penurunan satu tahun akibat kabut, sedikitnya citra cerah atau ambang yang terlewati secara kebetulan, sehingga deretnya menjadi halus dan hampir monoton, masuk akal untuk tambang yang beroperasi. Memasukkan kelas terbangun mempertahankan halaman yang diperkeras dan infrastruktur dalam footprint. Harganya: aturan ini tertinggal setahun dari perubahan nyata, dan tidak bisa melaporkan tahun pertama bukaan baru sampai tahun berikutnya mengonfirmasinya.
+
+**5.** Citra termal Landsat malam hari ada tetapi jarang dan harus dicari berdasarkan waktu akuisisi (sekitar pukul 22.00-23.00 waktu setempat di Indonesia, pada akuisisi malam yang tersedia). Pada malam hari, tanah terbuka yang dipanaskan matahari mendingin dan hilang; yang tetap panas adalah panas dengan sumber dari dalam: batu bara yang membara di stockpile atau lapisan, dan kadang pabrik pengolahan. Patch yang bertahan di malam hari adalah bukti terkuat pembakaran spontan.
+:::

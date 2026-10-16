@@ -76,3 +76,17 @@ Bab-bab di bagian ini mengikuti jalan sebuah hasil dari analisis ke pembacanya. 
 3. Di heatmap interaktif, cari baris paling kering untuk Kupang. Cari tahu apa yang terjadi pada tahun itu.
 4. Hitung ulang grafik risiko dengan "di bawah persentil ke-20 curah hujan Juli-Oktober kota itu sendiri", bukan "di bawah separuh normal". Apakah Kupang masih tampak aman?
 5. Tambahkan presipitasi ERA5-Land sebagai produk ketiga untuk Ambon. Apakah ia sepakat dengan CHIRPS dan IMERG tentang kenaikan setelah 2008?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Dengan sumbu y bebas, setiap kota memenuhi panelnya sendiri, sehingga Padang yang basah dan Kupang yang kering tampak sama besar, dan pembaca membandingkan bentuk seolah-olah jumlah. Perbandingan yang menyesatkan adalah antar-kota: seberapa lebih basah satu kota dari yang lain, dan seberapa besar penurunan musim kemarau dalam milimeter. Sumbu bebas hanya tepat bila pertanyaannya tentang bentuk musiman masing-masing kota, bukan tentang tingkatnya.
+
+**2.** Pilih kota dengan rezim yang berbeda, misalnya kota monsunal di Nusa Tenggara atau kota khatulistiwa berpuncak ganda. Letakkan di samping kota dengan rezim paling mirip (menurut waktu puncak dan musim kemaraunya), bukan menurut abjad: urutan panel harus mengelompokkan siklus musiman yang mirip agar mata membandingkan yang sejenis, dan yang berbeda menonjol karena posisinya.
+
+**3.** Temukan baris dengan total tahunan terendah untuk Kupang di heatmap, lalu cocokkan tahun itu dengan catatan El Niño dan Indian Ocean Dipole. Tahun El Niño kuat seperti 1997 dan 2015 membawa kekeringan parah ke Nusa Tenggara; kalau baris terkering adalah salah satunya, penjelasannya fase ENSO; kalau bukan, periksa IOD atau awal musim hujan yang terlambat pada tahun itu.
+
+**4.** Tidak dihitung di bab ini. Mendefinisikan kering sebagai di bawah persentil ke-20 curah hujan Juli-Oktober kota itu sendiri membuat ambangnya relatif: menurut konstruksinya sekitar 20 % tahun berada di bawahnya di setiap kota. Kupang, yang Juli-Oktobernya selalu sangat kering secara absolut, kemudian memperlihatkan tahun-tahun El Niño-nya dengan jelas di antara 20 % itu, sehingga tidak lagi tampak "aman". Definisi relatif menjawab "apakah tahun ini luar biasa kering untuk tempat ini"; setengah dari normal menjawab "apakah cukup kering untuk merugikan tanaman". Sebutkan pertanyaan mana yang Anda ajukan.
+
+**5.** Tidak dihitung di bab ini. Tambahkan presipitasi total `ECMWF/ERA5_LAND/MONTHLY_AGGR` untuk piksel Ambon dan hitung total tahunan 1991-2007 dan 2008-2024. Kalau ERA5-Land dan IMERG sama-sama menunjukkan lonjakan setelah 2008, kenaikan itu lebih mungkin nyata; kalau hanya CHIRPS yang menunjukkannya, curigai perubahan stasiun yang dipadukan CHIRPS di Indonesia timur. Perhatikan bahwa ERA5-Land adalah reanalisis dan cenderung meremehkan jumlah hujan konvektif, jadi bandingkan perubahannya, bukan tingkatnya.
+:::

@@ -91,3 +91,17 @@ Pelajaran umumnya: sebelum menyetel ambang, cek dulu apakah variabelnya memang b
 3. Jalankan metode ini pada citra kota "kebun_sawit_SPP" dari survei yang sama. Apa saja yang ikut terhitung padahal bukan sawit?
 4. Ulangi pemeriksaan silang dengan peta satelit 2020 (`p2020` sudah ada di tabel sel). Sel mana yang berubah, dan apakah drone menunjukkan sawit muda di sana?
 5. Digitasi setiap sawit secara manual di satu kotak 1 ha di blok yang tertanam (sekitar 140 titik). Ulangi sapuan sensitivitas dan hitung presisi serta recall yang sesungguhnya untuk setiap pengaturan. Apakah 5,5 m dan 0,30 masih yang terbaik?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Pada 4 m, dua maksimum bisa diterima di dalam satu tajuk besar, sehingga histogram jarak menumbuhkan lonjakan pada 4-6 m, jauh di bawah jarak tanam 8-9 m: lonjakan itu adalah penghitungan ganda, dan jumlahnya naik. Pada 7 m, sawit bertetangga pada grid rapat 8-9 m, atau tajuk yang saling tumpang tindih di blok tua, mulai tergabung dan jumlahnya turun, dengan histogram terpotong di bawah 7 m. 5,5 m menjaga histogram berpusat di dekat jarak tanam dengan sedikit jarak di bawah 6 m.
+
+**2.** Gambar poligon di Code Editor (atau di Python dengan poligon shapely), hitung deteksi di dalamnya dan bagi dengan luasnya dalam hektare. Pola tanam segitiga standar 9 m memuat sekitar 143 sawit per hektare. Jumlah yang mendekati 140 berarti blok terisi penuh; jauh di atas itu menandakan deteksi palsu semak; jauh di bawah menandakan celah (sawit mati atau hilang) atau tajuk yang tergabung. Periksa citra di tempat kepadatannya menyimpang.
+
+**3.** Di citra kota atau desa, detektor juga menghitung tajuk bulat lain yang terang dan berukuran mirip: pohon buah (mangga, rambutan), kelapa, pohon hias, semak, dan kadang sudut atap atau benda terang. Aturan maksimum tajuk tidak tahu bahwa sebuah tajuk adalah sawit; uji grid tanam di Bab [-@sec-palm-health] membuang sebagian besar dari itu karena tidak berada pada grid 9 m yang teratur.
+
+**4.** Bandingkan `p2020` dengan probabilitas 2024 per sel. Sel yang naik dari di bawah ke di atas 0,5 adalah kandidat tanaman baru atau muda; di citra drone, cari tajuk kecil pada grid teratur, lebih kecil dari ukuran sawit dewasa. Sel yang turun bisa berupa peremajaan (penebangan sawit tua) atau gangguan. Kalau drone memperlihatkan sawit muda di tempat probabilitasnya naik, kedua sumber sepakat tentang penanaman baru.
+
+**5.** Tidak dihitung di bab ini. Dengan sekitar 140 sawit yang didigitasi manual sebagai referensi, cocokkan setiap deteksi dengan referensi terdekat dalam jarak sekitar 3 m. Presisi = yang cocok / jumlah deteksi; recall = yang cocok / jumlah referensi. Jalankan sapuan jarak dan ambang, lalu pilih pengaturan yang memaksimalkan F1 (atau keseimbangan yang Anda butuhkan). 5,5 m dan 0,30 mungkin tetap terbaik, mungkin tidak; satu hektare adalah sampel kecil, jadi ulangi di kotak kedua sebelum mengubah default.
+:::
