@@ -26,6 +26,18 @@ Di UNSW Sydney, tiga orang mendukung proses belajar saya di bidang penginderaan 
 
 Semuanya berawal lebih dulu, di Geofisika Universitas Padjadjaran. **Professor Irwan Ary Dharmawan**, **Professor Eleonora Agustine** dan **Professor Muhammad Aufaristama** membimbing skripsi saya, dan merekalah yang pertama kali mengajari saya memandang Bumi dengan fisika dan memercayai sebuah pengukuran hanya setelah mengujinya. Kepada beliau bertiga, dan kepada seluruh dosen saya di Geofisika Universitas Padjadjaran dan di UNSW yang tidak dapat saya sebutkan satu per satu: terima kasih. Apa yang baik dalam buku ini banyak berutang kepada Bapak dan Ibu; kesalahannya adalah milik saya.
 
+**Professor Asep Harja** membimbing KKN (Kuliah Kerja Nyata) saya, masa ketika saya pertama kali bekerja bersama sebuah desa untuk persoalannya sendiri. Terima kasih, Prof.
+
+Dan untuk keluarga kecil saya. **Kesuma Fitri**, istri saya, yang selalu mendukung saya; anak-anak kami **Ibrahim Bagaskoro** dan **Yahya Kenzi Hendrawan**, yang bersama kami mengarungi ombak. Perjalanan kami masih berlanjut, dari tempat ke tempat, dari kesempatan ke kesempatan, dan semuanya adalah alasan untuk bersyukur atas keagungan ciptaan Allah SWT: betapa presisi dan teraturnya alam, dan betapa rumitnya bumi untuk dimodelkan, sehingga masih tersisa ruang yang luas bagi kita untuk terus berusaha memahaminya, dan bersyukur.
+
+> *Rabbanā mā khalaqta hādhā bāṭilan, subḥānaka.* "Ya Tuhan kami, tidaklah Engkau menciptakan semua ini sia-sia; Mahasuci Engkau." (QS Āli ʿImrān 3:191)
+>
+> *Fastabiqul khairāt.* "Maka berlomba-lombalah kamu dalam kebaikan." (QS Al-Baqarah 2:148)
+>
+> *Khairun nāsi anfaʿuhum lin nās.* "Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia." (HR ath-Thabrani, *al-Muʿjam al-Awsath* 5787; dinilai *hasan* oleh al-Albani)
+
+Buku ini adalah usaha kecil saya untuk keduanya: menjadi sedikit bermanfaat, dan berlomba bersama dalam kebaikan.
+
 ::: {.callout-tip}
 ## Edisi baca (Word)
 Teks dan pembahasan seluruh buku dalam satu dokumen Word, dengan tautan ke kode dan hasil setiap bab: [unduh (.docx)](../downloads/flux-pixels-planet-id.docx).

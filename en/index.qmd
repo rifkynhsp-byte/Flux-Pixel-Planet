@@ -26,6 +26,18 @@ At UNSW Sydney, three people supported my learning in remote sensing and GIS: **
 
 It began earlier, in Geophysics at Universitas Padjadjaran. **Professor Irwan Ary Dharmawan**, **Professor Eleonora Agustine** and **Professor Muhammad Aufaristama** supervised my undergraduate thesis, and they first taught me to look at the Earth with physics and to trust a measurement only after testing it. To them, and to all my lecturers in Geophysics at Universitas Padjadjaran and at UNSW, too many to name one by one: thank you. What is good in this book owes you a great deal; the mistakes are mine.
 
+**Professor Asep Harja** supervised my KKN (*Kuliah Kerja Nyata*), the community-service term in which I first worked with a village on its own problems. Thank you, Professor.
+
+And to my little family. **Kesuma Fitri**, my wife, who has always supported me; our sons **Ibrahim Bagaskoro** and **Yahya Kenzi Hendrawan**, who ride the waves with us. We are still on the journey, from place to place and from opportunity to opportunity, and all of it is reason to be grateful for the majesty of Allah's creation: how precise and ordered nature is, and how complex the Earth is to model, so that it leaves us plenty of room to keep trying to understand it, and to be grateful.
+
+> *Rabbanā mā khalaqta hādhā bāṭilan, subḥānaka.* "Our Lord, You did not create this aimlessly; exalted are You." (Āl ʿImrān 3:191)
+>
+> *Fastabiqū al-khayrāt.* "So race to all that is good." (Al-Baqarah 2:148)
+>
+> *Khayru an-nāsi anfaʿuhum li an-nās.* "The best of people are those most beneficial to people." (Hadith, at-Ṭabarānī, *al-Muʿjam al-Awsaṭ* 5787; graded *ḥasan* by al-Albānī)
+
+This book is my small attempt at both: to be of some use, and to race with others towards what is good.
+
 ::: {.callout-tip}
 ## Reading edition (Word)
 The text and discussion of the whole book as one Word document, with a link to the code and results of every chapter: [download (.docx)](../downloads/flux-pixels-planet-en.docx).
