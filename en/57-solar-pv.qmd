@@ -58,3 +58,13 @@ The same three questions (where, how big, since when) apply to every solar asset
 1. Replace the SWIR test with NDWI again and map what the script calls "new panels". Where does it go wrong?
 2. Extend the radar timeline to 2025. Has the signal stayed constant, or does it show maintenance or expansion?
 3. Find another floating solar plant, in Indonesia or elsewhere, and run the same method. Which step needs changing?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** With NDWI the panels count as water, because grey panels over water are dark in both green and near-infrared and NDWI stays positive. "New panels" (water in 2021, not water in 2024) then come out mostly in the wrong places: weed mats, fish-cage edges and turbid patches that changed between the two composites, about 44 ha in the first version, while the real 150-260 ha plant is largely missed. SWIR separates them because panels reflect SWIR while water absorbs it.
+
+**2.** Not computed in the chapter. Extend the monthly Sentinel-1 series over the footprint to 2025. A stable level near −15 dB means the arrays are unchanged; short dips can be maintenance or repositioning; a step up over a new area outside the footprint suggests expansion. Compare with open water nearby (about −21 dB) in the same months to separate plant changes from wind effects.
+
+**3.** Candidates include other reservoirs with floating solar in Indonesia and Southeast Asia. Usually the reservoir mask and the SWIR panel test transfer directly. What tends to change: the NDVI test (weed mats are less of a problem on clean reservoirs), the grow distance that joins array blocks (layouts differ), the fish-cage step (absent where there are no cages), and the dry-season window, which must be set for the local climate.
+:::

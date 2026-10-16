@@ -57,3 +57,13 @@ Luas hutan inti tidak menunjukkan apakah inti itu satu blok atau banyak. Tabel p
 1. Ganti jarak inti menjadi 100 m dan 1 km. Bagaimana kehilangan hutan inti di luar taman nasional berubah?
 2. Petakan blok hutan inti terbesar yang tersambung pada 2000 dan 2023. Apakah intinya sudah terpecah menjadi potongan-potongan terpisah?
 3. Ulangi untuk kawasan lindung lain yang Anda kenal, lalu bandingkan.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Dengan jarak inti 100 m jauh lebih banyak hutan terhitung sebagai inti, dan kehilangan hutan inti di luar taman nasional menjadi lebih kecil secara persentase, mendekati kehilangan hutan itu sendiri sebesar 12 %. Dengan 1 km sangat sedikit hutan yang terhitung inti bahkan pada 2000, dan yang tersisa kemungkinan hampir hilang seluruhnya di luar taman. Kehilangan hutan inti selalu lebih besar daripada kehilangan hutan, dan selisihnya membesar seiring jarak tepi, jadi sebutkan jaraknya dan alasan memilihnya untuk spesies yang dikaji.
+
+**2.** Labeli patch hutan inti yang terhubung (8-connected) pada 2000 dan 2023 dan petakan yang terbesar. Tabel patch sudah menyebutnya: 117 patch pada 2000 dengan yang terbesar 136.300 ha, 41 pada 2023 dengan yang terbesar 84.500 ha. Blok terbesar menyusut sekitar 38 %, dan turunnya jumlah patch sebagian besar karena patch kecil hilang, bukan bergabung. Peta memperlihatkan di mana blok yang tersisa menyempit, dan di sanalah koridor atau penegakan hukum paling penting.
+
+**3.** Pilih taman dengan batas yang jelas di WDPA, jalankan ketiga ukuran yang sama (luas hutan, hutan inti, foliage height diversity GEDI) di dalam dan di luar, dan sertakan pemeriksaan komoditas (probabilitas kopi, karet atau sawit) untuk "hutan" yang sebenarnya kebun. Bandingkan rasio kehilangan hutan inti terhadap kehilangan hutan: kawasan lindung yang mempertahankan hutan inti sementara hutan di luarnya terfragmentasi sedang menjalankan tugasnya, meskipun keduanya kehilangan sebagian luas.
+:::

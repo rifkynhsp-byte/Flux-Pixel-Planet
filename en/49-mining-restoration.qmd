@@ -64,3 +64,15 @@ Tin mining leaves ponds (*kolong*) where the ore was dug below the water table. 
 2. Compare pits mined before 2000 with pits mined after 2010. Does older mean more recovered?
 3. Use the ponds: how much new permanent water has mining created, from the JRC surface water dataset?
 4. Change the recovery threshold in the survival curve from NDVI 0.5 to 0.6. How much longer does it take for half of the land to recover?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. Lowering the threshold to 0.5 moves pixels from "early regrowth" into "green again", so the recovered share rises above 32 %, possibly well above, because much regrowth sits between 0.5 and 0.6. A result that moves a lot with the threshold is fragile: report the share at both, and lean on the GEDI height check, which shows that "green" land is still about 6 m tall against 16 m.
+
+**2.** The cohort table answers it: 42 % of land mined in 1995-1999 is green again, against 23 % for 2010-2015. Older pits are more recovered, but mostly because they have had longer. The survival curve, which compares pixels by years since mining rather than calendar year, is the fair test: if older cohorts recover faster at the same age, practice or site conditions differed; if not, age alone explains the table.
+
+**3.** Not computed in the chapter. Use JRC Global Surface Water: count pixels that were not water in the 1984-1994 occurrence or transition layers and are permanent water by 2021, inside the mined footprint. Mining ponds on Bangka (kolong) are numerous, so expect a substantial area, a few hundred hectares or more in the study area. They are part of the restoration question: some are used for water or fish, others are acidic and permanent.
+
+**4.** Not computed in the chapter. Raising the threshold to 0.6 makes recovery harder to reach, so the survival curve falls more slowly and the median time to recovery grows, possibly beyond the observation period (then it is reported as "more than N years"). The difference between the two medians shows how much the conclusion depends on what "recovered" means.
+:::

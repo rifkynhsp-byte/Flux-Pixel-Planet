@@ -52,3 +52,13 @@ The pipeline:
 1. Add a third map (for example ESRI 10 m land cover) and keep only pixels where all three agree. Does the 46 % on hard pixels improve, or does the labelled area just shrink?
 2. Mask the sea with a water-occurrence layer, then recompute the area table.
 3. Train on 2021 and 2024 consensus labels together. Does the change in built-up area between the two years get closer to what Dynamic World reports?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. Requiring three maps to agree removes more of the disputed pixels from the training set, so the labelled area shrinks further. The model then learns even fewer of the hard cases (village gardens, dry grassy fields), so the 46 % agreement on hard pixels is unlikely to improve much and may even fall; the score on easy pixels rises. Stricter consensus buys cleaner labels at the price of the very pixels that are hard.
+
+**2.** Not computed in the chapter. Mask pixels with low water occurrence offshore, or use a coastline and keep land only, before computing areas. Shallow sea and turbid coastal water sometimes get classed as other categories, especially bare or built near ports, so the area table becomes smaller and closer to land statistics. Check the water and bare rows first, which change most.
+
+**3.** Not computed in the chapter. Training on consensus labels from both years lets the model see each year's own examples, which reduces the drift between years in the embedding space. Expect the 2021-2024 built-up change to move closer to Dynamic World's, though it can still differ, because both maps carry their own definition of "built" (Dynamic World counts more of the peri-urban mosaic). Report the change with the definition and an interval, not as a single number.
+:::

@@ -81,3 +81,13 @@ ctg_classified <- classify_ground(ctg, csf())
 1. Buang jendela terbesar (65 m) dari penyaringnya. Di mana model medan gagal, dan kenapa?
 2. Coba ambang tanah 0,1 m dan 0,5 m. Bagaimana statistik DTM-nya berubah?
 3. Di R, klasifikasi file yang sama dengan `csf()` dan `pmf()`, lalu bandingkan kedua DTM-nya dengan DTM dari bab ini.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Tanpa jendela 65 m, objek yang lebih lebar dari jendela terbesar yang tersisa tidak pernah terhapus oleh opening: di bawah kanopi hutan yang menerus dan pada bangunan besar, filter mempertahankan titik kanopi atau atap sebagai tanah. DTM lalu menggembung ke atas puluhan meter di bawah kanopi terpadat, sementara tanah terbuka tidak terpengaruh. Jendela terbesar harus lebih lebar daripada objek terlebar, dan aturan itulah yang gagal.
+
+**2.** Tidak dihitung di bab ini. Pada 0,1 m lebih sedikit titik yang cukup dekat dengan permukaan interpolasi untuk dihitung sebagai tanah, sehingga himpunan tanah lebih bersih tetapi lebih jarang; di bawah kanopi DTM diinterpolasi melintasi celah yang lebih besar. Pada 0,5 m lebih banyak vegetasi rendah dan serasah yang diterima sebagai tanah, sehingga DTM sedikit lebih tinggi di area bersemak. Harapkan median selisih terhadap DTM yang diserahkan tetap kecil, sedangkan RMSE dan persentil ke-90 memperlihatkan perubahannya.
+
+**3.** Di lidR: `las <- classify_ground(las, csf())` dan, pada salinan baru, `classify_ground(las, pmf(ws = c(3, 9, 27, 65), th = c(0.3, 0.6, 1.5, 3)))`, lalu `rasterize_terrain(las, 1, tin())` untuk masing-masing dan kurangkan rasternya. CSF biasanya memberi DTM yang lebih halus dengan parameter lebih sedikit; PMF mengikuti patahan tajam lebih baik bila jendelanya cocok dengan medan. Bandingkan selisihnya terhadap DTM bab ini secara terpisah di tanah datar, di lereng dan di bawah kanopi.
+:::

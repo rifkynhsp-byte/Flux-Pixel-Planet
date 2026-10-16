@@ -67,3 +67,13 @@ If a map may end up in a court or a ministry, hold it to a higher standard than 
 1. Repeat Case A for another national park (for example Kerinci Seblat or Way Kambas). Is clearing inside the boundary rising or falling?
 2. For Case B, change the river buffer from 1 km to 300 m. How much of the bare ground is on the banks themselves?
 3. Pick one case from the table and make a one-page case sheet: coordinates, the two dated images, area, method, and what else it could be.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. Swap the WDPA name in the filter, keep the 5 km outside band, and chart yearly Hansen loss inside and outside. Report the trend with its context: a falling line inside the park can mean better protection or simply that little accessible forest is left near the edge; a rise after a quiet period, as at Leuser in 2024, is the signal enforcement should follow. Check that the boundary in WDPA matches the gazetted boundary before quoting numbers.
+
+**2.** Not computed in the chapter. With a 300 m buffer only bank-side bare ground is kept, so the area falls sharply. If most of the 2024 bare ground remains inside 300 m, the disturbance is concentrated on the banks, the classic pattern of riverside gold mining; if most of it disappears, the 1 km buffer was capturing fields, roads and settlements further from the river. The ratio tells you how much of the signal is the river itself.
+
+**3.** A good sheet has: the case ID and coordinates of the centroid and outline (with the datum, WGS 84); the area in hectares with the method's resolution; two dated Sentinel-2 images, before and after, with the dates written on them; the detection method in two sentences; the dating window rather than a single date; and a section "what else it could be" (legal concession, plantation replanting, natural landslide or flood scour) with the check that rules each out. Finish with what a field team should verify.
+:::

@@ -67,3 +67,13 @@ Kalau sebuah peta mungkin berakhir di pengadilan atau kementerian, tuntut standa
 1. Ulangi Kasus A untuk taman nasional lain (misalnya Kerinci Seblat atau Way Kambas). Apakah pembukaan di dalam batasnya naik atau turun?
 2. Untuk Kasus B, ubah sabuk sungai dari 1 km menjadi 300 m. Berapa bagian lahan terbuka yang berada tepat di tepi sungai?
 3. Pilih satu kasus dari tabel dan buat lembar kasus satu halaman: koordinat, dua citra bertanggal, luas, metode, dan kemungkinan penjelasan lain.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Ganti nama WDPA di filter, pertahankan sabuk 5 km di luar, lalu buat grafik kehilangan Hansen tahunan di dalam dan di luar. Laporkan trennya beserta konteks: garis yang turun di dalam taman bisa berarti perlindungan membaik atau sekadar tinggal sedikit hutan yang mudah dijangkau di dekat tepi; kenaikan setelah periode tenang, seperti di Leuser pada 2024, adalah sinyal yang harus diikuti penegakan hukum. Pastikan batas di WDPA sesuai dengan batas penetapan sebelum mengutip angka.
+
+**2.** Tidak dihitung di bab ini. Dengan buffer 300 m, hanya tanah terbuka di tepi sungai yang tersisa, sehingga luasnya turun tajam. Kalau sebagian besar tanah terbuka 2024 tetap berada di dalam 300 m, gangguan itu terpusat di tepi sungai, pola klasik penambangan emas di sungai; kalau sebagian besar hilang, buffer 1 km ikut menangkap ladang, jalan dan permukiman yang lebih jauh dari sungai. Rasionya memberi tahu seberapa besar sinyal itu berasal dari sungai sendiri.
+
+**3.** Lembar yang baik memuat: ID kasus serta koordinat centroid dan batasnya (dengan datum, WGS 84); luas dalam hektare dengan resolusi metodenya; dua citra Sentinel-2 bertanggal, sebelum dan sesudah, dengan tanggal tertulis di atasnya; metode deteksi dalam dua kalimat; rentang waktu, bukan satu tanggal; dan bagian "apa lagi kemungkinannya" (konsesi legal, peremajaan kebun, longsor alami atau gerusan banjir) beserta pemeriksaan yang menyingkirkan masing-masing. Akhiri dengan apa yang harus diverifikasi tim lapangan.
+:::

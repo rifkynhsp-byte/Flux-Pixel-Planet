@@ -57,3 +57,13 @@ Core-forest area does not say whether the core is one block or many. The patch t
 1. Change the core distance to 100 m and to 1 km. How does the core-forest loss outside the park change?
 2. Map the largest connected block of core forest in 2000 and 2023. Has the core been split into separate pieces?
 3. Repeat for another protected area you know, and compare.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. With a 100 m core distance much more forest counts as core, and core loss outside the park becomes smaller in percentage terms, closer to the 12 % loss of forest itself. With 1 km very little forest counts as core even in 2000, and what remains is likely to vanish almost entirely outside the park. Core-forest loss is always larger than forest loss, and the gap grows with the edge distance, so state the distance and why it was chosen for the species in question.
+
+**2.** Label connected patches of core forest (8-connected) in 2000 and 2023 and map the largest. The patch table already says it: 117 patches in 2000 with the largest at 136,300 ha, 41 in 2023 with the largest at 84,500 ha. The largest block shrank by about 38 %, and the drop in patch count is mostly small patches disappearing rather than merging. Mapping shows where the remaining block is pinched, which is where a corridor or enforcement matters most.
+
+**3.** Choose a park with a clear boundary in WDPA, run the same three measures (forest amount, core forest, GEDI foliage height diversity) inside and outside, and include the commodity check (coffee, rubber or oil palm probability) for "forest" that is really plantation. Compare the ratio of core loss to forest loss: a protected area that keeps core forest while forest outside fragments is doing its job, even if both lose some area.
+:::

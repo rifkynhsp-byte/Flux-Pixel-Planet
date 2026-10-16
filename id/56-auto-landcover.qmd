@@ -52,3 +52,13 @@ Alurnya:
 1. Tambahkan peta ketiga (misalnya ESRI 10 m land cover) dan ambil hanya piksel yang disepakati ketiganya. Apakah angka 46 % di piksel sulit membaik, atau luas yang berlabel saja yang menyusut?
 2. Mask laut dengan lapisan kejadian air, lalu hitung ulang tabel luas.
 3. Latih dengan label konsensus 2021 dan 2024 sekaligus. Apakah perubahan lahan terbangun di antara dua tahun itu mendekati angka Dynamic World?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Mensyaratkan tiga peta sepakat membuang lebih banyak piksel yang diperdebatkan dari data latih, sehingga area berlabel menyusut lagi. Model lalu belajar dari kasus sulit yang lebih sedikit (kebun desa, ladang kering berumput), sehingga kesesuaian 46 % pada piksel sulit kecil kemungkinannya membaik dan bahkan bisa turun; skor pada piksel mudah naik. Konsensus yang lebih ketat membeli label yang lebih bersih dengan harga piksel-piksel yang justru sulit.
+
+**2.** Tidak dihitung di bab ini. Mask piksel dengan kemunculan air yang rendah di laut lepas, atau gunakan garis pantai dan pertahankan daratan saja, sebelum menghitung luas. Laut dangkal dan perairan pantai yang keruh kadang masuk ke kategori lain, terutama lahan terbuka atau terbangun di dekat pelabuhan, sehingga tabel luas menjadi lebih kecil dan mendekati statistik daratan. Periksa baris air dan lahan terbuka lebih dulu, yang paling berubah.
+
+**3.** Tidak dihitung di bab ini. Melatih dengan label konsensus dari kedua tahun memungkinkan model melihat contoh setiap tahun, sehingga pergeseran antar-tahun di ruang embedding berkurang. Harapkan perubahan lahan terbangun 2021-2024 mendekati angka Dynamic World, meskipun masih bisa berbeda, karena kedua peta membawa definisi "terbangun"-nya sendiri (Dynamic World menghitung lebih banyak mosaik pinggiran kota). Laporkan perubahannya beserta definisi dan interval, bukan satu angka.
+:::

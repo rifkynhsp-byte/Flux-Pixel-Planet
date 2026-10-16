@@ -81,3 +81,13 @@ ctg_classified <- classify_ground(ctg, csf())
 1. Drop the largest window (65 m) from the filter. Where does the terrain model fail, and why?
 2. Try a ground threshold of 0.1 m and 0.5 m. How do the DTM statistics change?
 3. In R, classify the same file with `csf()` and `pmf()` and compare the two DTMs with the one from this chapter.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. Without the 65 m window, objects wider than the largest remaining window are never opened away: under continuous forest canopy and on large buildings the filter keeps canopy or roof points as ground. The DTM then bulges upward by tens of metres under the densest canopy, while open ground is unaffected. The largest window must be wider than the widest object, and that rule is what fails.
+
+**2.** Not computed in the chapter. At 0.1 m fewer points are close enough to the interpolated surface to count as ground, so the ground set is cleaner but sparser; under canopy the DTM is interpolated over larger gaps. At 0.5 m more low vegetation and debris are accepted as ground, so the DTM sits slightly high in shrubby areas. Expect the median difference against the delivered DTM to stay small and the RMSE and the 90th percentile to show the change.
+
+**3.** In lidR: `las <- classify_ground(las, csf())` and, on a fresh copy, `classify_ground(las, pmf(ws = c(3, 9, 27, 65), th = c(0.3, 0.6, 1.5, 3)))`, then `rasterize_terrain(las, 1, tin())` for each and difference the rasters. CSF usually gives a smoother DTM with fewer parameters; PMF follows sharp breaks better when its windows suit the terrain. Compare the differences against this chapter's DTM on flat ground, on slopes and under canopy separately.
+:::

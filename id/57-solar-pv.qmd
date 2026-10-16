@@ -58,3 +58,13 @@ Tiga pertanyaan yang sama (di mana, seberapa besar, sejak kapan) berlaku untuk s
 1. Ganti lagi uji SWIR dengan NDWI dan petakan apa yang disebut skrip sebagai "panel baru". Di mana kelirunya?
 2. Perpanjang lini waktu radar sampai 2025. Apakah sinyalnya tetap, atau menunjukkan perawatan atau perluasan?
 3. Cari PLTS terapung lain, di Indonesia atau di tempat lain, dan jalankan metode yang sama. Langkah mana yang perlu diubah?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Dengan NDWI, panel terhitung sebagai air, karena panel abu-abu di atas air gelap baik di hijau maupun inframerah dekat dan NDWI tetap positif. "Panel baru" (air pada 2021, bukan air pada 2024) kemudian sebagian besar muncul di tempat yang salah: hamparan gulma, tepi keramba dan bercak keruh yang berubah di antara kedua composite, sekitar 44 ha pada versi pertama, sementara pembangkit sebenarnya seluas 150-260 ha sebagian besar terlewat. SWIR memisahkannya karena panel memantulkan SWIR sementara air menyerapnya.
+
+**2.** Tidak dihitung di bab ini. Perpanjang deret bulanan Sentinel-1 di atas footprint hingga 2025. Tingkat yang stabil sekitar −15 dB berarti susunan panel tidak berubah; penurunan singkat bisa berupa pemeliharaan atau pengaturan ulang posisi; kenaikan bertahap di area baru di luar footprint menandakan perluasan. Bandingkan dengan air terbuka di dekatnya (sekitar −21 dB) pada bulan yang sama untuk memisahkan perubahan pembangkit dari efek angin.
+
+**3.** Kandidatnya antara lain waduk lain dengan PLTS terapung di Indonesia dan Asia Tenggara. Biasanya mask waduk dan uji panel SWIR bisa langsung dipakai. Yang cenderung berubah: uji NDVI (hamparan gulma kurang menjadi masalah di waduk yang bersih), jarak pembesaran yang menyatukan blok panel (tata letaknya berbeda), langkah keramba (tidak ada bila tidak ada keramba), dan jendela musim kemarau, yang harus diatur sesuai iklim setempat.
+:::
