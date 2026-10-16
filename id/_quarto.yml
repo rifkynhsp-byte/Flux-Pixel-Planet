@@ -138,6 +138,7 @@ book:
         - 40-water-cycle.qmd
         - 52-bathymetry.qmd
         - 62-mangrove-change.qmd
+        - 77-oil-ships.qmd
     - part: "Bagian XII: Energi Surya"
       chapters:
         - 64-solar-resource.qmd

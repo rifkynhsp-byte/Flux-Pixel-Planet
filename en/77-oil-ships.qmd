@@ -1,0 +1,140 @@
+# Oil and Ships Under Radar: Balikpapan 2018 and the Malacca Strait {#sec-oil-ships}
+
+<!-- run-links -->
+::: {.callout-tip .run-links appearance="simple" icon="false"}
+**Run this chapter**
+
+- `ch77_oil_ships` &nbsp; [![Open in Code Editor](https://img.shields.io/badge/Open%20in-Earth%20Engine%20Code%20Editor-1a73e8)](https://code.earthengine.google.com/?scriptPath=users/rifkynauvalhsp/Fullstack-Remote-Sensing:ch77_oil_ships)
+
+[![Add all book scripts to your Code Editor (once)](https://img.shields.io/badge/Add%20all%20book%20scripts-to%20your%20Code%20Editor-34a853)](https://code.earthengine.google.com/?accept_repo=users/rifkynauvalhsp/Fullstack-Remote-Sensing) &nbsp; *First time? Appendix A shows how to sign in to Earth Engine and Colab.*
+:::
+<!-- /run-links -->
+
+
+::: {.chapter-goal}
+#### In this chapter
+Radar sees the sea through cloud and at night, and two things stand out on it: oil, which leaves a dark patch, and ships, which shine. You will map the 2018 Balikpapan Bay oil spill from one Sentinel-1 pass and tell the slick from look-alikes, detect ships in the Malacca Strait with a CFAR test, and turn twelve-day snapshots into an estimate of ships per day that you check against the official count. The analysis runs in R, because it outgrows what Earth Engine can do interactively.
+:::
+
+## What radar sees on the sea
+
+Sentinel-1 measures how much of its microwave pulse comes back (P5). The open sea returns a little, because wind raises small waves of a few centimetres, the size of the radar wavelength, and those scatter energy back. Two things change that:
+
+- **Oil** forms a thin film that damps the small waves. The sea under it goes smooth, sends the pulse away like a mirror, and appears **dark**.
+- **A ship** is steel standing above the water. Its hull and superstructure send the pulse straight back and appear as a **bright point**, often 10 to 20 dB brighter than the sea around it.
+
+Both are relative signals. Oil is dark only compared with the sea around it, and that sea is darker in light wind and brighter in strong wind. A ship is bright only compared with its own patch of sea. Every method in this chapter therefore compares a pixel with its surroundings, not with a fixed number.
+
+## Part 1. The Balikpapan Bay oil spill, 31 March 2018
+
+On 31 March 2018 an undersea pipeline from the Pertamina refinery in Balikpapan, East Kalimantan, broke. Oil spread out of the bay into the Makassar Strait and caught fire; five people died. The Ministry of Environment and Forestry reported about 130 km² of slick on 4 April. Sentinel-1 passed over the bay on **2 April 2018 at 05:50 local time**, two days after the break and before dawn, when no optical satellite could see anything.
+
+{{< include _snippets/ch77_oil_ships.qmd >}}
+
+{{< include _snippets/ch77_oil_ships__ch77-balikpapan-vv.qmd >}}
+
+### Dark spots against the surrounding sea
+
+The method follows the three steps every slick detector shares [@brekke2005oilspill]: find dark spots, describe them, and decide which are oil.
+
+1. **Smooth the speckle.** A 5 × 5 mean (125 m) removes the grain of the radar image.
+2. **Compare with the sea around.** A pixel is dark if it is more than 3 dB below the median of the sea within about 10 km, and darker than −24 dB in absolute terms.
+3. **Keep connected areas of at least 0.5 km²** and measure each: its area, its contrast with the sea, and its shape.
+
+The window in step 2 is the decision that matters. The first version of this script used a 2.5 km window and found almost nothing: the main slick is about 15 km wide, so a small window sits *inside* the slick, and the slick looks normal against itself. A background must reach clean sea beyond the largest feature you want to find.
+
+{{< include _snippets/ch77_oil_ships__ch77-slick-detected.qmd >}}
+
+{{< include _snippets/ch77_oil_ships__ch77-slick-patches.qmd >}}
+
+Two patches qualify as likely oil: about 41 km² leaving the bay mouth and running east along the coast, and about 13 km² south-west of the bay mouth, **about 54 km² in all** (R 54.2 km², Python 53.6 km²; the small difference is how the two treat edge pixels). Both have a contrast of about 6 dB. The small patch to the south-east, out in the open strait, is classed "check": it is dark but small and compact, and a calm patch behind a squall or a natural film looks the same.
+
+### Look-alikes, and why the number is lower than the ministry's
+
+Not every dark patch is oil. Calm water in the lee of land, rain cells, upwelling and natural films from algae all damp the waves and look dark. The features in the table are what separate them: oil slicks from a source are usually large, sharply bounded and elongated along the current (low compactness), with high contrast; low-wind areas are diffuse, with a weak contrast and soft edges. With a single image, these rules make a candidate, not a verdict.
+
+Our 54 km² is less than half the 130 km² reported, and that is not a contradiction. The ministry's figure is for 4 April, two days later, after the oil had spread. Thin sheen along the coast, visible in the image as a fainter dark band, is darker than the sea by less than 3 dB and is not counted. And the threshold sets the edge: the likely-oil area is 69 km² at 2 dB, 54 km² at 3 dB and 40 km² at 4 dB. The honest report is "at least 54 km² of thick, high-contrast oil on the morning of 2 April".
+
+::: {.callout-important}
+## Scientific integrity: a dark patch is a hypothesis
+A radar slick map is evidence for an investigator, not proof for a court. Report the date and time of the pass, the threshold and window, and which patches you classed as look-alikes and why. For enforcement, the next step is a second pass, an aircraft or a vessel, and the wind at the time of the image: below about 3 m/s the whole sea goes dark and nothing can be separated, and above about 10-12 m/s waves break up and hide the slick.
+:::
+
+## Part 2. Ships in the Malacca Strait
+
+The Strait of Malacca carries a large share of the world's sea trade. Malaysia's Marine Department records every vessel over 300 gross tonnes that reports to its STRAITREP system at One Fathom Bank and Iyu Kecil: **102,525 transits in 2025, about 281 a day**. That number is a rare gift for remote sensing: an official count to test a satellite estimate against.
+
+The study area is a **gate across the strait**, 2.75 to 3.05° N and 100.2 to 101.15° E, open water from the Sumatran side to the Malaysian side near One Fathom Bank. In 2025, 29 ascending Sentinel-1 passes covered it completely, all at 19:34 local time, **one every twelve days**.
+
+{{< include _snippets/ch77_oil_ships__ch77-malacca-vh.qmd >}}
+
+### CFAR: bright against the local sea
+
+A CFAR detector (constant false alarm rate) compares each pixel with the sea around it, so the test adapts to the wind. Here a pixel is a ship candidate when its VH backscatter is more than **10 dB above the median sea within about 1.5 km**. Two further rules turned out to be necessary, and both were found by looking at the result rather than trusting it.
+
+**An absolute floor.** The first run counted 438 "ships" per pass, about 5,200 a day, eighteen times the official count. The detection map showed why: a north-south stripe of detections across the strait, which no shipping lane follows. Calm sea in VH sits close to the sensor's noise floor, and the noise is not even across the swath; where sub-swaths meet, noise is a little higher and passes a relative test alone. A steel hull is bright in absolute terms too, so the detector also requires **VH above −18 dB**. The stripe vanished, and the count fell to about 42 per pass.
+
+**A minimum size and fixed targets.** Single pixels are mostly noise, so a detection needs at least 3 pixels of 20 m. Platforms, navigation lights, fish-attracting structures and ships at long anchor appear pass after pass in the same place; any 500 m cell lit in more than a quarter of the passes is removed as a fixed target, not traffic.
+
+{{< include _snippets/ch77_oil_ships__ch77-lanes.qmd >}}
+
+{{< include _snippets/ch77_oil_ships__ch77-ships-per-pass.qmd >}}
+
+The lanes appear from the detections alone. Between 26 and 60 ships were in the gate at each pass, about 42 on a typical evening.
+
+### Why this part runs in R
+
+The Earth Engine version of the ship count did not finish. An interactive request timed out over a 20 km slice, and a batch export over all 29 passes ran for three hours and failed with "computation timed out". Counting objects needs every pixel at full resolution at once, the kind of task Earth Engine is least suited to. So Earth Engine does what it is best at, cutting the 29 scenes out of the archive (two halves of about 8 MB each per pass), and the detection runs locally in R with `terra`, about two minutes for all 58 files. Knowing when to leave the platform is part of using it well.
+
+## From snapshots to ships per day
+
+A satellite sees the gate for an instant every twelve days. It cannot follow a ship. It can count how many are in the gate at that moment, and traffic engineering has a rule that turns a count into a flow:
+
+$$q = k \times v$$
+
+Flow $q$ (ships per hour) equals density $k$ (ships per kilometre of lane) times speed $v$ (kilometres per hour). The density is the count divided by the length of path each ship travels inside the gate. Traffic runs north-west to south-east at about 135°, so a ship crossing the 33.2 km tall gate travels $33.2 / \cos 45° \approx 46.9$ km inside it. With 42 ships, a speed of 13 knots (24 km/h) and 24 hours:
+
+$$q = \frac{42}{46.9 \text{ km}} \times 24 \text{ km/h} \times 24 \text{ h} \approx 520 \text{ ships per day}$$
+
+Snapshots twelve days apart are enough because traffic through a strait is close to steady: on a typical evening the gate holds a similar number of ships, and averaging 29 evenings averages over weekdays, seasons and weather. The interval comes from resampling the 29 passes and drawing the speed from 10 to 16 knots in 5,000 Monte Carlo runs.
+
+{{< include _snippets/ch77_oil_ships__ch77-flow.qmd >}}
+
+### What counts as a ship?
+
+The radar estimate is about 520 a day, nearly twice STRAITREP's 281. That gap is mostly a difference of definition, not an error. Radar sees every hull it can resolve, including fishing boats, tugs, barges and local ferries; STRAITREP counts only vessels over 300 GT that report. Raising the minimum target size is a rough stand-in for a larger ship, and the estimate falls through the official figure between 20 and 40 pixels. That is consistent with the definition, not a calibration: radar spreads a hull's return over neighbouring pixels, so bright area is not length, and only matching the detections with AIS ship positions could turn pixels into tonnage.
+
+::: {.callout-important}
+## Scientific integrity: say which ships you counted
+"Ships per day" without a definition is not a result. Report the detector (threshold, floor, minimum size), the time of day of the passes, the fixed-target rule, the speed assumption, and the interval. Anchored and slow vessels add to the density but not to the flow, so the estimate is an upper bound for moving traffic of the sizes it can see. The same method run on a different gate, at a different time of day, measures a different thing.
+:::
+
+## Limits
+
+- **One pass per twelve days, always at 19:34.** Night-time traffic patterns may differ from the 24-hour mean; a second orbit (descending, morning) would test that.
+- **The sea mask is coarse.** MODIS water at 250 m, shrunk by 1 km, keeps detections off the coast but also drops ships in narrow approaches and harbours.
+- **Speed is assumed, not measured.** The interval carries 10 to 16 knots; a real AIS speed distribution would narrow it.
+- **The slick map is one image.** Without wind data and a second pass, the classes are candidates.
+- **"Dark vessels".** Comparing radar detections with AIS reports finds ships that are not transmitting, one of the most valuable uses of this method, but it needs AIS data, which is not open in Earth Engine.
+
+## Exercises {.unnumbered}
+
+1. Change the slick contrast threshold from 3 dB to 2 dB and to 4 dB. How does the likely-oil area change, and what does that tell you about reporting a single number?
+2. Repeat the slick detection with a 2.5 km background window (`w = 11` instead of 41 in the R tab). Which patch disappears, and why?
+3. Run the ship detector without the −18 dB floor on one pass and map the detections. Find the stripe. Which other places produce false ships?
+4. Use 11 knots and 15 knots as fixed speeds instead of the random draw. How much of the uncertainty in ships per day comes from speed, and how much from the passes?
+5. Move the gate north to 3.3 to 3.6° N. Does the estimate of ships per day change? It should not, if traffic is steady and the method is right: explain any difference.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** The likely-oil area is 68.6 km² at 2 dB, 53.6 km² at 3 dB and 40.2 km² at 4 dB (Python tab): the fainter sheen along the coast joins at 2 dB, and only the darkest core is left at 4 dB. Report it as "54 km² at 3 dB (40-69 km² for 2-4 dB)". A single number hides that the edge of a slick is a choice, not a line on the water.
+
+**2.** The large patch at the bay mouth shrinks to its edges or disappears: inside a 15 km slick a 2.5 km window takes its median from oil, so the slick is compared with itself and looks normal. Small, isolated dark spots survive, because their window still reaches clean sea. The rule: the background window must be larger than the largest feature you want to find.
+
+**3.** Without the floor the count rises several-fold and a north-south band of detections appears where sub-swaths meet, along with clusters near coasts (wave breaking, shallow banks) and in very calm patches where the sea is at the noise floor. All of them pass a relative test because the background is so dark. A real hull is bright in absolute terms, which is what the floor encodes.
+
+**4.** Ships per day is proportional to speed, so 11 knots gives about 15 % less and 15 knots about 15 % more than 13 knots: roughly 440 and 600 a day. The pass-to-pass spread (26 to 60 ships) gives an interval of similar width. Both matter; a measured AIS speed distribution would remove most of the speed part.
+
+**5.** If traffic is steady and the path length is right, the estimate should be similar. Differences come from the geometry (the lanes may run at a different angle there, so the path length changes), from ships turning towards Port Klang or Port Dickson, which adds local traffic, and from anchorages. A large difference means one of the assumptions in $q = k \times v$ does not hold at that gate.
+:::

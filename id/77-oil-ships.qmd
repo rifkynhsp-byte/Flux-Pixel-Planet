@@ -1,0 +1,140 @@
+# Minyak dan Kapal di Bawah Radar: Balikpapan 2018 dan Selat Malaka {#sec-oil-ships}
+
+<!-- run-links -->
+::: {.callout-tip .run-links appearance="simple" icon="false"}
+**Jalankan bab ini**
+
+- `ch77_oil_ships` &nbsp; [![Buka di Code Editor](https://img.shields.io/badge/Open%20in-Earth%20Engine%20Code%20Editor-1a73e8)](https://code.earthengine.google.com/?scriptPath=users/rifkynauvalhsp/Fullstack-Remote-Sensing:ch77_oil_ships)
+
+[![Tambahkan semua skrip buku ke Code Editor Anda (sekali saja)](https://img.shields.io/badge/Add%20all%20book%20scripts-to%20your%20Code%20Editor-34a853)](https://code.earthengine.google.com/?accept_repo=users/rifkynauvalhsp/Fullstack-Remote-Sensing) &nbsp; *Baru pertama kali? Lampiran A menjelaskan cara masuk ke Earth Engine dan Colab.*
+:::
+<!-- /run-links -->
+
+
+::: {.chapter-goal}
+#### Dalam bab ini
+Radar melihat laut menembus awan dan di malam hari, dan dua hal menonjol di sana: minyak, yang meninggalkan bercak gelap, dan kapal, yang tampak berkilau. Anda akan memetakan tumpahan minyak Teluk Balikpapan 2018 dari satu lintasan Sentinel-1 dan membedakan lapisan minyak dari look-alike, mendeteksi kapal di Selat Malaka dengan uji CFAR, lalu mengubah potret setiap dua belas hari menjadi perkiraan jumlah kapal per hari yang Anda periksa terhadap hitungan resmi. Analisisnya berjalan di R, karena ukurannya melampaui apa yang bisa dikerjakan Earth Engine secara interaktif.
+:::
+
+## Apa yang dilihat radar di laut
+
+Sentinel-1 mengukur seberapa banyak pulsa gelombang mikronya yang kembali (P5). Laut terbuka memantulkan sedikit, karena angin membangkitkan riak kecil berukuran beberapa sentimeter, seukuran panjang gelombang radar, dan riak itu menghamburkan energi kembali. Dua hal mengubahnya:
+
+- **Minyak** membentuk lapisan tipis yang meredam riak kecil. Laut di bawahnya menjadi licin, memantulkan pulsa menjauh seperti cermin, dan tampak **gelap**.
+- **Kapal** adalah baja yang berdiri di atas air. Lambung dan bangunan atasnya memantulkan pulsa langsung kembali dan tampak sebagai **titik terang**, sering 10 sampai 20 dB lebih terang daripada laut di sekitarnya.
+
+Keduanya adalah sinyal relatif. Minyak tampak gelap hanya dibanding laut di sekitarnya, dan laut itu lebih gelap saat angin lemah dan lebih terang saat angin kencang. Kapal tampak terang hanya dibanding petak lautnya sendiri. Karena itu setiap metode di bab ini membandingkan piksel dengan sekitarnya, bukan dengan satu angka tetap.
+
+## Bagian 1. Tumpahan minyak Teluk Balikpapan, 31 Maret 2018
+
+Pada 31 Maret 2018 pipa bawah laut dari kilang Pertamina di Balikpapan, Kalimantan Timur, patah. Minyak menyebar keluar teluk ke Selat Makassar dan terbakar; lima orang meninggal. Kementerian Lingkungan Hidup dan Kehutanan melaporkan sekitar 130 km² lapisan minyak pada 4 April. Sentinel-1 melintas di atas teluk pada **2 April 2018 pukul 05.50 waktu setempat**, dua hari setelah pipa patah dan sebelum fajar, ketika tidak ada satelit optik yang bisa melihat apa pun.
+
+{{< include _snippets/ch77_oil_ships.qmd >}}
+
+{{< include _snippets/ch77_oil_ships__ch77-balikpapan-vv.qmd >}}
+
+### Bercak gelap dibanding laut di sekitarnya
+
+Metodenya mengikuti tiga langkah yang dimiliki setiap detektor lapisan minyak [@brekke2005oilspill]: temukan bercak gelap, gambarkan cirinya, lalu putuskan mana yang minyak.
+
+1. **Haluskan speckle.** Rata-rata 5 × 5 (125 m) menghilangkan bintik-bintik citra radar.
+2. **Bandingkan dengan laut di sekitarnya.** Sebuah piksel gelap bila lebih dari 3 dB di bawah median laut dalam radius sekitar 10 km, dan lebih gelap dari −24 dB secara absolut.
+3. **Simpan area terhubung minimal 0,5 km²** dan ukur masing-masing: luas, kontras terhadap laut, dan bentuknya.
+
+Jendela pada langkah 2 adalah keputusan yang paling menentukan. Versi pertama skrip ini memakai jendela 2,5 km dan hampir tidak menemukan apa-apa: lapisan utama selebar sekitar 15 km, sehingga jendela kecil berada *di dalam* lapisan minyak, dan lapisan itu tampak normal dibanding dirinya sendiri. Latar belakang harus menjangkau laut bersih di luar objek terbesar yang ingin Anda temukan.
+
+{{< include _snippets/ch77_oil_ships__ch77-slick-detected.qmd >}}
+
+{{< include _snippets/ch77_oil_ships__ch77-slick-patches.qmd >}}
+
+Dua patch memenuhi syarat sebagai kemungkinan minyak: sekitar 41 km² yang keluar dari mulut teluk dan memanjang ke timur di sepanjang pantai, dan sekitar 13 km² di barat daya mulut teluk, **sekitar 54 km² seluruhnya** (R 54,2 km², Python 53,6 km²; selisih kecilnya berasal dari cara keduanya memperlakukan piksel tepi). Keduanya memiliki kontras sekitar 6 dB. Patch kecil di tenggara, di selat terbuka, diberi kelas \"periksa\": gelap tetapi kecil dan kompak, dan petak tenang di belakang badai atau lapisan alami tampak sama.
+
+### Look-alike, dan mengapa angkanya lebih kecil daripada angka kementerian
+
+Tidak setiap bercak gelap adalah minyak. Air tenang di balik daratan, sel hujan, upwelling dan lapisan alami dari alga semuanya meredam riak dan tampak gelap. Ciri-ciri di tabel itulah yang memisahkannya: lapisan minyak dari satu sumber biasanya luas, berbatas tegas dan memanjang mengikuti arus (compactness rendah), dengan kontras tinggi; area berangin lemah bersifat kabur, kontrasnya lemah dan tepinya lembut. Dengan satu citra, aturan ini menghasilkan kandidat, bukan vonis.
+
+Angka 54 km² kita kurang dari setengah 130 km² yang dilaporkan, dan itu bukan pertentangan. Angka kementerian untuk 4 April, dua hari kemudian, setelah minyak menyebar. Lapisan tipis di sepanjang pantai, yang terlihat di citra sebagai pita gelap yang lebih samar, lebih gelap dari laut kurang dari 3 dB dan tidak terhitung. Dan ambang menentukan tepinya: luas kemungkinan minyak 69 km² pada 2 dB, 54 km² pada 3 dB dan 40 km² pada 4 dB. Laporan yang jujur adalah \"setidaknya 54 km² minyak tebal berkontras tinggi pada pagi 2 April\".
+
+::: {.callout-important}
+## Integritas ilmiah: bercak gelap adalah hipotesis
+Peta lapisan minyak dari radar adalah bukti bagi penyelidik, bukan bukti bagi pengadilan. Laporkan tanggal dan jam lintasan, ambang dan jendelanya, serta patch mana yang Anda golongkan look-alike dan alasannya. Untuk penegakan hukum, langkah berikutnya adalah lintasan kedua, pesawat atau kapal, dan data angin pada saat citra diambil: di bawah sekitar 3 m/s seluruh laut menjadi gelap dan tidak ada yang bisa dipisahkan, dan di atas sekitar 10-12 m/s gelombang pecah dan menyembunyikan lapisan minyak.
+:::
+
+## Bagian 2. Kapal di Selat Malaka
+
+Selat Malaka membawa sebagian besar perdagangan laut dunia. Jabatan Laut Malaysia mencatat setiap kapal di atas 300 gross tonnage yang melapor ke sistem STRAITREP di One Fathom Bank dan Iyu Kecil: **102.525 pelintasan pada 2025, sekitar 281 per hari**. Angka itu adalah hadiah langka bagi penginderaan jauh: hitungan resmi untuk menguji perkiraan satelit.
+
+Wilayah kajiannya adalah **gerbang yang melintang selat**, 2,75 sampai 3,05° LU dan 100,2 sampai 101,15° BT, perairan terbuka dari sisi Sumatra ke sisi Malaysia di dekat One Fathom Bank. Pada 2025, 29 lintasan ascending Sentinel-1 mencakupnya secara penuh, semuanya pukul 19.34 waktu setempat, **satu setiap dua belas hari**.
+
+{{< include _snippets/ch77_oil_ships__ch77-malacca-vh.qmd >}}
+
+### CFAR: terang dibanding laut setempat
+
+Detektor CFAR (constant false alarm rate) membandingkan setiap piksel dengan laut di sekitarnya, sehingga ujinya menyesuaikan diri dengan angin. Di sini sebuah piksel menjadi kandidat kapal bila backscatter VH-nya lebih dari **10 dB di atas median laut dalam radius sekitar 1,5 km**. Dua aturan lagi ternyata diperlukan, dan keduanya ditemukan dengan melihat hasilnya, bukan dengan mempercayainya.
+
+**Batas bawah absolut.** Run pertama menghitung 438 \"kapal\" per lintasan, sekitar 5.200 per hari, delapan belas kali hitungan resmi. Peta deteksinya memperlihatkan sebabnya: jalur deteksi utara-selatan melintang selat, yang tidak diikuti alur pelayaran mana pun. Laut tenang pada VH berada dekat noise floor sensor, dan noise itu tidak merata di sepanjang swath; di tempat sub-swath bertemu, noise sedikit lebih tinggi dan lolos dari uji relatif saja. Lambung baja juga terang secara absolut, jadi detektor juga mensyaratkan **VH di atas −18 dB**. Jalurnya hilang, dan hitungannya turun menjadi sekitar 42 per lintasan.
+
+**Ukuran minimum dan target tetap.** Piksel tunggal sebagian besar noise, jadi deteksi memerlukan minimal 3 piksel berukuran 20 m. Anjungan, lampu navigasi, rumpon dan kapal yang lama berlabuh muncul lintasan demi lintasan di tempat yang sama; setiap sel 500 m yang menyala pada lebih dari seperempat lintasan dibuang sebagai target tetap, bukan lalu lintas.
+
+{{< include _snippets/ch77_oil_ships__ch77-lanes.qmd >}}
+
+{{< include _snippets/ch77_oil_ships__ch77-ships-per-pass.qmd >}}
+
+Alur pelayaran muncul dari deteksi saja. Antara 26 dan 60 kapal berada di gerbang pada setiap lintasan, sekitar 42 pada malam biasa.
+
+### Mengapa bagian ini berjalan di R
+
+Versi Earth Engine dari hitungan kapal tidak selesai. Permintaan interaktif kehabisan waktu pada potongan selebar 20 km, dan ekspor batch untuk 29 lintasan berjalan tiga jam lalu gagal dengan \"computation timed out\". Menghitung objek memerlukan setiap piksel pada resolusi penuh sekaligus, jenis tugas yang paling tidak cocok untuk Earth Engine. Jadi Earth Engine mengerjakan apa yang paling ia kuasai, memotong 29 citra dari arsip (dua bagian sekitar 8 MB per lintasan), dan deteksinya berjalan lokal di R dengan `terra`, sekitar dua menit untuk 58 file. Tahu kapan harus meninggalkan platform adalah bagian dari menggunakannya dengan baik.
+
+## Dari potret ke kapal per hari
+
+Satelit melihat gerbang itu sekejap setiap dua belas hari. Ia tidak bisa mengikuti kapal. Ia bisa menghitung berapa kapal yang ada di gerbang pada saat itu, dan rekayasa lalu lintas punya aturan yang mengubah hitungan menjadi aliran:
+
+$$q = k \times v$$
+
+Aliran $q$ (kapal per jam) sama dengan kepadatan $k$ (kapal per kilometer alur) dikali kecepatan $v$ (kilometer per jam). Kepadatan adalah jumlah kapal dibagi panjang lintasan yang ditempuh setiap kapal di dalam gerbang. Lalu lintas berjalan dari barat laut ke tenggara pada sekitar 135°, sehingga kapal yang melintasi gerbang setinggi 33,2 km menempuh $33{,}2 / \cos 45° \approx 46{,}9$ km di dalamnya. Dengan 42 kapal, kecepatan 13 knot (24 km/jam) dan 24 jam:
+
+$$q = \frac{42}{46{,}9 \text{ km}} \times 24 \text{ km/jam} \times 24 \text{ jam} \approx 520 \text{ kapal per hari}$$
+
+Potret yang berjarak dua belas hari sudah cukup karena lalu lintas melalui selat mendekati stabil: pada malam biasa gerbang memuat jumlah kapal yang mirip, dan merata-ratakan 29 malam berarti merata-ratakan hari kerja, musim dan cuaca. Intervalnya berasal dari pengambilan ulang 29 lintasan dan penarikan kecepatan 10 sampai 16 knot dalam 5.000 run Monte Carlo.
+
+{{< include _snippets/ch77_oil_ships__ch77-flow.qmd >}}
+
+### Apa yang dihitung sebagai kapal?
+
+Perkiraan radar sekitar 520 per hari, hampir dua kali 281 dari STRAITREP. Selisih itu sebagian besar perbedaan definisi, bukan kesalahan. Radar melihat setiap lambung yang dapat dibedakannya, termasuk kapal ikan, kapal tunda, tongkang dan feri lokal; STRAITREP hanya menghitung kapal di atas 300 GT yang melapor. Menaikkan ukuran target minimum adalah pengganti kasar untuk kapal yang lebih besar, dan perkiraannya melewati angka resmi di antara 20 dan 40 piksel. Itu konsisten dengan definisinya, bukan kalibrasi: radar menyebarkan pantulan lambung ke piksel tetangga, sehingga luas area terang bukanlah panjang kapal, dan hanya mencocokkan deteksi dengan posisi kapal dari AIS yang bisa mengubah piksel menjadi tonase.
+
+::: {.callout-important}
+## Integritas ilmiah: sebutkan kapal mana yang Anda hitung
+\"Kapal per hari\" tanpa definisi bukanlah hasil. Laporkan detektornya (ambang, batas bawah, ukuran minimum), jam lintasan, aturan target tetap, asumsi kecepatan, dan intervalnya. Kapal yang berlabuh dan lambat menambah kepadatan tetapi tidak menambah aliran, sehingga perkiraan ini adalah batas atas lalu lintas yang bergerak untuk ukuran kapal yang bisa dilihatnya. Metode yang sama pada gerbang lain, pada jam yang lain, mengukur hal yang berbeda.
+:::
+
+## Batasan
+
+- **Satu lintasan setiap dua belas hari, selalu pukul 19.34.** Pola lalu lintas malam mungkin berbeda dari rata-rata 24 jam; orbit kedua (descending, pagi) bisa mengujinya.
+- **Mask laut kasar.** Air MODIS 250 m yang dikecilkan 1 km menjauhkan deteksi dari pantai tetapi juga membuang kapal di alur masuk dan pelabuhan yang sempit.
+- **Kecepatan diasumsikan, bukan diukur.** Intervalnya membawa 10 sampai 16 knot; sebaran kecepatan AIS yang nyata akan mempersempitnya.
+- **Peta lapisan minyak berasal dari satu citra.** Tanpa data angin dan lintasan kedua, kelasnya masih berupa kandidat.
+- **\"Kapal gelap\".** Membandingkan deteksi radar dengan laporan AIS menemukan kapal yang tidak memancarkan sinyal, salah satu kegunaan paling berharga metode ini, tetapi memerlukan data AIS, yang tidak terbuka di Earth Engine.
+
+## Latihan {.unnumbered}
+
+1. Ubah ambang kontras lapisan minyak dari 3 dB menjadi 2 dB dan 4 dB. Bagaimana luas kemungkinan minyak berubah, dan apa artinya bagi pelaporan satu angka?
+2. Ulangi deteksi lapisan minyak dengan jendela latar belakang 2,5 km (`w = 11`, bukan 41, di tab R). Patch mana yang hilang, dan mengapa?
+3. Jalankan detektor kapal tanpa batas bawah −18 dB pada satu lintasan dan petakan deteksinya. Temukan jalurnya. Tempat mana lagi yang menghasilkan kapal palsu?
+4. Pakai 11 knot dan 15 knot sebagai kecepatan tetap, bukan undian acak. Berapa bagian ketidakpastian kapal per hari yang berasal dari kecepatan, dan berapa dari lintasan?
+5. Geser gerbang ke utara, ke 3,3 sampai 3,6° LU. Apakah perkiraan kapal per hari berubah? Seharusnya tidak, bila lalu lintas stabil dan metodenya benar: jelaskan perbedaan apa pun.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Luas kemungkinan minyak 68,6 km² pada 2 dB, 53,6 km² pada 3 dB dan 40,2 km² pada 4 dB (tab Python): lapisan tipis di sepanjang pantai ikut masuk pada 2 dB, dan hanya inti yang paling gelap yang tersisa pada 4 dB. Laporkan sebagai \"54 km² pada 3 dB (40-69 km² untuk 2-4 dB)\". Satu angka menyembunyikan bahwa tepi lapisan minyak adalah pilihan, bukan garis di permukaan air.
+
+**2.** Patch besar di mulut teluk menyusut ke tepinya atau hilang: di dalam lapisan selebar 15 km, jendela 2,5 km mengambil mediannya dari minyak, sehingga lapisan itu dibandingkan dengan dirinya sendiri dan tampak normal. Bercak gelap kecil yang terpisah bertahan, karena jendelanya masih menjangkau laut bersih. Aturannya: jendela latar belakang harus lebih besar daripada objek terbesar yang ingin ditemukan.
+
+**3.** Tanpa batas bawah, hitungannya naik beberapa kali lipat dan muncul jalur deteksi utara-selatan di tempat sub-swath bertemu, bersama gerombolan di dekat pantai (gelombang pecah, gosong) dan di petak yang sangat tenang tempat laut berada di noise floor. Semuanya lolos uji relatif karena latar belakangnya sangat gelap. Lambung yang nyata terang secara absolut, dan itulah yang dikodekan oleh batas bawah.
+
+**4.** Kapal per hari sebanding dengan kecepatan, jadi 11 knot memberi sekitar 15 % lebih sedikit dan 15 knot sekitar 15 % lebih banyak daripada 13 knot: kira-kira 440 dan 600 per hari. Sebaran antar-lintasan (26 sampai 60 kapal) memberi interval yang lebarnya serupa. Keduanya penting; sebaran kecepatan dari AIS akan menghapus sebagian besar komponen kecepatan.
+
+**5.** Bila lalu lintas stabil dan panjang lintasannya benar, perkiraannya seharusnya mirip. Perbedaan berasal dari geometri (alur di sana mungkin bersudut lain, sehingga panjang lintasan berubah), dari kapal yang berbelok ke Port Klang atau Port Dickson, yang menambah lalu lintas lokal, dan dari tempat berlabuh. Perbedaan besar berarti salah satu asumsi dalam $q = k \times v$ tidak berlaku di gerbang itu.
+:::

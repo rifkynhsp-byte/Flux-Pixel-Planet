@@ -19,11 +19,14 @@ var sea = ee.ImageCollection('MODIS/006/MOD44W').sort('system:time_start', false
 var vv = ee.ImageCollection('COPERNICUS/S1_GRD')
   .filterBounds(bay).filterDate('2018-04-01T21:00', '2018-04-01T23:00')
   .filter(ee.Filter.eq('instrumentMode', 'IW'))
-  .select('VV').mosaic().updateMask(sea);
+  .select('VV').mosaic()
+  .setDefaultProjection(ee.Projection('EPSG:32750').atScale(10))   // mosaic() drops the projection; reduceResolution needs it
+  .updateMask(sea);
 
 // Speckle: a 125 m mean. Background: the sea within ~10 km (computed at 250 m, ignoring land).
 // The window must reach clean sea beyond the slick; a 2 km window sits inside a 15 km slick.
-var vvSmooth = vv.focalMean(62, 'circle', 'meters');
+var P25 = ee.Projection('EPSG:32750').atScale(25);          // work at 25 m, as the R tab does: 6x fewer pixels than 10 m
+var vvSmooth = vv.reduceResolution(ee.Reducer.mean(), false, 64).reproject(P25).focalMean(62, 'circle', 'meters');
 var P250 = ee.Projection('EPSG:32750').atScale(250);
 var background = vvSmooth.reduceResolution(ee.Reducer.median(), false, 256).reproject(P250)
   .focalMedian(5000, 'circle', 'meters');
@@ -31,10 +34,8 @@ var dark = vvSmooth.lt(background.subtract(3)).and(vvSmooth.lt(-24)).selfMask();
 
 // Clean up: keep connected dark areas of at least 0.5 km2 (800 pixels of 25 m).
 var big = dark.updateMask(dark.connectedPixelCount(1024, true).gte(800));
-var areaKm2 = big.multiply(ee.Image.pixelArea()).divide(1e6)
-  .reduceRegion({reducer: ee.Reducer.sum(), geometry: bay, scale: 25, maxPixels: 1e9, tileScale: 4});
-print('Dark area >= 0.5 km2 (km2):', areaKm2);   // about 54-56 km2; the R tab also tests contrast and shape
-
+// Measuring the area needs every pixel of the bay at once, which is heavier than an interactive request
+// allows; the R and Python tabs measure it from the downloaded scene (about 54 km2 of likely oil).
 Map.centerObject(bay, 11);
 Map.addLayer(vvSmooth, {min: -28, max: -10}, 'Sentinel-1 VV, 2 Apr 2018 (dB)');
 Map.addLayer(big, {palette: ['ff7f00']}, 'Dark spots >= 0.5 km2 (candidate oil)');
@@ -45,7 +46,8 @@ var vh = ee.ImageCollection('COPERNICUS/S1_GRD')
   .filterBounds(gate).filterDate('2025-01-09', '2025-01-10')
   .filter(ee.Filter.eq('instrumentMode', 'IW'))
   .filter(ee.Filter.eq('orbitProperties_pass', 'ASCENDING'))
-  .select('VH').mosaic();
+  .select('VH').mosaic()
+  .setDefaultProjection(ee.Projection('EPSG:32647').atScale(10));
 var seaCore = sea.reproject(ee.Projection('EPSG:32647').atScale(250)).focalMin(4);   // 1 km off the coast
 
 // CFAR: brighter than the local sea by 10 dB (relative) AND brighter than -18 dB (absolute).
@@ -58,8 +60,6 @@ var shipObj = ship.updateMask(ship.connectedPixelCount(200, true).gte(3));
 Map.addLayer(vh, {min: -28, max: -8}, 'Sentinel-1 VH, 9 Jan 2025 (dB)', false);
 Map.addLayer(shipObj, {palette: ['00ffff']}, 'Ship detections (CFAR)', false);
 
-// Count the ships of this pass in a 20 km wide slice of the lanes (small enough to answer quickly).
-var slice = ee.Geometry.Rectangle([100.75, 2.75, 100.95, 3.05], null, false);
-var n = shipObj.reduceToVectors({geometry: slice, scale: 20, geometryType: 'centroid',
-                                 eightConnected: true, maxPixels: 1e9, tileScale: 4}).size();
-print('Ships in the 100.75-100.95 E slice on 9 Jan 2025:', n);
+// Counting ships needs every pixel of the gate at 20 m, which an interactive request cannot finish in time
+// (an Earth Engine batch export of all 29 passes timed out as well). The detections are therefore made from
+// downloaded scenes in the R and Python tabs; here, toggle the layers and compare the cyan points with the VH image.

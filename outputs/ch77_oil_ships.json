@@ -1,0 +1,52 @@
+[
+ {
+  "name": "ch77_oil_ships-webmap",
+  "kind": "html",
+  "html": "images/real/ch77_oil_ships-webmap.html",
+  "height": 480,
+  "caption": "Interactive: pan, zoom, switch layers and basemaps, change the overlay opacity."
+ },
+ {
+  "name": "ch77-balikpapan-vv",
+  "kind": "map",
+  "caption": "Two days after the pipeline broke. The dark ribbon leaving the bay mouth and running east along the coast is sea whose small waves the oil has calmed. Bright dots are ships at the anchorage.",
+  "image": "images/real/ch77-balikpapan-vv.jpg"
+ },
+ {
+  "name": "ch77-slick-detected",
+  "kind": "figure",
+  "caption": "Dark-spot detection: more than 3 dB darker than the sea within ~10 km, and darker than -24 dB. Orange: large, high-contrast patches, likely oil. Blue: patches too small or too weak to call.",
+  "image": "images/real/ch77-slick-detected.png"
+ },
+ {
+  "name": "ch77-slick-patches",
+  "kind": "table",
+  "caption": "Every dark patch over 0.5 km², with the features that separate oil from look-alikes.",
+  "markdown": "|   id |   area_km2 |   contrast_db |   perimeter_km |   compactness | class                |\n|-----:|-----------:|--------------:|---------------:|--------------:|:---------------------|\n|  210 |      41.1  |          6.23 |         135    |          0.03 | likely oil           |\n|  572 |      12.6  |          6.67 |          64.7  |          0.04 | likely oil           |\n|  685 |       0.95 |          5.27 |           6.88 |          0.25 | check: small or weak |"
+ },
+ {
+  "name": "ch77-malacca-vh",
+  "kind": "map",
+  "caption": "One pass over the gate across the strait. Ships are the bright points; the sea is dark and grainy.",
+  "image": "images/real/ch77-malacca-vh.jpg"
+ },
+ {
+  "name": "ch77-ships-per-pass",
+  "kind": "chart",
+  "caption": "Ships counted at each of the 29 passes of 2025, after removing fixed targets. Dashed: the mean.",
+  "image": "images/real/ch77-ships-per-pass.png",
+  "live": "import io\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\nDATA = \"\"\"date,ships\n2025-01-09,37\n2025-01-21,38\n2025-02-02,60\n2025-02-14,42\n2025-02-26,42\n2025-03-10,37\n2025-03-22,46\n2025-04-03,26\n2025-04-15,34\n2025-04-27,33\n2025-05-09,37\n2025-06-02,51\n2025-06-14,41\n2025-06-26,33\n2025-07-08,42\n2025-07-20,60\n2025-08-01,27\n2025-08-13,41\n2025-08-25,39\n2025-09-06,56\n2025-09-18,48\n2025-09-30,37\n2025-10-12,47\n2025-10-24,42\n2025-11-05,42\n2025-11-29,51\n2025-12-05,43\n2025-12-11,49\n2025-12-23,45\n\"\"\"\ndf = pd.read_csv(io.StringIO(DATA))\n\ndef plot_passes(df):\n    import matplotlib.pyplot as plt\n    fig, ax = plt.subplots(figsize=(10, 3.8))\n    ax.bar(pd.to_datetime(df.date), df.ships, width=6, color=\"#1f5fd6\")\n    ax.axhline(df.ships.mean(), ls=\"--\", color=\"k\", lw=1)\n    ax.set_title(\"Ships in the gate at each Sentinel-1 pass, 2025 (19:34 local time, every 12 days)\", loc=\"left\", fontweight=\"bold\")\n    ax.set_ylabel(\"ships detected\"); ax.grid(axis=\"y\", alpha=0.3)\n    return fig\n\nplot_passes(df)\nplt.show()\n"
+ },
+ {
+  "name": "ch77-lanes",
+  "kind": "figure",
+  "caption": "All 2025 detections binned. Traffic concentrates in lanes; the sparse middle is shallow water and banks.",
+  "image": "images/real/ch77-lanes.png"
+ },
+ {
+  "name": "ch77-flow",
+  "kind": "table",
+  "caption": "Ships per day through the gate, for five definitions of \"ship\". STRAITREP counts 281 per day (vessels over 300 GT).",
+  "markdown": "|   minimum target (pixels) |   bright area (m²) |   ships per pass (median) |   ships per day | 90 % interval   |\n|--------------------------:|-------------------:|--------------------------:|----------------:|:----------------|\n|                         3 |               1200 |                        42 |             518 | 410-634         |\n|                         5 |               2000 |                        37 |             444 | 348-544         |\n|                        10 |               4000 |                        30 |             376 | 296-459         |\n|                        20 |               8000 |                        23 |             307 | 241-380         |\n|                        40 |              16000 |                        17 |             223 | 174-278         |"
+ }
+]
