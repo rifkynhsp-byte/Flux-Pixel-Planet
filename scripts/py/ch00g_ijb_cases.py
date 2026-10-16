@@ -8,7 +8,7 @@
 PRINCIPLES P6 | IJB step by step
 
 Every number and map in this chapter was produced by the IJB app's own code
-(users/rifkynauvalhsp/IndrajaBuana), not by a re-implementation. The app's
+(the IJB Earth Engine App), not by a re-implementation. The app's
 modules were run headless with tools/ijb_headless/harness.js: the Code Editor
 interface is replaced by recording stubs, the inputs are typed in exactly as a
 user would type them, and the module's own button is pressed. Each run saves
@@ -263,7 +263,7 @@ def p6_products():
     age = asset_or("umur", age); yod = asset_or("tahun_gangguan", yod); km = asset_or("kmeans", km.select("kelas")).rename("kelas")
     outline = ee.Image().byte().paint(ee.FeatureCollection([ee.Feature(aoi)]), 1, 2).visualize(palette=["000000"])
     pal = lambda v: [c.lstrip("#") for c in v["palette"]]
-    src = "IJB app (users/rifkynauvalhsp/IndrajaBuana), run headless with the app's own code. GEE."
+    src = "IJB app (bit.ly/IJBExplorer), run headless with the app's own code. GEE."
     return [
         {"kind": "table", "name": "p6-runs", "data": p6_inputs_table,
          "caption": "Every run in the walk-through: what was entered, and the result cards exactly as the app showed them."},

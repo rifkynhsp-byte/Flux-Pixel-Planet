@@ -1,10 +1,10 @@
 # IJB headless runner
 
-Runs modules of the IJB app (`users/rifkynauvalhsp/IndrajaBuana`) outside the Code Editor, so the
+Runs modules of the IJB app (its Earth Engine source) outside the Code Editor, so the
 book can show results produced by the app's own code (chapter P6).
 
     npm install @google/earthengine
-    IJB_SRC=/path/to/clone/of/IndrajaBuana node harness.js job.json
+    IJB_SRC=/path/to/ijb/source node harness.js job.json
 
 A job names the module and its function, the area, and the values to type, then presses the
 module's button. Example (Banjir, Demak 2024):

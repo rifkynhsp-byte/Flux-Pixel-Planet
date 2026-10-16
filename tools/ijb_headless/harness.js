@@ -1,4 +1,4 @@
-// Runs IJB (users/rifkynauvalhsp/IndrajaBuana) module code headless: the app's own
+// Runs IJB (its Earth Engine source) module code headless: the app's own
 // Earth Engine logic, with the Code Editor ui replaced by recording stubs.
 // Usage: node harness.js <job.json>   (job: module, fn, aoiAsset/filter, inputs, level, out)
 const fs = require("fs");

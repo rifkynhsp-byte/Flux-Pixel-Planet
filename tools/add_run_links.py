@@ -18,7 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 GEE = "https://code.earthengine.google.com/?scriptPath=users/rifkynauvalhsp/Fullstack-Remote-Sensing:{}"
 COLAB = "https://colab.research.google.com/github/rifkynhsp-byte/Fullstack-Remote-Sensing/blob/main/notebooks/{}.ipynb"
-IJB_APP = "https://code.earthengine.google.com/?accept_repo=users/rifkynauvalhsp/IndrajaBuana"
+IJB_APP = "https://bit.ly/IJBExplorer"
 ACCEPT = "https://code.earthengine.google.com/?accept_repo=users/rifkynauvalhsp/Fullstack-Remote-Sensing"
 COLAB_BADGE = "https://colab.research.google.com/assets/colab-badge.svg"
 GEE_BADGE = "https://img.shields.io/badge/Open%20in-Earth%20Engine%20Code%20Editor-1a73e8"

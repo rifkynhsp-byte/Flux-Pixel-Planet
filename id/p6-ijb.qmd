@@ -5,7 +5,7 @@
 **Jalankan bab ini**
 
 - `ch00g_ijb_cases` &nbsp; [![Buka di Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rifkynhsp-byte/Fullstack-Remote-Sensing/blob/main/notebooks/ch00g_ijb_cases.ipynb)
-- [Buka aplikasi IJB di Code Editor](https://code.earthengine.google.com/?accept_repo=users/rifkynauvalhsp/IndrajaBuana)
+- [Buka aplikasi IJB](https://bit.ly/IJBExplorer)
 
 [![Tambahkan semua skrip buku ke Code Editor Anda (sekali saja)](https://img.shields.io/badge/Add%20all%20book%20scripts-to%20your%20Code%20Editor-34a853)](https://code.earthengine.google.com/?accept_repo=users/rifkynauvalhsp/Fullstack-Remote-Sensing) &nbsp; *Baru pertama kali? Lampiran A menjelaskan cara masuk ke Earth Engine dan Colab.*
 :::
@@ -25,11 +25,11 @@ Yang tetap Anda butuhkan adalah pemahaman dari P1 sampai P5. Aplikasi ini akan d
 
 ## Membuka IJB
 
-IJB berjalan di dalam Code Editor Google Earth Engine (Bab [-@sec-ecosystem] menjelaskan cara mendapatkan akun).
+IJB adalah Earth Engine App yang sudah dipublikasikan, jadi bisa dibuka di peramban web biasa.
 
-1. Masuk ke Earth Engine, lalu buka tautan repositori ini: <https://code.earthengine.google.com/?accept_repo=users/rifkynauvalhsp/IndrajaBuana>. Repositori `IndrajaBuana` akan muncul di bagian *Reader* pada panel Scripts di sebelah kiri.
-2. Buka skrip bernama **app** di repositori itu.
-3. Tekan **Run**. Peta Code Editor berganti menjadi layar IJB.
+1. Buka <https://bit.ly/IJBExplorer>.
+2. Tunggu beberapa detik sampai kerangkanya termuat: panel di kiri, peta di kanan.
+3. Mulai dari Langkah 1 di bawah.
 
 Mula-mula aplikasi hanya memuat kerangkanya. Setiap modul baru dibangun saat tombolnya ditekan, sehingga aplikasi tetap ringan, dan kalau suatu saat satu modul gagal, nama dan pesan galatnya muncul di layar sementara modul lain tetap berjalan.
 
