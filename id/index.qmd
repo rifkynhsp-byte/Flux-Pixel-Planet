@@ -6,6 +6,12 @@ Setiap tempat itu mengajarkan hal yang tidak ada di tutorial. Peta bisa terlihat
 
 Sebagian besar isinya lahir dari pekerjaan proyek. Sebagian lagi dari ruang kuliah, tempat saya akhirnya punya waktu untuk bertanya mengapa metode yang sudah bertahun-tahun saya pakai itu memang berhasil. Keduanya ada di sini, berdampingan, dan setiap bab ditutup dengan sesuatu yang bisa Anda jalankan sendiri.
 
+## Mengapa saya menulisnya
+
+Ayah saya adalah dosen ilmu sosial dan kebudayaan, dan semasa kecil saya sering ikut beliau mengajar di berbagai kota dan mengunjungi situs-situs peninggalan masa lampau. Saya terkesima di depan candi yang dibangun dengan presisi yang rasanya mustahil untuk zamannya, dan saya terus bertanya apakah zaman kita sendiri punya karya yang lebih maju. Ibu saya menjawabnya dengan caranya sendiri, dengan buku-buku tentang teknologi, dan saya memilih jalur sains. Di Geofisika Universitas Padjadjaran saya mengenal bumi dan teknologi sekaligus, dan saat KKN warga meminta kami mencari air di bawah tanah mereka; bersama dosen kami, kami menemukan tempat yang tepat untuk embung mereka. Kemudian, di bidang kehutanan di Riau, saya mengusulkan teknologi baru dan melihat orang menolaknya, sampai saya belajar mendengarkan dan membuat apa yang benar-benar menghemat waktu mereka. Pengalaman itu menjawab pertanyaan masa kecil saya: karya terbesar peradaban modern adalah teknologi yang bermanfaat bagi banyak orang.
+
+Untuk selebihnya, ayah saya punya peribahasa Sunda: *cikaracak ninggang batu, laun-laun jadi legok*, tetesan air yang terus-menerus akan melekukkan batu. Keterampilan yang sulit pun dikuasai dengan cara yang sama. Buku ini dimaksudkan menjadi tetesan-tetesan itu.
+
 ## Mengapa buku ini gratis
 
 Saya beruntung bisa mempelajari pekerjaan ini langsung di proyek nyata, bersama orang-orang hebat, dengan persoalan nyata yang harus dipecahkan, dan mendalaminya di UNSW Sydney dengan beasiswa LPDP. Tidak semua orang mendapat kesempatan itu. Saya ingin semua orang di bidang ini bisa merasakannya juga, dan punya rekan sejawat untuk bersama-sama memecahkan persoalan yang sulit. Buku ini membagikannya: pengetahuan praktis yang saya kumpulkan, saya tuliskan, dan saya berikan cuma-cuma, supaya mahasiswa di Kupang, penyuluh kehutanan di Riau, atau insinyur muda di mana pun bisa membangun kemampuan yang sama dan tumbuh darinya.

@@ -6,6 +6,12 @@ Each of those places taught me something the tutorials had not. A map can look c
 
 Most of it comes from project work. Some of it comes from the classroom, where I finally had time to ask why the methods I had been using for years actually work. Both are here, side by side, and every chapter ends with something you can run yourself.
 
+## Why I wrote it
+
+My father lectures in the social sciences and culture, and as a child I followed him to his classes in many cities and to the sites of the past he taught about. I stood in front of temples built with a precision that seemed impossible for their time, and I kept asking whether our own age had made anything greater. My mother answered in her own way, with books about technology, and I chose science. In Geophysics at Universitas Padjadjaran I learned the Earth and technology together, and during my community service (KKN) villagers asked us to find water under their land; with our lecturer we found the place for their pond. Later, in forestry in Riau, I proposed new technology and watched people resist it, until I learned to listen and build what saved them time. Those experiences answered the childhood question for me: the greatest work of a modern civilisation is technology that is useful to many people.
+
+My father has a Sundanese proverb for the rest: *cikaracak ninggang batu, laun-laun jadi legok*, steady drops of water hollow a stone. Hard skills come the same way. This book is meant to be those drops.
+
 ## Why this book is free
 
 I had the privilege of learning this work on real projects, next to good people, with real problems to solve, and of studying it further at UNSW Sydney with an LPDP scholarship. Not everyone gets that chance. I want everyone in this field to be able to experience it too, and to have peers to work through the hard problems with. This book shares it: the hands-on knowledge I have gathered, written down and given away, so that a student in Kupang, a forestry officer in Riau, a young engineer anywhere, can build the same skills and grow from them.
