@@ -68,3 +68,15 @@ The timetable is a plan. Scheduled headways in Jakarta's traffic are targets, an
 2. Replace the straight-line 500 m with 800 m. Which city gains the most, and why?
 3. Recompute Insight 3 at the stop level: for each stop, the combined headway, coloured by the service type that contributes most buses. Does the BRT surprise survive?
 4. Find another city's public GTFS feed in the Mobility Database and draw Insight 2 for it. Is its service more or less concentrated than Jakarta's?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. Most patterns in this feed run from 05:00 to 22:00, so at 22:00 many end or are ending: expect Royaltrans commuter coaches and many Mikrotrans and feeder patterns to drop out, with BRT corridors and a few night routes left. The access curve falls and steepens: far fewer residents are within 500 m of frequent service, and the gap between Jakarta Pusat and the outer cities widens, because what survives is concentrated on the main corridors.
+
+**2.** Not computed in the chapter. Going from 500 m to 800 m multiplies the walking catchment area by about 2.6, so the cities with the most residents just beyond 500 m gain most. Jakarta Pusat is already at 99 % and cannot gain much; Jakarta Utara (80 % at 10 minutes) and Jakarta Barat (85 %) have the most to gain, because their uncovered residents live in gaps between routes rather than far from all service. Remember the straight line overstates access where toll roads, rivers or gated estates block the walk.
+
+**3.** Not computed in the chapter. At the stop level, the combined headway adds up every pattern calling there, so stops on BRT corridors, called at by many patterns, come out with headways of a few minutes or less, while Mikrotrans stops served by one pattern stay at about 6 minutes. The "surprise" reverses: per pattern BRT is less frequent, but per stop it is the most frequent. Both are true, and which one matters depends on whether the passenger can take any bus or needs one particular route.
+
+**4.** Not computed in the chapter. Pick a feed from the Mobility Database, compute buses per hour per stop at 08:00 on a weekday, and draw the Lorenz curve and Gini. A city with a few trunk lines and little feeder service (many car-oriented cities) will sag further, with a higher Gini than Jakarta's 0.38; a dense, grid-like network will be closer to the diagonal. Check whether the feed is frequency-based or lists every trip, because the calculation differs.
+:::

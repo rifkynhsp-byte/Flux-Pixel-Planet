@@ -88,3 +88,15 @@ Timmer, M. P., Dietzenbacher, E., Los, B., Stehrer, R. and de Vries, G. J. (2015
 2. Masukkan rumah tangga ke dalam model (tutup model untuk konsumsi, dengan upah sebagai baris dan konsumsi rumah tangga sebagai kolom) untuk menghitung pengganda Tipe II. Seberapa besar pengganda konstruksi bertambah?
 3. Gambar diagram radar untuk kedelapan sektor kunci. Adakah bentuk yang sama di antara mereka?
 4. Unduh Tabel Input-Output Indonesia 2016 dari BPS (17 lapangan usaha, transaksi domestik) secara manual dan jalankan model yang sama. Apakah sektor kuncinya sama dengan hasil WIOD untuk 2014?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Tetapkan f sebesar USD 1 miliar hanya untuk makanan dan minuman lalu hitung A f. Putaran 1 lalu dipimpin tanaman pangan (0,29 per dolar, input terkuat bagi industri makanan), bersama peternakan, perikanan, perdagangan dan angkutan, serta kimia dan kemasan (plastik, kertas); logam, semen dan pertambangan, yang mendominasi putaran 1 konstruksi, sebagian besar hilang. Pengganda totalnya bisa mirip, tetapi sektor yang dijangkaunya, dan bersama itu wilayah dan lapangan kerjanya, berbeda.
+
+**2.** Tidak dihitung di bab ini. Masukkan rumah tangga ke dalam matriks: tambahkan kompensasi pekerja per unit output sebagai baris baru dan pangsa konsumsi rumah tangga sebagai kolom baru, lalu inverskan (I − A) yang diperbesar. Pengganda Tipe II memasukkan belanja upah yang diperoleh di setiap putaran, sehingga pengganda output konstruksi naik di atas nilai Tipe I sebesar 1,82; dalam studi input-output efek induksi biasanya menambah bagian yang cukup besar terhadap Tipe I. Rasio Tipe II / Tipe I adalah angka yang dilaporkan, dengan catatan bahwa ia mengasumsikan pangsa konsumsi yang tetap.
+
+**3.** Tidak dihitung di bab ini. Normalisasikan pengganda dan keterkaitan tiap sektor (output, nilai tambah, tenaga kerja, impor, ke belakang, ke depan) terhadap rata-ratanya dan gambar pada sumbu yang sama. Sektor kunci menurut definisinya sama-sama memiliki keterkaitan ke belakang dan ke depan yang tinggi; selain itu, industri pengolahan (logam, kimia, pengilangan, karet dan plastik) cenderung berbagi bentuk dengan kandungan impor tinggi dan tenaga kerja per dolar rendah, sedangkan angkutan dan jasa lainnya menyerap lebih banyak tenaga kerja dan lebih sedikit impor.
+
+**4.** Tidak dihitung di bab ini. Muat tabel transaksi domestik BPS 2016 secara manual (17 sektor), bentuk A dari aliran domestik dan output total, lalu ulangi perhitungan keterkaitan. Karena sektornya lebih kasar, beberapa sektor kunci WIOD tergabung (misalnya industri pengolahan menjadi satu), sehingga perbandingan harus dilakukan pada pengelompokan BPS. Kesesuaian untuk industri pengolahan, listrik dan angkutan akan mendukung hasil WIOD; perbedaannya perlu dibaca dengan memperhitungkan selisih dua tahun dan klasifikasi yang berbeda.
+:::

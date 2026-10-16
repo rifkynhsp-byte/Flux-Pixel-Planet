@@ -88,3 +88,15 @@ Timmer, M. P., Dietzenbacher, E., Los, B., Stehrer, R. and de Vries, G. J. (2015
 2. Add households to the model (close it for consumption, using wages as a row and household consumption as a column) to compute Type II multipliers. How much larger is construction's?
 3. Draw the radar chart for the eight key sectors. Is there a shape they share?
 4. Download Statistics Indonesia's 2016 input-output table (17 sectors, domestic transactions) by hand and run the same model. Do the key sectors agree with WIOD's for 2014?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. Set f to USD 1 billion in food and beverages only and compute A f. Round 1 is then led by crops (0.29 per dollar, the strongest input to food), with livestock, fishing, trade and transport, and chemicals and packaging (plastic, paper); metals, cement and mining, which dominated construction's round 1, largely disappear. The total multiplier may be similar, but the sectors it reaches, and with them the regions and jobs, are different.
+
+**2.** Not computed in the chapter. Move households inside the matrix: add compensation of employees per unit of output as a new row and household consumption shares as a new column, then invert the enlarged (I − A). The Type II multiplier includes the spending of wages earned in every round, so construction's output multiplier rises above its Type I value of 1.82; in input-output studies the induced effect typically adds a substantial fraction to Type I. The ratio Type II / Type I is the number to report, together with the caution that it assumes constant consumption shares.
+
+**3.** Not computed in the chapter. Normalise each sector's multipliers and linkages (output, value added, employment, imports, backward, forward) to the average and draw them on common axes. Key sectors share high backward and forward linkages by definition; beyond that, the processing industries (metals, chemicals, refining, rubber and plastic) tend to share a shape with high import content and low employment per dollar, while transport and other services employ more and import less.
+
+**4.** Not computed in the chapter. Load BPS's 2016 domestic-transactions table by hand (17 sectors), form A from the domestic flows and total output, and repeat the linkage calculation. Because the sectors are coarser, several WIOD key sectors merge (for example, the manufacturing industries into one), so the comparison has to be done at the BPS grouping. Agreement for manufacturing, electricity and transport would support the WIOD result; differences should be read against the two-year gap and the different classification.
+:::

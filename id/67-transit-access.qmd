@@ -68,3 +68,15 @@ Jadwal adalah rencana. *Headway* terjadwal di tengah lalu lintas Jakarta adalah 
 2. Ganti jarak garis lurus 500 m dengan 800 m. Kota mana yang paling bertambah, dan mengapa?
 3. Hitung ulang *Insight* 3 pada tingkat halte: untuk setiap halte, *headway* gabungannya, diwarnai menurut jenis layanan yang menyumbang bus terbanyak. Apakah kejutan BRT tetap bertahan?
 4. Cari *feed* GTFS publik kota lain di Mobility Database dan gambar *Insight* 2 untuknya. Apakah layanannya lebih atau kurang terpusat daripada Jakarta?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Sebagian besar pola di feed ini berjalan pukul 05.00 sampai 22.00, jadi pada 22.00 banyak yang berakhir atau sedang berakhir: harapkan bus komuter Royaltrans serta banyak pola Mikrotrans dan pengumpan hilang, dengan koridor BRT dan beberapa rute malam yang tersisa. Kurva akses turun dan menjadi lebih curam: jauh lebih sedikit penduduk yang berada dalam 500 m dari layanan yang sering, dan selisih antara Jakarta Pusat dan kota-kota pinggiran melebar, karena yang bertahan terpusat di koridor utama.
+
+**2.** Tidak dihitung di bab ini. Dari 500 m ke 800 m, luas tangkapan jalan kaki bertambah sekitar 2,6 kali, sehingga kota dengan penduduk terbanyak tepat di luar 500 m yang paling diuntungkan. Jakarta Pusat sudah 99 % dan tidak banyak bertambah; Jakarta Utara (80 % pada 10 menit) dan Jakarta Barat (85 %) paling banyak bisa bertambah, karena penduduk yang belum terjangkau tinggal di celah antar-rute, bukan jauh dari semua layanan. Ingat garis lurus melebih-lebihkan akses di tempat jalan tol, sungai atau perumahan berpagar menghalangi jalan kaki.
+
+**3.** Tidak dihitung di bab ini. Di tingkat halte, headway gabungan menjumlahkan semua pola yang singgah, sehingga halte di koridor BRT, yang disinggahi banyak pola, menghasilkan headway beberapa menit atau kurang, sementara halte Mikrotrans yang dilayani satu pola tetap sekitar 6 menit. "Kejutan"-nya berbalik: per pola BRT kurang sering, tetapi per halte paling sering. Keduanya benar, dan mana yang penting bergantung pada apakah penumpang bisa naik bus apa saja atau memerlukan satu rute tertentu.
+
+**4.** Tidak dihitung di bab ini. Pilih satu feed dari Mobility Database, hitung bus per jam per halte pada pukul 08.00 hari kerja, lalu gambar kurva Lorenz dan Gini-nya. Kota dengan beberapa jalur utama dan sedikit layanan pengumpan (banyak kota yang berorientasi mobil) akan melengkung lebih jauh, dengan Gini lebih tinggi daripada 0,38 Jakarta; jaringan yang padat seperti grid akan lebih dekat ke diagonal. Periksa apakah feed-nya berbasis frekuensi atau mencantumkan setiap perjalanan, karena perhitungannya berbeda.
+:::

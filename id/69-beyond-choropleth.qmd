@@ -66,3 +66,15 @@ Nilai provinsi hanya sebaik masukan grid-nya: WorldPop membagi hitungan sensus d
 2. Ganti cahaya malam per penduduk di peta bivariat dengan cahaya malam per km². Provinsi mana yang berpindah sudut, dan mengapa?
 3. Ubah nilai titik menjadi 5.000 dan 100.000 orang. Jelaskan apa yang disembunyikan setiap versi.
 4. Gambar Sankey Riau dengan ESA WorldCover (10 m) untuk 2020 dan 2021 alih-alih MODIS. Apakah aliran dua arahnya menyusut?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Interval sama paling sedikit berubah: Jakarta tetap sendirian dan 37 provinsi lain tetap berada di satu atau dua kelas terbawah. Kuantil berubah secara terlihat tetapi dapat diduga (sekitar 5-6 provinsi per kelas). Natural breaks paling banyak berubah dalam letak pemisahnya, karena Fisher-Jenks mengoptimalkan ulang celahnya dan bisa memisahkan provinsi Jawa yang padat atau memisahkan Bali, Banten dan Jawa Barat satu sama lain. Menambah kelas tidak menyembuhkan interval sama; hanya skema lain atau skala log yang bisa.
+
+**2.** Tidak dihitung di bab ini. Cahaya malam per km² mengikuti kepadatan dengan dekat, karena cahaya berada di tempat orang tinggal, sehingga kedua variabel menjadi sangat berkorelasi dan sebagian besar provinsi jatuh di diagonal grid 3 × 3. Jawa, Bali dan Jakarta pindah ke sudut tinggi-tinggi (padat dan terang), sedangkan provinsi Kalimantan dan Papua yang jarang penduduk, yang memimpin pada cahaya per penduduk, pindah ke rendah-rendah: cahayanya, tersebar di area yang luas, redup per km². Peta ini lalu hampir tidak mengatakan apa-apa yang belum dikatakan peta kepadatan.
+
+**3.** Tidak dihitung di bab ini. Pada 5.000 orang per titik, Jawa menjadi gumpalan padat, menyembunyikan perbedaan antara kota dan perdesaan di sana, sementara daerah jarang penduduk mendapat titik yang memperlihatkan permukiman kecil. Pada 100.000 orang per titik, Jawa masih memperlihatkan polanya, tetapi sebagian besar Kalimantan, Papua dan Maluku hampir tidak mendapat titik, sehingga seluruh provinsi dengan ratusan ribu penduduk tampak kosong, dan sebaran acak titik dalam tiap sel mendominasi pola. 20.000 adalah kompromi untuk peta nasional.
+
+**4.** Tidak dihitung di bab ini. WorldCover 10 m memisahkan kebun dari hutan alam lebih baik daripada MODIS, tetapi peta 2020 (v100) dan 2021 (v200) dibuat dengan versi algoritme yang berbeda, dan ESA memperingatkan bahwa perbedaan di antara keduanya sebagian besar karena algoritme, bukan perubahan nyata. Jadi aliran dua arah kemungkinan tidak menyusut dan bahkan bisa membesar; Sankey antara dua peta hanya bermakna bila keduanya dibuat dengan cara yang sama, seperti seri tahunan MODIS yang konsisten.
+:::

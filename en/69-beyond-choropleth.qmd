@@ -66,3 +66,15 @@ The provincial values are only as good as the gridded inputs: WorldPop distribut
 2. Replace night light per resident in the bivariate map with night light per km². Which provinces move corners, and why?
 3. Change the dot value to 5,000 and to 100,000 people. Describe what each version hides.
 4. Draw the Riau Sankey with ESA WorldCover (10 m) for 2020 and 2021 instead of MODIS. Do the two-way flows shrink?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. Equal intervals change least: Jakarta still sits alone and the other 37 provinces stay in the lowest class or two. Quantiles change visibly but predictably (about 5-6 provinces per class). Natural breaks change most in where the breaks fall, because Fisher-Jenks re-optimises the gaps and may split the dense Java provinces or isolate Bali, Banten and West Java from each other. More classes do not cure equal intervals; only a different scheme or a log scale does.
+
+**2.** Not computed in the chapter. Night light per km² follows density closely, because light is where people are, so the two variables become strongly correlated and most provinces fall on the diagonal of the 3 × 3 grid. Java, Bali and Jakarta move to the high-high corner (crowded and bright), and the sparse Kalimantan and Papua provinces, which led on light per resident, move to low-low: their light, spread over large areas, is dim per km². The map then says little that the density map did not.
+
+**3.** Not computed in the chapter. At 5,000 people per dot Java becomes a solid blot, hiding the differences between cities and countryside there, while sparse areas gain dots that reveal small settlements. At 100,000 people per dot Java still shows its pattern, but most of Kalimantan, Papua and Maluku get almost no dots, so whole provinces with hundreds of thousands of people look empty, and the scattering of each cell's dots dominates the pattern. 20,000 is the compromise for a national map.
+
+**4.** Not computed in the chapter. WorldCover at 10 m separates plantations from natural forest better than MODIS, but the 2020 (v100) and 2021 (v200) maps were produced with different algorithm versions, and ESA warns that differences between them are mostly due to the algorithm, not real change. So the two-way flows probably do not shrink and may even grow; a Sankey between two maps is only meaningful when both are made the same way, as with MODIS's consistent annual series.
+:::
