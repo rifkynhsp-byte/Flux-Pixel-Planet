@@ -91,3 +91,15 @@ Between 2016 and 2023, building cover rose from 28 to 31 % of the city. Only **1
 2. Add distance to the coast as a predictor. How much does Moran's I of the residuals drop?
 3. Run the low-ground analysis for North Jakarta (Kota Jakarta Utara) and compute the location quotient. How does it compare with Surabaya's 0.60?
 4. Replace straight-line park distance with walking distance on the OpenStreetMap street network (osmnx, as in Chapter [-@sec-transit]). How much does the 12 % change?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. Tree cover alone is the part of green that shades and transpires, so its coefficient in model B is more likely to stay negative (cooler). If the sign no longer flips, the positive coefficient of total green was carried by grass and shrub: in a hexagon where built-up share is held fixed, more grass mostly means less water or wetland, and sunny grass on dry ground in the dry season is not cool. Green is not one thing for heat; trees are what cool.
+
+**2.** Not computed in the chapter. Distance to the coast captures the sea breeze and the cool coastal fishponds, which the residual map shows as a pattern, so adding it should lower Moran's I of the residuals from 0.48, perhaps substantially, and raise R². If Moran's I stays well above zero, something else spatial is still missing (wind shadow, industrial heat, soil moisture); either way report the new Moran's I with its permutation p-value.
+
+**3.** Not computed in the chapter. Repeat the same steps for Kota Jakarta Utara: the share of land below 3 m and the share of new building cover (2016-2023) on it. North Jakarta is mostly low, subsiding coastal land with little room elsewhere, so its location quotient is likely to be much closer to 1 than Surabaya's 0.60, or above it if reclaimed and coastal land is being built. A quotient near 1 means building takes no account of elevation at all.
+
+**4.** Not computed in the chapter. Build the street network with osmnx, compute network distance from each GHSL cell to the nearest park entrance (or edge node), and use 400 m on the network. Walking distance is always at least the straight line, usually 20-40 % longer in a grid of streets and more where rivers, rail lines or gated estates block, so the 12 % will fall, perhaps to below 10 %.
+:::

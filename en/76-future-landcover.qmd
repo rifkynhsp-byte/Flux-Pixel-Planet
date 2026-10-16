@@ -127,3 +127,17 @@ This forecast reads "if the next ten years behave like 2017-2025". A new toll ro
 3. Use three-year label modes (for example 2016-2018 for "2017") to calm Dynamic World's flicker, and rerun forecast 2. Does the trap shrink?
 4. Overlay the 2035 new built land on the flood-prone low ground of Chapter [-@sec-flood] (HAND below 5 m). How many hectares of predicted growth sit there?
 5. Repeat the chapter for Jabodetabek's fringe (Chapter [-@sec-urban-growth]) and compare the trend in hectares per year.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. The Cisumdawu toll road opened in 2023 and the Tegalluar station in 2023, so in the 2017-2022 training data they had little time to attract building and the hindcast may barely improve. In the forecast the new features pull predicted growth towards the toll interchanges and the area around Tegalluar in the east, at the expense of the northern slopes. A feature that cannot be validated by the hindcast is a scenario assumption, and should be presented as one.
+
+**2.** Not computed in the chapter. GHSL projects almost no growth to 2030, so using its rate would turn far less land into built land than the 1,000 ha a year of the Dynamic World trend; the 2035 map would look almost like 2025. Defend the one whose definition matches the map you show (Dynamic World's built, villages included, follows the observed 2017-2025 trend), and show the GHSL-based version as a low scenario, with the definitions side by side.
+
+**3.** Not computed in the chapter. A three-year mode suppresses one-year flicker (a field labelled grass in a single fallow year stays crops), so the share of area that "changed" between 2017 and 2022 should fall well below 17 %, and forecast 2's collapse of cropland should shrink. It will not disappear: real flicker can last more than a year, and the model still treats every remaining label change as real. The trend-times-forest forecast remains the safer choice.
+
+**4.** Not computed in the chapter. Overlay the cells that become built by 2035 on HAND below 5 m and sum their area. Expect a modest but real share, concentrated in the flat south and south-east of the basin along the Citarum and around Dayeuhkolot and Bojongsoang, where flooding is already frequent. That number, in hectares, is the one a planner should see beside the forecast.
+
+**5.** Not computed in the chapter. Run the same pipeline on a box over Jabodetabek's fringe (Bekasi-Cikarang, Tangerang, Depok-Bogor), compute the 2017-2025 built-land trend in hectares per year, and compare. Expect a trend several times Bandung Raya's 1,000 ha a year, because the fringe is larger and flatter, and note that Chapter [-@sec-urban-growth]'s GHSL figures use a different definition of built, so compare trends from the same product.
+:::

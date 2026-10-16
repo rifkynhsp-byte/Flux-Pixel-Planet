@@ -82,3 +82,15 @@ The DTM is in metres relative to NAP, the Dutch datum close to mean sea level. I
 2. Compute a roughness map from the LiDAR DTM over the whole valley and outline the cells above the 95th percentile. How many of them match old landslide lobes in the hillshade?
 3. Repeat the Rotterdam analysis for a 1950s neighbourhood with pitched roofs (for example around 4.43° E, 51.93° N). How does the share of solar-suitable roof change?
 4. Tighten the building rule to NDVI < 0.2 and loosen the tree rule to NDVI ≥ 0.3. How sensitive are the building and canopy shares to these thresholds?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. 500 m east the transect crosses a different part of the deposit, nearer its distal edge or the river, so its thickness changes: expect a different value, thinner towards the toe, and possibly the river channel cut into it. The forest offset on the plateau (16 m for SRTM, 25 m for Copernicus) should stay similar, because it depends on canopy, not on the slide. A different number at a different place is the point: one transect is not the deposit's volume.
+
+**2.** Not computed in the chapter. Compute the standard deviation of slope in a 15 m window over the valley, take the 95th percentile, and outline the cells above it. Expect the 2014 deposit and the older slide lobes and scarps on both valley sides to show up clearly, together with some false positives from river banks, road cuts and gullies. Count how many outlines match lobes visible in the hillshade, and note the ones that don't: those are the cases a roughness map alone would misreport.
+
+**3.** Not computed in the chapter. In a neighbourhood of pitched-roof terraced houses, far fewer roofs are flat, and roughly half of each pitched roof faces away from the south, so the solar-suitable share of roof area falls compared with the flat-roofed centre, unless the streets run east-west so that many roofs have a south-facing plane. Report the share by roof plane, and remember chimneys and dormers on small roofs reduce the usable area further.
+
+**4.** Not computed in the chapter. Pixels with NDVI between 0.2 and 0.3 move from building to neither, and pixels between 0.3 and 0.4 that were neither now count as tree. In a dense city centre few tall objects have intermediate NDVI, so the building share (30 %) should change by only a point or two, while the canopy share (10 %) may rise more, because tree edges, small trees and green roofs fall in the 0.3-0.4 band. Large changes would mean the thresholds, not the data, decide the result.
+:::

@@ -82,3 +82,15 @@ DTM dinyatakan dalam meter terhadap NAP, datum Belanda yang dekat dengan muka la
 2. Hitung peta kekasaran dari DTM LiDAR untuk seluruh lembah dan tandai sel di atas persentil ke-95. Berapa banyak yang cocok dengan lidah longsor lama di hillshade?
 3. Ulangi analisis Rotterdam untuk permukiman tahun 1950-an dengan atap miring (misalnya sekitar 4,43° BT, 51,93° LU). Bagaimana porsi atap yang cocok untuk surya berubah?
 4. Perketat aturan bangunan menjadi NDVI < 0,2 dan longgarkan aturan pohon menjadi NDVI ≥ 0,3. Seberapa peka porsi bangunan dan tajuk terhadap ambang ini?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. 500 m ke timur, transek melintasi bagian lain endapan, lebih dekat ke tepi distal atau ke sungai, sehingga ketebalannya berubah: harapkan nilai yang berbeda, lebih tipis ke arah ujung, dan mungkin alur sungai yang memotongnya. Selisih hutan di plato (16 m untuk SRTM, 25 m untuk Copernicus) seharusnya tetap mirip, karena bergantung pada kanopi, bukan pada longsoran. Angka berbeda di tempat berbeda itulah intinya: satu transek bukan volume endapan.
+
+**2.** Tidak dihitung di bab ini. Hitung simpangan baku lereng dalam jendela 15 m di seluruh lembah, ambil persentil ke-95, lalu buat batas sel di atasnya. Harapkan endapan 2014 serta lobus dan gawir longsor lama di kedua sisi lembah terlihat jelas, bersama beberapa positif palsu dari tebing sungai, potongan jalan dan alur. Hitung berapa batas yang cocok dengan lobus yang terlihat pada hillshade, dan catat yang tidak cocok: itulah kasus yang akan salah dilaporkan bila hanya memakai peta kekasaran.
+
+**3.** Tidak dihitung di bab ini. Di permukiman rumah deret beratap pelana, jauh lebih sedikit atap yang datar, dan kira-kira separuh setiap atap pelana menghadap menjauh dari selatan, sehingga proporsi atap yang cocok untuk surya turun dibanding pusat kota yang beratap datar, kecuali jalannya membentang timur-barat sehingga banyak atap memiliki bidang yang menghadap selatan. Laporkan proporsinya per bidang atap, dan ingat cerobong dan jendela atap pada atap kecil makin mengurangi area yang bisa dipakai.
+
+**4.** Tidak dihitung di bab ini. Piksel dengan NDVI antara 0,2 dan 0,3 pindah dari bangunan ke bukan keduanya, dan piksel antara 0,3 dan 0,4 yang tadinya bukan keduanya kini terhitung pohon. Di pusat kota yang padat sedikit objek tinggi yang NDVI-nya menengah, sehingga proporsi bangunan (30 %) seharusnya hanya berubah satu-dua poin, sementara proporsi kanopi (10 %) bisa naik lebih banyak, karena tepi pohon, pohon kecil dan atap hijau jatuh di rentang 0,3-0,4. Perubahan yang besar berarti ambang, bukan data, yang menentukan hasil.
+:::

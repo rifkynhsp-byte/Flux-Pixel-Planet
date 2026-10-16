@@ -91,3 +91,15 @@ Antara 2016 dan 2023, tutupan bangunan naik dari 28 menjadi 31 % luas kota. Hany
 2. Tambahkan jarak ke pantai sebagai prediktor. Berapa penurunan Moran's I residualnya?
 3. Jalankan analisis lahan rendah untuk Jakarta Utara (Kota Jakarta Utara) dan hitung location quotient-nya. Bagaimana dibandingkan dengan 0,60 di Surabaya?
 4. Ganti jarak garis lurus ke taman dengan jarak berjalan kaki di jaringan jalan OpenStreetMap (osmnx, seperti di Bab [-@sec-transit]). Berapa perubahan angka 12 %?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Tutupan pohon saja adalah bagian dari hijau yang memberi naungan dan bertranspirasi, sehingga koefisiennya dalam model B lebih mungkin tetap negatif (lebih sejuk). Kalau tandanya tidak lagi berbalik, koefisien positif total hijau dibawa oleh rumput dan semak: di heksagon dengan proporsi terbangun yang ditahan tetap, lebih banyak rumput terutama berarti lebih sedikit air atau lahan basah, dan rumput yang terpapar matahari di tanah kering pada musim kemarau tidak sejuk. Hijau bukan satu hal bagi panas; pohonlah yang menyejukkan.
+
+**2.** Tidak dihitung di bab ini. Jarak ke pantai menangkap angin laut dan tambak pantai yang sejuk, yang tampak sebagai pola pada peta residual, sehingga menambahkannya seharusnya menurunkan Moran's I residual dari 0,48, mungkin cukup besar, dan menaikkan R². Kalau Moran's I tetap jauh di atas nol, masih ada hal spasial lain yang hilang (bayangan angin, panas industri, kelembapan tanah); bagaimanapun, laporkan Moran's I yang baru beserta p-value permutasinya.
+
+**3.** Tidak dihitung di bab ini. Ulangi langkah yang sama untuk Kota Jakarta Utara: proporsi lahan di bawah 3 m dan proporsi tutupan bangunan baru (2016-2023) di atasnya. Jakarta Utara sebagian besar adalah lahan pantai rendah yang mengalami penurunan muka tanah dengan sedikit ruang di tempat lain, sehingga location quotient-nya kemungkinan jauh lebih dekat ke 1 daripada 0,60 Surabaya, atau di atasnya bila lahan reklamasi dan pantai sedang dibangun. Quotient mendekati 1 berarti pembangunan sama sekali tidak memperhitungkan elevasi.
+
+**4.** Tidak dihitung di bab ini. Bangun jaringan jalan dengan osmnx, hitung jarak jaringan dari setiap sel GHSL ke pintu taman terdekat (atau simpul tepinya), dan pakai 400 m pada jaringan. Jarak jalan kaki selalu sekurang-kurangnya sama dengan garis lurus, biasanya 20-40 % lebih panjang pada grid jalan dan lebih lagi di tempat sungai, rel kereta atau perumahan berpagar menghalangi, sehingga 12 % akan turun, mungkin di bawah 10 %.
+:::

@@ -127,3 +127,17 @@ Prakiraan ini berarti "jika sepuluh tahun ke depan berjalan seperti 2017-2025". 
 3. Gunakan modus label tiga tahunan (misalnya 2016-2018 untuk "2017") untuk meredam kedipan Dynamic World, lalu jalankan ulang prakiraan 2. Apakah jebakannya mengecil?
 4. Tumpangkan lahan terbangun baru 2035 pada dataran rendah rawan banjir dari Bab [-@sec-flood] (HAND di bawah 5 m). Berapa hektare pertumbuhan yang diprediksi berada di sana?
 5. Ulangi bab ini untuk pinggiran Jabodetabek (Bab [-@sec-urban-growth]) dan bandingkan trennya dalam hektare per tahun.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Tol Cisumdawu dibuka pada 2023 dan stasiun Tegalluar pada 2023, sehingga dalam data latih 2017-2022 keduanya belum sempat menarik pembangunan dan hindcast mungkin hampir tidak membaik. Dalam prakiraan, fitur baru menarik pertumbuhan yang diprediksi ke simpang susun tol dan area sekitar Tegalluar di timur, dengan mengurangi lereng utara. Fitur yang tidak bisa divalidasi oleh hindcast adalah asumsi skenario, dan harus disajikan sebagai skenario.
+
+**2.** Tidak dihitung di bab ini. GHSL memproyeksikan hampir tanpa pertumbuhan hingga 2030, sehingga memakai lajunya akan mengubah jauh lebih sedikit lahan menjadi terbangun dibanding tren Dynamic World sebesar 1.000 ha per tahun; peta 2035 akan tampak hampir sama dengan 2025. Pertahankan yang definisinya sesuai dengan peta yang ditampilkan (terbangun versi Dynamic World, termasuk desa, mengikuti tren 2017-2025 yang teramati), dan tampilkan versi berbasis GHSL sebagai skenario rendah, dengan definisi keduanya berdampingan.
+
+**3.** Tidak dihitung di bab ini. Modus tiga tahun meredam kedipan satu tahun (sawah yang dilabeli rumput pada satu tahun bera tetap menjadi lahan pertanian), sehingga proporsi area yang "berubah" antara 2017 dan 2022 seharusnya turun jauh di bawah 17 %, dan runtuhnya lahan pertanian pada prakiraan 2 menyusut. Ia tidak akan hilang: kedipan nyata bisa berlangsung lebih dari setahun, dan model tetap memperlakukan setiap perubahan label yang tersisa sebagai nyata. Prakiraan tren-kali-forest tetap pilihan yang lebih aman.
+
+**4.** Tidak dihitung di bab ini. Tumpangkan sel yang menjadi terbangun pada 2035 di atas HAND di bawah 5 m lalu jumlahkan luasnya. Harapkan proporsi yang tidak besar tetapi nyata, terpusat di bagian selatan dan tenggara cekungan yang datar di sepanjang Citarum serta sekitar Dayeuhkolot dan Bojongsoang, tempat banjir sudah sering terjadi. Angka itu, dalam hektare, yang harus dilihat perencana di samping prakiraan.
+
+**5.** Tidak dihitung di bab ini. Jalankan alur yang sama pada kotak di pinggiran Jabodetabek (Bekasi-Cikarang, Tangerang, Depok-Bogor), hitung tren lahan terbangun 2017-2025 dalam hektare per tahun, lalu bandingkan. Harapkan tren beberapa kali lipat 1.000 ha per tahun di Bandung Raya, karena pinggiran itu lebih luas dan lebih datar, dan perhatikan bahwa angka GHSL di Bab [-@sec-urban-growth] memakai definisi terbangun yang berbeda, jadi bandingkan tren dari produk yang sama.
+:::
