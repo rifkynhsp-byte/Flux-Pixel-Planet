@@ -62,7 +62,7 @@ Pomalaa has been mined for nickel since long before the satellite archives used 
 ::: {.callout-tip collapse="true"}
 ## Answers
 
-**1.** At 3 % over 30 years the present value of a constant yearly flow is 19.6 years' worth instead of 30. Services fall from 71,000-158,000 to about 46,000-103,000 US$ per hectare, and the break-even with the central carbon price (about 97,000 US$) becomes roughly 143,000-200,000 US$ per hectare instead of about 168,000-255,000. Carbon, lost once at the start, is not discounted, so it now carries a larger share of the total.
+**1.** At 3 % over 30 years the present value of a constant yearly flow is 19.6 years' worth instead of 30. Services fall from 71,000-158,000 to about 46,000-103,000 US$ per hectare, and the break-even with the central carbon price (about 97,000 US$) becomes roughly 143,000-200,000 US$ per hectare instead of 168,000-255,000 undiscounted over the same 30 years. Carbon, lost once at the start, is not discounted, so it now carries a larger share of the total.
 
 **2.** Look for a valuation study for Sulawesi or eastern Indonesia (for example a watershed or a protected area) that reports a value per hectare per year, and note its year, currency and which services it covers. Convert it to the same price year as the global values before substituting. Local values are often lower for marketed services and higher for water where downstream users depend on it; whichever way it moves, cite it and say why it is more appropriate.
 

@@ -62,7 +62,7 @@ Pomalaa sudah ditambang untuk nikel jauh sebelum arsip satelit yang dipakai di s
 ::: {.callout-tip collapse="true"}
 ## Jawaban
 
-**1.** Pada 3 % selama 30 tahun, nilai kini dari aliran tahunan yang konstan setara 19,6 tahun, bukan 30. Jasa turun dari 71.000-158.000 menjadi sekitar 46.000-103.000 US$ per hektare, dan titik impas dengan harga karbon tengah (sekitar 97.000 US$) menjadi kira-kira 143.000-200.000 US$ per hektare, bukan sekitar 168.000-255.000. Karbon, yang hilang sekali di awal, tidak didiskonto, sehingga kini menanggung bagian yang lebih besar dari total.
+**1.** Pada 3 % selama 30 tahun, nilai kini dari aliran tahunan yang konstan setara 19,6 tahun, bukan 30. Jasa turun dari 71.000-158.000 menjadi sekitar 46.000-103.000 US$ per hektare, dan titik impas dengan harga karbon tengah (sekitar 97.000 US$) menjadi kira-kira 143.000-200.000 US$ per hektare, bukan 168.000-255.000 tanpa diskonto selama 30 tahun yang sama. Karbon, yang hilang sekali di awal, tidak didiskonto, sehingga kini menanggung bagian yang lebih besar dari total.
 
 **2.** Cari studi valuasi untuk Sulawesi atau Indonesia timur (misalnya sebuah DAS atau kawasan lindung) yang melaporkan nilai per hektare per tahun, lalu catat tahun, mata uang dan jasa apa saja yang dicakup. Konversikan ke tahun harga yang sama dengan nilai global sebelum menggantinya. Nilai lokal sering lebih rendah untuk jasa yang dipasarkan dan lebih tinggi untuk air bila pengguna di hilir bergantung padanya; ke arah mana pun bergesernya, kutip sumbernya dan jelaskan mengapa lebih tepat.
 
