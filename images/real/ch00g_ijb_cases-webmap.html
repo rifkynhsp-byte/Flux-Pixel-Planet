@@ -17,7 +17,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_0155032dda973c8321e6cfd426dbc9a1 {
+                #map_eebba1034d0a368dbb56db2bfa1a8801 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -185,6 +185,51 @@
                 </style>
             
         
+    
+            
+                <style>
+                    .leaflet-image-layer {
+                        /* old android/safari*/
+                        image-rendering: -webkit-optimize-contrast;
+                        image-rendering: crisp-edges; /* safari */
+                        image-rendering: pixelated; /* chrome */
+                        image-rendering: -moz-crisp-edges; /* firefox */
+                        image-rendering: -o-crisp-edges; /* opera */
+                        -ms-interpolation-mode: nearest-neighbor; /* ie */
+                    }
+                </style>
+            
+        
+    
+            
+                <style>
+                    .leaflet-image-layer {
+                        /* old android/safari*/
+                        image-rendering: -webkit-optimize-contrast;
+                        image-rendering: crisp-edges; /* safari */
+                        image-rendering: pixelated; /* chrome */
+                        image-rendering: -moz-crisp-edges; /* firefox */
+                        image-rendering: -o-crisp-edges; /* opera */
+                        -ms-interpolation-mode: nearest-neighbor; /* ie */
+                    }
+                </style>
+            
+        
+    
+            
+                <style>
+                    .leaflet-image-layer {
+                        /* old android/safari*/
+                        image-rendering: -webkit-optimize-contrast;
+                        image-rendering: crisp-edges; /* safari */
+                        image-rendering: pixelated; /* chrome */
+                        image-rendering: -moz-crisp-edges; /* firefox */
+                        image-rendering: -o-crisp-edges; /* opera */
+                        -ms-interpolation-mode: nearest-neighbor; /* ie */
+                    }
+                </style>
+            
+        
     <script src="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.css"/>
 </head>
@@ -192,14 +237,14 @@
     
     <div style="position:absolute;bottom:18px;left:10px;z-index:9999;background:white;padding:4px 8px;border-radius:4px;font:12px sans-serif">Overlay opacity <input type="range" min="0" max="100" value="85" oninput="document.querySelectorAll('.leaflet-image-layer').forEach(function(e){e.style.opacity=this.value/100}.bind(this))"></div>
     
-            <div class="folium-map" id="map_0155032dda973c8321e6cfd426dbc9a1" ></div>
+            <div class="folium-map" id="map_eebba1034d0a368dbb56db2bfa1a8801" ></div>
         
 </body>
 <script>
     
     
-            var map_0155032dda973c8321e6cfd426dbc9a1 = L.map(
-                "map_0155032dda973c8321e6cfd426dbc9a1",
+            var map_eebba1034d0a368dbb56db2bfa1a8801 = L.map(
+                "map_eebba1034d0a368dbb56db2bfa1a8801",
                 {
                     center: [0.0, 0.0],
                     crs: L.CRS.EPSG3857,
@@ -211,13 +256,13 @@
 
                 }
             );
-            L.control.scale().addTo(map_0155032dda973c8321e6cfd426dbc9a1);
+            L.control.scale().addTo(map_eebba1034d0a368dbb56db2bfa1a8801);
 
             
 
         
     
-            var tile_layer_a8b24356ee9530528bc4e13efa2683f4 = L.tileLayer(
+            var tile_layer_e9ecb9c4b55fea8870b4c758e61046d7 = L.tileLayer(
                 "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {
   "minZoom": 0,
@@ -234,10 +279,10 @@
             );
         
     
-            tile_layer_a8b24356ee9530528bc4e13efa2683f4.addTo(map_0155032dda973c8321e6cfd426dbc9a1);
+            tile_layer_e9ecb9c4b55fea8870b4c758e61046d7.addTo(map_eebba1034d0a368dbb56db2bfa1a8801);
         
     
-            var tile_layer_6625f9136ae096304c75e8b90aaeb897 = L.tileLayer(
+            var tile_layer_f2662457d4c41752a90159fd91bb54c9 = L.tileLayer(
                 "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
                 {
   "minZoom": 0,
@@ -254,10 +299,10 @@
             );
         
     
-            tile_layer_6625f9136ae096304c75e8b90aaeb897.addTo(map_0155032dda973c8321e6cfd426dbc9a1);
+            tile_layer_f2662457d4c41752a90159fd91bb54c9.addTo(map_eebba1034d0a368dbb56db2bfa1a8801);
         
     
-            var image_overlay_d7e738bcb9663f60f2da26da712385b3 = L.imageOverlay(
+            var image_overlay_27aa92ffa388b7bb7489f039ee5361d6 = L.imageOverlay(
                 "raw/p7-banjir-demak.png",
                 [[-7.139653974140401, 110.46321018689282], [-6.707843578996774, 110.83894743727315]],
                 {
@@ -268,10 +313,10 @@
             );
         
     
-            image_overlay_d7e738bcb9663f60f2da26da712385b3.addTo(map_0155032dda973c8321e6cfd426dbc9a1);
+            image_overlay_27aa92ffa388b7bb7489f039ee5361d6.addTo(map_eebba1034d0a368dbb56db2bfa1a8801);
         
     
-            var image_overlay_fc0006185de2a4733885e67363c9b164 = L.imageOverlay(
+            var image_overlay_12b3fe583990edd9e9b52b296c75b7a6 = L.imageOverlay(
                 "raw/p7-banjir-kecamatan.png",
                 [[-7.139649508934126, 110.46321018689282], [-6.706117898840665, 110.83894743727315]],
                 {
@@ -282,7 +327,7 @@
             );
         
     
-            var image_overlay_f08b57262f5f34caaa448f1948792cb4 = L.imageOverlay(
+            var image_overlay_cd68b7e01d662dfcea8c88eea73660de = L.imageOverlay(
                 "raw/p7-api-oki.png",
                 [[-4.261308680654593, 104.6404490951329], [-2.3884149062614246, 106.18944719675095]],
                 {
@@ -293,7 +338,7 @@
             );
         
     
-            var image_overlay_70d9f54f51163387a237a718b5273fd7 = L.imageOverlay(
+            var image_overlay_e3f271a4a4d1832b666d0e68ef8b766b = L.imageOverlay(
                 "raw/p7-ubah-ppu.png",
                 [[-1.6051024641257219, 116.33548058790134], [-0.7984778670069672, 116.95504597773744]],
                 {
@@ -304,7 +349,7 @@
             );
         
     
-            var image_overlay_43f4f4b4aa824ea564db950578acc9bd = L.imageOverlay(
+            var image_overlay_6501bf6f7f51b6ba1e875947fa59f1e0 = L.imageOverlay(
                 "raw/p7-rawan-jabar.png",
                 [[-7.8209778482284245, 106.37030386746231], [-5.918145695274167, 108.84687963882291]],
                 {
@@ -315,7 +360,7 @@
             );
         
     
-            var image_overlay_3a441c6a412a26d5bf59d5cc8c57f74a = L.imageOverlay(
+            var image_overlay_4f72fee56c382b9427b213d81618de99 = L.imageOverlay(
                 "raw/p6-citra.png",
                 [[-2.463229749402372, 112.63898834923953], [-2.1911888669505504, 113.02075874712264]],
                 {
@@ -326,7 +371,7 @@
             );
         
     
-            var image_overlay_582265ce56d8bd231d6c2405e7029493 = L.imageOverlay(
+            var image_overlay_8bc8ea3d46684f735fccc17076056d66 = L.imageOverlay(
                 "raw/p6-model10.png",
                 [[-2.463229749402372, 112.63898834923953], [-2.1911888669505504, 113.02075874712264]],
                 {
@@ -337,7 +382,7 @@
             );
         
     
-            var image_overlay_85bc4aa37c4aada6827600319d6d7a3b = L.imageOverlay(
+            var image_overlay_e330278ab9cb5559964fe75a5456067a = L.imageOverlay(
                 "raw/p6-dw.png",
                 [[-2.463229749402372, 112.63898834923953], [-2.1911888669505504, 113.02075874712264]],
                 {
@@ -348,7 +393,7 @@
             );
         
     
-            var image_overlay_5afe35080aad05821b8e5a63ecb4d3d0 = L.imageOverlay(
+            var image_overlay_5238acf0d13899a1e40eb2d10e5c30a5 = L.imageOverlay(
                 "raw/p6-chm.png",
                 [[-2.463229749402372, 112.63898834923953], [-2.1911888669505504, 113.02075874712264]],
                 {
@@ -359,32 +404,68 @@
             );
         
     
-            var layer_control_4a2934e13cad728bbdf5301df3b4457d_layers = {
+            var image_overlay_380784b45e528ade2163876c92f76616 = L.imageOverlay(
+                "raw/p6-age.png",
+                [[-2.463229749402372, 112.63898834923953], [-2.1911888669505504, 113.02075874712264]],
+                {
+  "opacity": 0.85,
+  "interactive": false,
+  "zindex": 19,
+}
+            );
+        
+    
+            var image_overlay_754cdafe78a4695bcb12076a9af5fc00 = L.imageOverlay(
+                "raw/p6-disturb.png",
+                [[-2.463229749402372, 112.63898834923953], [-2.1911888669505504, 113.02075874712264]],
+                {
+  "opacity": 0.85,
+  "interactive": false,
+  "zindex": 20,
+}
+            );
+        
+    
+            var image_overlay_a10aaf811338c29b9ef9cd4ca906b342 = L.imageOverlay(
+                "raw/p6-kmeans.png",
+                [[-2.463229749402372, 112.63898834923953], [-2.1911888669505504, 113.02075874712264]],
+                {
+  "opacity": 0.85,
+  "interactive": false,
+  "zindex": 21,
+}
+            );
+        
+    
+            var layer_control_0ab9e8b33c73aeb4f5346b5099267d1d_layers = {
                 base_layers : {
-                    "Street map" : tile_layer_a8b24356ee9530528bc4e13efa2683f4,
-                    "Satellite basemap" : tile_layer_6625f9136ae096304c75e8b90aaeb897,
+                    "Street map" : tile_layer_e9ecb9c4b55fea8870b4c758e61046d7,
+                    "Satellite basemap" : tile_layer_f2662457d4c41752a90159fd91bb54c9,
                 },
                 overlays :  {
-                    "Banjir: Demak, March 2024" : image_overlay_d7e738bcb9663f60f2da26da712385b3,
-                    "Banjir: Demak, flooded area per kecamatan" : image_overlay_fc0006185de2a4733885e67363c9b164,
-                    "Api: Ogan Komering Ilir, 2023 fire season" : image_overlay_f08b57262f5f34caaa448f1948792cb4,
-                    "Ubah: NDVI 2024 minus 2019, Penajam Paser Utara" : image_overlay_70d9f54f51163387a237a718b5273fd7,
-                    "Rawan: landslide susceptibility, West Java 2024" : image_overlay_43f4f4b4aa824ea564db950578acc9bd,
-                    "Citra: Kota Besi, dry season 2024" : image_overlay_3a441c6a412a26d5bf59d5cc8c57f74a,
-                    "Model: the author\u0027s 10-class model, 2024" : image_overlay_582265ce56d8bd231d6c2405e7029493,
-                    "Model: Dynamic World, 2024" : image_overlay_85bc4aa37c4aada6827600319d6d7a3b,
-                    "Model: canopy height trained on GEDI" : image_overlay_5afe35080aad05821b8e5a63ecb4d3d0,
+                    "Banjir: Demak, March 2024" : image_overlay_27aa92ffa388b7bb7489f039ee5361d6,
+                    "Banjir: Demak, flooded area per kecamatan" : image_overlay_12b3fe583990edd9e9b52b296c75b7a6,
+                    "Api: Ogan Komering Ilir, 2023 fire season" : image_overlay_cd68b7e01d662dfcea8c88eea73660de,
+                    "Ubah: NDVI 2024 minus 2019, Penajam Paser Utara" : image_overlay_e3f271a4a4d1832b666d0e68ef8b766b,
+                    "Rawan: landslide susceptibility, West Java 2024" : image_overlay_6501bf6f7f51b6ba1e875947fa59f1e0,
+                    "Citra: Kota Besi, dry season 2024" : image_overlay_4f72fee56c382b9427b213d81618de99,
+                    "Model: the author\u0027s 10-class model, 2024" : image_overlay_8bc8ea3d46684f735fccc17076056d66,
+                    "Model: Dynamic World, 2024" : image_overlay_e330278ab9cb5559964fe75a5456067a,
+                    "Model: canopy height trained on GEDI" : image_overlay_5238acf0d13899a1e40eb2d10e5c30a5,
+                    "Deret: stand and plantation age" : image_overlay_380784b45e528ade2163876c92f76616,
+                    "Deret: year of the largest disturbance (LandTrendr)" : image_overlay_754cdafe78a4695bcb12076a9af5fc00,
+                    "Tutupan: six K-Means clusters, no samples" : image_overlay_a10aaf811338c29b9ef9cd4ca906b342,
                 },
             };
-            let layer_control_4a2934e13cad728bbdf5301df3b4457d = L.control.layers(
-                layer_control_4a2934e13cad728bbdf5301df3b4457d_layers.base_layers,
-                layer_control_4a2934e13cad728bbdf5301df3b4457d_layers.overlays,
+            let layer_control_0ab9e8b33c73aeb4f5346b5099267d1d = L.control.layers(
+                layer_control_0ab9e8b33c73aeb4f5346b5099267d1d_layers.base_layers,
+                layer_control_0ab9e8b33c73aeb4f5346b5099267d1d_layers.overlays,
                 {
   "position": "topright",
   "collapsed": false,
   "autoZIndex": true,
 }
-            ).addTo(map_0155032dda973c8321e6cfd426dbc9a1);
+            ).addTo(map_eebba1034d0a368dbb56db2bfa1a8801);
 
         
     
@@ -395,10 +476,10 @@
   "titleCancel": "Exit Full Screen",
   "forceSeparateButton": false,
 }
-            ).addTo(map_0155032dda973c8321e6cfd426dbc9a1);
+            ).addTo(map_eebba1034d0a368dbb56db2bfa1a8801);
         
     
-            map_0155032dda973c8321e6cfd426dbc9a1.fitBounds(
+            map_eebba1034d0a368dbb56db2bfa1a8801.fitBounds(
                 [[-7.8209778482284245, 104.6404490951329], [-0.7984778670069672, 116.95504597773744]],
                 {}
             );
