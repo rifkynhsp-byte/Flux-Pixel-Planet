@@ -261,7 +261,9 @@ Or change sensor. Radar sees through cloud entirely, because microwaves at Senti
 
 **1.** Without `updateMask` every cloudy and shadowed observation enters the median. At a river mouth the result is a hazy, brighter composite with speckles of white where clouds dominated, and dark patches where cloud shadow over water was counted as deeper water; the water edge looks blurred and mangrove fringes lose contrast. With the mask the water is uniformly dark, the fringe is sharp, and the only artefacts are where few clear observations remained.
 
-**2.** ```javascript
+**2.**
+
+```javascript
 var n = processed.select('B8').count().rename('n_clear');
 Map.addLayer(n, {min: 0, max: 30, palette: ['red', 'yellow', 'green']}, 'Clear observations');
 Map.addLayer(n.lt(10).selfMask(), {palette: ['red']}, 'Fewer than 10');

@@ -110,7 +110,26 @@
       });
   }
 
-  var PROVIDERS = { counterapi: counterapi };
+  // abacus.jasoncameron.dev, a free CountAPI replacement. No account, no key, CORS open.
+  //   /hit/<namespace>/<key>  increment and return {"value": n}
+  //   /get/<namespace>/<key>  read without incrementing (404 until the first hit)
+  // counterapi.dev retired its keyless v1 API (HTTP 410) in 2026, which hid the badge.
+  function abacus(key, increment) {
+    var url = 'https://abacus.jasoncameron.dev/' + (increment ? 'hit' : 'get') + '/' +
+              encodeURIComponent(NS) + '/' + encodeURIComponent(key.slice(0, 64));
+    return fetch(url, { method: 'GET', mode: 'cors', cache: 'no-store', referrerPolicy: 'no-referrer' })
+      .then(function (r) {
+        if (r.status === 404 && !increment) return { value: 0 };
+        if (!r.ok) throw new Error('counter ' + r.status);
+        return r.json();
+      })
+      .then(function (j) {
+        if (!j || typeof j.value !== 'number') throw new Error('counter: unrecognised reply');
+        return j.value;
+      });
+  }
+
+  var PROVIDERS = { counterapi: counterapi, abacus: abacus };
 
   /* ------------------------------------------------------------------ */
   /* Badge                                                               */

@@ -157,7 +157,9 @@ Alasan untuk berpindah adalah modelnya atau integrasinya, bukan kata "machine le
 
 **2.** Muat asset-nya, hitung jarak dengan `fastDistanceTransform` (dalam meter, pada skala 30 m), lalu tambahkan di samping indikator lain pada daftar tempat setiap indikator dirumuskan ulang di antara batas terburuk dan terbaik, dan beri slider bobot. Batas yang masuk akal: terburuk 3 km (satu jam berjalan kaki, atau perjalanan panjang di jalan yang buruk) dan terbaik 300 m atau kurang. Periksa terhadap persentil ke-5 sampai ke-95 di wilayah itu, seperti yang dilakukan aplikasi untuk indikator lain, dan tulis batasnya di kode.
 
-**3.** ```javascript
+**3.**
+
+```javascript
 var total = weights.reduce(function (a, b) { return a + b; }, 0);
 if (total === 0) {
   message.setValue('Atur setidaknya satu bobot di atas nol untuk melihat skor.');

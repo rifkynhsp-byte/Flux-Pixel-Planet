@@ -34,7 +34,7 @@ def insert(path, lang, answers):
     if n_ex != len(answers):
         return f"MISMATCH ({n_ex} exercises, {len(answers)} answers)"
     block = "\n::: {.callout-tip collapse=\"true\"}\n## " + title + "\n\n" + \
-            "\n\n".join(f"**{i}.** {a}" for i, a in enumerate(answers, 1)) + "\n:::\n"
+            "\n\n".join(f"**{i}.**" + ("\n\n" if a.startswith("```") else " ") + a for i, a in enumerate(answers, 1)) + "\n:::\n"
     body = s[:end].rstrip("\n") + "\n" + block + ("\n" + s[end:] if nxt else "")
     path.write_text(body, encoding="utf-8")
     return f"ok ({n_ex})"

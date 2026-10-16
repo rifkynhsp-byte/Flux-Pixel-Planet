@@ -50,14 +50,14 @@ window.LMS_CONFIG = {
   //   2. It is somebody else's free service. If it goes away or a reader
   //      blocks it, the badge hides itself and nothing else changes.
   //
-  // provider: 'counterapi' uses https://counterapi.dev, which needs no
-  // account and no key. Set provider to 'none' to switch the badge off.
+  // provider: 'abacus' uses https://abacus.jasoncameron.dev, which needs no
+  // account and no key ('counterapi' v1 was retired in 2026). Set provider to 'none' to switch the badge off.
   //
   // Change `namespace` if you fork this book, otherwise your readers and
   // mine land in the same bucket.
   visitors: {
     enabled: true,
-    provider: 'counterapi',
+    provider: 'abacus',              // counterapi.dev v1 was retired (HTTP 410); abacus needs no account
     namespace: 'planetary-scale-cloud-gis',
 
     // Count one visit per browser per this many hours. Reloading a chapter

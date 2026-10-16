@@ -270,7 +270,9 @@ Atau ganti sensor. Radar menembus awan sepenuhnya, karena gelombang mikro pada p
 
 **1.** Tanpa `updateMask` setiap pengamatan berawan dan berbayang masuk ke median. Di muara sungai hasilnya composite yang berkabut dan lebih terang, dengan bercak putih di tempat awan dominan, dan bercak gelap di tempat bayangan awan di atas air terhitung sebagai air yang lebih dalam; batas air tampak kabur dan tepian mangrove kehilangan kontras. Dengan masking, air gelap merata, tepian tajam, dan artefak hanya ada di tempat sedikit pengamatan cerah yang tersisa.
 
-**2.** ```javascript
+**2.**
+
+```javascript
 var n = processed.select('B8').count().rename('n_clear');
 Map.addLayer(n, {min: 0, max: 30, palette: ['red', 'yellow', 'green']}, 'Pengamatan cerah');
 Map.addLayer(n.lt(10).selfMask(), {palette: ['red']}, 'Kurang dari 10');

@@ -171,7 +171,9 @@ The honest test is empirical: map aspect, map your classification, and look for 
 
 **3.** Subtract the ETH canopy height from the surface model to estimate ground. Inside mangrove you should get 0-5 m, but expect noise of several metres: ETH height has its own error (often ±5-8 m in tall tropical stands) and the two products differ in date and resolution. If the corrected ground scatters from −10 to +15 m over a flat delta, the subtraction added more noise than it removed, and elevation as a predictor (or a generous 40 m rule) is the better choice.
 
-**4.** ```javascript
+**4.**
+
+```javascript
 var aspect = ee.Terrain.aspect(dem);
 Map.addLayer(aspect, {min: 0, max: 360, palette: ['red', 'yellow', 'green', 'blue', 'red']}, 'Aspect');
 ```

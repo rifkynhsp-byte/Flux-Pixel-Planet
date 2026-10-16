@@ -214,7 +214,9 @@ Kalau transformasi GeoTIFF tidak sama dengan grid asal patch, prediksinya berges
 
 **3.** Kesesuaian biasanya naik dari 5 × 5 ke 9 × 9 lalu mendatar atau turun, karena jendela yang lebih besar menambah konteks tetapi juga mengaburkan tepi dan mencampur kelas. Coba 3, 5, 9, 15 dan 21; jendela tempat kesesuaian berhenti membaik (sering sekitar 9-15 piksel, 90-150 m, pada skala ini) adalah titik ketika konteks tambahan tidak lagi bermanfaat. Titik itu berguna: ia memberi tahu seberapa banyak konteks spasial yang dibutuhkan masalahnya.
 
-**4.** ```python
+**4.**
+
+```python
 import rasterio
 from rasterio.transform import Affine
 t = Affine(PIXEL, 0, X0, 0, -PIXEL, Y0)        # grid yang sama dengan permintaan computePixels

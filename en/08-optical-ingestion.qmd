@@ -176,7 +176,9 @@ Normalised indices such as NDVI are immune to a pure scale factor, since it canc
 
 **2.** In a dry region a usable scene appears at 5-10 %. Over equatorial coasts you may need 40-60 % before anything survives, and the "best" scene still has cloud over part of the site, because the property describes the whole ~110 km tile, not your area. A high threshold before anything is usable means persistent cloud: plan on pixel-level masking and compositing, and on radar as a primary source.
 
-**3.** ```javascript
+**3.**
+
+```javascript
 var l9 = ee.ImageCollection('LANDSAT/LC09/C02/T1_L2')
   .filterBounds(aoi).filterDate('2023-01-01', '2024-01-01')
   .sort('CLOUD_COVER').first();

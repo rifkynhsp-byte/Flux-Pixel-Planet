@@ -174,7 +174,9 @@ Indeks ternormalisasi seperti NDVI kebal terhadap faktor skala murni, karena fak
 
 **2.** Di daerah kering citra yang layak muncul pada 5-10 %. Di pesisir khatulistiwa Anda mungkin perlu 40-60 % sebelum ada yang tersisa, dan citra "terbaik" pun masih berawan di sebagian lokasi, karena properti itu menggambarkan seluruh tile sekitar 110 km, bukan wilayah Anda. Ambang yang tinggi sebelum ada citra yang layak berarti awan persisten: rencanakan masking per piksel dan composite, serta radar sebagai sumber utama.
 
-**3.** ```javascript
+**3.**
+
+```javascript
 var l9 = ee.ImageCollection('LANDSAT/LC09/C02/T1_L2')
   .filterBounds(aoi).filterDate('2023-01-01', '2024-01-01')
   .sort('CLOUD_COVER').first();

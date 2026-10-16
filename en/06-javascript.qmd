@@ -189,7 +189,9 @@ var filtered = collection
 ::: {.callout-tip collapse="true"}
 ## Answers
 
-**1.** ```javascript
+**1.**
+
+```javascript
 var falseColour = {
   bands: ['B8', 'B4', 'B3'],   // NIR as red: healthy vegetation shows bright red
   min: 0,
@@ -199,7 +201,9 @@ var falseColour = {
 ```
 The defence: B4 and B3 over vegetation sit around 0.02-0.08, B8 around 0.25-0.40, so a `max` near 3000-4000 keeps dense canopy from saturating while bare soil and water stay distinguishable. A per-band `min`/`max` list is also fine.
 
-**2.** ```javascript
+**2.**
+
+```javascript
 var addNdwi = function (image) {
   var ndwi = image.normalizedDifference(['B3', 'B8']).rename('NDWI');   // McFeeters: green and NIR
   return image.addBands(ndwi);

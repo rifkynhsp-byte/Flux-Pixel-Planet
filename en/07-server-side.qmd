@@ -228,7 +228,9 @@ reduceRegion answers one question about one area. reduceRegions answers it for e
 ::: {.callout-tip collapse="true"}
 ## Answers
 
-**1.** ```javascript
+**1.**
+
+```javascript
 var addYear = function (image) {
   var year = image.date().get('year');
   return image.addBands(ee.Image.constant(year).rename('year').toInt16());
@@ -238,7 +240,9 @@ print(withYear.first().bandNames());   // includes 'year'
 ```
 `ee.Image.constant` accepts the server-side number directly, so no `getInfo()` is needed. Casting to an integer keeps the band small.
 
-**2.** ```javascript
+**2.**
+
+```javascript
 var results = collection.map(addNdvi);
 ```
 The loop issues one request per image and waits for each; with tens of images it is slow, and once the collection runs to hundreds or thousands (and `size().getInfo()` blocks before the loop starts) the browser stops responding. The mapped version returns immediately, because nothing is computed until you display or export it.

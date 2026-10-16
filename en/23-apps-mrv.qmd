@@ -157,7 +157,9 @@ The reason to hand off is the model or the integration, not the words "machine l
 
 **2.** Load the asset, compute distance with `fastDistanceTransform` (in metres, at 30 m scale), then add it beside the other indicators in the list where each is rescaled between a worst and a best limit, and give it a weight slider. Sensible limits: worst at 3 km (an hour's walk, or a long ride on poor roads) and best at 300 m or less. Check them against the 5th-95th percentiles over the area, as the app does for the others, and write them in the code.
 
-**3.** ```javascript
+**3.**
+
+```javascript
 var total = weights.reduce(function (a, b) { return a + b; }, 0);
 if (total === 0) {
   message.setValue('Set at least one weight above zero to see a score.');

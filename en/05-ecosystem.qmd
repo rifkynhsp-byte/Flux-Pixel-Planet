@@ -141,7 +141,9 @@ Give assets descriptive identifiers, because `projects/your-project/assets/mangr
 
 **2.** With `max: 3000` the colour ramp is stretched over a larger range, so mountains are no longer saturated at the top colour and you can see differences between 1,500 and 3,000 m. In exchange, lowlands below a few hundred metres collapse into nearly one colour, so detail in coastal plains and deltas is lost. The stretch decides which part of the data you can see; choose it for the question.
 
-**3.** ```javascript
+**3.**
+
+```javascript
 var slope = ee.Terrain.slope(dem);           // degrees, computed from the DEM
 Map.addLayer(slope, {min: 0, max: 45, palette: ['white', 'orange', 'brown']}, 'Slope');
 ```

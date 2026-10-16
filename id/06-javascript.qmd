@@ -188,7 +188,9 @@ var filtered = collection
 ::: {.callout-tip collapse="true"}
 ## Jawaban
 
-**1.** ```javascript
+**1.**
+
+```javascript
 var falseColour = {
   bands: ['B8', 'B4', 'B3'],   // NIR sebagai merah: vegetasi sehat tampak merah terang
   min: 0,
@@ -198,7 +200,9 @@ var falseColour = {
 ```
 Alasannya: B4 dan B3 di atas vegetasi sekitar 0,02-0,08, B8 sekitar 0,25-0,40, sehingga `max` sekitar 3000-4000 mencegah kanopi rapat jenuh sementara tanah terbuka dan air tetap terbedakan. Daftar `min`/`max` per band juga boleh.
 
-**2.** ```javascript
+**2.**
+
+```javascript
 var addNdwi = function (image) {
   var ndwi = image.normalizedDifference(['B3', 'B8']).rename('NDWI');   // McFeeters: hijau dan NIR
   return image.addBands(ndwi);

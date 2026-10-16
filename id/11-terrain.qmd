@@ -169,7 +169,9 @@ Ujinya empiris dan jujur: petakan aspect, petakan klasifikasi Anda, lalu cari ke
 
 **3.** Kurangi model permukaan dengan tinggi kanopi ETH untuk memperkirakan permukaan tanah. Di dalam mangrove seharusnya didapat 0-5 m, tetapi harapkan noise beberapa meter: tinggi ETH punya galatnya sendiri (sering ±5-8 m pada tegakan tropis yang tinggi) dan kedua produk berbeda tanggal dan resolusi. Kalau tanah hasil koreksi tersebar dari −10 sampai +15 m di delta yang datar, pengurangan itu menambah lebih banyak noise daripada yang dihilangkan, dan elevasi sebagai prediktor (atau aturan 40 m yang longgar) adalah pilihan yang lebih baik.
 
-**4.** ```javascript
+**4.**
+
+```javascript
 var aspect = ee.Terrain.aspect(dem);
 Map.addLayer(aspect, {min: 0, max: 360, palette: ['red', 'yellow', 'green', 'blue', 'red']}, 'Aspek');
 ```

@@ -214,7 +214,9 @@ If the GeoTIFF's transform does not match the grid the patches came from, the pr
 
 **3.** Agreement typically rises from 5 × 5 to 9 × 9 and then flattens or falls, because larger windows add context but also blur edges and mix classes. Try 3, 5, 9, 15 and 21; the window where agreement stops improving (often around 9-15 pixels, 90-150 m, at this scale) is where extra context no longer pays. That point is useful: it tells you how much spatial context the problem needs.
 
-**4.** ```python
+**4.**
+
+```python
 import rasterio
 from rasterio.transform import Affine
 t = Affine(PIXEL, 0, X0, 0, -PIXEL, Y0)        # the same grid as the computePixels request
