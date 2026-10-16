@@ -91,3 +91,15 @@ Neither problem changes the main conclusion, that greenery and temperature are s
 2. Draw the central-limit simulation for greenery instead of population density. At what *n* do the means look normal, and why sooner?
 3. Thin the sample so that no two pixels are closer than 1 km, and rerun the t-test for crops against grass. How does the p-value change, and what does that say about spatial independence?
 4. Add elevation (Copernicus DEM) to the regression. How much of the greenery effect remains?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. Above 50 people per hectare almost all trees and grass pixels are urban parks, street trees and gardens, and almost all built-up pixels are dense neighbourhoods. The tree pixels that remain are warmer than forest on the slopes, because they sit inside the city's heat, so the gap is expected to shrink from 8.35 °C; the class sizes also become very unequal, so report the counts and intervals beside the medians.
+
+**2.** Not computed in the chapter. Greenery (a probability between 0 and 1) is bounded and much less skewed than population density (skewness 3.4), so the distribution of sample means looks normal at a much smaller n, perhaps 10-30 instead of the hundreds needed for density. The central limit theorem works faster the closer the data are to symmetric and the lighter their tails.
+
+**3.** Not computed in the chapter. Thinning to 1 km spacing leaves far fewer pixels, so the standard error grows and the p-value rises, possibly by many orders of magnitude, although the 1.1 °C difference itself changes little. The original vanishingly small p-value treated 600 neighbouring pixels as 600 independent facts; the thinned test is closer to the true uncertainty for spatial data.
+
+**4.** Not computed in the chapter. Greener pixels in the Bandung basin are often higher and cooler for that reason too (temperature falls about 0.6 °C per 100 m), so adding elevation should reduce the greenery coefficient. The share that remains is the greenery effect at a given elevation; if most of it remains, greenery matters in its own right, if it drops by half or more, much of the "effect" was elevation. Check for collinearity between the two before reading the coefficients.
+:::

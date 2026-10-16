@@ -91,3 +91,15 @@ Tidak satu pun masalah itu mengubah kesimpulan utama, bahwa kehijauan dan suhu b
 2. Gambar simulasi limit pusat untuk kehijauan, bukan kepadatan penduduk. Pada *n* berapa rata-ratanya tampak normal, dan mengapa lebih cepat?
 3. Jarangkan sampel sehingga tidak ada dua piksel yang berjarak kurang dari 1 km, lalu ulangi uji t untuk tanaman pertanian dan rumput. Bagaimana nilai p berubah, dan apa artinya bagi asumsi saling bebas spasial?
 4. Tambahkan ketinggian (Copernicus DEM) ke regresi. Seberapa besar efek kehijauan yang tersisa?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Di atas 50 orang per hektare hampir semua piksel pohon dan rumput adalah taman kota, pohon pinggir jalan dan kebun, dan hampir semua piksel terbangun adalah permukiman padat. Piksel pohon yang tersisa lebih hangat daripada hutan di lereng, karena berada di dalam panas kota, sehingga selisihnya diperkirakan menyusut dari 8,35 °C; ukuran kelas juga menjadi sangat tidak seimbang, jadi laporkan jumlah piksel dan interval di samping mediannya.
+
+**2.** Tidak dihitung di bab ini. Kehijauan (probabilitas antara 0 dan 1) terbatas dan jauh kurang menceng daripada kepadatan penduduk (skewness 3,4), sehingga sebaran rata-rata sampel tampak normal pada n yang jauh lebih kecil, mungkin 10-30, bukan ratusan seperti untuk kepadatan. Teorema limit pusat bekerja lebih cepat bila datanya makin simetris dan ekornya makin ringan.
+
+**3.** Tidak dihitung di bab ini. Penjarangan ke jarak 1 km menyisakan jauh lebih sedikit piksel, sehingga galat baku membesar dan p-value naik, mungkin berlipat-lipat orde besaran, meskipun selisih 1,1 °C itu sendiri sedikit berubah. P-value asli yang sangat kecil memperlakukan 600 piksel bertetangga sebagai 600 fakta independen; uji yang dijarangkan lebih dekat dengan ketidakpastian sebenarnya untuk data spasial.
+
+**4.** Tidak dihitung di bab ini. Piksel yang lebih hijau di cekungan Bandung sering juga lebih tinggi dan karena itu lebih sejuk (suhu turun sekitar 0,6 °C per 100 m), sehingga menambahkan elevasi seharusnya mengecilkan koefisien kehijauan. Bagian yang tersisa adalah efek kehijauan pada elevasi yang sama; kalau sebagian besar tersisa, kehijauan berpengaruh dengan sendirinya, kalau turun setengah atau lebih, banyak dari "efek" itu sebenarnya elevasi. Periksa kolinearitas keduanya sebelum membaca koefisien.
+:::

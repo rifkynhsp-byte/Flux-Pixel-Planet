@@ -79,3 +79,15 @@ The anomaly map subtracts the mean CO of 8-22 September 2020 from the same fortn
 2. Repeat the season chart for 2015, the worst fire year of the last two decades, or for 2023. Is the lag at Palangka Raya still about one day?
 3. Add ERA5 daily wind at 850 hPa to the anomaly map as arrows. Does the plume lie downwind of the fires?
 4. Compute the share of 2019 fire pixel-days that fell on peat, using the peat map of Chapter [-@sec-peat], for Sumatra and Kalimantan separately.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. Count, for each city, the days with ai above 1. Expect Palangka Raya and Pekanbaru to cross it on the most days and the distant cities on fewer, with peaks in mid-September as for CO. The aerosol index has more gaps, because it is retrieved only where cloud allows and it is high over thick smoke and dust alike, so its day counts are lower and noisier than CO's; agreement in timing, not in exact counts, is the test.
+
+**2.** Not computed in the chapter. In 2015 the fires were larger and longer (a strong El Niño), so CO stayed high for weeks and the day-to-day anomalies are smaller relative to the season; the one-day lag at Palangka Raya may still appear, but weaker or spread over 0-2 days. In 2023 (also El Niño, but fewer fires) the signal is weaker. Note that Sentinel-5P CO begins in 2018, so 2015 needs another CO source such as MOPITT or CAMS.
+
+**3.** Not computed in the chapter. In September the south-east monsoon at 850 hPa blows from the south-east over Sumatra and Kalimantan, so the arrows should point from the fire regions towards the Malacca Strait, Singapore and Sarawak, and the CO anomaly should lie downwind of the fires. Days when the plume lies elsewhere usually show a different wind; that is the check a lag correlation alone cannot make.
+
+**4.** Not computed in the chapter. Overlay FIRMS 2019 fire pixels on the peat map and divide the pixel-days on peat by the total for each island. Expect a large share in both, typically more than half, with Central Kalimantan and Riau dominated by peat; because 1 km fire pixels straddle peat edges, report the share at the pixel centre and say so.
+:::

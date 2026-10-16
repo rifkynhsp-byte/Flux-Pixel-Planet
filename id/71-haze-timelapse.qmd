@@ -79,3 +79,15 @@ Peta anomali mengurangkan rata-rata CO 8-22 September 2020 dari dua minggu yang 
 2. Ulangi grafik musim untuk 2015, tahun kebakaran terburuk dalam dua dekade terakhir, atau untuk 2023. Apakah jeda di Palangka Raya masih sekitar satu hari?
 3. Tambahkan angin harian ERA5 pada 850 hPa ke peta anomali sebagai panah. Apakah gumpalan asap berada di hilir angin dari api?
 4. Hitung porsi piksel-hari api 2019 yang jatuh di gambut, memakai peta gambut Bab [-@sec-peat], untuk Sumatra dan Kalimantan secara terpisah.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Hitung, untuk setiap kota, jumlah hari dengan ai di atas 1. Harapkan Palangka Raya dan Pekanbaru melewatinya paling sering dan kota-kota yang jauh lebih jarang, dengan puncak pada pertengahan September seperti CO. Indeks aerosol lebih banyak celahnya, karena hanya dapat diambil bila awan memungkinkan, dan tinggi baik di atas asap tebal maupun debu, sehingga jumlah harinya lebih rendah dan lebih berderau daripada CO; yang diuji adalah kesesuaian waktu, bukan jumlah persisnya.
+
+**2.** Tidak dihitung di bab ini. Pada 2015 kebakaran lebih besar dan lebih lama (El Niño kuat), sehingga CO tetap tinggi berminggu-minggu dan anomali harian lebih kecil dibanding musimnya; jeda satu hari di Palangka Raya mungkin masih muncul, tetapi lebih lemah atau tersebar di 0-2 hari. Pada 2023 (juga El Niño, tetapi kebakaran lebih sedikit) sinyalnya lebih lemah. Perhatikan bahwa CO Sentinel-5P baru tersedia sejak 2018, sehingga 2015 memerlukan sumber CO lain seperti MOPITT atau CAMS.
+
+**3.** Tidak dihitung di bab ini. Pada September, monsun tenggara di 850 hPa bertiup dari tenggara di atas Sumatra dan Kalimantan, sehingga panah seharusnya mengarah dari wilayah kebakaran ke Selat Malaka, Singapura dan Sarawak, dan anomali CO seharusnya berada di arah hilir angin dari kebakaran. Hari-hari ketika plume berada di tempat lain biasanya menunjukkan angin yang berbeda; itulah pemeriksaan yang tidak bisa dilakukan korelasi jeda saja.
+
+**4.** Tidak dihitung di bab ini. Tumpangkan piksel kebakaran FIRMS 2019 pada peta gambut dan bagi jumlah piksel-hari di gambut dengan totalnya untuk setiap pulau. Harapkan proporsi yang besar di keduanya, biasanya lebih dari setengah, dengan Kalimantan Tengah dan Riau didominasi gambut; karena piksel kebakaran 1 km bisa melintasi tepi gambut, laporkan proporsi berdasarkan titik pusat piksel dan sebutkan hal itu.
+:::

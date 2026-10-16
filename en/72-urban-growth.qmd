@@ -102,3 +102,15 @@ One caution: a model that produces yearly maps can drift, and the early years of
 2. Replace the Monas distance in the growth model with distance to the nearest toll gate (OpenStreetMap). Does the AUC improve, and does the odds ratio for distance to the centre change?
 3. Overlay the 2020-2040 growth probability on the JRC flood hazard map or the HAND layer of Chapter [-@sec-flood]. How much of the high-probability land is flood-prone?
 4. Repeat the radial profile for Surabaya, one of the two cities with LCRPGR > 1. Where does its edge move?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. Use the same formula, LCR = ln(U_end/U_start)/years and PGR likewise, for 1990-2000 and 2000-2020. If the 1990s ratio is above 1 and 2000-2020 is 0.34, the region switched from spreading to densifying; the falling built-up area per resident (35 to 26 m² from 2000 to 2020) suggests densification in the later period. Remember that pre-2000 GHSL epochs are reconstructed backwards and less certain.
+
+**2.** Not computed in the chapter. Toll gates mark where new estates and industrial zones get access (Cikarang, Serpong, BSD), so the AUC may improve slightly above 0.88, but distance to the centre and to toll gates are correlated, so much of their information overlaps. Replacing Monas removes the centre term; compare the toll-gate odds ratio with the old 0.55 per 15.5 km, and check whether the edge (0.43) and population (2.7) odds ratios change, which shows how much of the centre effect was really access.
+
+**3.** Not computed in the chapter. Threshold the growth probability (for example above 0.5), overlay the JRC flood hazard or HAND below a few metres, and report the flood-prone share of the high-probability area. Expect a substantial share on the northern coastal plain of Jakarta, Bekasi and Tangerang, which is low and flat, and little on the southern slopes. That share is what a planner or insurer would ask for first.
+
+**4.** Not computed in the chapter. Centre the rings on Surabaya's old centre (Tugu Pahlawan) and draw the built-up share for each epoch. With LCRPGR of 1.32, expect the edge (where the profile falls below about 50 %) to move outward faster than in Jabodetabek, along the corridors to Sidoarjo in the south and Gresik in the west, while the Madura Strait limits growth to the north and east.
+:::

@@ -102,3 +102,15 @@ Satu catatan: model yang menghasilkan peta tahunan bisa bergeser, dan tahun-tahu
 2. Ganti jarak ke Monas dalam model pertumbuhan dengan jarak ke gerbang tol terdekat (OpenStreetMap). Apakah AUC membaik, dan apakah odds ratio jarak ke pusat berubah?
 3. Tumpangkan peluang pertumbuhan 2020-2040 pada peta bahaya banjir JRC atau layer HAND di Bab [-@sec-flood]. Berapa bagian lahan berpeluang tinggi yang rawan banjir?
 4. Ulangi profil radial untuk Surabaya, satu dari dua kota dengan LCRPGR > 1. Ke mana tepinya bergeser?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Gunakan rumus yang sama, LCR = ln(U_akhir/U_awal)/tahun dan PGR serupa, untuk 1990-2000 dan 2000-2020. Kalau rasio 1990-an di atas 1 dan 2000-2020 bernilai 0,34, wilayah itu beralih dari menyebar ke memadat; turunnya luas terbangun per penduduk (35 ke 26 m² dari 2000 ke 2020) mengisyaratkan pemadatan pada periode yang lebih akhir. Ingat bahwa epoch GHSL sebelum 2000 direkonstruksi mundur dan kurang pasti.
+
+**2.** Tidak dihitung di bab ini. Gerbang tol menandai tempat kawasan perumahan dan industri baru mendapat akses (Cikarang, Serpong, BSD), sehingga AUC mungkin sedikit naik di atas 0,88, tetapi jarak ke pusat dan ke gerbang tol saling berkorelasi, sehingga informasinya banyak tumpang tindih. Mengganti Monas menghapus suku pusat; bandingkan odds ratio gerbang tol dengan 0,55 per 15,5 km sebelumnya, dan periksa apakah odds ratio tepi (0,43) dan penduduk (2,7) berubah, yang menunjukkan seberapa besar efek pusat sebenarnya adalah akses.
+
+**3.** Tidak dihitung di bab ini. Ambangkan probabilitas pertumbuhan (misalnya di atas 0,5), tumpangkan bahaya banjir JRC atau HAND di bawah beberapa meter, lalu laporkan proporsi rawan banjir dari area berprobabilitas tinggi. Harapkan proporsi yang cukup besar di dataran pantai utara Jakarta, Bekasi dan Tangerang yang rendah dan datar, dan sedikit di lereng selatan. Proporsi itulah yang pertama kali ditanyakan perencana atau perusahaan asuransi.
+
+**4.** Tidak dihitung di bab ini. Pusatkan cincin di pusat lama Surabaya (Tugu Pahlawan) dan gambar proporsi terbangun untuk setiap epoch. Dengan LCRPGR 1,32, harapkan tepi kota (tempat profil turun di bawah sekitar 50 %) bergerak keluar lebih cepat daripada Jabodetabek, sepanjang koridor ke Sidoarjo di selatan dan Gresik di barat, sementara Selat Madura membatasi pertumbuhan ke utara dan timur.
+:::
