@@ -213,3 +213,26 @@ reduceRegion menjawab satu pertanyaan untuk satu wilayah. reduceRegions menjawab
 2. Ambil perulangan di atas dan tulis ulang dengan `.map()`. Ukur keduanya kalau Anda cukup sabar, dan catat di titik mana perulangan berhenti sekadar lambat dan mulai tidak bisa dipakai.
 3. Hitung elevasi rata-rata area studi Anda pada 30 meter dan pada 300 meter. Jelaskan selisihnya dalam satu kalimat.
 4. Tulis fungsi yang dipetakan tanpa pernyataan `return`, dengan sengaja, lalu baca galatnya. Galat itu tidak jelas, dan sekali mengenalinya sudah sepadan dengan latihan ini.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** ```javascript
+var addYear = function (image) {
+  var year = image.date().get('year');
+  return image.addBands(ee.Image.constant(year).rename('year').toInt16());
+};
+var withYear = collection.map(addYear);
+print(withYear.first().bandNames());   // memuat 'year'
+```
+`ee.Image.constant` langsung menerima angka di sisi server, sehingga `getInfo()` tidak diperlukan. Mengubahnya menjadi integer membuat band tetap kecil.
+
+**2.** ```javascript
+var results = collection.map(addNdvi);
+```
+Loop mengirim satu permintaan per citra dan menunggu masing-masing; dengan puluhan citra ia lambat, dan ketika koleksi mencapai ratusan atau ribuan (dan `size().getInfo()` sudah menahan browser sebelum loop dimulai) browser berhenti merespons. Versi `.map()` langsung selesai, karena tidak ada yang dihitung sampai Anda menampilkan atau mengekspornya.
+
+**3.** Rata-rata pada 300 m biasanya berbeda beberapa meter atau kurang di medan landai dan lebih besar di medan curam. Pada 300 m setiap nilai dihitung dari tingkat piramida yang lebih kasar, sehingga lembah dan puncak dirata-ratakan bersama dan piksel di tepi batas dihitung berbeda. Satu kalimat: "Rata-ratanya berubah karena skala mengubah piksel mana dan berapa banyak yang masuk ke perhitungan; skala adalah bagian dari hasil."
+
+**4.** Earth Engine melaporkan pesan seperti `User-defined methods must return a value`, sering kali menunjuk ke tempat lain. Perbaikannya cukup `return image.addBands(...)`. Setiap kali `.map()` gagal secara misterius, periksa `return` lebih dulu.
+:::

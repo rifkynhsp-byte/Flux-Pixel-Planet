@@ -255,3 +255,20 @@ Or change sensor. Radar sees through cloud entirely, because microwaves at Senti
 2. Add an observation count band and map it. Identify the parts of your study area where fewer than ten clear observations contributed, and consider what that means for any classification built there.
 3. Build a wet season composite and a dry season composite separately. Difference their NDWI bands and interpret the result.
 4. Replace `median()` with `qualityMosaic('NDVI')` and compare mangrove edges between the two. Which would you submit with a monitoring report, and what would you say in the methods section?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Without `updateMask` every cloudy and shadowed observation enters the median. At a river mouth the result is a hazy, brighter composite with speckles of white where clouds dominated, and dark patches where cloud shadow over water was counted as deeper water; the water edge looks blurred and mangrove fringes lose contrast. With the mask the water is uniformly dark, the fringe is sharp, and the only artefacts are where few clear observations remained.
+
+**2.** ```javascript
+var n = processed.select('B8').count().rename('n_clear');
+Map.addLayer(n, {min: 0, max: 30, palette: ['red', 'yellow', 'green']}, 'Clear observations');
+Map.addLayer(n.lt(10).selfMask(), {palette: ['red']}, 'Fewer than 10');
+```
+Coastal pixels and the windward slopes of hills usually have the fewest clear looks. A classification there rests on a few dates, possibly all from one season, so its median is less stable and class confidence lower. Report the count map with the classification, or mask areas below a threshold you can defend.
+
+**3.** Filter each composite with `ee.Filter.calendarRange` on months (for much of Indonesia roughly November-March wet, June-September dry). In the difference `NDWI_wet − NDWI_dry`, positive values are areas wetter in the wet season: seasonally flooded fields, swamp margins and rising rivers. Values near zero are permanent water or permanently dry land. Strongly negative values usually signal a problem: few clear dry-season looks, or residual cloud in one composite.
+
+**4.** `qualityMosaic('NDVI')` takes, at each pixel, the greenest date. Mangrove edges look crisper and greener, and the fringe can appear slightly wider, because each pixel uses its best day, sometimes a low-tide date. The median is the fairer summary of typical condition. For a monitoring report submit the median and state: "Annual median of all cloud-masked Sentinel-2 L2A scenes (SCL classes 3, 8, 9, 10, 11 removed), YYYY; effective date mid-year; clear-observation count shown in Figure X."
+:::

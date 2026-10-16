@@ -166,3 +166,22 @@ Indeks ternormalisasi seperti NDVI kebal terhadap faktor skala murni, karena fak
 2. Naikkan ambang awan bertahap dari 5 ke 80 persen. Pada ambang berapa citra terbaik menjadi layak pakai, dan apa yang itu beri tahu tentang iklim setempat?
 3. Muat arsip Landsat 9 Collection 2 Level-2 di area dan tahun yang sama. Terapkan skala dan offsetnya, tampilkan dalam warna sejati, lalu bandingkan secara visual dengan hasil Sentinel-2.
 4. Cetak seluruh metadata satu citra dan temukan tiga properti, selain persentase awan, yang bisa berguna dijadikan filter.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Cetak `size()` setelah setiap langkah. Hasil yang umum di daerah tropis: `filterBounds` menyimpan semua citra di atas wilayah itu sepanjang waktu (ribuan), `filterDate` memangkasnya menjadi satu tahun (sekitar 70-150 citra, tergantung apakah wilayah Anda berada di tumpang tindih tile), dan filter awan membuang paling banyak di daerah lembap, sering hanya menyisakan kurang dari sepuluh pada 20 %. Kalau filter awan membuang hampir semuanya, itu informasi tentang iklim, dan Bab [-@sec-cloud] adalah jawabannya.
+
+**2.** Di daerah kering citra yang layak muncul pada 5-10 %. Di pesisir khatulistiwa Anda mungkin perlu 40-60 % sebelum ada yang tersisa, dan citra "terbaik" pun masih berawan di sebagian lokasi, karena properti itu menggambarkan seluruh tile sekitar 110 km, bukan wilayah Anda. Ambang yang tinggi sebelum ada citra yang layak berarti awan persisten: rencanakan masking per piksel dan composite, serta radar sebagai sumber utama.
+
+**3.** ```javascript
+var l9 = ee.ImageCollection('LANDSAT/LC09/C02/T1_L2')
+  .filterBounds(aoi).filterDate('2023-01-01', '2024-01-01')
+  .sort('CLOUD_COVER').first();
+var sr = l9.select('SR_B.*').multiply(0.0000275).add(-0.2);
+Map.addLayer(sr, {bands: ['SR_B4', 'SR_B3', 'SR_B2'], min: 0, max: 0.25}, 'Landsat 9 warna asli');
+```
+Dibanding Sentinel-2 pada 10 m, Landsat 30 m tampak lebih lembut: kanal sempit, jalan dan tepian menjadi kabur, tetapi warnanya seharusnya sangat mirip setelah keduanya dalam reflektans (rentang 0-0,25). Kalau Landsat tampak pucat, offset-nya terlewat.
+
+**4.** Properti yang berguna antara lain `MGRS_TILE` (pakai satu grid tile, hindari duplikat di area tumpang tindih), `SENSING_ORBIT_NUMBER` atau `SENSING_ORBIT_DIRECTION` (geometri pandang yang konsisten), `MEAN_SOLAR_ZENITH_ANGLE` (hindari citra dengan matahari rendah), `SPACECRAFT_NAME` (Sentinel-2A/B/C), dan `PROCESSING_BASELINE` (citra baseline 04.00 ke atas membawa offset tambahan −1000 pada Level-1C). Memfilter properti pandang dan pemrosesan membuat deret waktu lebih konsisten.
+:::

@@ -184,3 +184,15 @@ The fusion stack above uses radar as one layer among many. On its own, radar doe
 2. Remove `.divide(10000)` from the cloud masking function and rerun. The map looks almost unchanged and every index is wrong. Explain why.
 3. Call `getAnalysisReadyData` for 2019 and check the Console for which PALSAR epoch the fallback selected.
 4. Composite ascending and descending Sentinel-1 orbits separately and difference them. Over flat delta, over nearby hills. Where is the difference large, and why?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** In the optical composite mangrove and inland forest look much the same green. In VH at high tide the mangrove fringe is markedly brighter than the forest behind it and very much brighter than the dark open water: trunks standing in water send the pulse straight back (double bounce). If the fringe does not stand out, check the tide at the acquisition time; at low tide the effect weakens.
+
+**2.** Sentinel-2 SR is stored as integers ×10,000. Without the division the reflectance bands run 0-10,000 while radar and other bands keep their own units. The map still looks right because the display stretch is set separately. NDVI happens to survive, because a scale factor cancels in a normalised difference, but anything that mixes bands with fixed coefficients or thresholds (EVI with its constants, a threshold like `NDWI > 0.3` on a band ratio with an offset, or a classifier comparing reflectance with radar) is now wrong. The image can look fine while every quantitative product is off.
+
+**3.** The PALSAR yearly mosaics exist for 2007-2010 and 2015-2024. For 2019 the function takes the epochs of 2018 and 2019, sorts them so 2019 is laid last, and mosaics them: 2019 values wherever 2019 has data, with gaps filled from 2018. Printing `palsarCollection.filter(ee.Filter.calendarRange(2018, 2019, 'year')).aggregate_array('system:index')` shows both epochs.
+
+**4.** Over the flat delta the ascending-minus-descending difference is near zero, within about ±1 dB of speckle, because flat ground looks the same from either side. Over hills it reaches several dB, positive on slopes facing the ascending pass and negative on slopes facing the descending one: foreshortening makes slopes facing the radar bright and slopes facing away dark. That is why a time series must keep one orbit direction.
+:::

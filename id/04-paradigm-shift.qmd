@@ -119,3 +119,13 @@ Semua itu tidak mengubah kesimpulannya. Untuk kelas pertanyaan yang dibahas buku
 1. Perkirakan volume unduhan untuk proyek Anda yang terakhir: jumlah citra, ukuran rata-rata, dan jam yang habis untuk transfer dan pembongkaran. Simpan angkanya. Itu garis dasar yang sedang Anda gantikan.
 2. Tulis satu kalimat berisi pertanyaan lingkungan yang akan Anda ajukan seandainya volume data bukan kendala. Kembalilah ke kalimat itu setelah Bab [-@sec-accuracy].
 3. Jelaskan perbedaan klien dan server kepada rekan yang tidak menulis kode. Bila penjelasannya lebih dari dua menit, model mentalnya belum mengendap.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Contoh hitungan: 300 tile Sentinel-2 × sekitar 800 MB = 240 GB. Pada 20 MB/s itu sekitar 3,3 jam unduhan bila tidak ada yang gagal, ditambah ekstraksi dan penyaringan awan, biasanya satu sampai tiga hari kerja yang harus ditunggui, dan disk untuk menampungnya. Di Earth Engine pemilihan yang sama hanya satu filter dan beberapa detik. Angka yang Anda simpan adalah waktu untuk memindahkan data, bagian yang dihapus oleh platform ini.
+
+**2.** Tidak ada satu jawaban benar. Jawaban yang baik bersifat regional dan berulang, misalnya "luas dan kehilangan mangrove tahunan untuk setiap provinsi di Indonesia sejak 2000". Setelah Bab [-@sec-accuracy], tanyakan apa yang masih menghalangi: biasanya bukan lagi volume data, melainkan label untuk pelatihan dan validasi independen, serta ketidakpastian yang dapat dipertanggungjawabkan.
+
+**3.** Versi dua menit: "Laptop saya tidak mengerjakan perhitungannya. Saya menulis resep: satelit apa, tanggal berapa, apa yang dihitung. Server Google menyimpan semua citra dan memasak resep itu di sana, lalu hanya mengirim hasilnya, berupa peta atau angka. Karena itu saya bisa meneliti satu negara dari laptop, dan karena itu pula saya tidak bisa mencetak sejuta piksel ke layar." Kalau Anda masih perlu kata "lazy evaluation" atau "object graph", coba lagi tanpa kata-kata itu.
+:::

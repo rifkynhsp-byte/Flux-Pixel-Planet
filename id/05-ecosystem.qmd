@@ -132,3 +132,19 @@ Beri aset nama yang deskriptif, karena `projects/proyek-anda/assets/mangrove_tra
 2. Ubah `max` dari 1200 menjadi 3000, jalankan ulang, dan tulis satu kalimat tentang informasi apa yang didapat peta dan apa yang hilang.
 3. Cari `ee.Terrain.slope` di tab Docs. Tambahkan layer slope ke skrip tanpa melihat Bab [-@sec-terrain] lebih dulu.
 4. Simpan skripnya ke sebuah repositori lalu buat URL lewat **Get Link**. Buka di jendela penyamaran untuk memastikan ia benar-benar bisa direproduksi.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Untuk Indonesia puncak resminya adalah Puncak Jaya (Carstensz Pyramid), 4.884 m. Inspector akan menunjukkan nilai yang lebih rendah pada piksel SRTM tertinggi. Alasannya: setiap piksel adalah rata-rata 30 m (atau 90 m), sehingga puncak yang runcing terhaluskan ke bawah; SRTM diakuisisi tahun 2000 dengan radar, yang memiliki void dan kesalahan pada puncak curam berlapis es; dan angka resmi memakai datum vertikal dan survei yang berbeda. Selisih puluhan meter wajar dan merupakan pelajaran tentang apa itu piksel, bukan kesalahan skrip.
+
+**2.** Dengan `max: 3000` gradasi warna direntangkan pada rentang yang lebih besar, sehingga pegunungan tidak lagi jenuh di warna teratas dan perbedaan antara 1.500 dan 3.000 m terlihat. Imbalannya, dataran rendah di bawah beberapa ratus meter menyatu menjadi hampir satu warna, sehingga detail dataran pesisir dan delta hilang. Rentang warna menentukan bagian data mana yang terlihat; pilihlah sesuai pertanyaannya.
+
+**3.** ```javascript
+var slope = ee.Terrain.slope(dem);           // derajat, dihitung dari DEM
+Map.addLayer(slope, {min: 0, max: 45, palette: ['white', 'orange', 'brown']}, 'Kemiringan');
+```
+`ee.Terrain.slope` memerlukan citra elevasi dalam meter dan menghasilkan kemiringan dalam derajat. Kalau layer-nya putih semua, pastikan yang Anda masukkan adalah DEM, bukan salinan yang sudah divisualisasikan.
+
+**4.** Hasil yang bersih membuka skrip tanpa error variabel tak terdefinisi dan menggambar layer yang sama. Kalau gagal di jendela privat, penyebab umumnya adalah geometri yang digambar di peta tetapi tidak tersimpan bersama tautan (buka **Get Link** setelah menyimpan), atau asset yang masih privat: bagikan asset itu atau buat bisa dibaca oleh siapa pun yang memiliki tautan.
+:::

@@ -161,3 +161,19 @@ The honest test is empirical: map aspect, map your classification, and look for 
 2. Tighten the envelope to below 10 metres and map what it excludes. Are those areas really not mangrove?
 3. Replace elevation with the canopy subtracted estimate and compare. Has the subtraction added more noise than it removed?
 4. Map aspect over a hilly part of your study area alongside your classification. Do any classes track the compass?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** A mature stand on a tidal flat sits on ground about 0-3 m above mean sea level, yet the surface model reports roughly 20-28 m, the canopy top. The gap of about 20-25 m is the canopy offset. It is not an error in the DEM: the DEM is a surface model and is doing its job.
+
+**2.** Map `envelope.and(elev.gte(10))`, the pixels the tighter rule removes. Over the delta they are almost all tall, mature mangrove (high elevation because of the canopy, flat, next to water), plus some tall stands of nipa and back-mangrove. Those are real mangrove, and the most carbon-rich, so the 10 m rule is wrong on a surface model. The 40 m rule removes hills, which is what you wanted.
+
+**3.** Subtract the ETH canopy height from the surface model to estimate ground. Inside mangrove you should get 0-5 m, but expect noise of several metres: ETH height has its own error (often ±5-8 m in tall tropical stands) and the two products differ in date and resolution. If the corrected ground scatters from −10 to +15 m over a flat delta, the subtraction added more noise than it removed, and elevation as a predictor (or a generous 40 m rule) is the better choice.
+
+**4.** ```javascript
+var aspect = ee.Terrain.aspect(dem);
+Map.addLayer(aspect, {min: 0, max: 360, palette: ['red', 'yellow', 'green', 'blue', 'red']}, 'Aspect');
+```
+Put the classification over it and look on slopes steeper than about 15°. If one class appears mostly on north-facing (or south-facing) slopes and another class on the opposite side of the same hills, the classifier has learned illumination. Fix it with topographic correction (C or SCS+C) or by adding aspect and slope as predictors.
+:::

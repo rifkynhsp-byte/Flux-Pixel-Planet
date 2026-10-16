@@ -184,3 +184,29 @@ var filtered = collection
 2. Tulis sebuah fungsi yang menerima citra dan mengembalikannya dengan band NDWI. Jangan melihat Bab [-@sec-cloud] lebih dulu.
 3. Sisipkan tanda kutip pintar ke skrip yang sudah jalan, dengan sengaja, lalu baca pesan galatnya baik-baik. Mengenalinya sekali menghemat satu jam di kemudian hari.
 4. Cetak ukuran sebuah koleksi, lalu cetak koleksinya sendiri, dan perhatikan bedanya di Console.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** ```javascript
+var falseColour = {
+  bands: ['B8', 'B4', 'B3'],   // NIR sebagai merah: vegetasi sehat tampak merah terang
+  min: 0,
+  max: 4000,                   // reflektans NIR kanopi rapat mencapai 0,3-0,4 (3000-4000 dalam satuan S2)
+  gamma: 1.2
+};
+```
+Alasannya: B4 dan B3 di atas vegetasi sekitar 0,02-0,08, B8 sekitar 0,25-0,40, sehingga `max` sekitar 3000-4000 mencegah kanopi rapat jenuh sementara tanah terbuka dan air tetap terbedakan. Daftar `min`/`max` per band juga boleh.
+
+**2.** ```javascript
+var addNdwi = function (image) {
+  var ndwi = image.normalizedDifference(['B3', 'B8']).rename('NDWI');   // McFeeters: hijau dan NIR
+  return image.addBands(ndwi);
+};
+```
+Dua hal penting adalah urutan band (hijau dulu, agar air bernilai positif) dan `rename`; tanpa itu band baru bernama `nd`.
+
+**3.** Error-nya biasanya berbunyi `SyntaxError: Invalid or unexpected token`, dan baris yang ditunjuk bisa baris yang benar atau baris berikutnya. Pesannya tidak menyebut tanda kutip sama sekali. Perbaikannya adalah mengetik ulang tanda kutip secara manual sebagai kutip lurus. Mengenali pesan itu adalah inti latihan ini.
+
+**4.** `print(collection.size())` langsung mengembalikan satu angka. `print(collection)` meminta server mengirim deskripsi seluruh koleksi; untuk beberapa citra hasilnya daftar panjang yang bisa dibuka, dan untuk koleksi besar ia gagal dengan error terlalu banyak elemen (batas Console 5.000). Cetak ukuran, `first()` dan ringkasan, bukan seluruh koleksi.
+:::

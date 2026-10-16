@@ -264,3 +264,20 @@ Atau ganti sensor. Radar menembus awan sepenuhnya, karena gelombang mikro pada p
 2. Tambahkan band jumlah observasi lalu petakan. Identifikasi bagian area studi Anda yang disusun kurang dari sepuluh observasi bersih, dan pertimbangkan artinya bagi klasifikasi yang dibangun di sana.
 3. Bangun composite musim hujan dan musim kemarau secara terpisah. Selisihkan band NDWI keduanya lalu tafsirkan hasilnya.
 4. Ganti `median()` dengan `qualityMosaic('NDVI')` lalu bandingkan tepi mangrove di antara keduanya. Mana yang akan Anda serahkan bersama laporan pemantauan, dan apa yang akan Anda tulis di bagian metode?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tanpa `updateMask` setiap pengamatan berawan dan berbayang masuk ke median. Di muara sungai hasilnya composite yang berkabut dan lebih terang, dengan bercak putih di tempat awan dominan, dan bercak gelap di tempat bayangan awan di atas air terhitung sebagai air yang lebih dalam; batas air tampak kabur dan tepian mangrove kehilangan kontras. Dengan masking, air gelap merata, tepian tajam, dan artefak hanya ada di tempat sedikit pengamatan cerah yang tersisa.
+
+**2.** ```javascript
+var n = processed.select('B8').count().rename('n_clear');
+Map.addLayer(n, {min: 0, max: 30, palette: ['red', 'yellow', 'green']}, 'Pengamatan cerah');
+Map.addLayer(n.lt(10).selfMask(), {palette: ['red']}, 'Kurang dari 10');
+```
+Piksel pesisir dan lereng bukit yang menghadap angin biasanya paling sedikit pengamatan cerahnya. Klasifikasi di sana bertumpu pada beberapa tanggal saja, mungkin semuanya dari satu musim, sehingga mediannya kurang stabil dan keyakinan kelasnya lebih rendah. Laporkan peta jumlah pengamatan bersama klasifikasi, atau mask area di bawah ambang yang bisa Anda pertanggungjawabkan.
+
+**3.** Filter setiap composite dengan `ee.Filter.calendarRange` per bulan (untuk sebagian besar Indonesia kira-kira November-Maret musim hujan, Juni-September musim kemarau). Pada selisih `NDWI_hujan − NDWI_kemarau`, nilai positif adalah area yang lebih basah di musim hujan: sawah yang tergenang musiman, tepi rawa dan sungai yang naik. Nilai mendekati nol adalah air permanen atau lahan yang selalu kering. Nilai sangat negatif biasanya menandakan masalah: sedikit pengamatan cerah di musim kemarau, atau sisa awan pada salah satu composite.
+
+**4.** `qualityMosaic('NDVI')` mengambil, di setiap piksel, tanggal yang paling hijau. Tepian mangrove tampak lebih tajam dan lebih hijau, dan bisa sedikit lebih lebar, karena setiap piksel memakai hari terbaiknya, kadang tanggal saat surut. Median adalah ringkasan yang lebih adil untuk kondisi tipikal. Untuk laporan pemantauan, serahkan median dan tulis: "Median tahunan semua citra Sentinel-2 L2A yang sudah di-mask awan (kelas SCL 3, 8, 9, 10, 11 dibuang), TTTT; tanggal efektif pertengahan tahun; jumlah pengamatan cerah ditunjukkan pada Gambar X."
+:::

@@ -159,3 +159,19 @@ Ujinya empiris dan jujur: petakan aspect, petakan klasifikasi Anda, lalu cari ke
 2. Ketatkan envelope menjadi di bawah 10 meter lalu petakan apa yang dikecualikannya. Apakah area itu benar-benar bukan mangrove?
 3. Ganti elevasi dengan estimasi hasil pengurangan tajuk lalu bandingkan. Apakah pengurangannya menambah derau lebih banyak daripada yang dihilangkannya?
 4. Petakan aspect di bagian berbukit area studi Anda berdampingan dengan klasifikasinya. Adakah kelas yang mengikuti arah mata angin?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tegakan tua di dataran pasang surut berdiri di atas tanah sekitar 0-3 m di atas muka laut rata-rata, tetapi model permukaan melaporkan sekitar 20-28 m, yaitu puncak kanopi. Selisih sekitar 20-25 m itulah offset kanopi. Ini bukan kesalahan DEM: DEM ini model permukaan dan bekerja sebagaimana mestinya.
+
+**2.** Petakan `envelope.and(elev.gte(10))`, yaitu piksel yang dibuang oleh aturan yang lebih ketat. Di delta, hampir semuanya mangrove tua yang tinggi (elevasinya tinggi karena kanopi, datar, dekat air), ditambah beberapa tegakan tinggi nipah dan mangrove belakang. Itu mangrove sungguhan, dan yang paling kaya karbon, jadi aturan 10 m keliru pada model permukaan. Aturan 40 m membuang perbukitan, dan itulah yang Anda inginkan.
+
+**3.** Kurangi model permukaan dengan tinggi kanopi ETH untuk memperkirakan permukaan tanah. Di dalam mangrove seharusnya didapat 0-5 m, tetapi harapkan noise beberapa meter: tinggi ETH punya galatnya sendiri (sering ±5-8 m pada tegakan tropis yang tinggi) dan kedua produk berbeda tanggal dan resolusi. Kalau tanah hasil koreksi tersebar dari −10 sampai +15 m di delta yang datar, pengurangan itu menambah lebih banyak noise daripada yang dihilangkan, dan elevasi sebagai prediktor (atau aturan 40 m yang longgar) adalah pilihan yang lebih baik.
+
+**4.** ```javascript
+var aspect = ee.Terrain.aspect(dem);
+Map.addLayer(aspect, {min: 0, max: 360, palette: ['red', 'yellow', 'green', 'blue', 'red']}, 'Aspek');
+```
+Letakkan klasifikasi di atasnya dan lihat lereng yang lebih curam dari sekitar 15°. Kalau satu kelas sebagian besar muncul di lereng menghadap utara (atau selatan) dan kelas lain di sisi sebaliknya dari bukit yang sama, classifier telah mempelajari iluminasi. Perbaiki dengan koreksi topografi (C atau SCS+C) atau dengan menambahkan aspek dan kemiringan sebagai prediktor.
+:::

@@ -185,3 +185,29 @@ var filtered = collection
 2. Write a function that takes an image and returns it with an NDWI band attached. Do not look at Chapter [-@sec-cloud] first.
 3. Deliberately introduce a smart quote into a working script and read the error message carefully. Recognising it once saves an hour later.
 4. Print the size of a collection, then print the collection itself, and note the difference in what the Console does.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** ```javascript
+var falseColour = {
+  bands: ['B8', 'B4', 'B3'],   // NIR as red: healthy vegetation shows bright red
+  min: 0,
+  max: 4000,                   // NIR reflectance of dense canopy reaches 0.3-0.4 (3000-4000 in S2 units)
+  gamma: 1.2
+};
+```
+The defence: B4 and B3 over vegetation sit around 0.02-0.08, B8 around 0.25-0.40, so a `max` near 3000-4000 keeps dense canopy from saturating while bare soil and water stay distinguishable. A per-band `min`/`max` list is also fine.
+
+**2.** ```javascript
+var addNdwi = function (image) {
+  var ndwi = image.normalizedDifference(['B3', 'B8']).rename('NDWI');   // McFeeters: green and NIR
+  return image.addBands(ndwi);
+};
+```
+The two details that matter are the band order (green first, so water is positive) and the `rename`, without which the new band is called `nd`.
+
+**3.** The error usually reads like `SyntaxError: Invalid or unexpected token`, and the line it points to may be the right one or the next one. Nothing in the message mentions quotes. The fix is to retype the quote characters by hand as straight quotes. Recognising the message is the point of the exercise.
+
+**4.** `print(collection.size())` returns one number at once. `print(collection)` asks the server for the whole collection description; for a few images it prints a long expandable list, and for a large collection it fails with an error about too many elements (the Console limit is 5,000). Print sizes, `first()` and summaries, not whole collections.
+:::

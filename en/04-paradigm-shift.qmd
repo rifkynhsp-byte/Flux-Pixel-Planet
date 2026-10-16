@@ -148,3 +148,13 @@ The next chapter opens the Code Editor and puts an image on a map.
 1. Estimate the download volume for your own current or most recent project: number of scenes, average scene size, and the hours spent transferring and unpacking. Keep the figure. It is the baseline you are replacing.
 2. Write one sentence describing an environmental question you would ask if data volume were not a constraint. Return to it after Chapter [-@sec-accuracy] and assess how close you now are.
 3. Explain the client and server distinction to a colleague who does not code. If the explanation takes more than two minutes, the mental model is not settled yet.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Worked example: 300 Sentinel-2 tiles × about 800 MB = 240 GB. At 20 MB/s that is about 3.3 hours of download if nothing fails, plus unpacking and cloud screening, typically one to three days of attended work, and a disk to hold it. In Earth Engine the same selection is one filter and a few seconds. The figure you keep is the time spent moving bytes, which is the part the platform removes.
+
+**2.** There is no single right answer. A good one is regional and repeated, for example "annual mangrove extent and loss for every Indonesian province since 2000". After Chapter [-@sec-accuracy], ask what still stands in the way: usually not data volume any more, but labels for training and independent validation, and a defensible uncertainty.
+
+**3.** A two-minute version: "My laptop does not do the work. I write a recipe: which satellite, which dates, what to compute. Google's servers hold all the images and cook the recipe there, and send back only the answer, a map or a number. That is why I can study a whole country from a laptop, and why I cannot print a million pixels to my screen." If you needed the words "lazy evaluation" or "object graph", try again without them.
+:::

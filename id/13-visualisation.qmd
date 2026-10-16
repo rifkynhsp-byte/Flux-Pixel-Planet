@@ -228,3 +228,15 @@ Peta hanya menunjukkan satu saat. Untuk menunjukkan perubahan ada dua alat. Graf
 2. Hitung persentil ke-2 dan ke-98 untuk B8 di area Anda lalu bandingkan peregangan itu dengan tebakan Anda sebelumnya.
 3. Ambil klasifikasi yang Anda buat di Bab [-@sec-supervised] lalu tampilkan dengan pelangi, kemudian dengan viridis. Ubah keduanya ke skala abu-abu. Mana yang bertahan?
 4. Buat legenda untuk peta tutupan lahan Anda lalu tunjukkan kepada orang di luar bidang ini. Tanyakan menurut mereka peta itu mengatakan apa. Jawaban mereka adalah hasil Anda yang sebenarnya.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** False colour inframerah (B8, B4, B3) biasanya membuat batas mangrove paling jelas: mangrove tampak merah tua, air hitam dan lumpur abu-abu kebiruan, sehingga ketiga batasnya tajam. Warna asli menunjukkan hijau gelap di samping air gelap, kontrasnya lemah. SWIR (B12, B8, B4) paling baik memisahkan basah dari kering dan membantu ketika batasnya berupa gradien kelembapan (mangrove belakang ke lahan kering), bukan batas vegetasi dan air.
+
+**2.** Jalankan reducer `percentile([2, 98])` pada 100 m. Untuk citra pesisir, B8 biasanya sekitar 0,02-0,40 dalam reflektans. Rentang tebakan 0-0,3 membuat kanopi paling terang menjadi putih dan menyia-nyiakan bagian bawah, sehingga air dan lumpur basah menyatu menjadi satu nada gelap. Rentang persentil memakai seluruh rentang tampilan untuk nilai yang benar-benar ada. Gunakan batas yang sama untuk setiap panel perbandingan.
+
+**3.** Dalam skala abu-abu, peta rainbow kehilangan urutannya: kuning dan cyan menjadi abu-abu terang yang mirip, merah dan biru menjadi abu-abu gelap yang mirip, sehingga kelas yang berbeda dalam warna menyatu. Viridis mempertahankan gradasi terang ke gelap yang monoton, sehingga nilai yang berdekatan tetap terbedakan. Viridis yang bertahan. Untuk peta tutupan lahan kategorikal, pilihan yang lebih baik adalah palet kualitatif dengan kecerahan berbeda, tetapi ujiannya sama: periksa dalam skala abu-abu.
+
+**4.** Kalau jawabannya sesuai maksud Anda ("mangrove hilang di sepanjang pantai tenggara"), legendanya berhasil. Kalau mereka menggambarkan warnanya ("banyak hijaunya") atau bertanya arti sebuah kelas, ganti nama kelas dengan kata-kata sederhana, letakkan pesan utama di judul, dan kurangi jumlah kelas. Apa yang mereka katakan tentang isi peta adalah hasil yang akan dibawa pulang audiens Anda, apa pun isi tabel akurasi Anda.
+:::

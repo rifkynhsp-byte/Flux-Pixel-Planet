@@ -179,3 +179,15 @@ Stack gabungan di atas memakai radar sebagai salah satu dari banyak layer. Kalau
 2. Hapus `.divide(10000)` dari fungsi cloud masking lalu jalankan ulang. Petanya nyaris tidak berubah dan setiap indeksnya salah. Jelaskan mengapa.
 3. Panggil `getAnalysisReadyData` untuk 2019 dan periksa di Console epoch PALSAR mana yang dipilih mekanisme cadangannya.
 4. Composite orbit ascending dan descending Sentinel-1 secara terpisah lalu selisihkan. Lakukan di delta yang datar, lalu di perbukitan terdekat. Di mana selisihnya besar, dan mengapa?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Pada composite optik, mangrove dan hutan darat tampak sama hijaunya. Pada VH saat pasang, tepian mangrove jauh lebih terang daripada hutan di belakangnya dan sangat jauh lebih terang daripada air terbuka yang gelap: batang yang berdiri di air memantulkan pulsa langsung kembali (double bounce). Kalau tepian tidak menonjol, periksa pasang surut pada jam akuisisi; saat surut efeknya melemah.
+
+**2.** Reflektans permukaan Sentinel-2 disimpan sebagai integer ×10.000. Tanpa pembagian itu band reflektans bernilai 0-10.000 sementara radar dan band lain tetap dalam satuannya. Peta tetap tampak benar karena rentang tampilan diatur terpisah. NDVI kebetulan selamat, karena faktor skala saling meniadakan dalam normalised difference, tetapi apa pun yang mencampur band dengan koefisien atau ambang tetap (EVI dengan konstantanya, ambang pada rasio dengan offset, atau classifier yang membandingkan reflektans dengan radar) sekarang salah. Citra bisa tampak baik sementara semua produk kuantitatifnya meleset.
+
+**3.** Mosaic tahunan PALSAR tersedia untuk 2007-2010 dan 2015-2024. Untuk 2019 fungsi ini mengambil epoch 2018 dan 2019, mengurutkannya agar 2019 diletakkan terakhir, lalu me-mosaic-nya: nilai 2019 di mana pun 2019 memiliki data, dengan celah diisi dari 2018. Mencetak `palsarCollection.filter(ee.Filter.calendarRange(2018, 2019, 'year')).aggregate_array('system:index')` memperlihatkan kedua epoch itu.
+
+**4.** Di delta yang datar, selisih ascending dikurangi descending mendekati nol, dalam kisaran ±1 dB akibat speckle, karena tanah datar tampak sama dari kedua sisi. Di perbukitan selisihnya mencapai beberapa dB, positif pada lereng yang menghadap lintasan ascending dan negatif pada lereng yang menghadap lintasan descending: foreshortening membuat lereng yang menghadap radar terang dan lereng yang membelakanginya gelap. Itulah sebabnya deret waktu harus memakai satu arah orbit.
+:::

@@ -154,3 +154,15 @@ Before building a fusion stack, run the classification on optical alone and reco
 2. Load the same date over your area from Landsat 9 and Sentinel-2. Zoom to a feature roughly 20 metres across. Describe what the 30 metre product loses.
 3. Load a Sentinel-1 scene over a coastal area at high tide and at low tide. Find the double bounce signature.
 4. Look up the tide state at the acquisition time of the Sentinel-2 scene you plan to use as a baseline. Note it in your method description now, before you forget.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Example: "Has the mangrove fringe of the Mahakam delta retreated since 1995?" The first binding constraint is history before 2015, so Landsat at 30 m is the answer, with Sentinel-2 added only for the recent detail. If your question were "which ponds were dug last month", the first binding constraint would be feature size (under half a hectare) and the answer Sentinel-2, with Sentinel-1 if cloud blocks the month. Record the constraint, not just the sensor: it is your justification in the methods.
+
+**2.** At 30 m a 20 m feature covers less than one pixel, so it is mixed with its surroundings: a narrow road, a canal or a two-row mangrove fringe becomes a soft blur or disappears, edges move by up to a pixel, and a small pond shows as a slightly darker pixel rather than open water. Sentinel-2's 10 m bands (B2, B3, B4, B8) show its shape. Remember the warning in this chapter: Sentinel-2's red edge and SWIR bands are 20 m, so the gain is only in the four 10 m bands.
+
+**3.** At high tide the water under the trees creates double bounce: the mangrove looks very bright in VV and often in VH, brighter than dry forest inland, while the open water beside it is dark. At low tide the mud is exposed and the bright return weakens, so the contrast between fringe and inland forest drops. Pick two Sentinel-1 dates and check the tide tables for their times; the brightness change in the fringe, with no change inland, is the signature.
+
+**4.** Write the acquisition time in local time and the tide height from a tide table or a tide model for the nearest port, for example "Sentinel-2, 2024-08-14 10:24 WITA, tide +1.8 m (high)". This matters because the visible mangrove edge and the mudflat area change with the tide; a baseline taken at low tide and a monitoring image at high tide will show loss that never happened.
+:::

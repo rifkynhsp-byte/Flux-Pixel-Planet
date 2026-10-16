@@ -224,3 +224,26 @@ reduceRegion answers one question about one area. reduceRegions answers it for e
 2. Take the loop above and rewrite it with `.map()`. Time both if you have the patience, and note where the loop stops being merely slow and becomes unusable.
 3. Compute the mean elevation of your study area at 30 metres and at 300 metres. Explain the difference in one sentence.
 4. Deliberately write a mapped function with no `return` statement and read the error. It is not obvious, and recognising it once is worth the exercise.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** ```javascript
+var addYear = function (image) {
+  var year = image.date().get('year');
+  return image.addBands(ee.Image.constant(year).rename('year').toInt16());
+};
+var withYear = collection.map(addYear);
+print(withYear.first().bandNames());   // includes 'year'
+```
+`ee.Image.constant` accepts the server-side number directly, so no `getInfo()` is needed. Casting to an integer keeps the band small.
+
+**2.** ```javascript
+var results = collection.map(addNdvi);
+```
+The loop issues one request per image and waits for each; with tens of images it is slow, and once the collection runs to hundreds or thousands (and `size().getInfo()` blocks before the loop starts) the browser stops responding. The mapped version returns immediately, because nothing is computed until you display or export it.
+
+**3.** Expect the 300 m mean to differ by a few metres or less in gentle terrain and by more in steep terrain. At 300 m each value is computed from a coarser pyramid level, so valleys and peaks are averaged together and pixels on the boundary are counted differently. One sentence: "The mean changes because the scale changes which pixels, and how many, enter the average; the scale is part of the result."
+
+**4.** Earth Engine reports `User-defined methods must return a value.`, often from a line far from the function itself. The fix is simply `return image.addBands(...)`. Whenever a `.map()` fails mysteriously, check the `return` first.
+:::

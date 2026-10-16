@@ -133,3 +133,19 @@ Give assets descriptive identifiers, because `projects/your-project/assets/mangr
 2. Change `max` from 1200 to 3000, rerun, and write one sentence on what information the map gains and what it loses.
 3. Search the Docs tab for `ee.Terrain.slope`. Add a slope layer to the script without looking ahead to Chapter [-@sec-terrain].
 4. Save the script to a repository and generate a **Get Link** URL. Open it in a private browser window to confirm it reproduces cleanly.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** For Indonesia the published summit is Puncak Jaya (Carstensz Pyramid), 4,884 m. The Inspector will show a lower value on the highest SRTM pixel. Reasons: each pixel is an average over 30 m (or 90 m), so a sharp summit is smoothed down; SRTM was acquired in 2000 by radar, which has voids and errors on steep, icy peaks; and the published height uses a different vertical datum and survey. A difference of tens of metres is expected and is a lesson about what a pixel is, not an error in your script.
+
+**2.** With `max: 3000` the colour ramp is stretched over a larger range, so mountains are no longer saturated at the top colour and you can see differences between 1,500 and 3,000 m. In exchange, lowlands below a few hundred metres collapse into nearly one colour, so detail in coastal plains and deltas is lost. The stretch decides which part of the data you can see; choose it for the question.
+
+**3.** ```javascript
+var slope = ee.Terrain.slope(dem);           // degrees, computed from the DEM
+Map.addLayer(slope, {min: 0, max: 45, palette: ['white', 'orange', 'brown']}, 'Slope');
+```
+`ee.Terrain.slope` needs an elevation image in metres and returns slope in degrees. If your layer is all white, check that you passed the DEM and not a visualised copy of it.
+
+**4.** A clean result opens the script with no undefined-variable error and draws the same layers. If it fails in the private window, the usual causes are a geometry drawn on the map that was not saved with the link (open **Get Link** after saving), or an asset that is private: share it or make it readable by anyone with the link.
+:::

@@ -154,3 +154,15 @@ Sebelum membangun stack fusi, jalankan klasifikasi hanya dengan optik dan catat 
 2. Muat tanggal yang sama di area Anda dari Landsat 9 dan Sentinel-2. Perbesar ke objek berukuran sekitar 20 meter. Jelaskan apa yang hilang pada produk 30 meter.
 3. Muat satu citra Sentinel-1 di area pesisir saat pasang dan saat surut. Temukan tanda tangan pantulan gandanya.
 4. Cari kondisi pasang surut pada waktu perekaman citra Sentinel-2 yang akan Anda pakai sebagai garis dasar. Catat sekarang di deskripsi metode Anda, sebelum lupa.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Contoh: "Apakah tepian mangrove delta Mahakam mundur sejak 1995?" Kendala pertama yang mengikat adalah sejarah sebelum 2015, jadi jawabannya Landsat 30 m, dengan Sentinel-2 hanya untuk detail terkini. Kalau pertanyaannya "tambak mana yang digali bulan lalu", kendala pertamanya ukuran objek (di bawah setengah hektare) dan jawabannya Sentinel-2, ditambah Sentinel-1 bila awan menutup bulan itu. Catat kendalanya, bukan hanya sensornya: itulah justifikasi di bagian metode.
+
+**2.** Pada 30 m, objek selebar 20 m kurang dari satu piksel, sehingga bercampur dengan sekitarnya: jalan sempit, kanal atau tepian mangrove dua baris menjadi kabur atau hilang, batasnya bergeser hingga satu piksel, dan kolam kecil tampak sebagai piksel yang sedikit lebih gelap, bukan air terbuka. Band 10 m Sentinel-2 (B2, B3, B4, B8) memperlihatkan bentuknya. Ingat peringatan di bab ini: band red edge dan SWIR Sentinel-2 beresolusi 20 m, jadi keuntungannya hanya pada empat band 10 m.
+
+**3.** Saat pasang, air di bawah pohon menimbulkan double bounce: mangrove tampak sangat terang di VV dan sering juga di VH, lebih terang daripada hutan kering di darat, sementara air terbuka di sebelahnya gelap. Saat surut, lumpur terbuka dan pantulan terang melemah, sehingga kontras antara tepian dan hutan darat berkurang. Pilih dua tanggal Sentinel-1 dan cocokkan jamnya dengan tabel pasang surut; perubahan kecerahan di tepian tanpa perubahan di darat itulah tandanya.
+
+**4.** Tulis waktu akuisisi dalam waktu setempat dan tinggi pasang dari tabel pasang surut atau model pasang surut untuk pelabuhan terdekat, misalnya "Sentinel-2, 2024-08-14 10.24 WITA, pasang +1,8 m (tinggi)". Ini penting karena batas mangrove yang terlihat dan luas dataran lumpur berubah mengikuti pasang; baseline yang diambil saat surut dan citra pemantauan saat pasang akan menunjukkan kehilangan yang sebenarnya tidak terjadi.
+:::

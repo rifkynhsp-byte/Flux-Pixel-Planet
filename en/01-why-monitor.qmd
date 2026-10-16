@@ -133,3 +133,15 @@ A map that only a remote sensing specialist can read has failed at the last step
 2. Identify which of the three MRV capabilities your work currently provides and which it does not.
 3. Find the national or subnational commitment your study area falls under. Note the target, the baseline year and the reporting body.
 4. For your study area, name the single most likely reason a reviewer would reject your map. Keep the note. Chapter [-@sec-accuracy] will come back to it.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** A good answer names a person, a decision and a deadline, for example: "The district forestry office decides by March which 500 ha of degraded mangrove to replant first; my map ranks candidate sites by recovery potential." If your sentence only says what the map shows ("mangrove extent in 2024"), you have a visualisation. Rewrite it until a decision and its owner appear.
+
+**2.** Check each one against what you can hand over. **Baseline:** a dated map of the start of the accounting period, with its accuracy. **Change detection:** when and where something changed, not only two maps side by side. **Quantification with uncertainty:** a number with a ± range. Most early projects deliver a baseline only. The usual gap is uncertainty: an area or carbon figure without an interval cannot be used for MRV.
+
+**3.** For an Indonesian site the national frame is the enhanced NDC (about 32 % unconditional and up to 43 % conditional reduction by 2030) and FOLU Net Sink 2030 (about −140 Mt CO₂e for the land sector), reported to the UNFCCC by the Ministry of Environment and Forestry. Add the provincial or district plan if one exists (for example a provincial low-emission development plan) and write down its baseline year: an analysis that does not cover that year cannot report against the target.
+
+**4.** Typical reasons, from most to least common: accuracy measured on training pixels rather than independent field data; a boundary that does not match any management unit; one cloud-free date used as if it were the whole year; the tide or season of the image not stated for a coastal or seasonal class; area reported without the scale or the uncertainty. Keep the one that fits your map; Chapter [-@sec-accuracy] shows how to close it.
+:::

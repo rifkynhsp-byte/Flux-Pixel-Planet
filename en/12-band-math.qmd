@@ -287,3 +287,17 @@ There are at least six published variants of "the mangrove vegetation index" and
 3. Compute NDVI on the unscaled integer composite. Look at the result and note how plausible a wrong answer can look.
 4. Chart CMRI and NDVI histograms over the same area. Which is bimodal, and what does that tell you about which to give the classifier?
 5. Design an index for a class you care about. State the question it answers and show its histogram is bimodal, or abandon it.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** With $L = 0$, SAVI $= (1 + L)(NIR - Red)/(NIR + Red + L) = (NIR - Red)/(NIR + Red)$, which is NDVI, so the difference is 0 everywhere (to floating-point precision, around 1e-7). One sentence: "L is a soil offset added to the denominator; with no offset SAVI is NDVI by definition."
+
+**2.** They agree on open water (both positive) and on vegetation (both negative). They disagree over built-up areas: roofs, roads and concrete have low NIR relative to green, so NDWI often goes positive there and calls the city water, while MNDWI stays negative because built surfaces reflect SWIR strongly. Map `ndwi.gt(0).and(mndwi.lt(0))` to see exactly those urban false-water pixels.
+
+**3.** On integer reflectance (0-10,000) the division in an integer expression truncates, so NDVI comes out as 0 almost everywhere and 1 or −1 in a few places. Rendered with a palette it looks like a clean binary vegetation mask, plausible enough to pass a glance. Click a forest pixel in the Inspector: a real NDVI there is about 0.8, not 0. The fix is to scale to reflectance (or call `.toFloat()`) before any index.
+
+**4.** Over a delta with mangrove, water and inland forest, CMRI is usually the bimodal (often multi-peaked) one: mangrove and terrestrial vegetation pull apart while water sits far below. NDVI shows one big peak near 0.8-0.9 for all vegetation, because every canopy saturates there, plus a low peak for water. Give the classifier the index whose histogram separates the classes you need. Here that is CMRI for mangrove versus forest; NDVI only separates vegetation from not.
+
+**5.** Example: a flooded-rice index, "is this green AND standing in water?", as $NDVI \times MNDWI$ computed on an image from the transplanting season (January-February in Java), when fields are water with seedlings. Its histogram over a rice district should show a peak for flooded fields separate from dry land and permanent water. If it gives one broad hump instead, the index does not answer your question at that date: try another season or another band pair, or drop it.
+:::

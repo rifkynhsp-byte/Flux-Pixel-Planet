@@ -133,3 +133,15 @@ Peta yang hanya bisa dibaca spesialis penginderaan jauh sudah gagal di langkah t
 2. Identifikasi mana dari tiga kemampuan MRV yang sudah disediakan pekerjaan Anda dan mana yang belum.
 3. Cari komitmen nasional atau subnasional yang menaungi area studi Anda. Catat targetnya, tahun dasarnya, dan lembaga pelapornya.
 4. Untuk area studi Anda, sebutkan satu alasan paling mungkin seorang penelaah menolak peta Anda. Simpan catatan itu. Bab [-@sec-accuracy] akan kembali kepadanya.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Jawaban yang baik menyebut orang, keputusan dan tenggatnya, misalnya: "Dinas kehutanan kabupaten memutuskan sebelum Maret 500 ha mangrove terdegradasi mana yang ditanam lebih dulu; peta saya mengurutkan lokasi berdasarkan peluang pulihnya." Kalau kalimat Anda hanya menyebut isi peta ("luas mangrove 2024"), itu baru visualisasi. Tulis ulang sampai keputusan dan pemiliknya muncul.
+
+**2.** Periksa satu per satu dari apa yang bisa Anda serahkan. **Baseline:** peta bertanggal pada awal periode akuntansi, lengkap dengan akurasinya. **Deteksi perubahan:** kapan dan di mana sesuatu berubah, bukan sekadar dua peta berdampingan. **Kuantifikasi dengan ketidakpastian:** angka dengan rentang ±. Kebanyakan proyek awal baru memberi baseline. Celah yang paling sering adalah ketidakpastian: angka luas atau karbon tanpa interval tidak dapat dipakai untuk MRV.
+
+**3.** Untuk lokasi di Indonesia, kerangka nasionalnya adalah enhanced NDC (sekitar 32 % tanpa syarat dan hingga 43 % dengan dukungan internasional pada 2030) dan FOLU Net Sink 2030 (sekitar −140 Mt CO₂e untuk sektor lahan), dilaporkan ke UNFCCC oleh Kementerian Lingkungan Hidup dan Kehutanan. Tambahkan rencana provinsi atau kabupaten bila ada, dan catat tahun baseline-nya: analisis yang tidak mencakup tahun itu tidak bisa dilaporkan terhadap target.
+
+**4.** Alasan yang paling sering, dari yang paling umum: akurasi diukur pada piksel pelatihan, bukan data lapangan independen; batas wilayah yang tidak cocok dengan unit pengelolaan mana pun; satu tanggal bebas awan dipakai seolah mewakili setahun; kondisi pasang surut atau musim citra tidak disebut untuk kelas pesisir atau musiman; luas dilaporkan tanpa skala atau ketidakpastian. Simpan alasan yang paling cocok dengan peta Anda; Bab [-@sec-accuracy] menunjukkan cara menutupnya.
+:::

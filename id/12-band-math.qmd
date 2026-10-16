@@ -287,3 +287,17 @@ Ada setidaknya enam varian "mangrove vegetation index" yang dipublikasikan dan b
 3. Hitung NDVI pada composite bilangan bulat yang belum diskalakan. Lihat hasilnya dan perhatikan betapa masuk akalnya tampilan sebuah jawaban yang salah.
 4. Buat histogram CMRI dan NDVI di area yang sama. Mana yang bimodal, dan apa artinya bagi pilihan indeks yang Anda serahkan ke classifier?
 5. Rancang satu indeks untuk kelas yang Anda pedulikan. Nyatakan pertanyaan yang dijawabnya, lalu tunjukkan histogramnya bimodal, atau tinggalkan indeks itu.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Dengan $L = 0$, SAVI $= (1 + L)(NIR - Red)/(NIR + Red + L) = (NIR - Red)/(NIR + Red)$, yaitu NDVI, sehingga selisihnya 0 di mana-mana (hingga presisi floating point, sekitar 1e-7). Satu kalimat: "L adalah offset tanah yang ditambahkan ke penyebut; tanpa offset, SAVI menurut definisinya sama dengan NDVI."
+
+**2.** Keduanya sepakat di air terbuka (sama-sama positif) dan di vegetasi (sama-sama negatif). Keduanya berbeda di area terbangun: atap, jalan dan beton memiliki NIR rendah dibanding hijau, sehingga NDWI sering positif di sana dan menyebut kota sebagai air, sementara MNDWI tetap negatif karena permukaan terbangun memantulkan SWIR kuat. Petakan `ndwi.gt(0).and(mndwi.lt(0))` untuk melihat piksel kota yang keliru dianggap air.
+
+**3.** Pada reflektans integer (0-10.000), pembagian dalam ekspresi integer terpotong, sehingga NDVI bernilai 0 hampir di mana-mana dan 1 atau −1 di beberapa tempat. Dengan palet, hasilnya tampak seperti mask vegetasi biner yang rapi, cukup meyakinkan untuk lolos dari pandangan sekilas. Klik piksel hutan di Inspector: NDVI yang benar di sana sekitar 0,8, bukan 0. Perbaikannya adalah mengubah ke reflektans (atau memanggil `.toFloat()`) sebelum menghitung indeks apa pun.
+
+**4.** Di delta dengan mangrove, air dan hutan darat, CMRI biasanya yang bimodal (sering berpuncak banyak): mangrove dan vegetasi darat terpisah sementara air jauh di bawah. NDVI menunjukkan satu puncak besar sekitar 0,8-0,9 untuk semua vegetasi, karena setiap kanopi jenuh di sana, ditambah puncak rendah untuk air. Berikan kepada classifier indeks yang histogramnya memisahkan kelas yang Anda butuhkan. Di sini CMRI untuk mangrove versus hutan; NDVI hanya memisahkan vegetasi dari bukan vegetasi.
+
+**5.** Contoh: indeks padi tergenang, "apakah ini hijau DAN tergenang air?", sebagai $NDVI \times MNDWI$ pada citra musim tanam (Januari-Februari di Jawa), ketika sawah berupa air dengan bibit. Histogramnya di kabupaten padi seharusnya menunjukkan puncak sawah tergenang yang terpisah dari lahan kering dan air permanen. Kalau yang muncul satu gundukan lebar, indeks itu tidak menjawab pertanyaan Anda pada tanggal tersebut: coba musim lain atau pasangan band lain, atau tinggalkan.
+:::

@@ -230,3 +230,15 @@ A map shows one moment. Two tools show change. A chart is honest about every obs
 2. Compute the 2nd and 98th percentiles for B8 over your area and compare that stretch to your previous guess.
 3. Take a classification you made in Chapter [-@sec-supervised] and render it in rainbow, then in viridis. Convert both to greyscale. Which survives?
 4. Build a legend for your land cover map and show it to someone outside the field. Ask them what the map says. Their answer is your real result.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** False colour infrared (B8, B4, B3) usually makes the mangrove boundary clearest: mangrove reads deep red, water black and mud cyan-grey, so all three edges are sharp. True colour shows dark green against dark water, a weak contrast. SWIR (B12, B8, B4) separates wet from dry best and helps where the boundary is a moisture gradient (back-mangrove to dry land) rather than a vegetation-water edge.
+
+**2.** Run the `percentile([2, 98])` reducer at 100 m. Over a coastal scene B8 typically gives something like 0.02-0.40 in reflectance. A guessed stretch of 0-0.3 clips the brightest canopy to white and wastes the low end, so water and wet mud become one dark tone. The percentile stretch uses the full display range on the values that actually occur. Use the same bounds for every panel of a comparison.
+
+**3.** In greyscale the rainbow map loses its ordering: yellow and cyan come out as similar light greys and red and blue as similar dark greys, so classes that look distinct in colour merge. Viridis keeps a monotonic light-to-dark ramp, so neighbouring values stay distinct. Viridis survives. For a categorical land-cover map the better choice is a qualitative palette with distinct lightness, but the test is the same: check it in greyscale.
+
+**4.** If their answer matches what you intended ("mangrove has been lost along the coast in the south-east"), the legend works. If they describe the colours ("there is a lot of green") or ask what a class means, rename the classes in plain words, put the key message in the title, and reduce the number of classes. What they say the map shows is the result your audience will take away, whatever your accuracy table says.
+:::

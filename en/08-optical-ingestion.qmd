@@ -168,3 +168,22 @@ Normalised indices such as NDVI are immune to a pure scale factor, since it canc
 2. Raise the cloud threshold in steps from 5 to 80 percent. At what threshold does the best available scene become usable, and what does that tell you about the local climate?
 3. Load the Landsat 9 Collection 2 Level-2 archive over the same area and year. Apply the scale and offset above, display it in true colour, and compare it visually to the Sentinel-2 result.
 4. Print the full metadata of one scene and identify three properties, beyond cloud percentage, that you could usefully filter on.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Print `size()` after each step. A typical tropical result: `filterBounds` keeps every scene over the area for all time (thousands), `filterDate` cuts that to one year (about 70-150 scenes, depending on whether your area sits on a tile overlap), and the cloud filter removes the most in a humid region, often leaving under ten at 20 %. If the cloud filter removes almost everything, that is information about the climate, and Chapter [-@sec-cloud] is the answer.
+
+**2.** In a dry region a usable scene appears at 5-10 %. Over equatorial coasts you may need 40-60 % before anything survives, and the "best" scene still has cloud over part of the site, because the property describes the whole ~110 km tile, not your area. A high threshold before anything is usable means persistent cloud: plan on pixel-level masking and compositing, and on radar as a primary source.
+
+**3.** ```javascript
+var l9 = ee.ImageCollection('LANDSAT/LC09/C02/T1_L2')
+  .filterBounds(aoi).filterDate('2023-01-01', '2024-01-01')
+  .sort('CLOUD_COVER').first();
+var sr = l9.select('SR_B.*').multiply(0.0000275).add(-0.2);
+Map.addLayer(sr, {bands: ['SR_B4', 'SR_B3', 'SR_B2'], min: 0, max: 0.25}, 'Landsat 9 true colour');
+```
+Compared with Sentinel-2 at 10 m, Landsat at 30 m looks softer: narrow channels, roads and fringes blur, but the colours should match closely once both are in reflectance (0-0.25 stretch). If Landsat looks washed out, the offset was skipped.
+
+**4.** Useful properties include `MGRS_TILE` (keep one tile grid, avoid duplicates on overlaps), `SENSING_ORBIT_NUMBER` or `SENSING_ORBIT_DIRECTION` (consistent viewing geometry), `MEAN_SOLAR_ZENITH_ANGLE` (avoid low-sun scenes), `SPACECRAFT_NAME` (Sentinel-2A/B/C), and `PROCESSING_BASELINE` (scenes from baseline 04.00 onwards carry an extra offset of −1000 in Level-1C). Filtering on viewing and processing properties makes a time series more consistent.
+:::
