@@ -8,7 +8,7 @@ Most of it comes from project work. Some of it comes from the classroom, where I
 
 ## Why I wrote it
 
-My father lectures in the social sciences and culture, and as a child I followed him to his classes in many cities and to the sites of the past he taught about. I stood in front of temples built with a precision that seemed impossible for their time, and I kept asking whether our own age had made anything greater. My mother answered in her own way, with books about technology, and I chose science. In Geophysics at Universitas Padjadjaran I learned the Earth and technology together, and during my community service (KKN) villagers asked us to find water under their land; with our lecturer we found the place for their pond. Later, in forestry in Riau, I proposed new technology and watched people resist it, until I learned to listen and build what saved them time. Those experiences answered the childhood question for me: the greatest work of a modern civilisation is technology that is useful to many people.
+My father lectures in the social sciences and culture, and as a child I followed him to his classes in many cities and to the sites of the past he taught about. I stood in front of temples built with a precision that seemed impossible for their time, and I kept asking whether our own age had made anything greater. My mother answered in her own way, with books about technology, and I chose science. In Geophysics at Universitas Padjadjaran I learned the Earth and technology together, and during my community service (KKN) villagers asked us to find water under their land; with our lecturer, Professor Asep Harja, we found the place for their pond. Later, in forestry in Riau, I proposed new technology and watched people resist it, until I learned to listen and build what saved them time. Those experiences answered the childhood question for me: the greatest work of a modern civilisation is technology that is useful to many people.
 
 My father has a Sundanese proverb for the rest: *cikaracak ninggang batu, laun-laun jadi legok*, steady drops of water hollow a stone. Hard skills come the same way. This book is meant to be those drops.
 
@@ -25,8 +25,6 @@ The need is urgent. Indonesia is a vast tropical country, close to two million s
 At UNSW Sydney, three people supported my learning in remote sensing and GIS: **Professor Samsung Lim**, my supervisor, **Professor Linlin Ge** and **Professor Shawn Laffan**. They gave me their time, their questions and their patience, and they helped a practitioner learn to think like a researcher. This book is, in part, a thank-you to them.
 
 It began earlier, in Geophysics at Universitas Padjadjaran. **Professor Irwan Ary Dharmawan**, **Professor Eleonora Agustine** and **Professor Muhammad Aufaristama** supervised my undergraduate thesis, and they first taught me to look at the Earth with physics and to trust a measurement only after testing it. To them, and to all my lecturers in Geophysics at Universitas Padjadjaran and at UNSW, too many to name one by one: thank you. What is good in this book owes you a great deal; the mistakes are mine.
-
-**Professor Asep Harja** supervised my KKN (*Kuliah Kerja Nyata*), the community-service term in which I first worked with a village on its own problems. Thank you, Professor.
 
 And to my little family. **Kesuma Fitri**, my wife, who has always supported me; our sons **Ibrahim Bagaskoro** and **Yahya Kenzi Hendrawan**, who ride the waves with us. We are still on the journey, from place to place and from opportunity to opportunity, and all of it is reason to be grateful for the majesty of Allah's creation: how precise and ordered nature is, and how complex the Earth is to model, so that it leaves us plenty of room to keep trying to understand it, and to be grateful.
 
@@ -102,7 +100,6 @@ The comments inside those scripts are the teaching, not decoration. Where a line
 ## Running the code
 [![Add all book scripts to your Code Editor](https://img.shields.io/badge/Add%20all%20book%20scripts-to%20your%20Code%20Editor-34a853)](https://code.earthengine.google.com/?accept_repo=users/rifkynauvalhsp/Fullstack-Remote-Sensing) &nbsp; One click adds every chapter's script to the Scripts panel of your Earth Engine Code Editor, under *Reader*. Open one and press **Run**. Each chapter also has its own **Open in Code Editor** and **Open in Colab** buttons. A free non commercial account covers every chapter except the export heavy parts of Chapter [-@sec-apps]. Appendix A covers registration and the Python alternative.
 :::
-
 
 ## What this site does beyond being a book
 
