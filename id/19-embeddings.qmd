@@ -130,3 +130,15 @@ Empat batas membuat embedding tidak menggantikan sisa buku ini:
 2. Jalankan kurva belajar dengan sepuluh tarikan acak per ukuran, bukan tiga. Di bawah berapa titik per kelas sebaran hasilnya terlalu lebar untuk memercayai satu tarikan?
 3. Pakai peta perubahan untuk memilih sepuluh piksel dengan kemiripan di bawah 0,6 dan periksa di citra Sentinel-2 2018 dan 2023. Jenis perubahan apa yang terdeteksi embedding, dan mana yang terlewat?
 4. Ulangi pencarian kemiripan untuk tambak udang, bukan mangrove. Berapa titik rujukan yang dibutuhkan sebelum pencarian berhenti menemukan alur sungai?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Tambahkan `VV` dan `VH` (median 2023 dari citra IW pada satu arah orbit, dalam dB) ke stack Sentinel-2 dan jalankan ulang undian yang sama. Radar menambahkan struktur dan kelembapan yang tidak dimiliki optik, jadi harapkan ia menutup sebagian selisih 6-10 poin, paling banyak untuk kelas seperti mangrove versus hutan lain, tetapi tidak seluruhnya: embedding sudah menggabungkan radar dan deret waktu setahun penuh. Laporkan selisih yang baru untuk setiap ukuran sampel.
+
+**2.** Dengan tiga undian, sebarannya 0,01-0,02 untuk embedding dan 0,02-0,04 untuk stack Sentinel-2. Dengan sepuluh undian per ukuran, sebarannya bisa dibaca dengan baik: pada lima titik per kelas sebarannya paling lebar, dan biasanya menyempit di bawah sekitar ±0,02 mulai kira-kira dua puluh titik per kelas. Di bawah ukuran tempat sebarannya melebihi perbedaan yang ingin Anda deteksi, satu undian tidak bisa dipercaya; laporkan rata-rata dan sebaran antar-undian.
+
+**3.** Periksa sepuluh piksel itu pada citra 2018 dan 2023. Peta perubahan embedding baik untuk perubahan mendadak dan struktural: mangrove dibuka untuk tambak, tambak baru, reklamasi, pergeseran sungai, bangunan baru. Ia cenderung melewatkan perubahan bertahap, seperti penjarangan atau degradasi lambat pada tegakan yang tetap berupa hutan, dan perbedaan musiman atau pasang surut sebagian besar tidak muncul karena setiap vektor merangkum setahun penuh. Catat untuk setiap piksel apa yang berubah dan apakah embedding menangkapnya.
+
+**4.** Mulai dengan satu atau dua tambak acuan: pencarian juga mengembalikan kanal sungai dan perairan terlindung, karena tambak dan kanal sama-sama berisi air dengan tepi yang mirip. Tambahkan acuan dari jenis tambak yang berbeda (aktif, dikeringkan, terbengkalai) dan positif palsu berkurang. Biasanya lima sampai sepuluh acuan diperlukan sebelum kanal sebagian besar hilang dari hasil teratas; titik itu bergantung pada seberapa beragam tambak Anda. Catat jumlah acuan saat hasilnya stabil.
+:::

@@ -164,3 +164,17 @@ On 6 September 2018 an earthquake in Hokkaido set off thousands of shallow lands
 3. Compare object and pixel accuracy per class rather than overall. Which classes gained and which lost, and does that match the gradational boundary argument above?
 4. Raise the minimum mapping unit to 2 hectares and report how much mangrove area disappeared. That number belongs in your metadata.
 5. Export both a pixel based and an object based shapefile and open them in QGIS. Count the polygons in each. That ratio is the practical argument for this chapter.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** At `size` 5 (objects about 50 m) a fringe of two or three pixels stays its own object. At 10 (about 100 m) it survives where it is wide, but thin stretches start to merge with the neighbouring object. At 25 (about 250 m) most narrow fringes are absorbed into the water or the inland forest object. The size at which the fringe disappears is roughly the size at which the seed spacing exceeds about twice the fringe width.
+
+**2.** With compactness 5 the objects become rounder and more regular, and the coastline turns into blocky, smoothed shapes that cut across creeks and fringes; with 0 they follow the spectral boundary wherever it goes. One sentence: "Compactness favours regular shapes, which match fields with straight edges but not deltas, where real boundaries are irregular and follow the water."
+
+**3.** Typically the classes with sharp edges and large homogeneous areas (water, ponds, plantations) gain from objects, because salt-and-pepper errors disappear. The classes with gradational boundaries (back-mangrove grading into swamp forest, sparse stands on mudflat) gain little or lose, because an object must pick one class for a mixed transition. If that is your result, it matches the argument in the chapter.
+
+**4.** Compute area with and without the filter: `objects.filter(ee.Filter.gte('area_ha', 2))` versus all objects. Over a delta, raising the minimum mapping unit from 0.5 to 2 ha commonly removes several percent of mangrove area, more where the mangrove is fringing. Report it, for example: "Minimum mapping unit 2 ha; this removed 1,240 ha (3.1 %) of mangrove in patches smaller than 2 ha."
+
+**5.** The pixel-based export, vectorised, produces tens or hundreds of thousands of tiny polygons, many of one or a few pixels. The object-based export produces a few hundred to a few thousand polygons that follow real units. A ratio of 50:1 or more is common. That ratio is what a GIS user, a planner or a field team experiences when they open the file.
+:::

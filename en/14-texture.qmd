@@ -188,3 +188,17 @@ Texture is cheaper, simpler, and works as an ordinary band in an ordinary pixel 
 3. Quantise to 32 levels instead of 255. What is gained and what is lost?
 4. Run GLCM on NDVI rather than B8. Does the structural signal improve, and can you say why?
 5. Sample your texture bands at training points and plot entropy against contrast, coloured by class. Decide, on that evidence, whether to keep them.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** At `size` 1 (30 m window) the texture is mostly speckle of single crowns and the boundary is noisy. At `size` 3 (70 m) the planted grid and the natural stand separate cleanly, because the window spans roughly five to fourteen crowns of 5-15 m. At `size` 7 (150 m) the contrast is strong but the boundary is smeared across about 75 m on each side. The clearest boundary is usually at the window that spans several crowns but less than the stand width: here `size` 3.
+
+**2.** No exception is raised. With 0-1 float reflectance cast implicitly, nearly every pixel falls into one or two grey levels, so the co-occurrence matrix is degenerate: entropy and contrast come out constant or near zero across the scene, and the texture layer looks blank or banded. The failure presents as a uniform, useless layer rather than an error, which is why it survives.
+
+**3.** 32 levels make the matrix 32 × 32 instead of 256 × 256, so the computation is far faster and less memory-hungry, and the statistics are more stable in small windows (fewer empty cells). What is lost is subtle variation: two canopies whose brightness differs by less than one 32-level step look identical. For separating planted from natural stands 32 is often enough; for fine condition differences keep 255.
+
+**4.** Usually yes, modestly. NDVI is a ratio, so it removes the illumination and shading variation between sunlit and shaded crowns that B8 carries; the texture then reflects arrangement of vegetation vs gaps rather than sun-shadow pattern. But NDVI saturates in dense canopy, so within a closed natural stand it varies little and texture can weaken. Keep the index on which the two classes' entropy histograms separate better.
+
+**5.** If the classes form separate clouds in the entropy-contrast plot, for example plantation at low entropy and natural stand at high, the texture bands carry information the spectral bands do not, and you keep them. If the clouds overlap completely, they add only correlated noise and computation: drop them. Decide with the plot, then confirm with feature importance in Chapter [-@sec-supervised].
+:::

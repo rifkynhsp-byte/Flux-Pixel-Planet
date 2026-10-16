@@ -170,3 +170,17 @@ Ekspor klasifikasinya ke Asset, lalu muat aset jadi itu untuk ditampilkan dan un
 3. Buang tiga band dengan kepentingan terendah lalu latih ulang. Laporkan perubahan akurasinya dan putuskan apakah band itu tetap dipertahankan.
 4. Naikkan jari-jari focal mode menjadi 6 piksel lalu temukan satu objek nyata yang dihapusnya.
 5. Atur `gamma` SVM menjadi 5 lalu jalankan ulang. Jelaskan seperti apa rupa overfitting di atas peta, berbeda dari rupanya di dalam angka.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Ketiga classifier biasanya sepakat di inti setiap kelas dan berbeda di sepanjang tepi: tempat mangrove bertemu dataran lumpur, air atau mangrove belakang, serta pada piksel campuran selebar beberapa meter. Buat layer `rf.neq(svm).or(rf.neq(cart))` (bernilai 1 bila ada dua yang berbeda) dan ekspor. Ini peta ketidakpastian gratis, dan Bab [-@sec-accuracy] memakainya untuk menempatkan titik validasi di bagian peta yang paling lemah.
+
+**2.** Mengambil sampel sebelum membagi data menempatkan piksel bertetangga dari poligon yang sama di kedua sisi, sehingga piksel validasi hampir merupakan salinan piksel latih. Akurasi yang dilaporkan melonjak, sering dari pertengahan 80-an ke akhir 90-an, sementara petanya tidak berubah. Catat kedua angka: selisihnya adalah inflasi akibat kebocoran, dan hanya angka dari pembagian sebelum sampling yang boleh dilaporkan.
+
+**3.** Kalau akurasi berubah kurang dari sekitar satu poin (dalam rentang noise antar-seed acak), band itu tidak menambah apa-apa dan bisa dibuang: model menjadi lebih cepat dan sederhana tanpa kehilangan. Kalau akurasi turun jelas, pertahankan; importance yang rendah di Random Forest bisa berarti band itu redundan dengan band lain, bukan tidak berguna. Jalankan ulang dengan dua atau tiga seed sebelum memutuskan, karena perubahan satu poin pada satu kali run bukan bukti.
+
+**4.** Focal mode 6 piksel (sekitar 130 m pada 10 m) menghapus jalur mangrove tepi yang sempit, kolam kecil, kanal sungai selebar beberapa piksel, dan patch restorasi yang terisolasi, lalu menyerapnya ke kelas di sekitarnya. Bandingkan peta yang dihaluskan dan yang tidak di sepanjang tepian pantai yang sempit, dan Anda akan menemukan bentangan mangrove yang hilang. Bandingkan juga tabel luasnya: kelas yang langka dan sempit kehilangan paling banyak.
+
+**5.** Akurasi validasi bisa bertahan atau bahkan naik di wilayah latih, tetapi petanya menjadi berbintik: bercak kelas yang salah di dalam area homogen, pulau-pulau kecil yang mengikuti piksel latih satu per satu, dan batas kelas yang berkelok di sekitar lokasi latih. Dalam metrik, overfitting adalah selisih antara akurasi latih dan validasi; di peta, ia berupa noise yang mengikuti sampel, bukan bentang lahan. Kembalikan `gamma` ke nilai yang membuat peta koheren secara spasial.
+:::

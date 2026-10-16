@@ -164,3 +164,17 @@ Pada 6 September 2018, gempa di Hokkaido memicu ribuan longsor dangkal hanya dal
 3. Bandingkan akurasi objek dan piksel per kelas, bukan hanya keseluruhan. Kelas mana yang naik dan mana yang turun, dan apakah itu sesuai dengan argumen batas gradasional di atas?
 4. Naikkan unit pemetaan minimum menjadi 2 hektar lalu laporkan berapa luas mangrove yang lenyap. Angka itu wajib ada di metadata Anda.
 5. Ekspor shapefile berbasis piksel dan berbasis objek lalu buka keduanya di QGIS. Hitung jumlah poligon masing-masing. Rasio itu adalah argumen praktis bab ini.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Pada `size` 5 (objek sekitar 50 m), tepian selebar dua atau tiga piksel tetap menjadi objek sendiri. Pada 10 (sekitar 100 m), tepian itu bertahan di bagian yang lebar, tetapi bentangan tipis mulai menyatu dengan objek tetangga. Pada 25 (sekitar 250 m), sebagian besar tepian sempit terserap ke objek air atau hutan darat. Ukuran saat tepian menghilang kira-kira adalah ketika jarak seed melebihi sekitar dua kali lebar tepian.
+
+**2.** Dengan compactness 5, objek menjadi lebih bulat dan teratur, dan garis pantai berubah menjadi bentuk kotak yang dihaluskan dan memotong anak sungai serta tepian; dengan 0, objek mengikuti batas spektral ke mana pun ia pergi. Satu kalimat: "Compactness menyukai bentuk yang teratur, cocok untuk lahan pertanian bertepi lurus tetapi tidak untuk delta, yang batas aslinya tidak teratur dan mengikuti air."
+
+**3.** Biasanya kelas dengan tepi tajam dan area homogen yang luas (air, tambak, perkebunan) diuntungkan oleh objek, karena kesalahan salt-and-pepper hilang. Kelas dengan batas bergradasi (mangrove belakang yang beralih ke hutan rawa, tegakan jarang di dataran lumpur) sedikit diuntungkan atau malah dirugikan, karena satu objek harus memilih satu kelas untuk zona peralihan yang campuran. Kalau hasil Anda seperti itu, hasilnya sesuai dengan argumen di bab ini.
+
+**4.** Hitung luas dengan dan tanpa filter: `objects.filter(ee.Filter.gte('area_ha', 2))` dibanding semua objek. Di delta, menaikkan unit pemetaan minimum dari 0,5 ke 2 ha umumnya menghapus beberapa persen luas mangrove, lebih banyak bila mangrovenya berupa tepian. Laporkan, misalnya: "Unit pemetaan minimum 2 ha; ini menghapus 1.240 ha (3,1 %) mangrove dalam patch yang lebih kecil dari 2 ha."
+
+**5.** Ekspor berbasis piksel yang divektorkan menghasilkan puluhan atau ratusan ribu poligon kecil, banyak yang hanya satu atau beberapa piksel. Ekspor berbasis objek menghasilkan beberapa ratus sampai beberapa ribu poligon yang mengikuti unit sebenarnya. Rasio 50:1 atau lebih umum terjadi. Rasio itulah yang dirasakan pengguna GIS, perencana atau tim lapangan saat membuka filenya.
+:::

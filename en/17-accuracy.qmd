@@ -269,3 +269,17 @@ Every clause in that paragraph is a decision this chapter and Chapter [-@sec-sam
 3. Overlay your map and Global Mangrove Watch. Pick three disagreement areas and determine from high resolution imagery which is right.
 4. Compute area at 10 m and at 100 m and report both with the scale stated. Explain to a non specialist why both are correct.
 5. Write the methods paragraph for your own map, following the template above. If you cannot fill in a clause, you have found a decision you made by accident.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** In the chapter's matrix it is mangrove ↔ other forest (23 and 18 points). Spectra cannot separate them well, but their physical setting does: elevation and slope (mangrove sits low and flat), distance to tidal water, or Sentinel-1 VH at high tide (double bounce under mangrove only). Propose one of these, because it encodes where the class can be rather than another way to describe the same green canopy.
+
+**2.** Put the two in one table, for example "internal (training pixels) 97 %, independent (held-out polygons) 84 %". A gap of more than ten points usually comes from pixels of the same polygon in both sets, polygons drawn on today's basemap for an older image, or training areas clustered in easy places. Your paragraph should name which of these happened and what you changed.
+
+**3.** Choose three patches where the maps disagree and look at sub-metre imagery from the same year. Typical outcomes: your 10 m map is right on narrow fringes and small patches that a coarser product misses; Global Mangrove Watch is right where your classifier called back-mangrove or nipa as other forest; and some disagreements are real change between the products' dates. Record each verdict with its reason.
+
+**4.** Compute `pixelArea()` sums at `scale: 10` and `scale: 100`. The 100 m figure is usually smaller for a fringing class, because narrow strips drop out when each larger pixel takes the majority class. For a non-specialist: "It is like counting a coastline's mangroves with a fine net and a coarse net. Both counts are honest; the coarse net misses the thin strips. That is why we always say which net we used."
+
+**5.** Fill every clause: number and design of validation points, thinning distance, overall accuracy, producer's and user's accuracy for the key class with intervals, the area estimate with its 95 % interval, scale, and the date. Typical clauses people cannot fill are the stratification of the validation sample, the minimum separation, and the area interval. Each blank marks a decision taken by default rather than on purpose.
+:::

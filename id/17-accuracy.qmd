@@ -271,3 +271,17 @@ Setiap anak kalimat di paragraf itu adalah keputusan yang diminta bab ini dan Ba
 3. Tumpangkan peta Anda dan Global Mangrove Watch. Pilih tiga area yang berselisih lalu tentukan dari citra resolusi tinggi mana yang benar.
 4. Hitung luas pada 10 m dan pada 100 m lalu laporkan keduanya dengan skala yang disebutkan. Jelaskan kepada orang non spesialis mengapa keduanya benar.
 5. Tulis paragraf metode untuk peta Anda sendiri mengikuti templat di atas. Kalau ada anak kalimat yang tidak bisa Anda isi, Anda baru saja menemukan keputusan yang Anda ambil tanpa sengaja.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Pada matriks di bab ini, kesalahan terbesar adalah mangrove ↔ hutan lain (23 dan 18 titik). Spektrum sulit memisahkannya, tetapi kondisi fisiknya bisa: elevasi dan kemiringan (mangrove berada rendah dan datar), jarak ke air pasang surut, atau VH Sentinel-1 saat pasang (double bounce hanya di bawah mangrove). Usulkan salah satunya, karena prediktor itu mengodekan di mana kelas itu bisa berada, bukan cara lain untuk menggambarkan kanopi hijau yang sama.
+
+**2.** Letakkan keduanya dalam satu tabel, misalnya "internal (piksel latih) 97 %, independen (poligon yang ditahan) 84 %". Selisih lebih dari sepuluh poin biasanya berasal dari piksel poligon yang sama di kedua kelompok, poligon yang digambar di atas basemap masa kini untuk citra lama, atau area latih yang mengumpul di tempat yang mudah. Paragraf Anda harus menyebut mana yang terjadi dan apa yang Anda ubah.
+
+**3.** Pilih tiga patch tempat kedua peta berbeda dan lihat citra resolusi sub-meter dari tahun yang sama. Hasil yang umum: peta 10 m Anda benar pada tepian sempit dan patch kecil yang terlewat oleh produk yang lebih kasar; Global Mangrove Watch benar ketika classifier Anda menyebut mangrove belakang atau nipah sebagai hutan lain; dan sebagian perbedaan adalah perubahan nyata di antara tanggal kedua produk. Catat setiap keputusan beserta alasannya.
+
+**4.** Hitung jumlah `pixelArea()` pada `scale: 10` dan `scale: 100`. Angka 100 m biasanya lebih kecil untuk kelas tepian, karena jalur sempit hilang ketika setiap piksel besar mengambil kelas mayoritas. Untuk orang awam: "Seperti menghitung mangrove di garis pantai dengan jaring halus dan jaring kasar. Kedua hitungan jujur; jaring kasar melewatkan jalur yang tipis. Karena itu kami selalu menyebut jaring mana yang dipakai."
+
+**5.** Isi setiap klausa: jumlah dan desain titik validasi, jarak thinning, akurasi keseluruhan, producer's dan user's accuracy untuk kelas utama beserta intervalnya, estimasi luas dengan interval 95 %, skala, dan tanggal. Klausa yang biasanya tidak bisa diisi adalah stratifikasi sampel validasi, jarak minimum, dan interval luas. Setiap bagian yang kosong menandai keputusan yang diambil secara default, bukan dengan sengaja.
+:::

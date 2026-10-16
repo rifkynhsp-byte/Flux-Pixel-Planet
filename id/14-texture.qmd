@@ -188,3 +188,17 @@ Tekstur lebih murah, lebih sederhana, dan bekerja sebagai band biasa dalam alur 
 3. Kuantisasi ke 32 aras alih-alih 255. Apa yang didapat dan apa yang hilang?
 4. Jalankan GLCM pada NDVI alih-alih B8. Apakah sinyal strukturnya membaik, dan bisakah Anda menjelaskan mengapa?
 5. Cuplik band tekstur Anda pada titik data latih lalu plot entropy terhadap contrast dengan warna per kelas. Putuskan, atas dasar bukti itu, apakah band itu dipertahankan.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Pada `size` 1 (jendela 30 m) teksturnya sebagian besar speckle tajuk tunggal dan batasnya berderau. Pada `size` 3 (70 m) grid tanaman dan tegakan alami terpisah dengan bersih, karena jendela mencakup sekitar lima sampai empat belas tajuk berukuran 5-15 m. Pada `size` 7 (150 m) kontrasnya kuat tetapi batasnya melebar sekitar 75 m di tiap sisi. Batas paling jelas biasanya ada pada jendela yang mencakup beberapa tajuk tetapi lebih kecil dari lebar tegakan: di sini `size` 3.
+
+**2.** Tidak ada exception. Dengan reflektans float 0-1 yang diubah secara implisit, hampir setiap piksel jatuh ke satu atau dua tingkat keabuan, sehingga matriks ko-okurensinya mengalami degenerasi: entropi dan kontras bernilai konstan atau hampir nol di seluruh citra, dan layer tekstur tampak kosong atau bergaris. Kegagalannya muncul sebagai layer seragam yang tidak berguna, bukan sebagai error, dan karena itulah ia lolos.
+
+**3.** 32 tingkat membuat matriks berukuran 32 × 32, bukan 256 × 256, sehingga perhitungan jauh lebih cepat dan hemat memori, dan statistiknya lebih stabil pada jendela kecil (lebih sedikit sel kosong). Yang hilang adalah variasi halus: dua kanopi yang kecerahannya berbeda kurang dari satu langkah 32 tingkat tampak identik. Untuk memisahkan tegakan tanaman dari alami, 32 sering cukup; untuk perbedaan kondisi yang halus, pertahankan 255.
+
+**4.** Biasanya ya, sedikit. NDVI adalah rasio, jadi ia menghilangkan variasi iluminasi dan bayangan antara tajuk yang terkena matahari dan yang teduh, yang dibawa oleh B8; teksturnya lalu mencerminkan susunan vegetasi dan celah, bukan pola terang-bayang. Tetapi NDVI jenuh pada kanopi rapat, sehingga di dalam tegakan alami yang tertutup variasinya kecil dan tekstur bisa melemah. Pertahankan indeks yang membuat histogram entropi kedua kelas lebih terpisah.
+
+**5.** Kalau kelas membentuk awan titik yang terpisah pada plot entropi-kontras, misalnya tanaman pada entropi rendah dan tegakan alami pada entropi tinggi, band tekstur membawa informasi yang tidak dimiliki band spektral, dan Anda mempertahankannya. Kalau awan titiknya tumpang tindih sepenuhnya, band itu hanya menambah noise yang berkorelasi dan beban komputasi: buang. Putuskan dengan plot itu, lalu konfirmasikan dengan feature importance di Bab [-@sec-supervised].
+:::

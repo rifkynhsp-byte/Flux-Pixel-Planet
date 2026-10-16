@@ -170,3 +170,17 @@ Export the classification to an Asset, then load the finished asset for display 
 3. Drop the three lowest importance bands and retrain. Report the accuracy change and decide whether they should stay.
 4. Raise the focal mode radius to 6 pixels and find a real feature it deleted.
 5. Set SVM `gamma` to 5 and rerun. Describe what overfitting looks like on a map, as distinct from what it looks like in a metric.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** The three classifiers usually agree on the core of each class and disagree along the fringe: where mangrove meets mudflat, water or back-mangrove, and on mixed pixels a few metres wide. Build the layer as `rf.neq(svm).or(rf.neq(cart))` (1 where any two disagree) and export it. It is a free map of uncertainty, and Chapter [-@sec-accuracy] uses it to place validation points where the map is weakest.
+
+**2.** Sampling before the split puts neighbouring pixels of the same polygon on both sides, so validation pixels are near-copies of training pixels. Reported accuracy jumps, often from the mid-80s to the high 90s, while the map is unchanged. Write down both numbers: the gap is the inflation from leakage, and only the split-before-sampling figure may be reported.
+
+**3.** If accuracy changes by less than about one point (within the noise between random seeds), the bands add nothing and can go: the model gets faster and simpler with no loss. If accuracy drops clearly, keep them; low importance in a Random Forest can mean a band is redundant with another, not useless. Rerun with two or three seeds before deciding, because a one-point change on one run is not evidence.
+
+**4.** A 6-pixel focal mode (about 130 m across at 10 m) removes narrow fringing mangrove strips, small ponds, the river channels a few pixels wide, and isolated restoration patches, absorbing them into the surrounding class. Toggle the smoothed and unsmoothed maps along a narrow coastal fringe and you will find stretches of mangrove that vanish. Compare the area table too: the rare, narrow classes lose the most.
+
+**5.** Validation accuracy may hold up or even rise on the training region, but the map turns speckled: salt-and-pepper patches of the wrong class inside homogeneous areas, small islands that follow individual training pixels, and class boundaries that wiggle around training locations. In a metric, overfitting is a gap between training and validation accuracy; on a map it is noise that follows the samples rather than the landscape. Return `gamma` to a value where the map is spatially coherent.
+:::

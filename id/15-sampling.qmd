@@ -316,3 +316,17 @@ Selisih antara akurasi internal dan akurasi independen adalah angka yang jujur, 
 3. Ekspor sampelnya sebagai CSV lalu periksa dua puluh di antaranya secara acak terhadap citra resolusi tinggi. Tingkat salah label Anda adalah batas atas akurasi peta Anda.
 4. Jalankan validasi silang blok pada ukuran blok 1 km, 5 km, dan 20 km. Plot akurasi terhadap ukuran blok dan tentukan rentang autokorelasi data Anda.
 5. Gambar poligon latih untuk satu kelas yang Anda anggap mudah, lalu minta rekan kerja menggambarnya secara terpisah. Bandingkan. Tingkat ketidaksepakatannya lebih informatif daripada sebagian besar penyetelan model.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Dengan target yang sama, kelas langka mendapat tambahan titik dan kelas besar kehilangan titik. Kelas yang menjadi lebih sulit dimodelkan biasanya yang besar dan heterogen, misalnya "lahan lain" atau air dengan variasi keruh dan jernih: jumlah titiknya sekarang sama dengan kelas kecil yang seragam, padahal variasi internalnya jauh lebih besar. Sama tidak berarti adil, karena kebutuhan sebuah kelas bergantung pada variabilitasnya dan presisi yang Anda inginkan, bukan pada jumlah yang sama untuk semua kelas. Alokasi sama juga berarti akurasi keseluruhan harus diberi bobot ulang menurut luas.
+
+**2.** Dengan jarak 10 m, piksel bertetangga dari patch yang sama masuk ke data latih dan validasi sekaligus, sehingga validasi menjadi ujian hafalan. Akurasi yang dilaporkan biasanya naik beberapa poin (sering 3-10) tanpa peta menjadi lebih baik sama sekali. Simpan angkanya: itulah besarnya optimisme yang ditambahkan autokorelasi spasial, dan alasan untuk melakukan thinning serta membagi data per poligon.
+
+**3.** Ekspor dengan `Export.table.toDrive`, buka CSV-nya dan periksa dua puluh titik acak terhadap citra resolusi tinggi dari tanggal yang sama (citra historis Google Earth, atau basemap Planet untuk tahun itu). Kalau dua dari dua puluh salah, galat label Anda sekitar 10 % (dengan interval lebar pada n = 20) dan peta Anda tidak bisa jujur melampaui sekitar 90 % akurasi. Perbaiki label sebelum menyetel apa pun.
+
+**4.** Ukur akurasi dengan validasi silang blok: bagi wilayah menjadi blok persegi, latih pada semua blok kecuali satu, uji pada blok yang ditahan, ulangi untuk setiap blok. Biasanya akurasi turun dari blok 1 km ke 5 km lalu mendatar. Ukuran blok tempat kurva mulai mendatar adalah perkiraan rentang autokorelasi: titik yang berjarak lebih dekat dari itu tidak benar-benar independen. Pakai jarak itu sebagai jarak minimum thinning dan sebagai ukuran blok untuk melaporkan akurasi.
+
+**5.** Hitung piksel atau poligon yang dilabeli berbeda oleh Anda berdua. Bahkan untuk kelas yang "mudah", ketidaksepakatan 5-15 % lazim di batas kelas: di mana tepian mangrove berakhir, apakah tambak yang dibiarkan itu air atau lahan terbuka? Angka itu adalah batas atas kesepakatan antara peta Anda dan referensi apa pun. Biasanya lebih besar daripada keuntungan dari tuning, dan karena itulah protokol pelabelan tertulis (aturan untuk batas, ukuran minimum, tanggal citra) lebih berharga daripada satu hyperparameter lagi.
+:::

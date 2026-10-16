@@ -316,3 +316,15 @@ The gap between internal and independent accuracy is the honest number, and Chap
 2. Disable thinning by setting the minimum separation to 10 metres, then run Chapter [-@sec-supervised] with the result. Record how much reported accuracy rises. Keep the number.
 3. Export the samples as CSV and check twenty at random against high resolution imagery. Your mislabel rate is the ceiling on your map's accuracy.
 4. Draw training polygons for a class you consider easy, then ask a colleague to draw them independently. Compare. The disagreement rate is more informative than most model tuning.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** With equal targets the rare class gains points and the large classes lose them. The class that becomes harder to model is usually the large, heterogeneous one, such as "other land" or water with turbid and clear variants: it now has the same number of points as a uniform small class but far more internal variety to cover. Equal is not fair because what a class needs depends on its variability and the precision you want, not on giving every class the same count. Equal allocation also means any overall accuracy must be re-weighted by area.
+
+**2.** With 10 m separation, neighbouring pixels from the same patch fall into both training and validation, and validation becomes a test of memory. Reported accuracy typically rises by several points (often 3-10) without the map improving at all. Keep the number: it is the size of the optimism that spatial autocorrelation adds, and the reason to thin and to split by polygon.
+
+**3.** Export with `Export.table.toDrive`, open the CSV and check twenty random points against high-resolution imagery from the same date (Google Earth historical imagery, or a Planet or PlanetScope basemap for that year). If two of twenty are wrong, your label error is about 10 % (with a wide interval at n = 20) and your map cannot honestly exceed about 90 % accuracy. Fix the labels before tuning anything.
+
+**4.** Count the pixels or polygons the two of you labelled differently. Even for an "easy" class, disagreement of 5-15 % is common at boundaries: where does the mangrove fringe end, is a fallow pond water or bare? That rate is a ceiling on agreement between your map and any reference. It is usually larger than the gain from tuning, which is why a written labelling protocol (rules for edges, minimum size, date of imagery) is worth more than another hyperparameter.
+:::
