@@ -71,3 +71,13 @@ The honest conclusion: satellite products describe the shape of the water cycle 
 1. Repeat the budget for a smaller basin (for example the Citarum). What happens to the GRACE term, and why?
 2. Replace CHIRPS with ERA5-Land precipitation. Does the budget close better or worse?
 3. Compute P − ET for forest pixels and for plantation pixels separately (use a land-cover map). How different is their water yield?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. GRACE's footprint is about 300 km, so for a basin the size of the Citarum (about 6,600 km², far smaller than one footprint) the storage term is mostly the signal of the surrounding region, not of the basin. Its uncertainty dominates the budget, and the closure test becomes meaningless for storage. For small basins, drop ΔS from the monthly test and assume it averages to zero over many years, or use a gauge and a hydrological model instead.
+
+**2.** Not computed in the chapter. ERA5-Land runoff and ERA5-Land precipitation come from the same model, so the water balance becomes more internally consistent and the long-term residual P − ET − Q may shrink. That does not make it more correct: the agreement is partly circular. Over Borneo, reanalysis rainfall can differ substantially from gauge-calibrated CHIRPS, so report both budgets and the reason one closes better.
+
+**3.** Not computed in the chapter. Mask MOD16 ET and CHIRPS P with a land-cover map (forest versus oil palm or acacia plantation) and compute mean P − ET per class over the same years. Expect plantations to show somewhat higher water yield (lower ET) where canopy is younger or more open, and possibly the reverse for fast-growing plantations at full canopy. Rainfall differences between the areas confound the comparison, so compare classes within the same rainfall zone.
+:::

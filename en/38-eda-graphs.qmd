@@ -78,3 +78,17 @@ The lesson generalises. A product's quality flags are the first filter, not the 
 3. Make the correlation matrix with the season left in. Why does almost everything become strongly correlated?
 4. Repeat the ENSO comparison with the Niño 3.4 anomaly of May-June instead of July-October. How much of the relationship survives as a forecast?
 5. Apply the moving-median rule to the whole of 2019-2024 for the same Bandung pixel. Do the outliers cluster in particular months?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Go through the five rules in order. Common fixes: replace a bar of means with points or a box per group (rule 1); add the range or a band of individual years (rule 2); start bar axes at zero (rule 3); reduce colours to grey context plus one highlight (rule 4); rewrite the title to state the finding and add units and source (rule 5). The test of the redraw: can someone read the main point without your text?
+
+**2.** Not computed in the chapter. Ambon's band of individual years is wide, and its mean shape hides two things: the wet season (around May-August, the opposite of western Indonesia) varies by hundreds of millimetres between years, and the record contains a step change after 2008 (Chapter [-@sec-dataviz]). The band shows that "a typical year" is a poor description: any given year can be far from the average curve.
+
+**3.** With the season left in, every city has a strong annual cycle driven by the same monsoon, so months with high rain in one city tend to have high or low rain in another simply because of the calendar. Correlations become strongly positive (or negative, for cities with opposite regimes) almost everywhere. Removing the season first leaves anomalies, which show whether cities share the unusual months, the question that matters.
+
+**4.** Not computed in the chapter. Correlate July-October rainfall with the May-June Niño 3.4 anomaly. ENSO events usually build through the boreal summer, so the relationship weakens but much of it typically survives: a negative rank correlation, smaller in magnitude than the same-month values (−0.60 to −0.82). How much survives is the forecastable part, the only part useful for planning planting or water releases.
+
+**5.** Not computed in the chapter. Apply the moving-median rule to 2019-2024 and tabulate flagged values by month. If they cluster in the wet season months, they are likely cloud-contaminated observations that passed screening (cold, low LST values in the land surface temperature series); if they cluster in the dry season, look for fire or bare-soil heating. A cluster tells you a process, a scatter tells you noise.
+:::

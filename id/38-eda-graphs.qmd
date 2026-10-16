@@ -78,3 +78,17 @@ Pelajarannya berlaku umum. Penanda kualitas produk adalah saringan pertama, buka
 3. Buat matriks korelasi tanpa menghilangkan musim. Kenapa hampir semuanya jadi berkorelasi kuat?
 4. Ulangi perbandingan ENSO dengan anomali Niño 3.4 bulan Mei-Juni, bukan Juli-Oktober. Berapa besar hubungan itu yang tersisa sebagai ramalan?
 5. Terapkan aturan median bergerak pada seluruh 2019-2024 untuk piksel Bandung yang sama. Apakah pencilan mengumpul di bulan-bulan tertentu?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Ikuti kelima aturan secara berurutan. Perbaikan yang umum: ganti batang rata-rata dengan titik atau box per kelompok (aturan 1); tambahkan rentang atau pita tahun-tahun individual (aturan 2); mulai sumbu batang dari nol (aturan 3); kurangi warna menjadi konteks abu-abu ditambah satu sorotan (aturan 4); tulis ulang judul agar menyatakan temuan dan tambahkan satuan serta sumber (aturan 5). Ujian hasil gambar ulang: dapatkah orang membaca pesan utamanya tanpa teks Anda?
+
+**2.** Tidak dihitung di bab ini. Pita tahun-tahun individual Ambon lebar, dan bentuk rata-ratanya menyembunyikan dua hal: musim hujan (sekitar Mei-Agustus, kebalikan Indonesia bagian barat) bervariasi ratusan milimeter antar-tahun, dan rekamannya memuat perubahan bertahap setelah 2008 (Bab [-@sec-dataviz]). Pita itu memperlihatkan bahwa "tahun tipikal" adalah gambaran yang buruk: tahun mana pun bisa jauh dari kurva rata-rata.
+
+**3.** Dengan pola musim yang dibiarkan, setiap kota memiliki siklus tahunan kuat yang digerakkan oleh monsun yang sama, sehingga bulan dengan hujan tinggi di satu kota cenderung bertepatan dengan hujan tinggi atau rendah di kota lain hanya karena kalender. Korelasinya menjadi sangat positif (atau negatif, untuk kota dengan rezim berlawanan) hampir di mana-mana. Membuang pola musim lebih dulu menyisakan anomali, yang memperlihatkan apakah kota-kota berbagi bulan yang tidak biasa, pertanyaan yang sebenarnya penting.
+
+**4.** Tidak dihitung di bab ini. Korelasikan curah hujan Juli-Oktober dengan anomali Niño 3.4 bulan Mei-Juni. Peristiwa ENSO biasanya menguat sepanjang musim panas belahan utara, sehingga hubungannya melemah tetapi sebagian besar biasanya bertahan: korelasi peringkat negatif, lebih kecil besarnya daripada nilai bulan yang sama (−0,60 sampai −0,82). Seberapa banyak yang bertahan adalah bagian yang bisa diprakirakan, satu-satunya bagian yang berguna untuk merencanakan tanam atau pelepasan air.
+
+**5.** Tidak dihitung di bab ini. Terapkan aturan median bergerak untuk 2019-2024 dan tabulasikan nilai yang ditandai per bulan. Kalau mengumpul di bulan musim hujan, kemungkinan besar itu pengamatan yang terkontaminasi awan dan lolos penyaringan (nilai LST rendah yang dingin pada deret suhu permukaan); kalau mengumpul di musim kemarau, periksa kebakaran atau pemanasan tanah terbuka. Pengelompokan menunjukkan sebuah proses, sebaran acak menunjukkan noise.
+:::

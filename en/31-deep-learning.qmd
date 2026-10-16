@@ -204,3 +204,25 @@ If the GeoTIFF's transform does not match the grid the patches came from, the pr
 3. Give the Random Forest a 9 by 9 window instead of 5 by 5. At what window size does it stop improving?
 4. Write the U-Net prediction for the test block to a GeoTIFF with `rasterio`, using the same transform as the `computePixels` request. Upload it to your Earth Engine assets and repeat the confusion matrix there. Are the numbers the same as in Python?
 5. Repeat the fewer-labels experiment with three seeds per size. Does the U-Net's dip at half the tiles survive, or was it one unlucky run?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. Five new seeds give a better estimate of the U-Net's run-to-run spread; expect a range of a couple of points in agreement, larger than the Random Forest's because network training is more seed-dependent. If the U-Net's range still overlaps the Random Forest with 5 × 5 statistics, the honest conclusion is that on this task they are not distinguishable; report the mean and range of both, not the best run.
+
+**2.** Not computed in the chapter. In the pond belt, mangrove remnants, dykes and ponds form a fine mosaic. The Random Forest, which sees only a pixel and its 5 × 5 neighbourhood, will probably suffer more on mixed pixels; the U-Net may do better on pond shapes, but both are scored against WorldCover, which itself often confuses ponds, water and degraded mangrove there. Check WorldCover against high-resolution imagery before reading either score.
+
+**3.** Agreement typically rises from 5 × 5 to 9 × 9 and then flattens or falls, because larger windows add context but also blur edges and mix classes. Try 3, 5, 9, 15 and 21; the window where agreement stops improving (often around 9-15 pixels, 90-150 m, at this scale) is where extra context no longer pays. That point is useful: it tells you how much spatial context the problem needs.
+
+**4.** ```python
+import rasterio
+from rasterio.transform import Affine
+t = Affine(PIXEL, 0, X0, 0, -PIXEL, Y0)        # the same grid as the computePixels request
+with rasterio.open('unet_test.tif', 'w', driver='GTiff', height=768, width=768, count=1,
+                   dtype='uint8', crs='EPSG:32750', transform=t) as dst:
+    dst.write(pred.astype('uint8'), 1)
+```
+Upload it, sample it with WorldCover in Earth Engine and build the matrix. The numbers should match Python exactly if the grid, origin and CRS are identical; any difference means a half-pixel shift or a different projection.
+
+**5.** Not computed in the chapter. With three seeds per training size, compute the mean and range of agreement at each size. If the dip at half the tiles is inside the range of the other sizes, it was noise from one run; if it persists in all three seeds, it is real and worth explaining (for example the half-size subset happened to drop most pond tiles).
+:::

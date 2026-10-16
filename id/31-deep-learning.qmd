@@ -204,3 +204,25 @@ Kalau transformasi GeoTIFF tidak sama dengan grid asal patch, prediksinya berges
 3. Beri Random Forest jendela 9 kali 9, bukan 5 kali 5. Pada ukuran jendela berapa hasilnya berhenti membaik?
 4. Tulis prediksi U-Net untuk blok uji ke GeoTIFF dengan `rasterio`, memakai transformasi yang sama dengan permintaan `computePixels`. Unggah ke asset Earth Engine Anda dan ulangi confusion matrix di sana. Apakah angkanya sama dengan hasil di Python?
 5. Ulangi eksperimen label yang lebih sedikit dengan tiga seed per ukuran. Apakah penurunan U-Net pada separuh tile bertahan, atau hanya satu run yang sial?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Lima seed baru memberi perkiraan yang lebih baik tentang sebaran U-Net antar-run; harapkan rentang beberapa poin pada kesesuaian, lebih besar daripada Random Forest karena pelatihan jaringan lebih bergantung pada seed. Kalau rentang U-Net masih tumpang tindih dengan Random Forest berstatistik 5 × 5, kesimpulan yang jujur adalah keduanya tidak dapat dibedakan pada tugas ini; laporkan rata-rata dan rentang keduanya, bukan run terbaik.
+
+**2.** Tidak dihitung di bab ini. Di sabuk tambak, sisa mangrove, pematang dan tambak membentuk mosaik yang halus. Random Forest, yang hanya melihat satu piksel dan lingkungan 5 × 5-nya, kemungkinan lebih menderita pada piksel campuran; U-Net mungkin lebih baik pada bentuk tambak, tetapi keduanya dinilai terhadap WorldCover, yang di sana pun sering mencampuradukkan tambak, air dan mangrove terdegradasi. Periksa WorldCover terhadap citra resolusi tinggi sebelum membaca skor mana pun.
+
+**3.** Kesesuaian biasanya naik dari 5 × 5 ke 9 × 9 lalu mendatar atau turun, karena jendela yang lebih besar menambah konteks tetapi juga mengaburkan tepi dan mencampur kelas. Coba 3, 5, 9, 15 dan 21; jendela tempat kesesuaian berhenti membaik (sering sekitar 9-15 piksel, 90-150 m, pada skala ini) adalah titik ketika konteks tambahan tidak lagi bermanfaat. Titik itu berguna: ia memberi tahu seberapa banyak konteks spasial yang dibutuhkan masalahnya.
+
+**4.** ```python
+import rasterio
+from rasterio.transform import Affine
+t = Affine(PIXEL, 0, X0, 0, -PIXEL, Y0)        # grid yang sama dengan permintaan computePixels
+with rasterio.open('unet_test.tif', 'w', driver='GTiff', height=768, width=768, count=1,
+                   dtype='uint8', crs='EPSG:32750', transform=t) as dst:
+    dst.write(pred.astype('uint8'), 1)
+```
+Unggah, sampel bersama WorldCover di Earth Engine dan buat matriksnya. Angkanya seharusnya sama persis dengan Python bila grid, titik asal dan CRS-nya identik; perbedaan apa pun berarti pergeseran setengah piksel atau proyeksi yang berbeda.
+
+**5.** Tidak dihitung di bab ini. Dengan tiga seed per ukuran data latih, hitung rata-rata dan rentang kesesuaian pada setiap ukuran. Kalau penurunan pada setengah jumlah tile berada di dalam rentang ukuran lain, itu noise dari satu run; kalau bertahan di ketiga seed, itu nyata dan perlu dijelaskan (misalnya subset setengah ukuran kebetulan membuang sebagian besar tile tambak).
+:::

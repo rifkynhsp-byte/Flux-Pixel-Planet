@@ -57,3 +57,13 @@ fit <- fit.variogram(v, vgm("Sph"))   # range, sill, nugget
 1. Remove the QC "other quality" days and redo the monthly missing chart. What is left to analyse?
 2. Replace Sen's slope with an ordinary least squares slope. Which pixels change sign?
 3. Read the range off the semivariogram and use it as the block size in Chapter [-@sec-sampling]'s cross-validation. Does the accuracy change?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Removing the "other quality" days as well leaves mostly the best-quality, clear-sky days, and in the Bandung basin's wet months (roughly November to April) little survives: some months have almost no data at all. What is left is a dry-season-heavy record. Any trend or mean computed from it describes dry-season, clear-sky days, not the whole year. State that, or use a gap-tolerant method rather than pretending the series is complete.
+
+**2.** OLS is pulled by single extreme values, so pixels with a weak Sen's slope near zero and one outlying year near the start or end are the ones that change sign. Map `sign(ols) != sign(sens)`: those pixels are scattered rather than forming coherent areas, which is a sign that neither slope is robust there. Where both agree in sign, the trend is at least not an artefact of one year.
+
+**3.** Using the semivariogram range (about 14 km here) as the block size makes training and test blocks roughly independent. Expect reported accuracy to drop compared with random point splits or small blocks, by a few points or more, because neighbours no longer leak between training and test. The lower number is the honest one for predicting new areas.
+:::

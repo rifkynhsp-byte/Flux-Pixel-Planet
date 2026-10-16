@@ -74,3 +74,15 @@ Komposit perubahan memperlihatkannya sekilas. Dengan citra sebelum di saluran me
 2. Ganti pembagian poligon (0–6 latih, 7–9 uji) dengan pembagian lain. Seberapa besar akurasi uji berubah?
 3. Tambahkan lintasan turun kalau ada untuk hari-hari yang sama. Apakah recall perkotaan terendam berubah?
 4. Bandingkan luas banjirnya dengan pendekatan banjir dari topografi di Bab [-@sec-flood]. Di mana kedua metode sepakat?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Kedua peta sepakat pada area perkotaan yang kering, yang sudah terpisah dengan baik hanya dengan citra sebelum banjir. Keduanya paling berbeda pada semua yang berubah: permukiman dan lahan yang tergenang, yang oleh model asli sebagian besar disebut perkotaan atau vegetasi kering karena ia tidak pernah melihat citra sesudah banjir, serta air permanen, yang dikacaukannya (recall 0,11). Peta perbedaan itu pada dasarnya adalah peta banjir yang disembunyikan oleh bug.
+
+**2.** Tidak dihitung di bab ini. Pembagian yang berbeda dari sepuluh poligon per kelas menggeser akurasi held-out beberapa poin, lebih besar untuk kelas dengan poligon sedikit atau heterogen seperti perkotaan tergenang. Jalankan beberapa pembagian (atau loop leave-one-polygon-out) dan laporkan rata-rata serta rentangnya; satu pembagian dengan 15 poligon uji adalah sampel kecil, dan 0,96 hanyalah satu undian dari rentang itu.
+
+**3.** Tidak dihitung di bab ini. Lintasan descending pada hari yang sama menambahkan sudut pandang kedua, yang membantu di tempat bangunan membayangi atau menumpuk di atas air pada satu geometri. Harapkan recall perkotaan tergenang berubah, mungkin membaik, karena tanda banjir di antara bangunan sangat bergantung pada orientasi jalan terhadap radar. Kalau tidak ada citra descending dalam sehari dari puncak banjir, perbandingan tidak bisa dibuat, dan itu sendiri adalah kendala yang biasa dalam keadaan darurat.
+
+**4.** Keduanya sepakat pada tanah rendah dan datar di dekat sungai dan dataran banjir lama, tempat air pada radar dan topografi (ketinggian rendah di atas drainase) sama-sama menunjuk banjir. Keduanya berbeda di tempat radar tidak dapat melihat air (di antara gedung tinggi, di bawah pohon rapat) tetapi topografi menyebutnya rawan banjir, dan di tempat radar melihat permukaan gelap yang mirip air (jalan mulus, apron bandara) di tanah yang menurut topografi tinggi. Gunakan kesepakatannya sebagai inti yang meyakinkan dan perbedaannya sebagai daftar tempat yang perlu diperiksa.
+:::

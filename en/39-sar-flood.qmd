@@ -74,3 +74,15 @@ The change composite shows this at a glance. With the before image in red and th
 2. Replace the polygon split (0–6 train, 7–9 test) with a different split. How much does held-out accuracy move?
 3. Add a descending pass if one exists for the same days. Does it change the flooded-urban recall?
 4. Compare the flooded area with the flood-from-terrain approach in Chapter [-@sec-flood]. Where do the two methods agree?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** The two maps agree on dry urban areas, which the before image alone separates well. They disagree most on everything that changed: the flooded neighbourhoods and fields, which the original model mostly calls dry urban or vegetation because it never saw the after image, and permanent water, which it confuses (recall 0.11). The disagreement map is in effect a map of the flood the bug hid.
+
+**2.** Not computed in the chapter. Different splits of the ten polygons per class move held-out accuracy by a few points, more for the classes with few or heterogeneous polygons such as flooded urban. Run several splits (or a leave-one-polygon-out loop) and report the mean and range; a single split of 15 test polygons is a small sample, and 0.96 is one draw from that range.
+
+**3.** Not computed in the chapter. A descending pass on the same days adds a second look angle, which helps where buildings shadow or lay over the water in one geometry. Expect flooded-urban recall to change, possibly improving, because flood signatures between buildings depend strongly on the orientation of streets relative to the radar. If no descending scene exists within a day of the peak, the comparison cannot be made, which is itself the usual constraint in an emergency.
+
+**4.** They agree on the low, flat ground next to rivers and in the old floodplain, where both water on the radar and terrain (low height above drainage) point to flooding. They disagree where radar cannot see water (between tall buildings, under dense trees) but terrain says flood-prone, and where radar sees dark water-like surfaces (smooth roads, airport aprons) on ground terrain calls high. Use the agreement as the confident core and the disagreement as the list of places to check.
+:::

@@ -92,3 +92,17 @@ Each is a thesis-sized question.
 3. Find where Sentinel-2 says burned and MODIS does not. Are those small patches, edges, or real disagreements?
 4. Repeat the peat-fire split for a box in Riau or South Sumatra. Does the share of burned area on peat stay near 99 %?
 5. Compute dNBR for the 2019 Central Kalimantan fires. Why does it understate the damage on peat compared with the Blue Mountains?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** With the pre-fire window two years earlier, the difference now includes everything that changed in those two years, including the extreme 2019 drought drying the canopy before any fire. Compute dNBR over unburned forest nearby (outside the MODIS burned area) for both windows: the dNBR there is the drought and phenology signal, not fire. Subtract it, or report it, before attributing severity to fire.
+
+**2.** Aggregate FIRMS detections per month and the mean NDMI anomaly over the area, and plot both on one time axis. In 2019 the NDMI anomaly fell through the winter-spring drought and the detections rose sharply from October-November, so the fire season took off when the canopy was already at its driest. A lag of a month or two between drying and fire is the expected pattern; ignitions also matter, so the match will not be exact.
+
+**3.** Map `s2burned.and(modisBurned.not())`. Most of it is small patches and the margins of large burns: MODIS at 500 m misses burns smaller than about one pixel and often trims edges, while Sentinel-2 at 20 m resolves them. A smaller share is genuine disagreement: low-severity understorey burns that change NBR little, or dNBR picking up drought and logging. Check a sample in imagery before calling either map wrong.
+
+**4.** Not computed in the chapter. Move the box to a peat landscape in Riau or South Sumatra (with mineral uplands inside it) and rerun. Expect the share of burned area on peat to remain very high in drought years, but somewhat below 99 % where farmland on mineral soil is also burned for clearing, as in parts of South Sumatra. The split depends on how much mineral land the box contains, so report the peat share of the box beside the result.
+
+**5.** dNBR measures the change in surface vegetation and moisture as seen from above. On peat the main damage is below the surface: smouldering consumes the peat itself to depths of tens of centimetres, releasing most of the carbon, but the satellite only sees the vegetation change. Much Central Kalimantan peat is also already degraded (fern and shrub after earlier fires), so its NBR before the fire was low and the drop is small. In the Blue Mountains, by contrast, a tall eucalypt canopy was lost, which dNBR captures well.
+:::

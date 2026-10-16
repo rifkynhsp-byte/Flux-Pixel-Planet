@@ -92,3 +92,17 @@ Masing-masing cukup besar untuk menjadi satu tesis.
 3. Cari lokasi yang terbakar menurut Sentinel-2 tetapi tidak menurut MODIS. Apakah itu petak kecil, tepi, atau perbedaan yang nyata?
 4. Ulangi pembagian api di gambut untuk sebuah kotak di Riau atau Sumatra Selatan. Apakah bagian area terbakar di atas gambut tetap mendekati 99 %?
 5. Hitung dNBR untuk kebakaran Kalimantan Tengah 2019. Mengapa nilainya meremehkan kerusakan di gambut dibandingkan Blue Mountains?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Dengan jendela sebelum kebakaran dua tahun lebih awal, selisihnya kini mencakup semua yang berubah dalam dua tahun itu, termasuk kekeringan ekstrem 2019 yang mengeringkan kanopi sebelum ada kebakaran. Hitung dNBR di hutan yang tidak terbakar di sekitarnya (di luar area terbakar MODIS) untuk kedua jendela: dNBR di sana adalah sinyal kekeringan dan fenologi, bukan kebakaran. Kurangi atau laporkan nilai itu sebelum mengaitkan tingkat keparahan dengan kebakaran.
+
+**2.** Jumlahkan deteksi FIRMS per bulan dan rata-rata anomali NDMI di wilayah itu, lalu plot keduanya pada satu sumbu waktu. Pada 2019, anomali NDMI turun sepanjang kekeringan musim dingin-semi dan deteksi naik tajam sejak Oktober-November, sehingga musim kebakaran melonjak ketika kanopi sudah paling kering. Jeda satu atau dua bulan antara pengeringan dan kebakaran adalah pola yang diharapkan; sumber api juga berperan, jadi kecocokannya tidak akan sempurna.
+
+**3.** Petakan `s2burned.and(modisBurned.not())`. Sebagian besar berupa patch kecil dan tepi area terbakar yang luas: MODIS pada 500 m melewatkan bekas kebakaran yang lebih kecil dari sekitar satu piksel dan sering memotong tepinya, sementara Sentinel-2 pada 20 m dapat menangkapnya. Sebagian kecil adalah perbedaan yang nyata: kebakaran tumbuhan bawah berintensitas rendah yang hanya sedikit mengubah NBR, atau dNBR yang menangkap kekeringan dan penebangan. Periksa sampel di citra sebelum menyatakan salah satu peta keliru.
+
+**4.** Tidak dihitung di bab ini. Pindahkan kotak ke bentang gambut di Riau atau Sumatra Selatan (dengan dataran tinggi mineral di dalamnya) dan jalankan ulang. Harapkan bagian area terbakar di atas gambut tetap sangat tinggi pada tahun kering, tetapi agak di bawah 99 % di tempat lahan pertanian di tanah mineral juga dibakar untuk pembukaan, seperti di sebagian Sumatra Selatan. Proporsinya bergantung pada seberapa banyak lahan mineral di dalam kotak, jadi laporkan proporsi gambut di kotak bersama hasilnya.
+
+**5.** dNBR mengukur perubahan vegetasi permukaan dan kelembapan sebagaimana terlihat dari atas. Di gambut, kerusakan utama ada di bawah permukaan: pembaraan membakar gambut itu sendiri hingga kedalaman puluhan sentimeter dan melepaskan sebagian besar karbon, tetapi satelit hanya melihat perubahan vegetasinya. Banyak gambut di Kalimantan Tengah juga sudah terdegradasi (pakis dan semak setelah kebakaran sebelumnya), sehingga NBR sebelum kebakaran sudah rendah dan penurunannya kecil. Di Blue Mountains, sebaliknya, kanopi eukaliptus yang tinggi hilang, dan itu ditangkap dengan baik oleh dNBR.
+:::

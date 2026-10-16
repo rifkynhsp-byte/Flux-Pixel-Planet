@@ -71,3 +71,13 @@ Kesimpulan jujurnya: produk satelit menggambarkan bentuk siklus air dengan baik 
 1. Ulangi neraca untuk DAS yang lebih kecil (misalnya Citarum). Apa yang terjadi pada suku GRACE, dan kenapa?
 2. Ganti CHIRPS dengan presipitasi ERA5-Land. Apakah neracanya lebih tertutup atau justru kurang?
 3. Hitung P − ET untuk piksel hutan dan piksel kebun secara terpisah (pakai peta tutupan lahan). Seberapa berbeda hasil airnya?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Jejak GRACE sekitar 300 km, sehingga untuk DAS seukuran Citarum (sekitar 6.600 km², jauh lebih kecil dari satu jejak) suku simpanan sebagian besar adalah sinyal wilayah di sekitarnya, bukan DAS itu. Ketidakpastiannya mendominasi neraca, dan uji penutupan menjadi tidak bermakna untuk simpanan. Untuk DAS kecil, buang ΔS dari uji bulanan dan anggap rata-ratanya nol selama bertahun-tahun, atau gunakan pos duga air dan model hidrologi.
+
+**2.** Tidak dihitung di bab ini. Runoff ERA5-Land dan presipitasi ERA5-Land berasal dari model yang sama, sehingga neraca air menjadi lebih konsisten secara internal dan residual jangka panjang P − ET − Q bisa mengecil. Itu tidak membuatnya lebih benar: kecocokannya sebagian melingkar. Di Kalimantan, curah hujan reanalisis bisa jauh berbeda dari CHIRPS yang dikalibrasi stasiun, jadi laporkan kedua neraca dan alasan salah satunya lebih tertutup.
+
+**3.** Tidak dihitung di bab ini. Mask ET MOD16 dan P CHIRPS dengan peta tutupan lahan (hutan versus perkebunan sawit atau akasia) lalu hitung rata-rata P − ET per kelas untuk tahun yang sama. Harapkan perkebunan menunjukkan hasil air yang sedikit lebih tinggi (ET lebih rendah) di tempat kanopinya lebih muda atau lebih terbuka, dan mungkin sebaliknya untuk perkebunan cepat tumbuh dengan kanopi penuh. Perbedaan curah hujan antar-area mengacaukan perbandingan, jadi bandingkan kelas dalam zona curah hujan yang sama.
+:::
