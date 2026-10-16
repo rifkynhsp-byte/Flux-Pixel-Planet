@@ -55,3 +55,15 @@ PR adalah angka yang paling tidak pasti. Alih-alih menebaknya, bab ini **menguku
 2. Tambahkan baterai: kalau sebuah rumah memakai 40 % listriknya pada malam hari, berapa kWh penyimpanan yang dibutuhkan untuk melewati satu malam tanpa PLN?
 3. Ulangi perhitungan atap untuk satu kecamatan di Kupang. Seberapa banyak tambahan yang diberikan iklim yang lebih cerah per bangunan?
 4. Tambahkan jarak ke gardu induk atau jalan utama terdekat pada penyaringan lahan. Berapa dari 3.070 ha yang tersisa dalam radius 5 km?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Atap 40 m² dengan cakupan 30 % kira-kira 2,4 kWp. Dengan 4,85 kWh/m²/hari di Bandung Utara (sekitar 1.770 kWh/m² setahun) dan PR 0,70-0,86, hasilnya 2,4 × 1.770 × PR / 12 ≈ 250-300 kWh per bulan. Bagi dengan tagihan Anda sendiri: rumah tangga yang memakai 250 kWh sebulan akan tertutup sekitar 100-120 % dalam setahun, yang memakai 400 kWh sekitar 60-75 %. Pakai angka kWh di tagihan, bukan rupiahnya, dan ingat bulan paling gelap memberi sekitar seperlima lebih sedikit.
+
+**2.** Pada 150 kWh per bulan, 40 % di malam hari berarti 60 kWh per bulan, atau sekitar 2 kWh per malam. Baterai sebaiknya tidak dikosongkan penuh, jadi dengan kedalaman pakai sekitar 80 % kapasitas yang dibutuhkan sekitar 2,5 kWh (lebih besar untuk tagihan yang lebih besar: 0,4 × kWh bulanan / 30 / 0,8). Panel juga harus menghasilkan tambahan 2 kWh itu di siang hari, dan 250-300 kWh per bulan dari atap 40 m² mampu menyediakannya.
+
+**3.** Tidak dihitung di bab ini. Kupang menerima sekitar 2.100 kWh/m² setahun dibanding sekitar 1.770 di Bandung Utara, sehingga bangunan yang sama dengan atap yang sama akan menghasilkan sekitar 19 % lebih banyak (2.100 / 1.770). Total per bangunan juga bergantung pada ukuran bangunan di kecamatan yang dipilih, jadi laporkan kenaikan per m² karena iklim dan angka per bangunan dari Open Buildings.
+
+**4.** Tidak dihitung di bab ini. Hitung jarak dari piksel lahan terbuka ke gardu induk atau jalan utama (OpenStreetMap power=substation, highway=primary/secondary) dan pertahankan piksel dalam radius 5 km. Laporkan sisa hektare dan GWp pada kepadatan Cirata. Harapkan sebagian besar dari 3.070 ha di cekungan Bandung masih berada dalam 5 km dari jalan, tetapi jauh lebih sedikit dalam 5 km dari gardu induk; sambungan jaringan, bukan lahan, biasanya yang menjadi kendala.
+:::

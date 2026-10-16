@@ -136,3 +136,15 @@ Model ini memprediksi hitungan hari kerja dari pukul 6 pagi sampai tengah malam 
 2. Hapus fitur 1000 m. Apakah galat validasi silang spasial naik atau turun, dan mengapa?
 3. Ganti jumlah skor rute dengan rata-ratanya, dan rata-rata dengan nilai maksimumnya. Mana yang lebih disukai pembeli media, dan untuk pengiklan yang mana?
 4. Tambahkan hitungan akhir pekan sebagai target kedua. Prediktor mana yang berubah tingkat kepentingannya?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Perhatikan dulu bahwa 0,15 + 0,6 + 0,2 + 0,1 = 1,05, jadi turunkan pendapatan + penduduk menjadi 0,10 atau skalakan ulang. Dengan footfall 0,6 skor makanan cepat saji mengikuti hitungan prediksi dengan dekat, sehingga sepuluh teratas bergeser ke poros CBD dan simpul transportasi tersibuk (Town Hall, Central, Wynyard) dan menjauhi halte yang tinggi hanya karena kepadatan gerai makanan cepat saji. Hitung berapa dari sepuluh yang berubah; kalau sebagian besar berubah, peringkat lebih bergantung pada bobot daripada data, dan klien perlu diberi tahu.
+
+**2.** Tidak dihitung di bab ini. Fitur 1000 m menggambarkan kawasan, yang hampir sepenuhnya dimiliki bersama oleh lokasi bertetangga, sehingga lebih membantu fold acak (interpolasi antara lokasi yang nyaris kembar) daripada fold spasial. Dalam CV spasial galatnya kemungkinan hanya sedikit berubah, karena peringkat kepentingan dipimpin fitur 100 m dan 500 m; galat bahkan bisa sedikit turun bila rata-rata 1000 m sebagian besar noise di dekat batas City, tempat OpenStreetMap terpotong. Ke arah mana pun bergesernya, bandingkan perubahannya dengan sebaran antar-fold sebelum menyebutnya nyata.
+
+**3.** Jumlah memeringkat rute menurut panjangnya (jangkauan), rata-rata menurut audiens rata-rata per lokasi (kualitas), dan maksimum menurut satu halte terbaik. Pembeli yang ingin jangkauan luas dengan biaya per orang rendah, biasanya makanan cepat saji, bisa menerima jumlah tetapi harus melihat panjang rute di sampingnya; jasa keuangan dan pendidikan, yang menyasar audiens tertentu, menginginkan rata-rata; maksimum berguna untuk memilih satu lokasi, bukan rute, karena satu halte yang baik tidak mengatakan apa pun tentang empat puluh halte lainnya.
+
+**4.** Tidak dihitung di bab ini. Harapkan prediktor yang terkait pekerjaan kehilangan kepentingan di akhir pekan (kepadatan pekerjaan, rasio luas lantai, volume gedung perkantoran), dan yang terkait rekreasi dan belanja naik (titik minat, makanan cepat saji, cahaya malam di sekitar Haymarket, Darling Harbour dan jalan-jalan belanja). Kalau model akhir pekan dilatih pada lokasi yang sama, bandingkan permutation importance pada lokasi yang ditahan untuk kedua target, berdampingan.
+:::

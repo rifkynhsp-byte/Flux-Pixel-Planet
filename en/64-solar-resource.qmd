@@ -55,3 +55,15 @@ PR is the uncertain one. Instead of guessing it, this chapter **measures it on a
 2. Add a battery: if a house uses 40 % of its electricity at night, how many kWh of storage would it need to cover one night without PLN?
 3. Repeat the rooftop calculation for a district in Kupang. How much more does the sunnier climate give per building?
 4. Add distance to the nearest substation or main road to the land screen. How much of the 3,070 ha remains within 5 km?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** A 40 m² roof at 30 % coverage is about 2.4 kWp. With North Bandung's 4.85 kWh/m²/day (about 1,770 kWh/m² a year) and PR 0.70-0.86 it gives 2.4 × 1,770 × PR / 12 ≈ 250-300 kWh a month. Divide by your own bill: a household using 250 kWh a month would cover about 100-120 % over the year, one using 400 kWh about 60-75 %. Use the kWh on the bill, not the rupiah, and remember the darkest month gives about a fifth less.
+
+**2.** At 150 kWh a month, 40 % at night is 60 kWh a month, or about 2 kWh per night. Batteries should not be emptied fully, so with about 80 % usable depth the storage needed is about 2.5 kWh (more for a bigger bill: 0.4 × monthly kWh / 30 / 0.8). The panels must also make that 2 kWh extra during the day, which the 250-300 kWh a month of a 40 m² roof can supply.
+
+**3.** Not computed in the chapter. Kupang receives about 2,100 kWh/m² a year against about 1,770 for North Bandung, so the same building with the same roof would produce about 19 % more (2,100 / 1,770). The total per building also depends on building sizes in the chosen district, so report both the per-m² gain from climate and the per-building figure from Open Buildings.
+
+**4.** Not computed in the chapter. Compute distance from the open-land pixels to substations or main roads (OpenStreetMap power=substation, highway=primary/secondary) and keep pixels within 5 km. Report the remaining hectares and GWp at Cirata's density. Expect a large share of the Bandung basin's 3,070 ha to remain within 5 km of a road, but far less within 5 km of a substation; grid connection, not land, is usually the constraint.
+:::

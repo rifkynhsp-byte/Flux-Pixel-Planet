@@ -78,3 +78,15 @@ Grafik ini menggambarkan reanalisis, bukan pengukuran. ERA5 adalah model cuaca y
 2. Ganti *ramp* GHI pada *Insight* 3 dengan perubahan indeks kecerahan dari jam ke jam. Bagaimana nilai ekstrem sore hari berubah, dan mengapa?
 3. Ubah kemiringan PV menjadi 0° dan 20°. Bulan mana yang bertambah dan mana yang berkurang, dan mengapa jawabannya berbeda antara Kupang (10° LS) dan Bandung (7° LS)?
 4. Gambar ulang *Insight* 5 dengan sumbu y bebas (`sharey=False` di Python, `scales = "free_y"` di R). Perbandingan mana yang menjadi mustahil?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Harapkan pita Bandung lebih redup daripada Kupang dan terputus oleh garis-garis berawan di lebih banyak bulan, bukan hanya Desember sampai April, dengan sore yang lebih gelap daripada pagi karena awan konvektif. Judul utama yang benar menyatakan satu temuan yang diperlihatkan grafik, misalnya bahwa hari cerah jarang di musim hujan dan sore lebih berawan daripada pagi; periksa terhadap grafik sebelum dipakai.
+
+**2.** Tidak dihitung di bab ini. Indeks kecerahan membagi lintasan matahari itu sendiri, sehingga penurunan sore yang teratur (sekitar −150 W/m² per jam di Kupang) hilang dan kotak-kotaknya berpusat dekat nol di setiap jam. Yang tersisa adalah awan: ekstrem sore tetap besar, karena awan tetap tumbuh setelah tengah hari, sedangkan bagian sistematisnya hilang. Dekat matahari terbit dan terbenam indeks menjadi berderau, karena dibagi dengan iradiansi ekstraterestrial yang kecil, jadi buang jam-jam matahari terendah.
+
+**3.** Tidak dihitung di bab ini. Kemiringan menghadap utara membantu ketika matahari berada di utara, kira-kira April sampai September di selatan khatulistiwa, dan sedikit merugi ketika matahari dekat zenit atau di selatan (November sampai Februari). Pada 0° bulan-bulan musim hujan sedikit naik dan bulan pertengahan tahun turun; pada 20° sebaliknya. Kupang (10° LS) melihat matahari lebih jauh ke utara di pertengahan tahun dan memiliki musim kemarau yang cerah, sehingga kemiringan lebih menguntungkan di sana; Bandung (7° LS) lebih dekat ke khatulistiwa dan lebih berawan, dan cahaya difus menguntungkan panel yang lebih datar, sehingga perbedaannya lebih kecil.
+
+**4.** Dengan sumbu y bebas setiap panel diskalakan ke maksimumnya sendiri, sehingga semua bulan tampak hampir sama tinggi dan perbandingan antarbulan, puncak musim kemarau terhadap penurunan musim hujan, menjadi mustahil dibaca. Di dalam satu panel kedua lokasi masih bisa dibandingkan, dan bentuk hari tetap terlihat; hanya besarnya antar-panel yang hilang, itulah sebabnya bab ini memakai sumbu bersama.
+:::

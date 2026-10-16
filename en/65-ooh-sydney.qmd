@@ -136,3 +136,15 @@ It predicts weekday counts from 6 am to midnight in fair weather, at the scale o
 2. Remove the 1000 m features. Does the spatial-CV error rise or fall, and why?
 3. Replace the sum of route scores with the mean, and the mean with the maximum. Which would a media buyer prefer, and for which advertiser?
 4. Add the weekend count as a second target. Which predictors change importance?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. Note first that 0.15 + 0.6 + 0.2 + 0.1 = 1.05, so lower income + population to 0.10 or rescale. With footfall at 0.6 the fast-food score follows the predicted count closely, so the top ten moves towards the busiest CBD spine and transport hubs (Town Hall, Central, Wynyard) and away from shelters ranked high only for fast-food density. Count how many of the ten change; if most change, the ranking depends on the weights more than on the data, which a client should be told.
+
+**2.** Not computed in the chapter. The 1000 m features describe the district, which neighbouring sites share almost entirely, so they help random folds (interpolation between near-twins) more than spatial folds. Under spatial CV the error is likely to change little, because the importance ranking is led by 100 m and 500 m features; it may even fall slightly if the 1000 m means are mostly noise near the City boundary, where OpenStreetMap is cut off. Whichever way it moves, compare the change with the fold-to-fold spread before calling it real.
+
+**3.** The sum ranks routes by length (reach), the mean by the average audience per location (quality), and the maximum by the single best stop. A buyer wanting broad reach at low cost per person, typically fast food, might accept the sum but should see length beside it; financial services and education, which target an audience, want the mean; the maximum is useful for choosing one site, not a route, because one good stop says nothing about the other forty.
+
+**4.** Not computed in the chapter. Expect predictors tied to work to lose importance on weekends (job density, floor-space ratio, office building volume), and those tied to leisure and shopping to gain (points of interest, fast food, night-time light around Haymarket, Darling Harbour and the shopping streets). If the weekend model is fitted on the same sites, compare permutation importance on the held-out sites for both targets, side by side.
+:::

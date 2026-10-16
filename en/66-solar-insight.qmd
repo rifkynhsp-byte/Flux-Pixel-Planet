@@ -78,3 +78,15 @@ They describe a reanalysis, not a measurement. ERA5 is a weather model constrain
 2. Replace the GHI ramp in Insight 3 with the hour-to-hour change in clearness index. How do the afternoon extremes change, and why?
 3. Change the PV tilt to 0° and to 20°. Which months gain and which lose, and why does the answer differ between Kupang (10° S) and Bandung (7° S)?
 4. Redraw Insight 5 with free y axes (`sharey=False` in Python, `scales = "free_y"` in R). Which comparison becomes impossible?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. Expect Bandung's band to be dimmer than Kupang's and broken by cloudy streaks through more of the year, not only from December to April, with afternoons darker than mornings because of convective cloud. A true headline states one finding the chart shows, for example that clear days are rare in the wet season and afternoons are cloudier than mornings; check it against the chart before keeping it.
+
+**2.** Not computed in the chapter. The clearness index divides out the sun's own path, so the steady afternoon decline (about −150 W/m² per hour in Kupang) disappears and the boxes centre near zero at every hour. What remains is cloud: the afternoon extremes stay large, because clouds still build after midday, while the systematic part is gone. Near sunrise and sunset the index becomes noisy, because it divides by a small extraterrestrial irradiance, so drop the lowest-sun hours.
+
+**3.** Not computed in the chapter. A north-facing tilt helps when the sun is in the north, roughly April to September south of the equator, and costs a little when the sun is near the zenith or to the south (November to February). At 0° the wet-season months gain slightly and mid-year months lose; at 20° the opposite. Kupang (10° S) has the sun further north in mid-year and a clear dry season, so tilt gains more there; Bandung (7° S) is closer to the equator and cloudier, and diffuse light favours flatter panels, so the difference is smaller.
+
+**4.** With free y axes each panel is scaled to its own maximum, so all months look about equally tall and the comparison between months, the dry-season peak against the wet-season dip, becomes impossible to read. Within one panel the two sites can still be compared, and the shape of the day stays visible; only the magnitude across panels is lost, which is why the chapter shares the axes.
+:::
