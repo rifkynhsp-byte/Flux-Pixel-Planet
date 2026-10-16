@@ -313,6 +313,22 @@ Setiap kasus di atas menghasilkan kartu yang rapi dengan angka yang masuk akal. 
 5. Petakan banjir yang Anda ketahui dengan Banjir, dilaporkan per *Kecamatan*. Arah orbit mana yang lewat paling dekat dengan tanggal kejadian?
 6. Pakai Rawan dengan titik yang Anda tempatkan sendiri pada longsor dari inventaris yang sudah terbit. Apakah titik panas di cekungan Bandung tetap ada?
 
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tergantung kabupaten Anda. Dynamic World memiliki sembilan kelas global, sehingga kelas perkebunan model penulis, sawit, karet dan sagu, semuanya masuk ke satu kelas "trees", bersama hutan; di Kota Besi luasnya 54.742 ha, sekitar sembilan per sepuluh wilayah. Kalau pertanyaan Anda hutan lawan bukan hutan, Dynamic World mungkin cukup; kalau pertanyaannya tanaman apa, siapa pemilik pohonnya, atau deforestasi per komoditas, penggabungan itu penting dan model 10 kelas yang harus dipakai.
+
+**2.** Di Kota Besi garis yang dipasang memiliki kemiringan sekitar 0,5 (0,54 pada 400 footprint uji, r 0,76, RMSE 3,9 m). Wilayah Anda akan berbeda, tetapi harapkan kemiringan di bawah 1: regresi menarik prediksi ke arah rata-rata, sehingga kanopi tertinggi diduga terlalu rendah dan kanopi pendek terlalu tinggi. Hutan tua yang tinggi tampak lebih rendah di peta daripada kenyataannya, dan itu paling berpengaruh untuk karbon.
+
+**3.** Tidak dihitung di bab ini; tergantung wilayah Anda. Harapkan rata-rata desa tertinggi di tempat peta 10 kelas menunjukkan hutan terbanyak atau kebun tua yang tinggi; desa yang didominasi sawit akan berada sekitar 10-15 m. Bandingkan tinggi desa dengan komposisi kelasnya: kalau sebuah desa tinggi tetapi peta menunjukkan sebagian besar kebun, periksa kelas di sana sebelum memercayai salah satunya.
+
+**4.** Tidak dihitung di bab ini; tergantung kabupatennya. Baca histogram tahun tanam: kebanyakan kabupaten perkebunan menunjukkan satu atau dua gelombang penanaman, misalnya ledakan pada 2000-an. Blok mencapai 25 tahun, umur peremajaan yang lazim, lima tahun setelah tahun tanamnya melewati tahun sekarang dikurangi 25; jumlahkan hektare yang ditanam dalam rentang (tahun sekarang − 30) sampai (tahun sekarang − 25) untuk mendapatkan luas yang perlu diremajakan dalam lima tahun ke depan.
+
+**5.** Tidak dihitung di bab ini; tergantung banjirnya. Sentinel-1 melintasi tempat yang sama pada orbit ascending dan descending pada hari dan jam yang berbeda; periksa tanggal akuisisi yang ditampilkan modul dan pilih orbit yang citra sesudahnya paling dekat dengan puncak banjir, idealnya dalam satu-dua hari. Lintasan beberapa hari kemudian hanya memperlihatkan air yang tersisa, sehingga luas banjir menjadi lebih kecil.
+
+**6.** Tidak dihitung di bab ini. Dengan titik yang ditempatkan pada longsoran yang dipetakan dalam inventaris terbitan, yang mencakup pegunungan selatan yang curam dan basah serta tempat-tempat di dekat jalan dan kota, data latih tidak lagi mengikuti asal laporan berita. Harapkan hotspot di cekungan Bandung melemah atau hilang dan pegunungan selatan naik, yang menunjukkan bahwa hotspot sebelumnya berasal dari bias pelaporan katalog, bukan dari medan.
+:::
+
 ## Kode di balik bab ini {.unnumbered}
 
 {{< include _snippets/ch00g_ijb_cases.qmd >}}

@@ -318,6 +318,22 @@ Every case above produced a tidy card with a plausible number. The work was in d
 5. Map a flood you know with Banjir, reporting per *Kecamatan*. Which orbit direction passed closest to the event date?
 6. Use Rawan with points you place by hand on mapped landslides from a published inventory. Does the hotspot in the Bandung basin remain?
 
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** It depends on your kabupaten. Dynamic World has nine global classes, so the author's plantation classes, oil palm, rubber and sago, all fall into its single "trees" class, together with forest; in Kota Besi that was 54,742 ha, about nine tenths of the area. If your question is forest against non-forest, Dynamic World may be enough; if it is which crop, who owns the trees, or deforestation by commodity, the merge matters and the 10-class model is the one to use.
+
+**2.** In Kota Besi the fitted line has a slope of about 0.5 (0.54 on 400 test footprints, r 0.76, RMSE 3.9 m). Your area will differ, but expect a slope below 1: the regression pulls predictions towards the average, so it under-estimates the tallest canopies and over-estimates short ones. Tall, old forest is lower on the map than in reality, which matters most for carbon.
+
+**3.** Not computed in the chapter; it depends on your area. Expect the tallest village mean where the 10-class map shows the most forest or old, tall plantations; a village dominated by oil palm will sit around 10-15 m. Compare the village's height with its class mix: if a village is tall but the map shows mostly plantation, check the classes there before trusting either.
+
+**4.** Not computed in the chapter; it depends on the district. Read the planting-year histogram: most plantation districts show one or two waves of planting, for example a boom in the 2000s. Blocks reach 25 years, the usual replanting age, five years after the planting year passes the current year minus 25; sum the hectares planted in the window (current year − 30) to (current year − 25) to get the area due for replanting in the next five years.
+
+**5.** Not computed in the chapter; it depends on the flood. Sentinel-1 passes the same place on ascending and descending orbits at different days and times; check the acquisition dates the module lists and choose the orbit whose after-image is closest to the peak of the flood, ideally within a day or two. A pass several days later shows only the water that remained, so the flood area will be smaller.
+
+**6.** Not computed in the chapter. With points placed on mapped landslides from a published inventory, which covers the steep, wet southern mountains as well as places near roads and towns, the training data no longer follow where news reports come from. Expect the Bandung basin hotspot to weaken or disappear and the southern mountains to rise, which shows that the earlier hotspot came from the catalogue's reporting bias, not from the terrain.
+:::
+
 ## The code behind this chapter {.unnumbered}
 
 {{< include _snippets/ch00g_ijb_cases.qmd >}}
