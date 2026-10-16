@@ -17,7 +17,7 @@ DATA <- Sys.getenv("TRANSIT_DATA", "data/transit_jakarta")
 # The exact inputs used for the book (frozen 2 October 2026), downloaded once if not here
 if (!file.exists(file.path(DATA, "transjakarta_gtfs.zip"))) {
   dir.create(DATA, FALSE, TRUE); tmp <- tempfile(fileext = ".zip")
-  download.file("https://github.com/rifkynhsp-byte/Fullstack-Remote-Sensing/releases/download/data-v1/ch67_transit_jakarta_inputs.zip", tmp, mode = "wb"); unzip(tmp, exdir = DATA)
+  download.file("https://github.com/rifkynhsp-byte/Flux-Pixel-Planet/releases/download/data-v1/ch67_transit_jakarta_inputs.zip", tmp, mode = "wb"); unzip(tmp, exdir = DATA)
 }
 CRS <- 32748                       # UTM 48S, metres
 HOUR <- 8 * 3600                   # 08:00

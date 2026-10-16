@@ -41,7 +41,7 @@ from exactextract import exact_extract
 
 DATA = Path(os.environ.get("OOH_DATA", "data/ooh_sydney"))
 
-SNAPSHOT = "https://github.com/rifkynhsp-byte/Fullstack-Remote-Sensing/releases/download/data-v1/ch65_ooh_sydney_inputs.zip"
+SNAPSHOT = "https://github.com/rifkynhsp-byte/Flux-Pixel-Planet/releases/download/data-v1/ch65_ooh_sydney_inputs.zip"
 
 
 def snapshot():

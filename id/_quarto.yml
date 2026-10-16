@@ -34,7 +34,7 @@ book:
       affiliation: "Senior Remote Sensing Specialist, APRIL · Master of Engineering Science, UNSW Sydney (2026)"
   date: today
   date-format: "MMMM YYYY"
-  repo-url: https://github.com/rifkynhsp-byte/Fullstack-Remote-Sensing
+  repo-url: https://github.com/rifkynhsp-byte/Flux-Pixel-Planet
   repo-branch: main
   repo-subdir: id
   repo-actions: [edit, issue]

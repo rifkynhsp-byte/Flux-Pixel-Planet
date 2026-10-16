@@ -37,7 +37,7 @@ import requests
 
 DATA = Path(os.environ.get("MAP_DATA", "data/maps_indonesia")); DATA.mkdir(parents=True, exist_ok=True)
 
-SNAPSHOT = "https://github.com/rifkynhsp-byte/Fullstack-Remote-Sensing/releases/download/data-v1/ch69_maps_indonesia_inputs.zip"
+SNAPSHOT = "https://github.com/rifkynhsp-byte/Flux-Pixel-Planet/releases/download/data-v1/ch69_maps_indonesia_inputs.zip"
 
 
 def snapshot():

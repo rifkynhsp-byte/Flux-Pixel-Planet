@@ -27,7 +27,7 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-SITE = "https://rifkynhsp-byte.github.io/Fullstack-Remote-Sensing"
+SITE = "https://rifkynhsp-byte.github.io/Flux-Pixel-Planet"
 SHARED = ["references.bib", "booklib.py", "styles.css"]
 
 TEXT = {
@@ -188,7 +188,7 @@ def prepare(lang, quarto, skip_mermaid=False):
 
     # No code and no outputs in the reading edition: each listing (with its maps,
     # charts and tables) becomes a link to the online chapter and to the script.
-    repo = "https://github.com/rifkynhsp-byte/Fullstack-Remote-Sensing/blob/main/scripts"
+    repo = "https://github.com/rifkynhsp-byte/Flux-Pixel-Planet/blob/main/scripts"
     for q in dst.glob("*.qmd"):
         t = q.read_text(encoding="utf-8")
         url = f"{SITE}/{lang}/{q.stem}.html"

@@ -18,8 +18,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PY, NB = ROOT / "scripts" / "py", ROOT / "notebooks"
-GH = "rifkynhsp-byte/Fullstack-Remote-Sensing"
-SITE = "https://rifkynhsp-byte.github.io/Fullstack-Remote-Sensing"
+GH = "rifkynhsp-byte/Flux-Pixel-Planet"
+SITE = "https://rifkynhsp-byte.github.io/Flux-Pixel-Planet"
 GEE_REPO = "users/rifkynauvalhsp/Fullstack-Remote-Sensing"
 BANNER = re.compile(r"^# -{20,}\n# (STEP [^\n]*|[A-Z][^\n]*)\n# -{20,}\n", re.M)
 # packages Colab does not ship, by import name -> pip name

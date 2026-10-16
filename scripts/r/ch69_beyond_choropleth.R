@@ -20,7 +20,7 @@ DATA <- Sys.getenv("MAP_DATA", "data/maps_indonesia")
 # The exact inputs used for the book (frozen 2 October 2026), downloaded once if not here
 if (!file.exists(file.path(DATA, "provinces.gpkg"))) {
   dir.create(DATA, FALSE, TRUE); tmp <- tempfile(fileext = ".zip")
-  download.file("https://github.com/rifkynhsp-byte/Fullstack-Remote-Sensing/releases/download/data-v1/ch69_maps_indonesia_inputs.zip", tmp, mode = "wb"); unzip(tmp, exdir = DATA)
+  download.file("https://github.com/rifkynhsp-byte/Flux-Pixel-Planet/releases/download/data-v1/ch69_maps_indonesia_inputs.zip", tmp, mode = "wb"); unzip(tmp, exdir = DATA)
 }
 sf_use_s2(FALSE)
 g <- st_read(file.path(DATA, "provinces.gpkg"), quiet = TRUE) |>

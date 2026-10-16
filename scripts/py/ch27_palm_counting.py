@@ -32,7 +32,7 @@ from skimage.feature import peak_local_max
 # OpenAerialMap orthophoto (CC BY 4.0), originally at oin-hotosm-temp.s3.us-east-1.amazonaws.com/
 # 6a13018bb96dbc8d970d888e/0/6a13018bb96dbc8d970d888f.tif. That bucket is temporary, so the book
 # keeps an identical copy with its data snapshots; it is read in place, by HTTP range requests.
-URL = "https://github.com/rifkynhsp-byte/Fullstack-Remote-Sensing/releases/download/data-v1/ch27_ch61_drone_orthophoto.tif"
+URL = "https://github.com/rifkynhsp-byte/Flux-Pixel-Planet/releases/download/data-v1/ch27_ch61_drone_orthophoto.tif"
 OVERVIEW = 8          # 3.7 cm x 8 = 0.30 m
 MIN_SPACING_M = 5.5   # two crowns closer than this are one palm
 SIGMA_M = 0.9         # blur about a third of a crown radius

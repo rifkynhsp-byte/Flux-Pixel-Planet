@@ -43,7 +43,7 @@ from shapely.geometry import LineString
 FEED = "https://gtfs.transjakarta.co.id/files/file_gtfs.zip"
 DATA = Path(os.environ.get("TRANSIT_DATA", "data/transit_jakarta")); DATA.mkdir(parents=True, exist_ok=True)
 
-SNAPSHOT = "https://github.com/rifkynhsp-byte/Fullstack-Remote-Sensing/releases/download/data-v1/ch67_transit_jakarta_inputs.zip"
+SNAPSHOT = "https://github.com/rifkynhsp-byte/Flux-Pixel-Planet/releases/download/data-v1/ch67_transit_jakarta_inputs.zip"
 
 
 def snapshot():
