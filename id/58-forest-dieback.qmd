@@ -63,3 +63,15 @@ Tiga langkah yang sama berlaku untuk wabah penyakit di perkebunan akasia atau sa
 2. Ganti median musim panas dengan median bulanan untuk 2019–2020 dan cari piksel yang NDMI-nya turun berbulan-bulan sebelum tahun kehilangan versi Hansen.
 3. Jalankan skrip yang sama untuk hutan beech (berdaun lebar) di dekatnya. Apakah kekeringan 2018 juga membuatnya stres, dan apakah ia pulih?
 4. Tambahkan elevasi dan arah lereng (Bab [-@sec-terrain]) lalu bandingkan piksel yang stres lebih awal (2018–2019) dengan yang belakangan (2021–2022). Apakah perbedaannya nyata atau masih dalam batas derau?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Pada 0,10 lebih banyak piksel memenuhi syarat, termasuk tegakan yang hanya kecokelatan atau menipis, sehingga luas wabah bertambah dan patch-nya lebih berderau, dengan piksel terisolasi yang tersebar di hutan sehat. Pada 0,20 hanya pengeringan paling parah yang terhitung, luasnya menyusut dan kerusakan yang terlambat atau sebagian terlewat. Ambang yang masuk akal adalah yang patch-nya kompak dan menyebar keluar dari patch sebelumnya tahun demi tahun, seperti wabah kumbang kulit kayu; biasanya sekitar 0,15.
+
+**2.** Tidak dihitung di bab ini. Hitung median NDMI bulanan April 2019 sampai Oktober 2020 untuk piksel dengan tahun kehilangan Hansen 2020 atau 2021. Cari penurunan di bawah tingkat 2017 piksel itu sendiri pada musim panas atau gugur sebelum tahun kehilangan: tajuk yang terserang mengering sebelum penebangan sanitasi menyingkirkannya, sehingga satelit sering melihat kerusakan berbulan-bulan sebelum Hansen mencatat kehilangan, yaitu saat tegakan ditebang, bukan saat mati.
+
+**3.** Tidak dihitung di bab ini. Pilih hutan berdaun lebar di tutupan lahan Copernicus dan jalankan skrip NDMI musim panas yang sama. Harapkan beech menunjukkan penurunan pada 2018 dan 2019 (stres kekeringan, daun gugur lebih awal) lalu sebagian besar pulih sejak 2020, tanpa keruntuhan permanen seperti spruce: pohon berdaun lebar terdampak kekeringan tetapi tidak oleh kumbang kulit kayu spruce. Aturan satu musim ("tetap rendah pada musim panas berikutnya") itulah yang memisahkan stres dari kematian.
+
+**4.** Tidak dihitung di bab ini. Ambil sampel elevasi dan aspek untuk piksel dengan awal wabah cepat (2018-2019) dan lambat (2021-2022), lalu bandingkan sebarannya dengan uji yang memperhitungkan pengelompokan spasial (resampling per blok, karena piksel bertetangga tidak independen). Wabah awal sering bermula di lereng yang lebih hangat, lebih rendah dan menghadap selatan tempat stres kekeringan paling besar; kalau perbedaannya bertahan pada uji blok, itu nyata, kalau tidak, ia berada dalam noise piksel bertetangga.
+:::

@@ -58,3 +58,13 @@ Pomalaa has been mined for nickel since long before the satellite archives used 
 1. Add a discount rate of 3 % to the services and recompute the break-even for 30 years. How much does it change?
 2. Replace the global unit values with values from a local study you can find for Sulawesi or eastern Indonesia, and say where the number came from.
 3. Measure the turbidity (red band) of the bay next to the mines and of a bay far from any mine. Is there a difference you can see from space?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** At 3 % over 30 years the present value of a constant yearly flow is 19.6 years' worth instead of 30. Services fall from 71,000-158,000 to about 46,000-103,000 US$ per hectare, and the break-even with the central carbon price (about 97,000 US$) becomes roughly 143,000-200,000 US$ per hectare instead of about 168,000-255,000. Carbon, lost once at the start, is not discounted, so it now carries a larger share of the total.
+
+**2.** Look for a valuation study for Sulawesi or eastern Indonesia (for example a watershed or a protected area) that reports a value per hectare per year, and note its year, currency and which services it covers. Convert it to the same price year as the global values before substituting. Local values are often lower for marketed services and higher for water where downstream users depend on it; whichever way it moves, cite it and say why it is more appropriate.
+
+**3.** Not computed in the chapter. Take dry-season Sentinel-2 composites and compare the red-band (B4) reflectance of the water in the bay next to the mines with a bay far from any mine, masking land and cloud. A brighter red band means more suspended sediment; a clearly brighter bay near the mines, especially in plumes from river mouths and ports, is visible evidence of sediment runoff. Turbidity also depends on rivers and tides, so compare several dates.
+:::

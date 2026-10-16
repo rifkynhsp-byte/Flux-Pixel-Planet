@@ -58,3 +58,13 @@ Pomalaa sudah ditambang untuk nikel jauh sebelum arsip satelit yang dipakai di s
 1. Tambahkan tingkat diskonto 3 % pada jasa ekosistem dan hitung ulang titik impas untuk 30 tahun. Seberapa besar perubahannya?
 2. Ganti nilai satuan global dengan nilai dari studi lokal yang bisa Anda temukan untuk Sulawesi atau Indonesia timur, dan sebutkan dari mana angkanya berasal.
 3. Ukur kekeruhan (kanal merah) teluk di dekat tambang dan teluk yang jauh dari tambang mana pun. Apakah ada perbedaan yang bisa dilihat dari antariksa?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Pada 3 % selama 30 tahun, nilai kini dari aliran tahunan yang konstan setara 19,6 tahun, bukan 30. Jasa turun dari 71.000-158.000 menjadi sekitar 46.000-103.000 US$ per hektare, dan titik impas dengan harga karbon tengah (sekitar 97.000 US$) menjadi kira-kira 143.000-200.000 US$ per hektare, bukan sekitar 168.000-255.000. Karbon, yang hilang sekali di awal, tidak didiskonto, sehingga kini menanggung bagian yang lebih besar dari total.
+
+**2.** Cari studi valuasi untuk Sulawesi atau Indonesia timur (misalnya sebuah DAS atau kawasan lindung) yang melaporkan nilai per hektare per tahun, lalu catat tahun, mata uang dan jasa apa saja yang dicakup. Konversikan ke tahun harga yang sama dengan nilai global sebelum menggantinya. Nilai lokal sering lebih rendah untuk jasa yang dipasarkan dan lebih tinggi untuk air bila pengguna di hilir bergantung padanya; ke arah mana pun bergesernya, kutip sumbernya dan jelaskan mengapa lebih tepat.
+
+**3.** Tidak dihitung di bab ini. Ambil composite Sentinel-2 musim kemarau dan bandingkan reflektans band merah (B4) air di teluk dekat tambang dengan teluk yang jauh dari tambang mana pun, dengan me-mask daratan dan awan. Band merah yang lebih terang berarti lebih banyak sedimen tersuspensi; teluk dekat tambang yang jelas lebih terang, terutama pada plume dari muara sungai dan pelabuhan, adalah bukti visual limpasan sedimen. Kekeruhan juga dipengaruhi sungai dan pasang surut, jadi bandingkan beberapa tanggal.
+:::

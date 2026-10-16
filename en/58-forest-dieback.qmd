@@ -63,3 +63,15 @@ The same three steps apply to a disease outbreak in an acacia or oil-palm planta
 2. Replace the summer median with monthly medians for 2019–2020 and look for a pixel whose NDMI falls months before the Hansen loss year.
 3. Run the same script for a beech (broadleaf) forest nearby. Did the 2018 drought stress it too, and did it recover?
 4. Add elevation and aspect (Chapter [-@sec-terrain]) and compare the early-onset pixels (2018–2019) with the late ones (2021–2022). Is the difference real or within the noise?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. At 0.10 more pixels qualify, including stands that only browned or thinned, so the outbreak area grows and patches become noisier, with isolated pixels scattered through healthy forest. At 0.20 only the most severe drying counts, the area shrinks and late or partial damage is missed. The threshold that makes sense is the one whose patches are compact and spread outward from earlier patches year by year, as a beetle outbreak does; usually that is near 0.15.
+
+**2.** Not computed in the chapter. Compute monthly NDMI medians from April 2019 to October 2020 for pixels whose Hansen loss year is 2020 or 2021. Look for a drop below the pixel's own 2017 level in the summer or autumn before the loss year: red-attack crowns dry out before salvage felling removes them, so the satellite often sees the damage months before Hansen records loss, which is when the stand was cut, not when it died.
+
+**3.** Not computed in the chapter. Select broadleaf forest in the Copernicus land cover and run the same summer-NDMI script. Expect beech to show a drop in 2018 and 2019 (drought stress, early leaf fall) followed largely by recovery from 2020, without the permanent collapse of spruce: broadleaf trees are hit by the drought but not by the spruce bark beetle. The one-summer rule ("stays down the following summer") is what separates stress from death.
+
+**4.** Not computed in the chapter. Sample elevation and aspect for early-onset (2018-2019) and late-onset (2021-2022) pixels and compare their distributions with a test that accounts for spatial clustering (block resampling, since neighbouring pixels are not independent). Early outbreaks often start on warmer, lower, south-facing slopes where drought stress is greatest; if the difference survives the block test it is real, if not it is within the noise of neighbouring pixels.
+:::

@@ -85,3 +85,13 @@ The red-edge screen flags far more than NDVI: 22 % of the palm area is more than
 1. Apply Khalid's equation with trunk height instead of total height (assume the fronds add 5 m). Does the result move into the field range?
 2. Replace the 0.42 achievement ratio with 0.8 for a well-managed estate. How does the landscape total change?
 3. Compare the health map with the age map. Are the weak blocks young, prime or old?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Subtracting 5 m from H lowers Khalid's estimate by 197 × 5 = 985 kg per palm, or about 134 Mg/ha at 136 palms per hectare. From about 360 Mg/ha that leaves roughly 226 Mg/ha for prime-age palms, still about twice the upper end of the 41-105 Mg/ha field range. Trunk height alone does not rescue the equation as applied; the units or the population it was fitted on are the more likely problem.
+
+**2.** The landscape total scales linearly with the achievement ratio, so 0.8 instead of 0.42 multiplies it by 0.8 / 0.42 ≈ 1.9, nearly doubling the estimated fruit. Applied to a whole landscape of smallholdings this overstates production badly; it is the right figure only for estates whose records show that level of management.
+
+**3.** Not computed in the chapter. Cross-tabulate the health classes with age groups. Weak blocks are typically concentrated among the old palms (over about 20-25 years, approaching replanting) and among very young palms that have not closed canopy, where same-age comparisons are noisy; weak prime-age blocks are the interesting ones, because they point to management problems (nutrition, drainage, disease) that can still be fixed.
+:::

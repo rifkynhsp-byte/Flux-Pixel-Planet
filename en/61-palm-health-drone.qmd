@@ -115,3 +115,13 @@ It also forced honest class names. RGB at 0.3 m cannot separate a lawn from dens
 1. Change the grid rule to two neighbours, then to four. How many detections are excluded, and what do the excluded crowns in the gallery look like?
 2. Replace k-means with fixed thresholds on GLI (for example the 10th and 50th percentiles). Do the maps differ much?
 3. Map the palms in the poor group. Are they scattered, or clustered in one part of the block? A cluster would suggest something that spreads or a soil problem; scattered palms suggest individual causes.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. With two neighbours fewer detections are excluded than the 1,279 at three, and the gallery of passes starts to include bushes and trees at the block edge that happen to have two neighbours. With four neighbours more are excluded, including real palms on the edge of the block or next to gaps, which have fewer grid neighbours. Three is the compromise: inspect the excluded crowns in each gallery and choose the rule whose exclusions look like non-palms.
+
+**2.** Not computed in the chapter. Fixed GLI thresholds at the 10th and 50th percentiles put exactly 10 % of palms in the poor group, more than the 40 (3 %) k-means found, so the poor group grows and its crowns look less distinct. The spatial pattern of the healthy group usually changes little. Fixed thresholds are easier to explain and to repeat on another flight; k-means adapts to the data but can change from flight to flight.
+
+**3.** Map the 40 poor-group palms over the orthophoto. If they cluster in one part of the block (a low, wet corner, a block edge, or a patch next to a road), suspect a soil, drainage or spreading cause such as Ganoderma; if they are scattered, individual causes (old palms, unpruned fronds, damage) are more likely. Either way the map is a list of palms for a field crew to visit, not a diagnosis.
+:::

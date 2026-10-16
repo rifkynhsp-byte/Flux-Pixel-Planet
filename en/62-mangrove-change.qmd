@@ -55,3 +55,13 @@ This follows the approach of the author's interactive mangrove explorer: one mod
 1. Replace the yearly area by a three-year moving average. Does a trend appear?
 2. Change the condition threshold from 0.005 to 0.01 per year. How much of the degrading area survives a stricter rule?
 3. Count only loss that became water, crops or built land, and compare that number with the raw loss figure.
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. A three-year moving average damps the year-to-year jumps (9,700 to 14,200 to 10,700 ha), so any slow trend shows more clearly. If the smoothed series is still flat or wanders, there is no trend the method can detect; if it rises or falls steadily, that is a candidate trend, to be confirmed with a second source such as GMW change products. Smoothing does not remove the bias, only the noise.
+
+**2.** Not computed in the chapter. A stricter slope of ±0.01 per year shrinks both the degrading and the improving areas; the share of the 3,000 ha degrading that survives is the core you can defend. If most of it disappears, the degrading class was mostly within noise; if a clear core remains along the lagoon edges and channels, those are the places to check in the field.
+
+**3.** The raw loss is about 2,680 ha. Of the lost mangrove, about 12 % became open water and 9 % crops in Dynamic World 2024, plus some built land, about a quarter in all, roughly 600-700 ha. That is the number to report as conversion; the rest is still vegetated wetland, and its "loss" is most likely classification noise or a change in definition at the mangrove edge.
+:::

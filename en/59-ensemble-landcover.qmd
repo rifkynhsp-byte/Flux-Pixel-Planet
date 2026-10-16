@@ -60,3 +60,15 @@ Labellers tend to click many points in one patch. A random split then tests the 
 2. Remove paddy from the training set and retrain. Does the accuracy of the other classes change?
 3. Add 30 paddy points from another district of your choice (from imagery you can interpret) and rerun the block validation. How many does it take before paddy recall rises above zero?
 4. Run the automatic-label method of Chapter [-@sec-auto-landcover] over this area and compare it with the ensemble map. Where do the classes from field labels add the most?
+
+::: {.callout-tip collapse="true"}
+## Answers
+
+**1.** Not computed in the chapter. With 2 km blocks some test points still have training neighbours in adjacent blocks, so block accuracy rises towards the random-split figure; with 10 km blocks fewer, larger blocks are held out, neighbours are truly separated and whole classes may disappear from training more often, so accuracy falls further and varies more between folds. Choose the block size from the range of spatial autocorrelation (Chapter [-@sec-statistics]), not to get a better number.
+
+**2.** Not computed in the chapter. Removing paddy changes the other classes little in block validation, except open land and agriculture, which absorbed paddy's misclassified points: their precision may rise because paddy is no longer being called open land. In random validation almost nothing changes. Removing a class is not a fix, though: the map then has no paddy at all, which is worse for a district where rice matters.
+
+**3.** Not computed in the chapter. Add the new points in a third block (or more) far from the existing two, and rerun the 5-fold block validation. Recall rises above zero as soon as every fold's training set contains paddy from at least one block not held out, which can happen with a few tens of points if they are in a new block. More important than the count is the number of independent places paddy is sampled from.
+
+**4.** Not computed in the chapter. Run the consensus-label method of Chapter [-@sec-auto-landcover] over the Riau coast. It can only produce the seven shared global classes, so oil palm, sago, rubber and paddy collapse into trees, grassland or cropland. Field labels add most exactly there: in the commodity classes that carry the economic and policy questions, and in paddy, which WorldCover calls grassland in 95 % of the points.
+:::

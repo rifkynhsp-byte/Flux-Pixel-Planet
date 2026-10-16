@@ -55,3 +55,13 @@ Ini mengikuti pendekatan aplikasi penjelajah mangrove milik penulis: satu model,
 1. Ganti luas tahunan dengan rata-rata bergerak tiga tahun. Apakah muncul tren?
 2. Ubah ambang kondisi dari 0,005 menjadi 0,01 per tahun. Berapa luas yang terdegradasi yang bertahan dengan aturan yang lebih ketat?
 3. Hitung hanya kehilangan yang menjadi air, tanaman pertanian, atau lahan terbangun, lalu bandingkan dengan angka kehilangan mentah.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Rata-rata bergerak tiga tahun meredam lompatan tahun ke tahun (9.700 ke 14.200 ke 10.700 ha), sehingga tren lambat terlihat lebih jelas. Kalau deret yang dihaluskan masih datar atau berkelok, tidak ada tren yang bisa dideteksi metode ini; kalau naik atau turun secara konsisten, itu kandidat tren, yang perlu dikonfirmasi dengan sumber kedua seperti produk perubahan GMW. Penghalusan tidak menghapus bias, hanya noise.
+
+**2.** Tidak dihitung di bab ini. Kemiringan yang lebih ketat ±0,01 per tahun menyusutkan area yang terdegradasi maupun yang membaik; bagian dari 3.000 ha terdegradasi yang bertahan adalah inti yang bisa dipertanggungjawabkan. Kalau sebagian besar hilang, kelas terdegradasi sebagian besar berada dalam noise; kalau inti yang jelas tetap ada di tepi laguna dan alur sungai, itulah tempat yang perlu diperiksa di lapangan.
+
+**3.** Kehilangan mentahnya sekitar 2.680 ha. Dari mangrove yang hilang, sekitar 12 % menjadi air terbuka dan 9 % lahan pertanian menurut Dynamic World 2024, ditambah sebagian lahan terbangun, sekitar seperempat seluruhnya, kira-kira 600-700 ha. Itulah angka yang dilaporkan sebagai konversi; sisanya masih berupa lahan basah bervegetasi, dan "kehilangannya" kemungkinan besar noise klasifikasi atau perubahan definisi di tepi mangrove.
+:::

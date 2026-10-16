@@ -115,3 +115,13 @@ Pemeriksaan itu juga memaksa nama kelas yang jujur. RGB 0,3 m tidak bisa membeda
 1. Ubah aturan grid menjadi dua tetangga, lalu empat. Berapa deteksi yang dibuang, dan seperti apa tajuk yang dibuang di galeri?
 2. Ganti k-means dengan ambang tetap pada GLI (misalnya persentil ke-10 dan ke-50). Apakah petanya banyak berbeda?
 3. Petakan sawit di kelompok buruk. Apakah tersebar, atau mengelompok di satu bagian blok? Pengelompokan menunjukkan sesuatu yang menular atau masalah tanah; yang tersebar menunjukkan penyebab per pohon.
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Dengan dua tetangga, lebih sedikit deteksi yang dikeluarkan dibanding 1.279 pada aturan tiga, dan galeri yang lolos mulai memuat semak dan pohon di tepi blok yang kebetulan punya dua tetangga. Dengan empat tetangga, lebih banyak yang dikeluarkan, termasuk sawit sungguhan di tepi blok atau di samping celah, yang tetangga grid-nya lebih sedikit. Tiga adalah kompromi: periksa tajuk yang dikeluarkan di setiap galeri dan pilih aturan yang pengecualiannya tampak seperti bukan sawit.
+
+**2.** Tidak dihitung di bab ini. Ambang GLI tetap pada persentil ke-10 dan ke-50 menempatkan tepat 10 % sawit di kelompok buruk, lebih banyak daripada 40 (3 %) hasil k-means, sehingga kelompok buruk membesar dan tajuknya tampak kurang berbeda. Pola spasial kelompok sehat biasanya sedikit berubah. Ambang tetap lebih mudah dijelaskan dan diulang pada penerbangan lain; k-means menyesuaikan diri dengan data tetapi bisa berubah dari penerbangan ke penerbangan.
+
+**3.** Petakan 40 sawit kelompok buruk di atas ortofoto. Kalau mengumpul di satu bagian blok (sudut rendah yang basah, tepi blok, atau petak di samping jalan), curigai penyebab tanah, drainase atau yang menular seperti Ganoderma; kalau tersebar, penyebab individual (sawit tua, pelepah belum dipangkas, kerusakan) lebih mungkin. Bagaimanapun, peta ini adalah daftar sawit yang perlu didatangi tim lapangan, bukan diagnosis.
+:::

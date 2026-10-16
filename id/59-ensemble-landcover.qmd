@@ -60,3 +60,15 @@ Pelabel cenderung mengeklik banyak titik di satu petak. Pembagian acak lalu meng
 2. Buang sawah dari data latih lalu latih ulang. Apakah akurasi kelas-kelas lain berubah?
 3. Tambahkan 30 titik sawah dari kabupaten lain pilihan Anda (dari citra yang bisa Anda tafsirkan) lalu jalankan ulang validasi blok. Berapa titik yang dibutuhkan sampai recall sawah naik di atas nol?
 4. Jalankan metode label otomatis dari Bab [-@sec-auto-landcover] di wilayah ini lalu bandingkan dengan peta ensemble. Di mana kelas dari label lapangan paling banyak menambah informasi?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Tidak dihitung di bab ini. Dengan blok 2 km sebagian titik uji masih memiliki tetangga latih di blok yang berdekatan, sehingga akurasi blok naik mendekati angka pembagian acak; dengan blok 10 km lebih sedikit blok besar yang ditahan, tetangga benar-benar terpisah dan seluruh kelas lebih sering hilang dari data latih, sehingga akurasi turun lagi dan lebih bervariasi antar-fold. Pilih ukuran blok dari rentang autokorelasi spasial (Bab [-@sec-statistics]), bukan untuk mendapatkan angka yang lebih baik.
+
+**2.** Tidak dihitung di bab ini. Membuang padi sedikit mengubah kelas lain dalam validasi blok, kecuali lahan terbuka dan pertanian, yang menyerap titik padi yang salah kelas: presisinya bisa naik karena padi tidak lagi disebut lahan terbuka. Dalam validasi acak hampir tidak ada yang berubah. Membuang kelas bukan perbaikan: peta lalu tidak memuat padi sama sekali, dan itu lebih buruk untuk kabupaten yang padinya penting.
+
+**3.** Tidak dihitung di bab ini. Tambahkan titik baru di blok ketiga (atau lebih) yang jauh dari dua blok yang ada, lalu jalankan ulang validasi blok 5-fold. Recall naik di atas nol begitu data latih setiap fold memuat padi dari setidaknya satu blok yang tidak ditahan, dan itu bisa terjadi dengan beberapa puluh titik bila berada di blok baru. Yang lebih penting daripada jumlahnya adalah berapa banyak tempat independen tempat padi diambil sampelnya.
+
+**4.** Tidak dihitung di bab ini. Jalankan metode label konsensus dari Bab [-@sec-auto-landcover] di pesisir Riau. Metode itu hanya bisa menghasilkan tujuh kelas global yang sama, sehingga sawit, sagu, karet dan padi melebur menjadi pohon, padang rumput atau lahan pertanian. Label lapangan memberi nilai tambah terbesar justru di sana: pada kelas komoditas yang memuat pertanyaan ekonomi dan kebijakan, dan pada padi, yang oleh WorldCover disebut padang rumput pada 95 % titiknya.
+:::

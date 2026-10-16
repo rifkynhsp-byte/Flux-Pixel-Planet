@@ -85,3 +85,13 @@ Penapisan red-edge menandai jauh lebih banyak daripada NDVI: 22 % areal sawit kl
 1. Terapkan persamaan Khalid dengan tinggi batang, bukan tinggi total (anggap pelepah menambah 5 m). Apakah hasilnya masuk ke rentang lapangan?
 2. Ganti rasio capaian 0,42 dengan 0,8 untuk kebun yang dikelola dengan baik. Bagaimana total bentang lahannya berubah?
 3. Bandingkan peta kesehatan dengan peta umur. Apakah blok-blok yang lemah berumur muda, prima, atau tua?
+
+::: {.callout-tip collapse="true"}
+## Jawaban
+
+**1.** Mengurangi H sebesar 5 m menurunkan estimasi Khalid sebesar 197 × 5 = 985 kg per pohon, atau sekitar 134 Mg/ha pada 136 pohon per hektare. Dari sekitar 360 Mg/ha, tersisa kira-kira 226 Mg/ha untuk sawit usia produktif, masih sekitar dua kali batas atas rentang lapangan 41-105 Mg/ha. Tinggi batang saja tidak menyelamatkan persamaan sebagaimana diterapkan; satuan atau populasi yang dipakai untuk menyusunnya lebih mungkin menjadi masalahnya.
+
+**2.** Total lanskap berbanding lurus dengan rasio capaian, sehingga 0,8 alih-alih 0,42 mengalikannya dengan 0,8 / 0,42 ≈ 1,9, hampir dua kali lipat perkiraan buah. Bila diterapkan pada seluruh lanskap kebun rakyat, angka ini sangat melebih-lebihkan produksi; ia hanya tepat untuk perkebunan yang catatannya menunjukkan tingkat pengelolaan setinggi itu.
+
+**3.** Tidak dihitung di bab ini. Buat tabulasi silang kelas kesehatan dengan kelompok umur. Blok yang lemah biasanya terpusat pada sawit tua (di atas sekitar 20-25 tahun, menjelang peremajaan) dan pada sawit sangat muda yang kanopinya belum menutup, tempat perbandingan seumur berderau; blok lemah pada usia produktif adalah yang menarik, karena menunjukkan masalah pengelolaan (hara, drainase, penyakit) yang masih bisa diperbaiki.
+:::
