@@ -26,6 +26,8 @@ At UNSW Sydney, three people supported my learning in remote sensing and GIS: **
 
 It began earlier, in Geophysics at Universitas Padjadjaran. **Professor Irwan Ary Dharmawan**, **Professor Eleonora Agustine** and **Professor Muhammad Aufaristama** supervised my undergraduate thesis, and they first taught me to look at the Earth with physics and to trust a measurement only after testing it. To them, and to all my lecturers in Geophysics at Universitas Padjadjaran and at UNSW, too many to name one by one: thank you. What is good in this book owes you a great deal; the mistakes are mine.
 
+In forestry in Riau, my manager **Amit Kumar Haldar** is where much of my experience grew. Under him, our ideas were not left on paper: they were executed and tested in real-world operations, where a method either works or is quickly shown not to. Thank you.
+
 And to my little family. **Kesuma Fitri**, my wife, who has always supported me; our sons **Ibrahim Bagaskoro** and **Yahya Kenzi Hendrawan**, who ride the waves with us. We are still on the journey, from place to place and from opportunity to opportunity, and all of it is reason to be grateful for the majesty of Allah's creation: how precise and ordered nature is, and how complex the Earth is to model, so that it leaves us plenty of room to keep trying to understand it, and to be grateful.
 
 > *Rabbanā mā khalaqta hādhā bāṭilan, subḥānaka.* "Our Lord, You did not create this aimlessly; exalted are You." (Āl ʿImrān 3:191)
