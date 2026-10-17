@@ -17,7 +17,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_45149bbdd8797c3eadea6fbbac4c326b {
+                #map_2a7a74b18964360b68b579d094fe3345 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -72,14 +72,14 @@
     
     <div style="position:absolute;bottom:18px;left:10px;z-index:9999;background:white;padding:4px 8px;border-radius:4px;font:12px sans-serif">Overlay opacity <input type="range" min="0" max="100" value="85" oninput="document.querySelectorAll('.leaflet-image-layer').forEach(function(e){e.style.opacity=this.value/100}.bind(this))"></div>
     
-            <div class="folium-map" id="map_45149bbdd8797c3eadea6fbbac4c326b" ></div>
+            <div class="folium-map" id="map_2a7a74b18964360b68b579d094fe3345" ></div>
         
 </body>
 <script>
     
     
-            var map_45149bbdd8797c3eadea6fbbac4c326b = L.map(
-                "map_45149bbdd8797c3eadea6fbbac4c326b",
+            var map_2a7a74b18964360b68b579d094fe3345 = L.map(
+                "map_2a7a74b18964360b68b579d094fe3345",
                 {
                     center: [0.0, 0.0],
                     crs: L.CRS.EPSG3857,
@@ -91,13 +91,13 @@
 
                 }
             );
-            L.control.scale().addTo(map_45149bbdd8797c3eadea6fbbac4c326b);
+            L.control.scale().addTo(map_2a7a74b18964360b68b579d094fe3345);
 
             
 
         
     
-            var tile_layer_6685063ff67b7aec2fc5c5a4b613ea14 = L.tileLayer(
+            var tile_layer_68f664a47303b4e6c95c91c69cd5a7d6 = L.tileLayer(
                 "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {
   "minZoom": 0,
@@ -114,10 +114,10 @@
             );
         
     
-            tile_layer_6685063ff67b7aec2fc5c5a4b613ea14.addTo(map_45149bbdd8797c3eadea6fbbac4c326b);
+            tile_layer_68f664a47303b4e6c95c91c69cd5a7d6.addTo(map_2a7a74b18964360b68b579d094fe3345);
         
     
-            var tile_layer_1ed81f70c7639abab2c4f04380796210 = L.tileLayer(
+            var tile_layer_d32b4c0d08036c685f4cb96d86ee07cc = L.tileLayer(
                 "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
                 {
   "minZoom": 0,
@@ -134,10 +134,10 @@
             );
         
     
-            tile_layer_1ed81f70c7639abab2c4f04380796210.addTo(map_45149bbdd8797c3eadea6fbbac4c326b);
+            tile_layer_d32b4c0d08036c685f4cb96d86ee07cc.addTo(map_2a7a74b18964360b68b579d094fe3345);
         
     
-            var image_overlay_18b6cdd3315ea1b8162acd4acc1be455 = L.imageOverlay(
+            var image_overlay_6652038fffb4bf9ee7585e80e79c90a8 = L.imageOverlay(
                 "raw/p6-emit-rgb.png",
                 [[-7.05, 107.3], [-6.75, 107.75]],
                 {
@@ -148,27 +148,27 @@
             );
         
     
-            image_overlay_18b6cdd3315ea1b8162acd4acc1be455.addTo(map_45149bbdd8797c3eadea6fbbac4c326b);
+            image_overlay_6652038fffb4bf9ee7585e80e79c90a8.addTo(map_2a7a74b18964360b68b579d094fe3345);
         
     
-            var layer_control_bfac27c40196ee1c20101227a66d6b3e_layers = {
+            var layer_control_f06dcde8a0213f6b936948174ee2d060_layers = {
                 base_layers : {
-                    "Street map" : tile_layer_6685063ff67b7aec2fc5c5a4b613ea14,
-                    "Satellite basemap" : tile_layer_1ed81f70c7639abab2c4f04380796210,
+                    "Street map" : tile_layer_68f664a47303b4e6c95c91c69cd5a7d6,
+                    "Satellite basemap" : tile_layer_d32b4c0d08036c685f4cb96d86ee07cc,
                 },
                 overlays :  {
-                    "Saguling to Bandung, EMIT, 26 Aug 2025" : image_overlay_18b6cdd3315ea1b8162acd4acc1be455,
+                    "Saguling to Bandung, EMIT, 26 Aug 2025" : image_overlay_6652038fffb4bf9ee7585e80e79c90a8,
                 },
             };
-            let layer_control_bfac27c40196ee1c20101227a66d6b3e = L.control.layers(
-                layer_control_bfac27c40196ee1c20101227a66d6b3e_layers.base_layers,
-                layer_control_bfac27c40196ee1c20101227a66d6b3e_layers.overlays,
+            let layer_control_f06dcde8a0213f6b936948174ee2d060 = L.control.layers(
+                layer_control_f06dcde8a0213f6b936948174ee2d060_layers.base_layers,
+                layer_control_f06dcde8a0213f6b936948174ee2d060_layers.overlays,
                 {
   "position": "topright",
   "collapsed": false,
   "autoZIndex": true,
 }
-            ).addTo(map_45149bbdd8797c3eadea6fbbac4c326b);
+            ).addTo(map_2a7a74b18964360b68b579d094fe3345);
 
         
     
@@ -179,10 +179,10 @@
   "titleCancel": "Exit Full Screen",
   "forceSeparateButton": false,
 }
-            ).addTo(map_45149bbdd8797c3eadea6fbbac4c326b);
+            ).addTo(map_2a7a74b18964360b68b579d094fe3345);
         
     
-            map_45149bbdd8797c3eadea6fbbac4c326b.fitBounds(
+            map_2a7a74b18964360b68b579d094fe3345.fitBounds(
                 [[-7.05, 107.3], [-6.75, 107.75]],
                 {}
             );

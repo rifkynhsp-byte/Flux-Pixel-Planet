@@ -309,7 +309,78 @@ def plot_street_to_pixel(df):
     return fig
 
 
+# ---------------------------------------------------------------------------
+# 4. A cross-section, forest to city: how each sensor sees the same transition
+# ---------------------------------------------------------------------------
+XA, XB = (107.585, -6.775), (107.540, -6.885)      # Tangkuban Perahu foothill (Cisarua) to Cimahi
+XN = 240                                             # samples, about 50 m apart
+DW_COL = ["#419bdf", "#397d49", "#88b053", "#7a87c6", "#e49635", "#dfc35a", "#c4281b", "#a59b8f", "#b39fe1"]
+# Fixed physical ranges, so that every curve runs 0 to 1 and they share one axis
+NORM = {"NDVI": (-0.2, 0.9), "EVI": (-0.1, 0.8), "VV": (-20, 0), "VH": (-27, -8), "CHM": (0, 35)}
+
+
+def transect_table():
+    xs = np.linspace(XA[0], XB[0], XN)
+    ys = np.linspace(XA[1], XB[1], XN)
+    pts = ee.FeatureCollection([ee.Feature(ee.Geometry.Point(float(x), float(y)), {"i": i})
+                                for i, (x, y) in enumerate(zip(xs, ys))])
+    box = pts.geometry().buffer(500).bounds()
+    s2 = (ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED").filterBounds(box)
+          .filterDate("2025-06-01", "2025-10-01").filter(ee.Filter.lt("CLOUDY_PIXEL_PERCENTAGE", 40))
+          .map(lambda im: im.updateMask(im.select("SCL").remap([4, 5, 6, 11], [1, 1, 1, 1], 0)))
+          .median().divide(10000))
+    ndvi = s2.normalizedDifference(["B8", "B4"]).rename("NDVI")
+    evi = s2.expression("2.5*(N-R)/(N+6*R-7.5*B+1)", {"N": s2.select("B8"), "R": s2.select("B4"),
+                                                       "B": s2.select("B2")}).rename("EVI")
+    s1 = (ee.ImageCollection("COPERNICUS/S1_GRD").filterBounds(box).filterDate("2025-06-01", "2025-10-01")
+          .filter(ee.Filter.eq("instrumentMode", "IW")).select(["VV", "VH"]).median())
+    chm = ee.Image("users/nlang/ETH_GlobalCanopyHeight_2020_10m_v1").select(0).rename("CHM")
+    dem = ee.ImageCollection("COPERNICUS/DEM/GLO30").select("DEM").mosaic().rename("elev")
+    dw = (ee.ImageCollection("GOOGLE/DYNAMICWORLD/V1").filterBounds(box)
+          .filterDate("2025-06-01", "2025-10-01").select("label").mode().rename("dw"))
+    stack = ee.Image.cat([ndvi, evi, s1, chm, dem, dw])
+    rows = stack.reduceRegions(pts, ee.Reducer.first(), 10).getInfo()["features"]
+    df = pd.DataFrame([r["properties"] for r in rows]).sort_values("i")
+    d = np.hypot((xs - xs[0]) * 111.32 * math.cos(math.radians(-6.83)), (ys - ys[0]) * 110.57)
+    df["km"] = d[df.i.to_numpy()]
+    df["lon"], df["lat"] = xs[df.i.to_numpy()], ys[df.i.to_numpy()]
+    return df
+
+
+def plot_transect(df):
+    fig, (a0, a1, a2) = plt.subplots(3, 1, figsize=(11, 7.5), sharex=True,
+                                     gridspec_kw={"height_ratios": [1.2, 2.4, 0.35]})
+    a0.fill_between(df.km, df.elev.min() - 20, df.elev, color="#cbd5e1")
+    a0.plot(df.km, df.elev, color="#475569", lw=1.2)
+    a0.text(0, 1.03, "Elevation (m)", transform=a0.transAxes, fontsize=8.5, color="#475569")
+    cols = {"NDVI": "#16a34a", "EVI": "#ca8a04", "VV": "#7c3aed", "VH": "#db2777", "CHM": "#0f766e"}
+    for k, (lo, hi) in NORM.items():
+        v = ((df[k] - lo) / (hi - lo)).clip(0, 1).rolling(5, center=True, min_periods=1).mean()
+        a1.plot(df.km, v, color=cols[k], lw=1.6 if k in ("NDVI", "CHM") else 1.2,
+                label=f"{k} ({lo} to {hi}{' m' if k == 'CHM' else (' dB' if k in ('VV', 'VH') else '')})")
+    a1.set_ylim(0, 1.05)
+    a1.legend(frameon=False, fontsize=7.5, ncol=5, loc="upper center", bbox_to_anchor=(0.5, 1.13))
+    a1.text(0, -0.02, "", transform=a1.transAxes)
+    a1.set_ylabel("Scaled 0 to 1", fontsize=8.5)
+    for i in range(len(df) - 1):
+        a2.axvspan(df.km.iloc[i], df.km.iloc[i + 1], color=DW_COL[int(df.dw.iloc[i])], lw=0)
+    a2.set_yticks([]); a2.set_xlabel("Distance from A, the forest above Cisarua, to B, Cimahi (km)")
+    from matplotlib.patches import Patch
+    seen = sorted(set(int(v) for v in df.dw))
+    a2.legend(handles=[Patch(color=DW_COL[c], label=DW_NAMES[c]) for c in seen], frameon=False,
+              fontsize=7.5, ncol=len(seen), loc="upper center", bbox_to_anchor=(0.5, -0.9))
+    a2.text(0, 1.15, "Dynamic World, 2025 dry season", transform=a2.transAxes, fontsize=8, color="#475569")
+    for ax in (a0, a1):
+        for sp in ("top", "right"):
+            ax.spines[sp].set_visible(False)
+    fig.suptitle("Forest to city in one line: canopy height follows the trees, NDVI stays high over "
+                 "farms and gardens, both radar channels brighten in town", x=0.01, ha="left", fontsize=10.5)
+    fig.tight_layout(rect=(0, 0, 1, 0.96))
+    return fig
+
+
 SPECTRA = class_spectra()
+TRANSECT = transect_table()
 GROUND = ground_truth_table()
 RGB = {"bands": ["reflectance_35", "reflectance_23", "reflectance_11"],
        "min": 0, "max": 0.15, "gamma": 1.3}
@@ -348,6 +419,13 @@ def products():
          "floatfmt": ("", "", "", ".2f", ".2f", ".3f", ".3f", ".3f"),
          "caption": "The same four pixels as numbers: labels, indices and three key bands (red, "
                     "near infrared, shortwave infrared)."},
+        {"kind": "chart", "name": "p6-transect", "data": TRANSECT, "plot": plot_transect,
+         "caption": "One line from the forest on the foothill of Tangkuban Perahu above Cisarua to "
+                    "Cimahi, sampled every 50 m. Every measure is scaled to 0-1 over a fixed range "
+                    "(in the legend) so they share one axis. Each sensor sees a different part of "
+                    "the transition: canopy height follows the trees, NDVI and EVI cannot tell a "
+                    "lush field or garden from forest, and both radar channels brighten over "
+                    "buildings, where walls and streets bounce the signal straight back."},
         {"kind": "table", "name": "p6-sensors", "data": sensors_table,
          "caption": "Hyperspectral and multispectral sensors. Band counts and ranges from the "
                     "mission documentation; widths rounded."},

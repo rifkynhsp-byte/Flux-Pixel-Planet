@@ -76,6 +76,10 @@ The labels are more interesting than the spectra. **Dynamic World** calls all fo
 
 Street View photographs are not the same date as the satellite pixels, and the camera sees the side of a building or the edge of a field while the satellite sees the top. That difference is the point of the exercise: ground photographs are for knowing what is there, satellite pixels for measuring how much of it there is.
 
+### One line, forest to city
+
+The four places are points. The cross-section in the output block below is a line, 13 km from the forest on the foothill of Tangkuban Perahu above Cisarua down to Cimahi, sampled every 50 m, with five measurements scaled to the same 0 to 1 axis. Each sensor sees a different part of the transition. Canopy height (ETH, 2020) follows the trees and drops wherever they are cleared. NDVI and EVI stay high over vegetable farms and gardens as well as forest, so on their own they cannot say where the forest ends. Radar VV and VH, which reflect structure and moisture rather than colour, rise over the town in the last 5 km, where walls and streets bounce the signal back. No single measure draws the landscape; together they do, which is why the classifiers in this book are fed several sensors at once.
+
 ## Which one to use
 
 Use **multispectral** data (Landsat, Sentinel-2) for anything that needs regular, wall-to-wall coverage: land cover, change, crops through the season, water. Its few bands are placed for exactly these questions, the archive is long, and the revisit is frequent.

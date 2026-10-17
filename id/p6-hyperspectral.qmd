@@ -76,6 +76,10 @@ Labelnya lebih menarik daripada spektrumnya. **Dynamic World** menyebut keempatn
 
 Foto Street View tidak bertanggal sama dengan piksel satelit, dan kamera melihat sisi bangunan atau tepi sawah sementara satelit melihat bagian atasnya. Perbedaan itu justru inti latihan ini: foto dari permukaan untuk mengetahui apa yang ada di sana, piksel satelit untuk mengukur seberapa banyak.
 
+### Satu garis, dari hutan ke kota
+
+Keempat tempat tadi adalah titik. Penampang di blok keluaran di bawah adalah sebuah garis, 13 km dari hutan di kaki Tangkuban Perahu di atas Cisarua turun ke Cimahi, diambil sampelnya setiap 50 m, dengan lima ukuran yang diskalakan ke sumbu 0 sampai 1 yang sama. Setiap sensor melihat bagian transisi yang berbeda. Tinggi tajuk (ETH, 2020) mengikuti pepohonan dan turun di mana pun pohon ditebang. NDVI dan EVI tetap tinggi di atas kebun sayur dan pekarangan sama seperti di atas hutan, sehingga sendirian keduanya tidak bisa mengatakan di mana hutan berakhir. Radar VV dan VH, yang mencerminkan struktur dan kelembapan alih-alih warna, naik di atas kota pada 5 km terakhir, tempat dinding dan jalan memantulkan sinyal kembali. Tidak ada satu ukuran pun yang menggambar lanskapnya; bersama-sama mereka menggambarkannya, dan itulah sebabnya pengklasifikasi di buku ini diberi beberapa sensor sekaligus.
+
 ## Kapan memakai yang mana
 
 Gunakan data **multispektral** (Landsat, Sentinel-2) untuk apa pun yang memerlukan cakupan rutin dan menyeluruh: tutupan lahan, perubahan, tanaman sepanjang musim, air. Band-nya yang sedikit ditempatkan tepat untuk pertanyaan-pertanyaan ini, arsipnya panjang, dan kunjungan ulangnya sering.
