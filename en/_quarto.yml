@@ -65,6 +65,7 @@ book:
         - p6-hyperspectral.qmd
         - p7-geostationary.qmd
         - p8-lidar.qmd
+        - p9-way-forward.qmd
         - p6-ijb.qmd
     - part: "Part I: Foundations, Purpose and Physics"
       chapters:

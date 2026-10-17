@@ -1,0 +1,63 @@
+# P9 · Jalan ke Depan: Mata Baru, Alat Baru, Pertanyaan yang Sama {#sec-p9-way-forward .unnumbered}
+
+::: {.chapter-goal}
+#### Dalam bab ini
+Pandangan optimistis ke depan, dengan fakta yang diperiksa. Anda akan melihat satelit baru mana yang sudah mengubah apa yang bisa diukur (BIOMASS, NISAR, Landsat berikutnya), bagaimana model fondasi, embedding, dan asisten AI mengubah cara kita bekerja dengan data, seperti apa asisten yang benar-benar bisa menjalankan analisis, dan mengapa semua itu tidak menghilangkan kebutuhan untuk memahami fisikanya dan mengajukan pertanyaan yang baik. Bab ini tanpa kode; ia adalah jembatan antara bagian Prinsip dan bagian buku selanjutnya.
+:::
+
+## Mata baru di orbit
+
+Sensor sepuluh tahun terakhir tidak sekadar menambah jumlah citra. Mereka menambah jenis pengukuran yang baru.
+
+**Radar yang melihat batang pohon.** **BIOMASS** milik ESA, diluncurkan 29 April 2025, membawa radar apertur sintetis P-band pertama di orbit. Pada panjang gelombang sekitar 70 cm, sinyalnya menembus daun dan ranting kecil dan berinteraksi dengan batang dan cabang besar, bagian kayu hutan tempat karbon tersimpan. Citra pertamanya kembali dalam sebulan setelah peluncuran. Bagi hutan tropis, tempat indeks optik jenuh (Bab [-@sec-indices]) dan tempat sebagian besar ketidakpastian karbon berada, ini adalah pengukuran atas hal yang paling perlu kita ketahui.
+
+**Radar dengan jadwal tetap.** **NISAR**, dibangun NASA dan ISRO dan diluncurkan 30 Juli 2025, adalah radar pencitra pertama yang membawa dua frekuensi, L-band (24 cm) dan S-band (9,4 cm), dan mulai beroperasi untuk sains pada November 2025. Rancangannya bertujuan memotret hampir seluruh daratan dan es berulang kali setiap beberapa pekan, sehingga interferometri radar (P5) berubah dari proyek khusus menjadi layanan pemantauan: penurunan muka tanah di kota pesisir, gunung api, lereng rawan longsor, gangguan hutan, sawah basah dan kering, terlihat sesuai jadwal dan bukan ketika ada yang memesan citra.
+
+**Cahaya yang diukur dalam ratusan warna.** Spektrometer pencitraan berpindah dari satu satelit eksperimen ke beberapa misi yang beroperasi, di antaranya EnMAP, PRISMA, dan EMIT (P6), dan pencitraan hiperspektral juga direncanakan untuk program Copernicus Eropa. Yang dulu rasa ingin tahu riset kini menjadi pengukuran rutin atas mineral, kimia tumbuhan, dan kualitas air.
+
+**Laser yang mengukur tinggi hutan.** GEDI dan ICESat-2 (P8) memberi sampel tinggi dan struktur tajuk hampir global yang pertama, dan bila digabungkan dengan data optik dan radar menjadi dasar peta tinggi dan biomassa hutan yang konsisten pertama.
+
+**Dan kesinambungan.** Landsat telah mengukur daratan sejak 1972, rekaman terpanjang yang kita miliki. **Landsat Next** direncanakan sebagai konstelasi tiga satelit dengan band yang lebih banyak dan lebih sempit, lebih sering, untuk diluncurkan pada 2030-an. Rancangannya ditinjau ulang pada 2025 untuk menekan biaya, sehingga bentuk akhirnya belum pasti. Yang penting bagi buku ini adalah prinsip yang selalu dijaga program itu: rekaman yang panjang, terkalibrasi, dan gratis, sehingga peta hari ini bisa dibandingkan dengan peta tahun 1990.
+
+![Sepuluh tahun terakhir dalam sensor (di atas garis) dan dalam alat untuk memakainya (di bawah). Tanggal peluncuran dan rilis sesuai pengumuman misi dan pengembangnya; Landsat Next masih direncanakan, belum diluncurkan.](images/way-forward-timeline.png){#fig-way-forward}
+
+## Cara baru membaca data
+
+**Model fondasi dan embedding.** Model fondasi mempelajari dari citra tanpa label dalam jumlah sangat besar seperti apa permukaan Bumi biasanya, lalu bisa disesuaikan untuk tugas tertentu dengan sedikit label. NASA dan IBM merilis **Prithvi**, model fondasi geospasial terbuka, pada 2023. Pada Juli 2025 **AlphaEarth Foundations** dari Google DeepMind menghasilkan embedding tahunan seluruh permukaan daratan pada 10 m, 64 angka per piksel yang meringkas satu tahun data optik, radar, dan lainnya, dan menerbitkannya sebagai dataset di Earth Engine. Bab [-@sec-embeddings] memakai embedding itu untuk melatih peta tutupan lahan dari dua puluh titik; P6 memperlihatkan salah satu konsekuensinya, sawah yang tahunnya sebagian tampak seperti air.
+
+**Retrieval-augmented generation (RAG).** Model bahasa yang berdiri sendiri menjawab dari ingatan dan bisa mengarang fakta. Retrieval-augmented generation memberinya perpustakaan untuk dicari lebih dulu, katalog dataset, kumpulan laporan, buku ini, dan membuatnya menjawab dari apa yang ditemukannya, dengan sumber ditampilkan. Bagi penginderaan jauh itu berarti bertanya dengan bahasa sehari-hari dataset mana yang mencakup sawah tergenang pada 2023, dan mendapat jawaban yang menunjuk koleksi yang sebenarnya beserta batas-batasnya.
+
+**Alat yang bisa dipakai asisten (MCP).** **Model Context Protocol**, standar terbuka yang diperkenalkan akhir 2024, menetapkan cara asisten AI terhubung ke alat dan data di luar dirinya: basis data, tempat penyimpanan berkas, akun Earth Engine, penjalan skrip. Dengan sambungan seperti itu, asisten tidak lagi terbatas menjelaskan sebuah analisis. Ia bisa menjalankannya, membaca hasilnya, dan melaporkannya, dengan setiap langkah tercatat.
+
+## Asisten penginderaan jauh
+
+Gabungkan semua itu dan gambaran lama dari film tentang komputer yang bisa diajak bicara dan menjawab pertanyaan apa pun tentang planet ini, Jarvis untuk penginderaan jauh, tidak lagi fiksi ilmiah. Tanyakan: *berapa luas sawah yang tergenang di Karawang Januari lalu, dan desa mana yang terdampak?* Ia bisa mencari citra radar yang tepat, menjalankan metode banjir Bab [-@sec-flood], menerapkan peta sawah, merangkum per desa dengan batas resmi, memeriksa hasilnya terhadap berita dan penakar hujan, lalu mengembalikan peta, tabel, dan satu paragraf yang menyatakan seberapa yakin ia, dalam hitungan menit. Dasbor akan memperbarui dirinya setiap citra baru tiba. Pemrosesan yang dulu memakan seminggu penulisan skrip akan selesai dalam waktu yang dibutuhkan untuk bertanya.
+
+Sebagian besar ini sudah berjalan sepotong-sepotong; buku ini sendiri dibangun dan diperiksa dengan bantuan alat semacam itu. Yang tidak berubah adalah siapa yang bertanggung jawab atas jawabannya. Asisten bisa menjalankan metode yang salah dengan sempurna, memilih ambang yang cocok untuk satu tempat tetapi tidak untuk tempat lain, atau tidak menyadari bahwa embedding 2024 melihat sawah tergenang sebagai air. Pertanyaan-pertanyaan di bagian Prinsip buku ini tetap harus bisa Anda ajukan pada hasil apa pun, bagaimanapun dibuatnya: apa yang sebenarnya diukur sensor, pada skala dan tanggal berapa, apa lagi yang bisa menghasilkan sinyal yang sama, dan bagaimana ia diperiksa terhadap kondisi lapangan.
+
+## Apa yang tersisa untuk kita
+
+Semakin cepat pemrosesannya, semakin banyak pekerjaan yang berpindah ke awal dan akhir: memilih pertanyaan yang tepat, dan memutuskan apa yang dilakukan dengan jawabannya. Hutan mana yang dilindungi lebih dulu, desa mana yang perlu peringatan, di mana jalan baru tidak boleh dibangun, bagaimana larangan menangkap ikan ditegakkan, bagaimana panen padi diasuransikan. Keputusan-keputusan itu menyangkut orang-orang yang tidak akan pernah melihat citra satelit, dan keputusan itu menjadi lebih baik di tangan orang yang memahami pengukurannya sekaligus tempatnya.
+
+Itulah pemanfaatan yang diharapkan buku ini dari semua itu: mengukur dengan jujur, membagikan apa yang Anda pelajari, dan menjadikan pengukuran itu bekerja untuk orang-orang dan tempat-tempat yang paling membutuhkannya.
+
+## Istilah kunci
+
+**BIOMASS** (SAR P-band). **NISAR** (SAR L- dan S-band). **Landsat Next**. **Spektroskopi pencitraan**. **Model fondasi**. **Embedding**, **AlphaEarth Foundations**, **Prithvi**. **Retrieval-augmented generation (RAG)**. **Model Context Protocol (MCP)**. **Asisten AI**, **agen**.
+
+## Kuis
+
+1. Mengapa radar P-band bisa mengukur biomassa hutan lebih baik daripada indeks optik?
+2. Apa yang membedakan NISAR dari radar pencitra sebelumnya, dan mengapa jadwal yang teratur penting bagi interferometri?
+3. Dalam satu kalimat masing-masing, apa itu model fondasi, dan apa itu embedding?
+4. Masalah apa yang diselesaikan retrieval-augmented generation?
+5. Sebuah asisten melaporkan bahwa 12 000 ha sawah tergenang di satu kabupaten. Sebutkan tiga pertanyaan yang harus Anda ajukan sebelum memakai angka itu.
+
+::: {.callout-note collapse="true"}
+## Jawaban
+1. Pada panjang gelombang sekitar 70 cm, P-band menembus daun dan ranting kecil dan berinteraksi dengan batang dan cabang besar, tempat sebagian besar biomassa kayu berada. Indeks optik merespons daun di puncak tajuk dan jenuh di hutan rapat.
+2. Ia membawa dua frekuensi, L-band dan S-band, dan dirancang untuk memotret hampir seluruh daratan dan es berulang kali setiap beberapa pekan. Interferometri membandingkan citra dari tempat yang sama; akuisisi yang sering dan teratur menjaga pasangan citra tetap dekat dalam waktu (dekorelasi lebih kecil) dan mengubah deformasi menjadi deret waktu.
+3. Model fondasi adalah model besar yang dilatih dengan data tanpa label dalam jumlah sangat besar dan bisa disesuaikan untuk banyak tugas dengan sedikit label. Embedding adalah sekumpulan angka ringkas yang dihasilkan model seperti itu untuk setiap piksel atau petak, meringkas apa yang dipelajarinya tentang tempat itu.
+4. Model bahasa yang menjawab dari ingatan bisa mengarang fakta; RAG membuatnya mencari koleksi tepercaya lebih dulu dan menjawab dari apa yang ditemukannya, dengan sumber.
+5. Misalnya: sensor, metode, dan ambang apa yang menghasilkannya, dan untuk tanggal berapa; bagaimana peta sawah dan peta banjir divalidasi, dan terhadap apa; apakah air permanen, tambak, atau sawah bera yang tergenang ikut terhitung; berapa ketidakpastiannya.
+:::

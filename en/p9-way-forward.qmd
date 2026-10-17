@@ -1,0 +1,63 @@
+# P9 · The Way Forward: New Eyes, New Tools, the Same Questions {#sec-p9-way-forward .unnumbered}
+
+::: {.chapter-goal}
+#### In this chapter
+An optimistic look ahead, with the facts checked. You will see which new satellites are already changing what can be measured (BIOMASS, NISAR, the next Landsat), how foundation models, embeddings and AI assistants are changing the way we work with the data, what an assistant that can actually run an analysis would look like, and why none of it removes the need to understand the physics and to ask good questions. There is no code in this chapter; it is the bridge between the Principles and the rest of the book.
+:::
+
+## New eyes in orbit
+
+The sensors of the last ten years did not just add more images. They added new kinds of measurement.
+
+**Radar that sees the trunks.** ESA's **BIOMASS**, launched on 29 April 2025, carries the first P-band synthetic aperture radar in orbit. At about 70 cm wavelength the signal passes through leaves and small branches and interacts with trunks and large limbs, the woody part of a forest where the carbon is. Its first images came back within a month of launch. For tropical forests, where optical indices saturate (Chapter [-@sec-indices]) and where most of the carbon uncertainty lies, it is a measurement of what we most need to know.
+
+**Radar on a regular schedule.** **NISAR**, built by NASA and ISRO and launched on 30 July 2025, is the first imaging radar to fly two frequencies, L-band (24 cm) and S-band (9.4 cm), and it began science operations in November 2025. Its design aim is to image nearly all land and ice repeatedly every couple of weeks, which turns radar interferometry (P5) from a special project into a monitoring service: ground subsidence in coastal cities, volcanoes, landslide slopes, forest disturbance, wet and dry rice fields, seen on a timetable rather than when someone orders an image.
+
+**Light measured in hundreds of colours.** Imaging spectrometers moved from one experimental satellite to several operating missions, EnMAP, PRISMA and EMIT among them (P6), and hyperspectral imaging is planned for Europe's Copernicus programme as well. What was a research curiosity is becoming a routine measurement of minerals, plant chemistry and water quality.
+
+**Lasers that measure the forest's height.** GEDI and ICESat-2 (P8) gave the first near-global samples of canopy height and structure, and combined with optical and radar data they have become the basis of the first consistent maps of forest height and biomass.
+
+**And continuity.** Landsat has measured the land since 1972, the longest record we have. **Landsat Next** is planned as a constellation of three satellites with more and narrower bands, more often, to launch in the 2030s. Its design was put under review in 2025 to reduce its cost, so its final form is not yet settled. What matters for this book is the principle the programme has always kept: a long, calibrated, free record, so that today's map can be compared with the map of 1990.
+
+![The last ten years in sensors (above the line) and in the tools to use them (below). Launch and release dates are those announced by the missions and developers; Landsat Next is planned, not launched.](images/way-forward-timeline.png){#fig-way-forward}
+
+## New ways to read the data
+
+**Foundation models and embeddings.** A foundation model learns from enormous amounts of unlabelled imagery what the Earth's surfaces usually look like, then can be adapted to a specific task with few labels. NASA and IBM released **Prithvi**, an open geospatial foundation model, in 2023. In July 2025 Google DeepMind's **AlphaEarth Foundations** produced annual embeddings of the whole land surface at 10 m, 64 numbers per pixel summarising a year of optical, radar and other data, and published them as a dataset in Earth Engine. Chapter [-@sec-embeddings] uses those embeddings to train a land-cover map from twenty points; P6 showed one consequence of them, a paddy field whose year looks partly like water.
+
+**Retrieval-augmented generation (RAG).** A language model on its own answers from memory and can invent facts. Retrieval-augmented generation gives it a library to search first, a catalogue of datasets, a set of reports, this book, and makes it answer from what it found, with the sources shown. For remote sensing that means asking in plain language which dataset covers flooded rice in 2023, and getting an answer that points to the real collection and its limits.
+
+**Tools the assistant can use (MCP).** The **Model Context Protocol**, an open standard introduced in late 2024, defines how an AI assistant connects to outside tools and data: a database, a file store, an Earth Engine account, a script runner. With such connections an assistant is no longer limited to describing an analysis. It can run one, read the result and report it, with every step logged.
+
+## A remote sensing assistant
+
+Put those pieces together and the old film image of a talking computer that answers any question about the planet, a Jarvis for remote sensing, stops being science fiction. Ask it: *how much paddy flooded in Karawang last January, and which villages were hit?* It could find the right radar images, run the flood method of Chapter [-@sec-flood] against them, apply the paddy map, summarise by village with the official boundaries, check the result against news reports and rain gauges, and return a map, a table and a paragraph saying how sure it is, in minutes. Dashboards would update themselves as each new image arrives. Processing that took a week of scripting would take the time to ask.
+
+Much of this already works in pieces; this book itself was built and checked with help from such tools. What will not change is who is responsible for the answer. An assistant can run the wrong method perfectly, choose a threshold that suits one place and not another, or miss that the 2024 embedding sees a flooded paddy as water. The questions in this book's Principles are the questions you must still be able to ask of any result, however it was made: what did the sensor actually measure, at what scale and on what date, what else could produce the same signal, and how was it checked against the ground.
+
+## What is left for us
+
+The faster the processing, the more of the work moves to the beginning and the end: choosing the right question, and deciding what to do with the answer. Which forests to protect first, which villages need a warning, where a new road should not go, how a fishing ban is enforced, how a rice harvest is insured. Those decisions affect people who will never see a satellite image, and they are made better by people who understand both the measurement and the place.
+
+That is the use this book hopes you will make of all of it: to measure honestly, to share what you learn, and to put the measurements to work for the people and the places that need them most.
+
+## Key terms
+
+**BIOMASS** (P-band SAR). **NISAR** (L- and S-band SAR). **Landsat Next**. **Imaging spectroscopy**. **Foundation model**. **Embedding**, **AlphaEarth Foundations**, **Prithvi**. **Retrieval-augmented generation (RAG)**. **Model Context Protocol (MCP)**. **AI assistant**, **agent**.
+
+## Quiz
+
+1. Why can a P-band radar measure forest biomass better than an optical index?
+2. What makes NISAR different from earlier imaging radars, and why does a regular schedule matter for interferometry?
+3. In one sentence each, what is a foundation model, and what is an embedding?
+4. What problem does retrieval-augmented generation solve?
+5. An assistant reports that 12 000 ha of paddy flooded in a district. Name three questions you should ask before using the number.
+
+::: {.callout-note collapse="true"}
+## Answers
+1. At about 70 cm wavelength, P-band passes through leaves and small branches and interacts with trunks and large branches, where most woody biomass is. Optical indices respond to the leaves at the top of the canopy and saturate in dense forest.
+2. It flies two frequencies, L-band and S-band, and is designed to image nearly all land and ice repeatedly every couple of weeks. Interferometry compares images of the same place; frequent, regular acquisitions keep the pairs close in time (less decorrelation) and turn deformation into a time series.
+3. A foundation model is a large model trained on huge amounts of unlabelled data that can be adapted to many tasks with few labels. An embedding is the compact set of numbers such a model produces for each pixel or patch, summarising what it has learned about that place.
+4. A language model answering from memory can invent facts; RAG makes it search a trusted collection first and answer from what it found, with sources.
+5. For example: which sensor, method and threshold produced it, and for which dates; how the paddy and flood maps were validated, and against what; whether permanent water, fishponds or fallow flooded fields could have been counted; what the uncertainty is.
+:::

@@ -821,6 +821,46 @@ def flux_sphere():
     save(fig, "flux-sphere")
 
 
+# ---------------------------------------------------------------------------
+# A decade of new eyes and new tools (P9)
+# ---------------------------------------------------------------------------
+def way_forward_timeline():
+    """Launch and release dates used in P9, all checked against the missions' own announcements."""
+    sensors = [(2015.5, "Sentinel-2A"), (2018.7, "ICESat-2"), (2018.93, "GEDI on the ISS"),
+               (2019.22, "PRISMA"), (2022.25, "EnMAP"), (2022.55, "EMIT"),
+               (2022.95, "Himawari-9 operational"), (2024.68, "Sentinel-2C"), (2024.93, "Sentinel-1C"),
+               (2025.33, "BIOMASS (P-band radar)"), (2025.58, "NISAR (L- and S-band radar)"),
+               (2030.5, "Landsat Next (planned, 2030s)")]
+    tools = [(2023.6, "Prithvi, NASA-IBM geospatial foundation model"),
+             (2024.85, "Model Context Protocol (MCP)"),
+             (2025.58, "AlphaEarth satellite embeddings in Earth Engine")]
+    fig, ax = plt.subplots(figsize=(11, 5.2))
+    ax.axhline(0, color=MUTED, lw=1)
+    for i, (x, lab) in enumerate(sensors):
+        y = 0.35 + 0.42 * (i % 5)
+        planned = "planned" in lab
+        ax.plot([x, x], [0, y], color=AMBER, lw=0.8, ls=":" if planned else "-")
+        ax.plot(x, 0, "o", color=AMBER, mfc="white" if planned else AMBER, ms=6)
+        ax.text(x, y + 0.04, lab, ha="center", va="bottom", fontsize=7.5, color=INK)
+    for i, (x, lab) in enumerate(tools):
+        y = -0.5 - 0.5 * i
+        ax.plot([x, x], [0, y], color=BRIGHT, lw=0.8)
+        ax.plot(x, 0, "s", color=BRIGHT, ms=6)
+        ax.text(x, y - 0.05, lab, ha="center", va="top", fontsize=7.5, color=INK)
+    ax.set_xlim(2014.5, 2032)
+    ax.set_ylim(-2.2, 2.6)
+    ax.set_yticks([])
+    for sp in ("left", "right", "top"):
+        ax.spines[sp].set_visible(False)
+    ax.set_xticks(range(2015, 2033, 1))
+    ax.tick_params(axis="x", labelsize=8)
+    ax.text(2014.6, 2.45, "New sensors (above)", color=AMBER, fontsize=9, fontweight="bold")
+    ax.text(2014.6, -2.15, "New ways to use them (below)", color=BRIGHT, fontsize=9, fontweight="bold")
+    ax.set_title("In ten years the sensors multiplied, and the tools began to understand what they see",
+                 loc="left", fontsize=11, color=INK, pad=10)
+    save(fig, "way-forward-timeline")
+
+
 if __name__ == "__main__":
     print("Generating figures into images/")
     spectral_signatures()
