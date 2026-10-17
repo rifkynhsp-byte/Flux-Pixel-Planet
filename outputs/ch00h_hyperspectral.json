@@ -33,6 +33,18 @@
   "markdown": "| sensor     | band   |   centre_nm |   width_nm |   Water |   Trees |   Crops |   Built |\n|:-----------|:-------|------------:|-----------:|--------:|--------:|--------:|--------:|\n| Sentinel-2 | B1     |         443 |         20 |   0.041 |   0.031 |   0.034 |   0.081 |\n| Sentinel-2 | B2     |         490 |         65 |   0.039 |   0.036 |   0.041 |   0.088 |\n| Sentinel-2 | B3     |         560 |         35 |   0.046 |   0.057 |   0.062 |   0.108 |\n| Sentinel-2 | B4     |         665 |         30 |   0.032 |   0.038 |   0.046 |   0.118 |\n| Sentinel-2 | B5     |         705 |         15 |   0.041 |   0.088 |   0.087 |   0.144 |\n| Sentinel-2 | B6     |         740 |         15 |   0.05  |   0.25  |   0.224 |   0.204 |\n| Sentinel-2 | B7     |         783 |         20 |   0.053 |   0.291 |   0.274 |   0.22  |\n| Sentinel-2 | B8     |         842 |        115 |   0.052 |   0.307 |   0.284 |   0.226 |\n| Sentinel-2 | B8A    |         865 |         20 |   0.051 |   0.313 |   0.288 |   0.228 |\n| Sentinel-2 | B9     |         945 |         20 |   0.046 |   0.316 |   0.277 |   0.235 |\n| Sentinel-2 | B11    |        1610 |         90 |   0.027 |   0.175 |   0.141 |   0.243 |\n| Sentinel-2 | B12    |        2190 |        180 |   0.014 |   0.084 |   0.073 |   0.208 |"
  },
  {
+  "name": "p6-street-to-pixel",
+  "kind": "chart",
+  "caption": "Four places in and around Bandung. Left: Google Street View, looking at a point a few tens of metres from the camera. Middle: the same place in Sentinel-2, with the camera (yellow) and the 10 m pixel it looks at (red). Right: that pixel's spectral signature in ten Sentinel-2 bands, its NDVI and EVI, and the labels Dynamic World and the author's 10-class model give it. Street View images © Google.",
+  "image": "images/real/p6-street-to-pixel.png"
+ },
+ {
+  "name": "p6-street-table",
+  "kind": "table",
+  "caption": "The same four pixels as numbers: labels, indices and three key bands (red, near infrared, shortwave infrared).",
+  "markdown": "| site                              | dw    | ijb    |   NDVI |   EVI |    B4 |    B8 |   B11 |\n|:----------------------------------|:------|:-------|-------:|------:|------:|------:|------:|\n| Building, Gedung Merdeka, Bandung | built | Water  |   0.01 |  0.01 | 0.165 | 0.169 | 0.323 |\n| Paddy, Majalaya                   | crops | Water  |   0.82 |  0.62 | 0.034 | 0.347 | 0.155 |\n| Lake, Situ Cileunca               | water | Water  |  -0.26 | -0.05 | 0.040 | 0.023 | 0.018 |\n| Forest, Tahura Juanda             | trees | Forest |   0.83 |  0.62 | 0.032 | 0.339 | 0.153 |"
+ },
+ {
   "name": "p6-sensors",
   "kind": "table",
   "caption": "Hyperspectral and multispectral sensors. Band counts and ranges from the mission documentation; widths rounded.",

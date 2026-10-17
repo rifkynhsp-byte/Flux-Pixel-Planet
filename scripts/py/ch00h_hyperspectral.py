@@ -17,8 +17,15 @@ fall inside it. Everything that happens within that average, a shoulder, a
 dip, a shift, is lost.
 """
 
+import io
+import math
+from pathlib import Path
+
 import ee
 import matplotlib.pyplot as plt
+import requests
+from matplotlib.patches import Rectangle
+from PIL import Image
 import numpy as np
 import pandas as pd
 
@@ -174,7 +181,136 @@ def sensors_table():
     ], columns=["Sensor", "Type", "Bands", "Range (nm)", "Band width (nm)", "Pixel (m)", "Years"])
 
 
+# ---------------------------------------------------------------------------
+# 3. From the street to the pixel: four places seen from the ground and from orbit
+# ---------------------------------------------------------------------------
+# Street View panoramas found near each place; the camera looks at a point a
+# few tens of metres away whose Dynamic World class matches the place.
+SITES = [
+    {"name": "Building, Gedung Merdeka, Bandung", "pano": (-6.92133, 107.60981), "heading": 300,
+     "dist": 25, "sv_date": "May 2024"},
+    {"name": "Paddy, Majalaya", "pano": (-7.03767, 107.74397), "heading": 180, "dist": 45,
+     "sv_date": "April 2021"},
+    {"name": "Lake, Situ Cileunca", "pano": (-7.19754, 107.54934), "heading": 320, "dist": 80,
+     "sv_date": "December 2021"},
+    {"name": "Forest, Tahura Juanda", "pano": (-6.85715, 107.63307), "heading": 60, "dist": 30,
+     "sv_date": "November 2019"},
+]
+SV_DIR = Path(__file__).resolve().parents[2] / "images" / "real"
+DW_NAMES = ["water", "trees", "grass", "flooded vegetation", "crops", "shrub and scrub", "built",
+            "bare", "snow and ice"]
+IJB_NAMES = ["Plantation", "Forest", "Agriculture", "Open land", "Water", "Mangrove", "Paddy",
+             "Oil palm", "Sago", "Rubber"]
+
+
+def target_point(site):
+    lat, lon = site["pano"]
+    b = math.radians(site["heading"])
+    dlat = site["dist"] * math.cos(b) / 6371000
+    dlon = site["dist"] * math.sin(b) / (6371000 * math.cos(math.radians(lat)))
+    return lat + math.degrees(dlat), lon + math.degrees(dlon)
+
+
+def street_view(site, i):
+    """The Street View photo, fetched once with the author's key and kept with attribution."""
+    out = SV_DIR / f"p6-streetview-{i}.jpg"
+    key_file = Path.home() / ".config" / "qsgi" / "maps-api-key"
+    if not out.exists() and key_file.exists():
+        r = requests.get("https://maps.googleapis.com/maps/api/streetview",
+                         params={"size": "640x400", "location": "%f,%f" % site["pano"],
+                                 "heading": site["heading"], "fov": 70, "pitch": 0,
+                                 "source": "outdoor", "key": key_file.read_text().strip()},
+                         timeout=60)
+        if r.headers.get("content-type", "").startswith("image/"):
+            out.write_bytes(r.content)
+    return Image.open(out) if out.exists() else None
+
+
+S2B = ["B2", "B3", "B4", "B5", "B6", "B7", "B8", "B8A", "B11", "B12"]
+S2C = [490, 560, 665, 705, 740, 783, 842, 865, 1610, 2190]
+
+
+def ground_truth_table():
+    """For each target pixel: Sentinel-2 reflectance, indices, Dynamic World and the 10-class model."""
+    pts = ee.FeatureCollection([ee.Feature(ee.Geometry.Point(target_point(st)[::-1]), {"site": st["name"]})
+                                for st in SITES])
+    box = pts.geometry().buffer(2000).bounds()
+    s2 = (ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED").filterBounds(box)
+          .filterDate("2025-06-01", "2025-10-01").filter(ee.Filter.lt("CLOUDY_PIXEL_PERCENTAGE", 40))
+          .map(lambda im: im.updateMask(im.select("SCL").remap([4, 5, 6, 11], [1, 1, 1, 1], 0)))
+          .select(S2B).median().divide(10000))
+    ndvi = s2.normalizedDifference(["B8", "B4"]).rename("NDVI")
+    evi = s2.expression("2.5*(N-R)/(N+6*R-7.5*B+1)", {"N": s2.select("B8"), "R": s2.select("B4"),
+                                                       "B": s2.select("B2")}).rename("EVI")
+    dwc = (ee.ImageCollection("GOOGLE/DYNAMICWORLD/V1").filterBounds(box).filterDate("2025-06-01", "2025-10-01"))
+    dw_label = dwc.select("label").mode().rename("dw")
+    dw_prob = dwc.select(["water", "trees", "grass", "flooded_vegetation", "crops",
+                                           "shrub_and_scrub", "built", "bare"]).mean()
+    emb = (ee.ImageCollection("GOOGLE/SATELLITE_EMBEDDING/V1/ANNUAL")
+           .filter(ee.Filter.calendarRange(2024, 2024, "year")).filterBounds(box).mosaic())
+    dem = ee.Image("USGS/SRTMGL1_003").select("elevation")
+    ijb = (ee.Image.cat([emb, dem, ee.Terrain.slope(dem)])
+           .classify(ee.Classifier.load("projects/ee-rifkynauvalhsp2/assets/LULC_Classifier_Embeddings_Topo_rubber"))
+           .rename("ijb"))
+    stack = s2.addBands([ndvi, evi, dw_label, ijb]).addBands(dw_prob.max(ee.Image(0)).reduce(ee.Reducer.max()).rename("dw_p"))
+    rows = stack.sampleRegions(pts, scale=10).getInfo()["features"]
+    df = pd.DataFrame([r["properties"] for r in rows])
+    df["dw"] = df.dw.astype(int).map(lambda v: DW_NAMES[v])
+    df["ijb"] = df.ijb.astype(int).map(lambda v: IJB_NAMES[v])
+    return df.set_index("site").loc[[st["name"] for st in SITES]].reset_index()
+
+
+def s2_chip(site):
+    lat, lon = target_point(site)
+    d = 0.0018                                         # about 200 m either side
+    region = ee.Geometry.Rectangle([lon - d, lat - d, lon + d, lat + d], None, False)
+    img = (ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED").filterBounds(region)
+           .filterDate("2025-06-01", "2025-10-01").filter(ee.Filter.lt("CLOUDY_PIXEL_PERCENTAGE", 40))
+           .select(["B4", "B3", "B2"]).median())
+    url = img.visualize(min=200, max=2000, gamma=1.2).getThumbURL(
+        {"region": region, "dimensions": 400, "format": "png", "crs": "EPSG:4326"})
+    return Image.open(io.BytesIO(requests.get(url, timeout=300).content)), (lon - d, lon + d, lat - d, lat + d)
+
+
+def plot_street_to_pixel(df):
+    n = len(SITES)
+    fig, axes = plt.subplots(n, 3, figsize=(13, 3.3 * n), gridspec_kw={"width_ratios": [1.6, 1, 1.5]})
+    for i, site in enumerate(SITES):
+        row = df.iloc[i]
+        a0, a1, a2 = axes[i]
+        sv = street_view(site, i)
+        if sv is not None:
+            a0.imshow(sv)
+        a0.set_axis_off()
+        a0.set_title(f"{site['name']}: Street View, {site['sv_date']}", loc="left", fontsize=9)
+        chip, ext = s2_chip(site)
+        a1.imshow(chip, extent=ext)
+        tl = target_point(site)
+        a1.plot(site["pano"][1], site["pano"][0], "^", color="#facc15", ms=8, mec="black", label="camera")
+        a1.add_patch(Rectangle((tl[1] - 0.000045, tl[0] - 0.000045), 0.00009, 0.00009, fill=False,
+                               ec="#ef4444", lw=1.8))
+        a1.set_xticks([]); a1.set_yticks([])
+        a1.set_title("Sentinel-2, 2025: camera ▲, pixel looked at □", loc="left", fontsize=8)
+        refl = [row[b] for b in S2B]
+        a2.plot(S2C, refl, "-o", color="#1d4ed8", ms=4)
+        a2.set_ylim(0, 0.45); a2.set_xlim(400, 2300)
+        a2.set_title(f"Dynamic World: {row.dw}   |   10-class model: {row.ijb}", loc="left", fontsize=8.5)
+        a2.text(0.98, 0.95, f"NDVI {row.NDVI:.2f}\nEVI {row.EVI:.2f}", transform=a2.transAxes,
+                ha="right", va="top", fontsize=9,
+                bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="#cbd5e1"))
+        a2.set_ylabel("Reflectance", fontsize=8)
+        if i == n - 1:
+            a2.set_xlabel("Wavelength (nm)")
+        for sp in ("top", "right"):
+            a2.spines[sp].set_visible(False)
+    fig.suptitle("What you see from the street, what the satellite sees, and what two classifiers call it",
+                 x=0.01, ha="left", fontsize=11.5)
+    fig.tight_layout(rect=(0, 0, 1, 0.97))
+    return fig
+
+
 SPECTRA = class_spectra()
+GROUND = ground_truth_table()
 RGB = {"bands": ["reflectance_35", "reflectance_23", "reflectance_11"],
        "min": 0, "max": 0.15, "gamma": 1.3}
 
@@ -199,6 +335,19 @@ def products():
         {"kind": "table", "name": "p6-s2-table", "data": SPECTRA, "transform": band_table,
          "caption": "The same class spectra as Sentinel-2 would report them: the mean "
                     "reflectance inside each band."},
+        {"kind": "chart", "name": "p6-street-to-pixel", "data": GROUND, "plot": plot_street_to_pixel,
+         "live": False,
+         "caption": "Four places in and around Bandung. Left: Google Street View, looking at a point "
+                    "a few tens of metres from the camera. Middle: the same place in Sentinel-2, "
+                    "with the camera (yellow) and the 10 m pixel it looks at (red). Right: that "
+                    "pixel's spectral signature in ten Sentinel-2 bands, its NDVI and EVI, and the "
+                    "labels Dynamic World and the author's 10-class model give it. Street View "
+                    "images © Google."},
+        {"kind": "table", "name": "p6-street-table", "data": GROUND,
+         "columns": ["site", "dw", "ijb", "NDVI", "EVI", "B4", "B8", "B11"],
+         "floatfmt": ("", "", "", ".2f", ".2f", ".3f", ".3f", ".3f"),
+         "caption": "The same four pixels as numbers: labels, indices and three key bands (red, "
+                    "near infrared, shortwave infrared)."},
         {"kind": "table", "name": "p6-sensors", "data": sensors_table,
          "caption": "Hyperspectral and multispectral sensors. Band counts and ranges from the "
                     "mission documentation; widths rounded."},
