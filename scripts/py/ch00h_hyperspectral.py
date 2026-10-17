@@ -293,7 +293,7 @@ def plot_street_to_pixel(df):
         a1.set_title("Sentinel-2, 2025: camera ▲, pixel looked at □", loc="left", fontsize=8)
         refl = [row[b] for b in S2B]
         a2.plot(S2C, refl, "-o", color="#1d4ed8", ms=4)
-        a2.set_ylim(0, 0.45); a2.set_xlim(400, 2300)
+        a2.set_ylim(0, max(0.45, max(refl) + 0.04)); a2.set_xlim(400, 2300)
         a2.set_title(f"Dynamic World: {row.dw}   |   10-class model: {row.ijb}", loc="left", fontsize=8.5)
         a2.text(0.98, 0.95, f"NDVI {row.NDVI:.2f}\nEVI {row.EVI:.2f}", transform=a2.transAxes,
                 ha="right", va="top", fontsize=9,
