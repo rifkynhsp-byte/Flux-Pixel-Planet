@@ -751,10 +751,81 @@ def palette_comparison():
     save(fig, "palette-comparison")
 
 
+# ---------------------------------------------------------------------------
+# Flux through a closed surface: Gauss, the Sun, and a satellite over the Earth
+# ---------------------------------------------------------------------------
+def flux_sphere():
+    """The geophysicist's way of seeing, in three panels.
+
+    a. Gauss: whatever a source emits crosses every closed surface around it.
+    b. The Sun: the same 3.828e26 W crosses every sphere, so at 1 AU each
+       square metre receives L / (4 pi d^2) = 1361 W.
+    c. The Earth: it intercepts that over its disc (pi R^2), spreads it over
+       its sphere (4 pi R^2, so 340 W per m2 on average), sends about 30 %
+       straight back as reflected light and the rest out later as heat. A
+       satellite sits on a closed surface around the Earth and samples both.
+    """
+    from matplotlib.patches import Circle, FancyArrowPatch
+    L, AU = 3.828e26, 1.496e11
+    S = L / (4 * np.pi * AU ** 2)
+    fig, axes = plt.subplots(1, 3, figsize=(12, 4.4))
+    for ax in axes:
+        ax.set_aspect("equal"); ax.set_axis_off()
+
+    a = axes[0]
+    a.set_xlim(-3.2, 3.2); a.set_ylim(-3.2, 3.2)
+    a.add_patch(Circle((0, 0), 0.35, color=BRIGHT))
+    for r, ls in ((1.4, "-"), (2.7, "--")):
+        a.add_patch(Circle((0, 0), r, fill=False, ec=MUTED, lw=1.2, ls=ls))
+    for ang in np.linspace(0, 2 * np.pi, 12, endpoint=False):
+        a.add_patch(FancyArrowPatch((0.45 * np.cos(ang), 0.45 * np.sin(ang)),
+                                    (3.0 * np.cos(ang), 3.0 * np.sin(ang)),
+                                    arrowstyle="-|>", mutation_scale=8, color=BRIGHT, lw=0.9))
+    a.text(0, -3.15, "the same total flux crosses\nevery surface around the source", ha="center",
+           va="top", fontsize=8, color=INK)
+    a.set_title("a. Gauss: measure the flux\nat the boundary, learn the inside", loc="left", fontsize=9.5)
+
+    b = axes[1]
+    b.set_xlim(-3.2, 3.2); b.set_ylim(-3.2, 3.2)
+    b.add_patch(Circle((0, 0), 0.5, color="#facc15"))
+    b.text(0, 0, "Sun", ha="center", va="center", fontsize=8)
+    for r, lab in ((1.3, "r"), (2.6, "2r")):
+        b.add_patch(Circle((0, 0), r, fill=False, ec="#f59e0b", lw=1.2))
+        b.text(r * 0.72, r * 0.72, lab, fontsize=8, color="#b45309")
+    b.text(0, -3.15, f"L = 3.828 × 10²⁶ W through every sphere\nat 1 AU: L / 4πd² = {S:,.0f} W per m²\n"
+                     "twice as far: a quarter as much", ha="center", va="top", fontsize=8, color=INK)
+    b.set_title("b. The Sun: inverse square\nfrom the same idea", loc="left", fontsize=9.5)
+
+    c = axes[2]
+    c.set_xlim(-3.2, 3.2); c.set_ylim(-3.2, 3.2)
+    c.add_patch(Circle((0, 0), 1.2, color="#93c5fd"))
+    c.text(0, 0, "Earth", ha="center", va="center", fontsize=8)
+    c.add_patch(Circle((0, 0), 2.4, fill=False, ec=MUTED, lw=1.0, ls="--"))
+    c.plot(1.7, 1.7, "s", color="#334155", ms=8)
+    c.text(1.85, 1.9, "satellite", fontsize=7.5)
+    for y in (-0.8, 0, 0.8):
+        c.add_patch(FancyArrowPatch((-3.1, y), (-1.3, y), arrowstyle="-|>", mutation_scale=8,
+                                    color="#f59e0b", lw=1.2))
+    c.add_patch(FancyArrowPatch((0.8, 0.9), (1.55, 1.55), arrowstyle="-|>", mutation_scale=8,
+                                color="#f59e0b", lw=1.6))
+    c.add_patch(FancyArrowPatch((0.9, -0.8), (2.2, -1.9), arrowstyle="-|>", mutation_scale=8,
+                                color=RED, lw=1.6))
+    c.text(0, -3.15, f"{S:,.0f} W/m² on the disc, {S / 4:.0f} W/m² averaged over the sphere\n"
+                     "about 30 % reflected (optical sensors sample this)\n"
+                     "the rest absorbed, then emitted as heat (thermal sensors)",
+           ha="center", va="top", fontsize=8, color=INK)
+    c.set_title("c. A satellite samples the flux\nleaving the Earth", loc="left", fontsize=9.5)
+    fig.suptitle("Flux through a closed surface: from Gauss to the Sun to a satellite over the Earth",
+                 x=0.01, ha="left", fontsize=11, color=INK)
+    fig.tight_layout(rect=(0, 0.02, 1, 0.94))
+    save(fig, "flux-sphere")
+
+
 if __name__ == "__main__":
     print("Generating figures into images/")
     spectral_signatures()
     ndvi_saturation()
+    flux_sphere()
     speckle_filter()
     ent = glcm_texture()
     nn = block_cv()
