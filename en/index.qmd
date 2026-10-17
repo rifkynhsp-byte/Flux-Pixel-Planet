@@ -6,6 +6,10 @@ Each of those places taught me something the tutorials had not. A map can look c
 
 Most of it comes from project work. Some of it comes from the classroom, where I finally had time to ask why the methods I had been using for years actually work. Both are here, side by side, and every chapter ends with something you can run yourself.
 
+## Why "Flux, Pixels and Planet"
+
+The title is the book in three words. **Flux** is the physics: the energy leaving the Earth's surface, reflected sunlight, emitted heat or a radar echo, which a satellite measures without touching the ground (P1). **Pixels** are what that measurement becomes once it is recorded: numbers on a grid that can be computed, combined and modelled, in the cloud and at scale. **Planet** is why it matters: the whole Earth, and for this book above all Indonesia, mapped often enough and widely enough to inform decisions about forests, food, water, cities and hazards. From flux to pixels to the planet is the path every chapter follows.
+
 ## Why I wrote it
 
 My father lectures in the social sciences and culture, and as a child I followed him to his classes in many cities and to the sites of the past he taught about. I stood in front of temples built with a precision that seemed impossible for their time, and I kept asking whether our own age had made anything greater. My mother answered in her own way, with books about technology, and I chose science. In Geophysics at Universitas Padjadjaran I learned the Earth and technology together, and during my community service (KKN) villagers asked us to find water under their land; with our lecturer, Professor Asep Harja, we found the place for their pond. Later, in forestry in Riau, I proposed new technology and watched people resist it, until I learned to listen and build what saved them time. Those experiences answered the childhood question for me: the greatest work of a modern civilisation is technology that is useful to many people.
