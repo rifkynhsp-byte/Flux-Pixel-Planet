@@ -76,9 +76,9 @@ The labels are more interesting than the spectra. **Dynamic World** calls all fo
 
 Street View photographs are not the same date as the satellite pixels, and the camera sees the side of a building or the edge of a field while the satellite sees the top. That difference is the point of the exercise: ground photographs are for knowing what is there, satellite pixels for measuring how much of it there is.
 
-### One line, forest to city
+### One line, from the reservoir to the town
 
-The four places are points. The cross-section in the output block below is a line, 13 km from the forest on the foothill of Tangkuban Perahu above Cisarua down to Cimahi, sampled every 50 m, with five measurements scaled to the same 0 to 1 axis. Each sensor sees a different part of the transition. Canopy height (ETH, 2020) follows the trees and drops wherever they are cleared. NDVI and EVI stay high over vegetable farms and gardens as well as forest, so on their own they cannot say where the forest ends. Radar VV and VH, which reflect structure and moisture rather than colour, rise over the town in the last 5 km, where walls and streets bounce the signal back. No single measure draws the landscape; together they do, which is why the classifiers in this book are fed several sensors at once.
+The four places are points. The cross-section in the output block below is a line, about 11 km from the shore of Saguling through the farms, hills and housing of Kota Baru Parahyangan to Padalarang, sampled every 60 m. Above it, Sentinel-2 true colour is drawn as a strip 1 km either side of the line, turned so that the line runs left to right on the same distance axis, with four Street View photos numbered in order along it: water, paddy, a village and trees. Below, five measurements share one 0 to 1 axis, each with its own line and marker. Each sensor sees a different part of the landscape. Canopy height (ETH, 2020) follows the trees. NDVI and EVI are high over paddy, gardens and trees alike, so they cannot say where a forest ends. Radar VV and VH, which respond to structure and moisture rather than colour, are lowest over the reservoir and highest over the town, where walls and streets bounce the signal back. No single measure draws the landscape; together they do, which is why the classifiers in this book are given several sensors at once.
 
 ## Which one to use
 

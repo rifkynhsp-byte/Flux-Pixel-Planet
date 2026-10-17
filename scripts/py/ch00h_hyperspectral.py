@@ -310,13 +310,16 @@ def plot_street_to_pixel(df):
 
 
 # ---------------------------------------------------------------------------
-# 4. A cross-section, forest to city: how each sensor sees the same transition
+# 4. A cross-section through Kota Baru Parahyangan: water, hills, farms, town
 # ---------------------------------------------------------------------------
-XA, XB = (107.585, -6.775), (107.540, -6.885)      # Tangkuban Perahu foothill (Cisarua) to Cimahi
-XN = 240                                             # samples, about 50 m apart
+XA, XB = (107.440, -6.905), (107.512, -6.833)      # Saguling shore (SW) to Padalarang (NE)
+XN = 180                                             # samples, about 60 m apart
 DW_COL = ["#419bdf", "#397d49", "#88b053", "#7a87c6", "#e49635", "#dfc35a", "#c4281b", "#a59b8f", "#b39fe1"]
-# Fixed physical ranges, so that every curve runs 0 to 1 and they share one axis
 NORM = {"NDVI": (-0.2, 0.9), "EVI": (-0.1, 0.8), "VV": (-20, 0), "VH": (-27, -8), "CHM": (0, 35)}
+STYLE = {"NDVI": dict(color="#16a34a", ls="-", marker="o"), "EVI": dict(color="#ca8a04", ls="--", marker="s"),
+         "VV": dict(color="#7c3aed", ls=":", marker="^"), "VH": dict(color="#db2777", ls="-.", marker="v"),
+         "CHM": dict(color="#0f766e", ls="-", marker="D")}
+PHOTO = [(0, "water"), (4, "crops"), (1, "forest"), (6, "built-up")]     # Dynamic World code, label
 
 
 def transect_table():
@@ -324,7 +327,7 @@ def transect_table():
     ys = np.linspace(XA[1], XB[1], XN)
     pts = ee.FeatureCollection([ee.Feature(ee.Geometry.Point(float(x), float(y)), {"i": i})
                                 for i, (x, y) in enumerate(zip(xs, ys))])
-    box = pts.geometry().buffer(500).bounds()
+    box = pts.geometry().buffer(1000).bounds()
     s2 = (ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED").filterBounds(box)
           .filterDate("2025-06-01", "2025-10-01").filter(ee.Filter.lt("CLOUDY_PIXEL_PERCENTAGE", 40))
           .map(lambda im: im.updateMask(im.select("SCL").remap([4, 5, 6, 11], [1, 1, 1, 1], 0)))
@@ -338,46 +341,128 @@ def transect_table():
     dem = ee.ImageCollection("COPERNICUS/DEM/GLO30").select("DEM").mosaic().rename("elev")
     dw = (ee.ImageCollection("GOOGLE/DYNAMICWORLD/V1").filterBounds(box)
           .filterDate("2025-06-01", "2025-10-01").select("label").mode().rename("dw"))
-    stack = ee.Image.cat([ndvi, evi, s1, chm, dem, dw])
-    rows = stack.reduceRegions(pts, ee.Reducer.first(), 10).getInfo()["features"]
-    df = pd.DataFrame([r["properties"] for r in rows]).sort_values("i")
-    d = np.hypot((xs - xs[0]) * 111.32 * math.cos(math.radians(-6.83)), (ys - ys[0]) * 110.57)
-    df["km"] = d[df.i.to_numpy()]
-    df["lon"], df["lat"] = xs[df.i.to_numpy()], ys[df.i.to_numpy()]
+    rows = (ee.Image.cat([ndvi, evi, s1, chm, dem, dw]).reduceRegions(pts, ee.Reducer.first(), 10)
+            .getInfo()["features"])
+    df = pd.DataFrame([r["properties"] for r in rows]).sort_values("i").reset_index(drop=True)
+    df["lon"], df["lat"] = xs[df.i], ys[df.i]
+    df["km"] = np.hypot((df.lon - XA[0]) * 111.32 * math.cos(math.radians(XA[1])), (df.lat - XA[1]) * 110.57)
     return df
 
 
-def plot_transect(df):
-    fig, (a0, a1, a2) = plt.subplots(3, 1, figsize=(11, 7.5), sharex=True,
-                                     gridspec_kw={"height_ratios": [1.2, 2.4, 0.35]})
-    a0.fill_between(df.km, df.elev.min() - 20, df.elev, color="#cbd5e1")
-    a0.plot(df.km, df.elev, color="#475569", lw=1.2)
-    a0.text(0, 1.03, "Elevation (m)", transform=a0.transAxes, fontsize=8.5, color="#475569")
-    cols = {"NDVI": "#16a34a", "EVI": "#ca8a04", "VV": "#7c3aed", "VH": "#db2777", "CHM": "#0f766e"}
-    for k, (lo, hi) in NORM.items():
-        v = ((df[k] - lo) / (hi - lo)).clip(0, 1).rolling(5, center=True, min_periods=1).mean()
-        a1.plot(df.km, v, color=cols[k], lw=1.6 if k in ("NDVI", "CHM") else 1.2,
-                label=f"{k} ({lo} to {hi}{' m' if k == 'CHM' else (' dB' if k in ('VV', 'VH') else '')})")
-    a1.set_ylim(0, 1.05)
-    a1.legend(frameon=False, fontsize=7.5, ncol=5, loc="upper center", bbox_to_anchor=(0.5, 1.13))
-    a1.text(0, -0.02, "", transform=a1.transAxes)
-    a1.set_ylabel("Scaled 0 to 1", fontsize=8.5)
-    for i in range(len(df) - 1):
-        a2.axvspan(df.km.iloc[i], df.km.iloc[i + 1], color=DW_COL[int(df.dw.iloc[i])], lw=0)
-    a2.set_yticks([]); a2.set_xlabel("Distance from A, the forest above Cisarua, to B, Cimahi (km)")
-    from matplotlib.patches import Patch
-    seen = sorted(set(int(v) for v in df.dw))
-    a2.legend(handles=[Patch(color=DW_COL[c], label=DW_NAMES[c]) for c in seen], frameon=False,
-              fontsize=7.5, ncol=len(seen), loc="upper center", bbox_to_anchor=(0.5, -0.9))
-    a2.text(0, 1.15, "Dynamic World, 2025 dry season", transform=a2.transAxes, fontsize=8, color="#475569")
-    for ax in (a0, a1):
-        for sp in ("top", "right"):
-            ax.spines[sp].set_visible(False)
-    fig.suptitle("Forest to city in one line: canopy height follows the trees, NDVI stays high over "
-                 "farms and gardens, both radar channels brighten in town", x=0.01, ha="left", fontsize=10.5)
-    fig.tight_layout(rect=(0, 0, 1, 0.96))
-    return fig
+# Street View photos chosen by eye from Google's own imagery near the line, no people
+# in view: (label, pano lat, pano lon, heading, target lon, target lat, date)
+PHOTOS = [("water", -6.90224, 107.44521, 230, 107.44466, -6.90324, "June 2024"),
+          ("crops", -6.90054, 107.44481, 266, 107.44443, -6.90057, "August 2021"),
+          ("built-up", -6.87663, 107.46649, 188, 107.46617, -6.87883, "June 2024"),
+          ("forest", -6.83972, 107.50981, 237, 107.50936, -6.84002, "July 2024")]
 
+
+def photo_points(df):
+    """The chosen photos, fetched once with the author's key and kept with Google's attribution."""
+    key_file = Path.home() / ".config" / "qsgi" / "maps-api-key"
+    out = []
+    dx, dy = XB[0] - XA[0], XB[1] - XA[1]
+    for label, plat, plon, head, tlon, tlat, date in PHOTOS:
+        f = SV_DIR / f"p6-kbp-{label}.jpg"
+        if not f.exists() and key_file.exists():
+            r = requests.get("https://maps.googleapis.com/maps/api/streetview",
+                             params={"size": "640x400", "location": f"{plat},{plon}", "heading": head,
+                                     "pitch": -5, "fov": 70, "source": "outdoor",
+                                     "key": key_file.read_text().strip()}, timeout=60)
+            if r.headers.get("content-type", "").startswith("image/"):
+                f.write_bytes(r.content)
+        t = ((tlon - XA[0]) * dx + (tlat - XA[1]) * dy) / (dx * dx + dy * dy)
+        row = df.iloc[(df.i - t * (XN - 1)).abs().argmin()]
+        out.append(dict(label=label, row=row, file=f, date=date, plat=plat, plon=plon, tlon=tlon, tlat=tlat))
+    return out
+
+
+def line_coords(lon, lat):
+    """Distance along the line from A, and across it (left positive), in km."""
+    kx, ky = 111.32 * math.cos(math.radians(XA[1])), 110.57
+    ex, ey = (XB[0] - XA[0]) * kx, (XB[1] - XA[1]) * ky
+    L = math.hypot(ex, ey)
+    px, py = (lon - XA[0]) * kx, (lat - XA[1]) * ky
+    return (px * ex + py * ey) / L, (ex * py - ey * px) / L
+
+
+def plot_transect(df):
+    photos = sorted(photo_points(df), key=lambda ph: ph["row"].km)      # numbered A to B
+    L = float(df.km.max())
+    fig = plt.figure(figsize=(13, 9.2))
+    gs = fig.add_gridspec(4, 4, height_ratios=[1.5, 1.1, 2.2, 0.28], hspace=0.3, wspace=0.06,
+                          top=0.94)
+    # 1. Photos in order along the line
+    for n, ph in enumerate(photos):
+        ax = fig.add_subplot(gs[0, n])
+        if ph["file"].exists():
+            ax.imshow(Image.open(ph["file"]))
+        ax.set_axis_off()
+        ax.set_title(f"{n + 1}. {ph['label']}, km {ph['row'].km:.1f}", loc="left", fontsize=9.5)
+        ax.text(0.99, 0.03, ph["date"], transform=ax.transAxes, ha="right", fontsize=7, color="white")
+    # 2. Sentinel-2 strip, 1 km either side, rotated so A to B runs left to right
+    kx, ky = 111.32 * math.cos(math.radians(XA[1])), 110.57
+    x0, x1 = min(XA[0], XB[0]) - 0.015, max(XA[0], XB[0]) + 0.015
+    y0, y1 = min(XA[1], XB[1]) - 0.015, max(XA[1], XB[1]) + 0.015
+    region = ee.Geometry.Rectangle([x0, y0, x1, y1], None, False)
+    rgb = (ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED").filterBounds(region)
+           .filterDate("2025-06-01", "2025-10-01").filter(ee.Filter.lt("CLOUDY_PIXEL_PERCENTAGE", 40))
+           .select(["B4", "B3", "B2"]).median().visualize(min=200, max=2200, gamma=1.2))
+    url = rgb.getThumbURL({"region": region, "dimensions": 1200, "format": "png", "crs": "EPSG:4326"})
+    img = np.asarray(Image.open(io.BytesIO(requests.get(url, timeout=300).content)).convert("RGB"))
+    H, W = img.shape[:2]
+    ex, ey = (XB[0] - XA[0]) * kx / L, (XB[1] - XA[1]) * ky / L          # unit vector along, in km
+    u, v = np.meshgrid(np.linspace(0, L, 900), np.linspace(1, -1, 200))
+    lon = XA[0] + (u * ex - v * ey) / kx
+    lat = XA[1] + (u * ey + v * ex) / ky
+    col = np.clip(((lon - x0) / (x1 - x0) * (W - 1)).round().astype(int), 0, W - 1)
+    row = np.clip(((y1 - lat) / (y1 - y0) * (H - 1)).round().astype(int), 0, H - 1)
+    ar = fig.add_subplot(gs[1, :])
+    ar.imshow(img[row, col], extent=[0, L, -1, 1], aspect="auto")
+    ar.axhline(0, color="white", lw=1.2, ls="--")
+    for n, ph in enumerate(photos, 1):
+        cu, cv = line_coords(ph["plon"], ph["plat"])
+        tu, tv = line_coords(ph["tlon"], ph["tlat"])
+        ar.annotate("", xy=(tu, tv), xytext=(cu, cv), arrowprops=dict(arrowstyle="->", color="#facc15", lw=1.4))
+        ar.plot(cu, cv, "^", color="#facc15", ms=9, mec="black")
+        ar.text(cu, cv + 0.25, str(n), color="#facc15", fontsize=11, fontweight="bold", ha="center")
+    ar.set_xlim(0, L); ar.set_ylim(-1, 1)
+    ar.set_ylabel("km across", fontsize=8)
+    ar.tick_params(labelsize=7, labelbottom=False)
+    ar.set_title("Sentinel-2 true colour 2025, 1 km either side of the line A (Saguling shore) to "
+                 "B (Padalarang); ▲ cameras 1-4", loc="left", fontsize=9)
+    # 3. Profile: five measures with their own colour, line and marker; elevation behind
+    ac = fig.add_subplot(gs[2, :], sharex=ar)
+    ae = ac.twinx()
+    ae.fill_between(df.km, df.elev.min() - 5, df.elev, color="#e2e8f0", zorder=0)
+    ae.set_ylabel("Elevation (m), grey", fontsize=8, color="#64748b")
+    ae.tick_params(labelsize=7, colors="#64748b")
+    ac.set_zorder(ae.get_zorder() + 1); ac.patch.set_visible(False)
+    for k, (lo, hi) in NORM.items():
+        val = ((df[k] - lo) / (hi - lo)).clip(0, 1).rolling(3, center=True, min_periods=1).mean()
+        st = STYLE[k]
+        unit = " m" if k == "CHM" else (" dB" if k in ("VV", "VH") else "")
+        ac.plot(df.km, val, color=st["color"], ls=st["ls"], marker=st["marker"], markevery=10, ms=5,
+                lw=1.6, label=f"{k} ({lo} to {hi}{unit})")
+    for n, ph in enumerate(photos, 1):
+        ac.axvline(ph["row"].km, color="#94a3b8", lw=0.8)
+        ac.text(ph["row"].km, 1.02, str(n), ha="center", fontsize=9, fontweight="bold", color="#b45309")
+    ac.set_ylim(0, 1.08); ac.set_ylabel("Scaled 0 to 1", fontsize=8.5)
+    ac.legend(frameon=False, fontsize=7.5, ncol=5, loc="upper center", bbox_to_anchor=(0.5, 1.2))
+    ac.tick_params(labelbottom=False)
+    # 4. Dynamic World strip
+    ad = fig.add_subplot(gs[3, :], sharex=ar)
+    for i in range(len(df) - 1):
+        ad.axvspan(df.km.iloc[i], df.km.iloc[i + 1], color=DW_COL[int(df.dw.iloc[i])], lw=0)
+    ad.set_yticks([])
+    ad.set_xlabel("Distance from A (km); strip: Dynamic World 2025", fontsize=8.5)
+    from matplotlib.patches import Patch
+    seen = sorted(set(int(x) for x in df.dw))
+    ad.legend(handles=[Patch(color=DW_COL[c], label=DW_NAMES[c]) for c in seen], frameon=False, fontsize=7.5,
+              ncol=len(seen), loc="upper center", bbox_to_anchor=(0.5, -1.7))
+    fig.suptitle("Kota Baru Parahyangan in one line: each sensor sees a different part of the landscape",
+                 x=0.01, y=0.985, ha="left", fontsize=12)
+    return fig
 
 SPECTRA = class_spectra()
 TRANSECT = transect_table()
@@ -420,12 +505,11 @@ def products():
          "caption": "The same four pixels as numbers: labels, indices and three key bands (red, "
                     "near infrared, shortwave infrared)."},
         {"kind": "chart", "name": "p6-transect", "data": TRANSECT, "plot": plot_transect,
-         "caption": "One line from the forest on the foothill of Tangkuban Perahu above Cisarua to "
-                    "Cimahi, sampled every 50 m. Every measure is scaled to 0-1 over a fixed range "
-                    "(in the legend) so they share one axis. Each sensor sees a different part of "
-                    "the transition: canopy height follows the trees, NDVI and EVI cannot tell a "
-                    "lush field or garden from forest, and both radar channels brighten over "
-                    "buildings, where walls and streets bounce the signal straight back."},
+         "caption": "One line, about 11 km, from the Saguling shore through the hills and farms "
+                    "around Kota Baru Parahyangan to Padalarang, sampled every 60 m. Top: the line "
+                    "on Sentinel-2. Middle: elevation, then five measures scaled to 0-1 over fixed "
+                    "ranges (legend) with their own line styles, then Dynamic World. Bottom: Street "
+                    "View at the middle of the longest stretch of each class (images © Google)."},
         {"kind": "table", "name": "p6-sensors", "data": sensors_table,
          "caption": "Hyperspectral and multispectral sensors. Band counts and ranges from the "
                     "mission documentation; widths rounded."},
