@@ -188,13 +188,13 @@ def sensors_table():
 # few tens of metres away whose Dynamic World class matches the place.
 SITES = [
     {"name": "Building, Gedung Merdeka, Bandung", "pano": (-6.92133, 107.60981), "heading": 300,
-     "dist": 25, "sv_date": "May 2024"},
+     "dist": 25, "sv_date": "May 2024", "credit": "© Google"},
     {"name": "Paddy, Majalaya", "pano": (-7.03767, 107.74397), "heading": 180, "dist": 45,
-     "sv_date": "April 2021"},
+     "sv_date": "April 2021", "credit": "© Google"},
     {"name": "Lake, Situ Cileunca", "pano": (-7.19754, 107.54934), "heading": 320, "dist": 80,
-     "sv_date": "December 2021"},
+     "sv_date": "December 2021", "credit": "© Diyenes, via Google Street View"},
     {"name": "Forest, Tahura Juanda", "pano": (-6.85715, 107.63307), "heading": 60, "dist": 30,
-     "sv_date": "November 2019"},
+     "sv_date": "November 2019", "credit": "© Google"},
 ]
 SV_DIR = Path(__file__).resolve().parents[2] / "images" / "real"
 DW_NAMES = ["water", "trees", "grass", "flooded vegetation", "crops", "shrub and scrub", "built",
@@ -282,7 +282,7 @@ def plot_street_to_pixel(df):
         if sv is not None:
             a0.imshow(sv)
         a0.set_axis_off()
-        a0.set_title(f"{site['name']}: Street View, {site['sv_date']}", loc="left", fontsize=9)
+        a0.set_title(f"{site['name']}: Street View, {site['sv_date']}, {site['credit']}", loc="left", fontsize=8.5)
         chip, ext = s2_chip(site)
         a1.imshow(chip, extent=ext)
         tl = target_point(site)
@@ -351,10 +351,10 @@ def transect_table():
 
 # Street View photos chosen by eye from Google's own imagery near the line, no people
 # in view: (label, pano lat, pano lon, heading, target lon, target lat, date)
-PHOTOS = [("water", -6.90224, 107.44521, 230, 107.44466, -6.90324, "June 2024"),
-          ("crops", -6.90054, 107.44481, 266, 107.44443, -6.90057, "August 2021"),
-          ("built-up", -6.87663, 107.46649, 188, 107.46617, -6.87883, "June 2024"),
-          ("forest", -6.83972, 107.50981, 237, 107.50936, -6.84002, "July 2024")]
+PHOTOS = [("water", -6.90224, 107.44521, 230, 107.44466, -6.90324, "June 2024, © Google"),
+          ("crops", -6.90054, 107.44481, 266, 107.44443, -6.90057, "August 2021, © Yodha Pramudita"),
+          ("built-up", -6.87663, 107.46649, 188, 107.46617, -6.87883, "June 2024, © Google"),
+          ("forest", -6.83972, 107.50981, 237, 107.50936, -6.84002, "July 2024, © Google")]
 
 
 def photo_points(df):
@@ -498,7 +498,7 @@ def products():
                     "with the camera (yellow) and the 10 m pixel it looks at (red). Right: that "
                     "pixel's spectral signature in ten Sentinel-2 bands, its NDVI and EVI, and the "
                     "labels Dynamic World and the author's 10-class model give it. Street View "
-                    "images © Google."},
+                    "photos by Google, except Situ Cileunca, by contributor Diyenes."},
         {"kind": "table", "name": "p6-street-table", "data": GROUND,
          "columns": ["site", "dw", "ijb", "NDVI", "EVI", "B4", "B8", "B11"],
          "floatfmt": ("", "", "", ".2f", ".2f", ".3f", ".3f", ".3f"),
@@ -509,7 +509,8 @@ def products():
                     "around Kota Baru Parahyangan to Padalarang, sampled every 60 m. Top: the line "
                     "on Sentinel-2. Middle: elevation, then five measures scaled to 0-1 over fixed "
                     "ranges (legend) with their own line styles, then Dynamic World. Bottom: Street "
-                    "View at the middle of the longest stretch of each class (images © Google)."},
+                    "View photos near the line, by Google and, for photo 2, by contributor Yodha "
+                    "Pramudita, via Google Street View."},
         {"kind": "table", "name": "p6-sensors", "data": sensors_table,
          "caption": "Hyperspectral and multispectral sensors. Band counts and ranges from the "
                     "mission documentation; widths rounded."},
