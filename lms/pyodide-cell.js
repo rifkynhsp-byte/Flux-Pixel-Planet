@@ -50,6 +50,7 @@
   var T = {
     en: {
       run: 'Run', running: 'Running', reset: 'Reset', edit: 'Editable',
+      show: 'Show code', hide: 'Hide code',
       loading: 'Starting Python in your browser',
       loadingNote: 'First run downloads the runtime, about 10 MB. Cached afterwards.',
       ready: 'Ready', output: 'Output', noOutput: 'Ran without printing anything.',
@@ -59,6 +60,7 @@
     },
     id: {
       run: 'Jalankan', running: 'Menjalankan', reset: 'Atur ulang', edit: 'Dapat diubah',
+      show: 'Tampilkan kode', hide: 'Sembunyikan kode',
       loading: 'Menyalakan Python di peramban Anda',
       loadingNote: 'Jalan pertama mengunduh runtime, sekitar 10 MB. Setelah itu tersimpan di cache.',
       ready: 'Siap', output: 'Keluaran', noOutput: 'Berjalan tanpa mencetak apa pun.',
@@ -193,7 +195,20 @@
     status.className = 'pyc-status';
     status.textContent = T.edit;
 
+    // The code starts hidden so the chapter reads cleanly; Run works either way.
+    var showBtn = document.createElement('button');
+    showBtn.className = 'pyc-show';
+    showBtn.type = 'button';
+    showBtn.textContent = T.show;
+    showBtn.setAttribute('aria-expanded', 'false');
+    showBtn.addEventListener('click', function () {
+      var open = host.classList.toggle('pyc-open');
+      showBtn.textContent = open ? T.hide : T.show;
+      showBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
     bar.appendChild(runBtn);
+    bar.appendChild(showBtn);
     bar.appendChild(resetBtn);
     bar.appendChild(status);
     host.appendChild(bar);

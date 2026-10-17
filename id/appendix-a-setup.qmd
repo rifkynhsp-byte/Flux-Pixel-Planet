@@ -2,12 +2,22 @@
 
 ## Mendaftar Earth Engine
 
-1. Masuk dengan akun Google di [earthengine.google.com](https://earthengine.google.com) lalu ajukan akses.
-2. Pilih opsi non komersial bila pekerjaan Anda riset, pengajaran atau nirlaba. Penerapan komersial memerlukan paket berbayar.
-3. Buat atau tautkan proyek Google Cloud. Pendaftaran terbaru mewajibkannya, bahkan pada tingkat gratis.
-4. Buka [code.earthengine.google.com](https://code.earthengine.google.com). Bila petanya termuat, Anda siap.
+**Siapa yang bisa memakainya gratis.** Earth Engine gratis untuk penggunaan **non-komersial**: mahasiswa, pengajar, peneliti akademik, organisasi nirlaba, dan pekerjaan pemerintah yang tidak dijual. Semua yang ada di buku ini memenuhi syarat bila Anda memakainya untuk belajar, mengajar, atau meneliti. Pekerjaan untuk klien yang membayar, atau di dalam produk sebuah perusahaan, termasuk komersial dan memerlukan langganan Earth Engine berbayar. Google bisa meminta Anda menegaskan bahwa penggunaan Anda non-komersial dan menerapkan batas pemakaian pada proyek non-komersial; skrip-skrip buku ini jauh di dalam batas itu.
 
-Persetujuan biasanya di hari yang sama dan sesekali lebih lama. Tidak ada yang perlu dikonfigurasi di komputer Anda.
+**Akses kini melalui proyek Google Cloud.** Anda tidak memerlukan kartu kredit untuk penggunaan non-komersial, tetapi memerlukan proyek tempat Earth Engine ditautkan:
+
+1. Masuk dengan akun Google (akun pribadi tidak masalah; akun kampus juga bisa bila institusi Anda mengizinkan Google Cloud).
+2. Buka [console.cloud.google.com](https://console.cloud.google.com), buat proyek, dan catat **ID proyek**-nya (misalnya `ee-namaanda`).
+3. Daftarkan proyek itu untuk Earth Engine di [code.earthengine.google.com/register](https://code.earthengine.google.com/register): pilih **penggunaan tidak berbayar**, lalu kategori non-komersial yang sesuai (misalnya akademik atau riset, atau pendidikan), dan jawab beberapa pertanyaan singkat tentang apa yang akan Anda kerjakan.
+4. Buka [code.earthengine.google.com](https://code.earthengine.google.com) dan pilih proyek itu bila diminta. Bila petanya termuat, Anda siap.
+5. Untuk Python dan Colab, lakukan autentikasi sekali dan sebutkan proyek yang sama: `ee.Authenticate()`, lalu `ee.Initialize(project="ee-namaanda")`.
+
+Persetujuan biasanya langsung atau di hari yang sama. Tidak ada yang perlu dikonfigurasi di komputer Anda.
+
+::: {.callout-tip}
+## Bila menyiapkan proyek cloud menjadi kendala
+Sebagian pembaca tidak bisa membuat proyek Google Cloud, misalnya dengan akun kampus atau kantor yang dikelola. Anda tetap bisa mengikuti sebagian besar buku ini: **IJB**, aplikasi Earth Engine berbasis web yang dijelaskan di P10, berjalan di peramban biasa tanpa akun, tanpa proyek, dan tanpa kode, dan cukup baik untuk analisis sehari-hari (komposit, tutupan lahan, banjir, kebakaran, perubahan). Buka di <https://rifkynauvalhsp.users.earthengine.app/view/ijbexplorer>.
+:::
 
 ## Menjaga skrip agar selamat
 

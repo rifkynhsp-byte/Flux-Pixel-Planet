@@ -179,13 +179,18 @@
     if (!provider) return;
     if (typeof fetch !== 'function') return;
 
-    var inc = shouldIncrement('page');
+    // Each counter keeps its own memory of when this browser last counted:
+    // the book-wide total once per window, and each chapter once per window.
+    // (One shared key used to stop every other chapter from counting after
+    // the first page read, so they showed zero views.)
+    var incTotal = shouldIncrement(TOTAL_KEY);
+    var incPage = shouldIncrement(PAGE_KEY);
 
     // Both counters are asked at once, and the badge shows whichever answer
     // arrives. A failure on one does not hide the other.
     Promise.all([
-      provider(TOTAL_KEY, inc).catch(function () { return null; }),
-      provider(PAGE_KEY, inc).catch(function () { return null; })
+      provider(TOTAL_KEY, incTotal).catch(function () { return null; }),
+      provider(PAGE_KEY, incPage).catch(function () { return null; })
     ]).then(function (r) {
       if (r[0] == null && r[1] == null) return;   // counter unreachable: stay silent
       paint(r[0], r[1]);

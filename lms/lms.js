@@ -979,7 +979,33 @@
   /* Boot                                                                    */
   /* ---------------------------------------------------------------------- */
 
+  /* Code listings start folded so a chapter reads as prose and figures;
+   * one click opens the JavaScript, Python and R tabs. */
+  function foldListings() {
+    var lang = (document.documentElement.lang || 'en').slice(0, 2) === 'id' ? 'id' : 'en';
+    var L = lang === 'id' ? { show: 'Tampilkan kode', hide: 'Sembunyikan kode' }
+                          : { show: 'Show code', hide: 'Hide code' };
+    var sets = document.querySelectorAll('main .panel-tabset');
+    Array.prototype.forEach.call(sets, function (set) {
+      if (!set.querySelector('.sourceCode, pre code')) return;
+      if (set.closest('.real-output, .py-live')) return;
+      set.classList.add('lms-fold');
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'lms-fold-btn';
+      btn.textContent = L.show;
+      btn.setAttribute('aria-expanded', 'false');
+      btn.addEventListener('click', function () {
+        var open = set.classList.toggle('lms-fold-open');
+        btn.textContent = open ? L.hide : L.show;
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      set.parentNode.insertBefore(btn, set);
+    });
+  }
+
   function boot() {
+    try { foldListings(); } catch (e) { console.warn('fold:', e); }
     // The footer slots are created before anything fills them, so the order
     // on the page is fixed regardless of which async path finishes first.
     if (isChapter()) chapterFoot('complete');

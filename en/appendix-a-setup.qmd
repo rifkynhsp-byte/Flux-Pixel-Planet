@@ -2,12 +2,22 @@
 
 ## Registering for Earth Engine
 
-1. Sign in to a Google account at [earthengine.google.com](https://earthengine.google.com) and request access.
-2. Choose the non commercial option if your work is research, teaching or non profit. Commercial deployment requires a paid plan.
-3. Create or attach a Google Cloud project. Recent registrations require one even on the free tier.
-4. Open [code.earthengine.google.com](https://code.earthengine.google.com). If the map loads, you are ready.
+**Who can use it free.** Earth Engine is free for **non-commercial** use: students, teachers, academic researchers, non-profit organisations and government work that is not sold. Everything in this book qualifies when you use it to learn, teach or do research. Work done for a paying client, or inside a company's product, is commercial and needs a paid Earth Engine subscription. Google may ask you to confirm that your use is non-commercial and applies usage limits to non-commercial projects; the book's scripts stay well inside them.
 
-Approval is usually same day and occasionally takes longer. There is nothing to configure on your own machine.
+**Access now runs through a Google Cloud project.** You do not need a credit card for non-commercial use, but you do need a project to attach Earth Engine to:
+
+1. Sign in with a Google account (a personal one is fine; a university account works too if your institution allows Google Cloud).
+2. Open [console.cloud.google.com](https://console.cloud.google.com), create a project and note its **project ID** (for example `ee-yourname`).
+3. Register that project for Earth Engine at [code.earthengine.google.com/register](https://code.earthengine.google.com/register): choose **unpaid usage**, then the non-commercial category that fits you (for example academia or research, or education), and answer the short questions about what you will do.
+4. Open [code.earthengine.google.com](https://code.earthengine.google.com) and select the project if asked. If the map loads, you are ready.
+5. For Python and Colab, authenticate once and name the same project: `ee.Authenticate()`, then `ee.Initialize(project="ee-yourname")`.
+
+Approval is usually immediate or the same day. There is nothing to configure on your own machine.
+
+::: {.callout-tip}
+## If setting up a cloud project is a hurdle
+Some readers cannot create a Google Cloud project, for example on a managed university or office account. You can still follow most of this book: **IJB**, the web-based Earth Engine app described in P10, runs in an ordinary browser with no account, no project and no code, and does a good job of the everyday analyses (composites, land cover, floods, fire, change). Open it at <https://rifkynauvalhsp.users.earthengine.app/view/ijbexplorer>.
+:::
 
 ## Making scripts survive
 

@@ -1245,3 +1245,16 @@ body.quarto-dark .lms-appbar { background: #262c33; }
   #quarto-header .navbar-title { white-space: normal; font-size: 1.05rem; line-height: 1.2; }
   .book-tools { margin-left: .25rem; }
 }
+
+
+/* ---- Folded code (listings and live cells start hidden) ------------------ */
+.panel-tabset.lms-fold:not(.lms-fold-open) { display: none; }
+.lms-fold-btn, .pyc-show {
+  font: inherit; font-size: .85rem; cursor: pointer;
+  border: 1px solid var(--bs-border-color, #cbd5e1); border-radius: 999px;
+  background: transparent; color: inherit; padding: .2rem .8rem; margin: .4rem 0;
+}
+.lms-fold-btn::before { content: "</> "; opacity: .7; }
+.lms-fold-btn:hover, .pyc-show:hover { background: rgba(37, 99, 235, .08); }
+.py-live.pyc:not(.pyc-open) > div.sourceCode,
+.py-live.pyc:not(.pyc-open) > pre { display: none; }

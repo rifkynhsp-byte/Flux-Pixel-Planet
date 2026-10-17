@@ -39,7 +39,7 @@
 /* The version is the cache name. Bumping it makes the next visit fetch fresh
    copies and drop everything from the old one. Bump it when the precache
    list changes or when a cached asset changes name. */
-const VERSION = 'pscg-v1';
+const VERSION = 'pscg-v2';
 const PAGES = `${VERSION}-pages`;
 const ASSETS = `${VERSION}-assets`;
 
